@@ -1,0 +1,7 @@
+.DS_STORE
+vim/.vim/plugged
+vim/.vim/.netrwhist
+
+# Ignore work-related snippets
+vim/.vim/UltiSnips/markdown.snippets
+_vscode/work.code-snippets
