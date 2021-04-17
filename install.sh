@@ -8,12 +8,6 @@ echo "🏁 ${PURPLE}Beginning installation...${NC}"
 # Ask for sudo and maintain it until all steps are complete
 sh _scripts/ask-for-admin.sh
 
-# Install Xcode command line tools
-sh _scripts/install-xcode-command-line-tools.sh
-
-# Register and fetch git submodules
-sh _scripts/unpack-submodules.sh
-
 # Install Homebrew
 sh _scripts/install-homebrew.sh
 
@@ -22,6 +16,12 @@ sh _scripts/install-from-brewfile.sh
 
 # Welcome message
 sh _scripts/welcome.sh
+
+# Install Xcode command line tools
+sh _scripts/install-xcode-command-line-tools.sh
+
+# Register and fetch git submodules
+sh _scripts/unpack-submodules.sh
 
 # Set up nvm
 sh _scripts/install-nvm.sh
