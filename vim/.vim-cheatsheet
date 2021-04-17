@@ -1,0 +1,113 @@
+" change operator
+cw                          - change word
+ci"                         - change everything inside " "
+ci{                         - change everything inside { }
+cit                         - change tag contents in XML-based langs (eg. everything between <p> </p>)
+
+
+" substitute operator (vim-subversive)
+siw                         - substitute word
+sip                         - substitute paragraph
+ss                          - substitute line
+S                           - substitute to the end of line
+
+
+" normal mode
+yy                          - yank line
+dd                          - delete line
+D                           - delete from the current cursor position to the end of the line
+p                           - paste
+u                           - undo
+Ctrl + r                    - redo changes which were undone
+o                           - open new line and switch to Insert mode
+==                          - automatically format
+w                           - (word) jump to first character of next word
+b                           - (backwards) jump to first character of previous word
+e                           - (efter) jump to last character of next word
+Ctrl + o                    - go to previous entry of jump log
+<leader>av                  - augment .vimrc
+<leader>az                  - augment .zshrc
+<leader>rv                  - reload .vimrc (:source)
+
+
+" yanking
+"ay                         - copy (yank) to a specific register, in this case register a
+"ap                         - paste the contents of the a register
+"+y                         - copy to the special + register, which is available in GUI apps
+:%y+                        - copy all lines of this file into the system clipboard. explanation: % refer the next command to work on all the lines, y yank those lines, + to this register (system clipboard)
+
+" yank improvements (vim-yoink)
+Ctrl + n                    - cycle forward in yank list
+Ctrl + p                    - cycle backward in yank list
+
+
+" FZF usage
+\o                          - search files in the current directory with FZF
+Ctrl + x                    - open file in horizontal split
+Ctrl + v                    - open file in vertical split
+
+
+" unimpaired mappings
+"linewise mappings
+[<Space> and ]<Space>       - add newlines before and after the cursorline
+[e and ]e                   - exchange the current line with the one above or below it
+" normal mode aliases for ex commands
+]q                          - is :cnext
+[q                          - is :cprevious
+]a                          - is :next
+[a                          - is :bprevious
+[f and ]f                   - go to the next/previous file in the directory
+[n and ]n                   - jump between SCM conflict markers
+
+
+" custom snippets
+" assuming <leader> is \
+\tab                        - expand custom snippet
+\]                          - next tabstop in snippet
+\[                          - previous tabstop in snippet
+
+
+" insert mode autocompletion
+Ctrl + n                    - autocompletes with keywords from the currently open file(s)
+Ctrl + xf                   - autocompletes with filenames from the current directory
+Ctrl + xl                   - autocompletes with full lines from the current file
+
+
+" navigation without moving the cursor
+zz                          - set current line in the middle of the screen
+zt                          - set current line on the top of the screen
+zb                          - set current line on the bottom of the screen
+Ctrl + Y                    - move up one line (yesterday or yore = in the past in swedish)
+Ctrl + E                    - move down one line (efter = after in swedish)
+tn                          - new tab
+tk                          - next tab
+tj                          - previous tab
+th                          - first tab
+tl                          - last tab
+
+
+" window splitting
+:sp                         - split
+:vsp                        - vertical split
+Ctrl + h/j/k/l              - cycle between open split editors
+Ctrl + w + o                - make the current window the only one
+Ctrl + w + c                - close the current window
+Ctrl + w + s                - split horizontally opening the same file
+Ctrl + w + v                - split vertically opening the same file
+
+
+" marking
+ma                          - set mark
+"a                          - go to the beginning of mark line
+`a                          - go to the beginning of mark itself
+
+
+" comparing
+vim -d file1 file2          - open vim diff mode
+
+
+" hacks
+%s/midichlorian//gn         - find "midichlorian" occurences
+:r somefile.md              - read aka append the contents of somefile.md to the end of the current file
+:r !{command}               - append the output of the command to the current file eg :r !{npm ls -g --depth=0}
+:.!{figlet}                 - use the current line as input to figlet and append output to the current line instead
