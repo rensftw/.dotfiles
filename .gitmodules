@@ -1,3 +1,6 @@
 [submodule "js-engines/engine262"]
 	path = js-engines/engine262
 	url = https://github.com/engine262/engine262.git
+[submodule "zsh/.zsh/pure"]
+	path = zsh/.zsh/pure
+	url = https://github.com/sindresorhus/pure.git
