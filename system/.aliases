@@ -1,0 +1,170 @@
+################################################################################
+# General aliases
+################################################################################
+
+# Include work-related aliases
+source ~/.aliases.local
+
+# Navigation aliases
+alias ls="ls -G"
+alias ll="ls -Ghal"
+alias grep="grep --color=auto --ignore-case"
+alias mkdir="mkdir -pv"
+alias path="echo -e ${PATH//:/\\n}"
+alias c="clear"
+
+# Show hidden files and colorize the output of tree
+alias tree="tree -C"
+
+# Find-in-file  (using ripgrep combined with preview)
+# usage: fif <searchTerm>
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
+
+# Preview files and open the chosen files in vim
+vf() {
+  vim -o $(fzf --preview 'bat --color=always {}')
+}
+
+# Process monitoring
+alias btm="btm --config ~/.dotfiles/_bottom/bottom.toml"
+
+# Show active IP ports
+alias ap="sudo lsof -i -P -n | grep LISTEN"
+
+# Analyze code complexity
+alias acc="npx code-complexity . --limit 20 --sort ratio"
+
+# Create a shell script for installing VSCode plugins
+alias export-code-ext="code --list-extensions | xargs -L 1 echo code --install-extension  | sed 's/$/ --force/'"
+
+# Update to the latest macOS and fetch the full installer
+alias fetch-macos-installer="softwareupdate --fetch-full-installer"
+
+# Internet connection speed shortcuts
+# What's my external IP?
+alias external-ip="curl ifconfig.me"
+sto-servers() {
+    echo "Open https://speedtestserver.com/"
+}
+alias sto-sof="speedtest -vo sp1.neterra.net"
+alias sto-ath="speedtest -vo speedtest2.cosmote.net"
+
+# Cool miscellaneous shortcuts
+alias plinkplonk="cat ~/develop/plink-plonk-cute.js | pbcopy"
+weather() {
+    combinedurl="v2.wttr.in/$1?m"
+    echo "$combinedurl"
+    curl "v2.wttr.in/$1?m"
+}
+
+# App shortcut aliases
+alias chrome="open -a /Applications/Google\ Chrome.app"
+alias ff="open -a Firefox.app"
+alias cds='open -a Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security'
+
+################################################################################
+# Git aliases
+################################################################################
+# For more fzf + git inspiration checkout: https://junegunn.kr/2016/07/fzf-git/, https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+fzf-down() {
+  fzf --height 50% "$@" --border
+}
+
+# Git status with file preview
+gsp() {
+  is_in_git_repo || return
+  git -c color.status=always status --short |
+  fzf-down -m --ansi --nth 2..,.. \
+    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1})' |
+  cut -c4- | sed 's/.* -> //'
+}
+
+# Git log with commit preview
+gl() {
+  is_in_git_repo || return
+  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
+  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+    --header 'Press CTRL-S to toggle sort' \
+    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always' |
+  grep -o "[a-f0-9]\{7,\}"
+}
+
+# Git stash with preview
+gstash() {
+  is_in_git_repo || return
+  git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
+  cut -d: -f1
+}
+
+# Git branch with commit log preview
+_gb() {
+  is_in_git_repo || return
+  git branch -a --color=always | grep -v '/HEAD\s' | sort |
+  fzf-down --ansi --multi --tac --preview-window right:70% \
+    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)' |
+  sed 's/^..//' | cut -d' ' -f1 |
+  sed 's#^remotes/##'
+}
+
+# Mnemonic: git checkout branch
+gcb() {
+  git checkout $(_gb)
+}
+
+# Interactive FZF prompt to stage files
+ga() {
+  git add $(gsp)
+}
+
+# Interactive FZF prompt to unstage files
+gr() {
+  git reset $(gsp)
+}
+
+# Mnemonic: git stash apply
+gsa() {
+  git stash apply $(gstash)
+}
+
+# Mnemonic: current branch commits
+cbcommits() {
+  CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git log origin/master..$CURRENT_BRANCH --oneline
+}
+
+# Mnemonic: Am I behind origin/master?
+amibehind() {
+  CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  git log $CURRENT_BRANCH..origin/master --oneline
+}
+
+# Show git status
+alias gs="git status"
+
+# Add current git branch name to the clipboard
+alias gb="git rev-parse --abbrev-ref HEAD | pbcopy"
+
+# Show a compact summary of unstaged changes
+alias gdc="git diff --compact-summary"
+
+# What has happened to origin/master since I last pulled? (shows commits)
+alias glmomo="git log master..origin/master --oneline"
+
+# What has happened to origin/master since I last pulled? (shows file changes)
+alias gdmomo="git diff master...origin/master --compact-summary"
+
+# Delete all local branches except master and the branch I'm currently on
+alias gdab='git branch | egrep -v "(master|\*)" | xargs git branch -D'
+
+# Fetch and show status
+alias gfs="git fetch && git status"
+
+# Pretty log
+alias glg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'"

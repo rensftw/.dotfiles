@@ -1,0 +1,13 @@
+ifconfig            - network interface configuration, used to view and change config params of our system
+(networksetup -listallhardwareports - show allhardware to device to ethernet address mappings)
+ping                - checks if a service is alive and also shows packet loss
+nmap                - scans a network for open ports
+netstat             - network statistics  
+arp                 - address resolution and control
+traceroute          - print the route packets take to network host
+nslookup            - query Internet name servers interactively
+dig                 - query DNS servers (https://www.madboa.com/geek/dig/)
+whois               - query internet domain names ans network number directory service
+
+ssh                 - secure shell for connecting to remote machines
+scp                 - secure file transfer
