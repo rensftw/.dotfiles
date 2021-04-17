@@ -1,2 +1,4 @@
 # Display a welcome message; change to your name :)
-figlet -f 'big' 'Welcome Irena'
+NAME="Irena"
+
+figlet -f 'big' "Welcome $NAME"
