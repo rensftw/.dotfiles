@@ -1,0 +1,170 @@
+{
+    "atomKeymap.promptV3Features": true,
+    "auto-rename-tag.activationOnLanguage": [
+        "html",
+        "xml"
+    ],
+    "debug.javascript.usePreview": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": true,
+    "editor.cursorBlinking": "phase",
+    "editor.cursorStyle": "line",
+    "editor.fontSize": 12,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "editor.linkedEditing": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.parameterHints.enabled": false,
+    "editor.quickSuggestions": {
+        "comments": false,
+        "other": true,
+        "strings": true
+    },
+    "editor.renderWhitespace": "boundary",
+    "editor.snippetSuggestions": "top",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.tabCompletion": "on",
+    "editor.tabSize": 4,
+    "eslint.lintTask.enable": true,
+    "explorer.autoReveal": true,
+    "explorer.confirmDragAndDrop": false,
+    "extensions.ignoreRecommendations": true,
+    "files.autoSave": "onWindowChange",
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.factorypath": true,
+        "**/.project": true,
+        "**/.settings": true
+    },
+    "gitlens.heatmap.toggleMode": "window",
+    "gitlens.hovers.annotations.over": "annotation",
+    "gitlens.keymap": "none",
+    "gitlens.menus": {
+        "editor": {
+            "blame": true,
+            "clipboard": true,
+            "compare": true,
+            "details": true,
+            "history": true,
+            "remote": true
+        },
+        "editorGroup": {
+            "blame": true,
+            "compare": true,
+            "history": true,
+            "remote": false
+        },
+        "editorTab": {
+            "compare": true,
+            "history": true,
+            "remote": true
+        },
+        "explorer": {
+            "compare": true,
+            "history": true,
+            "remote": true
+        }
+    },
+    "javascript.suggest.completeJSDocs": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "javascript.validate.enable": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "liveshare.presence": true,
+    "material-icon-theme.activeIconPack": "vue_vuex",
+    "material-icon-theme.folders.color": "#90a4ae",
+    "material-icon-theme.folders.theme": "specific",
+    "peacock.affectStatusBar": false,
+    "peacock.affectTabActiveBorder": true,
+    "peacock.favoriteColors": [
+        {
+            "name": "Angular Red",
+            "value": "#b52e31"
+        },
+        {
+            "name": "Auth0 Orange",
+            "value": "#eb5424"
+        },
+        {
+            "name": "Azure Blue",
+            "value": "#007fff"
+        },
+        {
+            "name": "C# Purple",
+            "value": "#68217A"
+        },
+        {
+            "name": "Gatsby Purple",
+            "value": "#639"
+        },
+        {
+            "name": "Go Cyan",
+            "value": "#5dc9e2"
+        },
+        {
+            "name": "Java Blue-Gray",
+            "value": "#557c9b"
+        },
+        {
+            "name": "JavaScript Yellow",
+            "value": "#f9e64f"
+        },
+        {
+            "name": "Mandalorian Blue",
+            "value": "#1857a4"
+        },
+        {
+            "name": "Node Green",
+            "value": "#215732"
+        },
+        {
+            "name": "React Blue",
+            "value": "#00b3e6"
+        },
+        {
+            "name": "Something Different",
+            "value": "#832561"
+        },
+        {
+            "name": "Vue Green",
+            "value": "#42b883"
+        },
+        {
+            "name": "Docker Blue",
+            "value": "#319aea"
+        },
+        {
+            "name": "PHP Purple",
+            "value": "#4f5c93"
+        }
+    ],
+    "python.pythonPath": "/usr/local/bin/python3",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "terminal.explorerKind": "external",
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.cursorStyle": "underline",
+    "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
+    "turboConsoleLog.addSemicolonInTheEnd": true,
+    "turboConsoleLog.includeFileNameAndLineNum": false,
+    "turboConsoleLog.insertEnclosingClass": false,
+    "turboConsoleLog.logMessagePrefix": "🚨",
+    "turboConsoleLog.quote": "'",
+    "window.title": "${rootName}",
+    "workbench.activityBar.visible": true,
+    "workbench.colorTheme": "Night Owl",
+    "workbench.editor.enablePreview": true,
+    "workbench.editorAssociations": [
+        {
+            "filenamePattern": "*.ipynb",
+            "viewType": "jupyter.notebook.ipynb"
+        }
+    ],
+    "workbench.fontAliasing": "antialiased",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.list.automaticKeyboardNavigation": false,
+    "workbench.settings.editor": "json",
+    "gitlens.mode.active": "zen"
+}
