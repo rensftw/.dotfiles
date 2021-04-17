@@ -12,4 +12,4 @@ brew uninstall --force --zap $(brew list --cask)
 
 # Uninstall Homebrew itself
 echo "${GREEN}Removing Homebrew itself${NC}"
-/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
