@@ -15,13 +15,13 @@ echo "${GREEN}Removing Homebrew itself${NC}"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
 echo "${GREEN}Removing leftover artifacts${NC}"
-rm -rf /usr/local/Frameworks
-rm -rf /usr/local/Homebrew
-rm -rf /usr/local/bin
-rm -rf /usr/local/etc
-rm -rf /usr/local/include
-rm -rf /usr/local/lib
-rm -rf /usr/local/opt
-rm -rf /usr/local/sbin
-rm -rf /usr/local/share
-rm -rf /usr/local/var
+sudo rm -rf /usr/local/Frameworks
+sudo rm -rf /usr/local/Homebrew
+sudo rm -rf /usr/local/bin
+sudo rm -rf /usr/local/etc
+sudo rm -rf /usr/local/include
+sudo rm -rf /usr/local/lib
+sudo rm -rf /usr/local/opt
+sudo rm -rf /usr/local/sbin
+sudo rm -rf /usr/local/share
+sudo rm -rf /usr/local/var
