@@ -2,8 +2,8 @@
 # General aliases
 ################################################################################
 
-# Include work-related aliases
-source ~/.aliases.local
+# Include work-related aliases (uncomment if necessary)
+# source ~/.aliases.local
 
 # Navigation aliases
 alias ls="ls -G"
