@@ -11,6 +11,7 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     sh _scripts/ask-for-admin.sh
 
     # Uninstall all pip packages
+    echo "🐍 ${GREEN}Removing pip packages${NC}"
     pip freeze | xargs pip uninstall -y
 
     # Remove all dotfiles
