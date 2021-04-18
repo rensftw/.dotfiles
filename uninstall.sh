@@ -2,14 +2,14 @@
 
 source _scripts/colors.sh
 
-# Ask for sudo and maintain it until all steps are complete
-sh _scripts/ask-for-admin.sh
-
 echo "${RED}This action is irreversible. Are you sure you want to proceed? (y/n)${NC}"
 
 read ANSWER
 
 if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
+    # Ask for sudo and maintain it until all steps are complete
+    sh _scripts/ask-for-admin.sh
+
     # Remove all casks and formulae and then uninstall Homebrew itself
     sh _scripts/uninstall-homebrew.sh
 
