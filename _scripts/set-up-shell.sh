@@ -26,5 +26,5 @@ fi
 
 if [[ $SHELL =~ 'zsh' ]]; then
     echo "🌈 ${CYAN} Sourcing .zshrc${NC}"
-    source ~/.zshrc
+    source $HOME/.zshrc
 fi
