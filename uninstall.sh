@@ -2,8 +2,10 @@
 
 source _scripts/colors.sh
 
-echo "${RED}This action is irreversible. Are you sure you want to proceed? (y/n)${NC}"
+# Ask for sudo and maintain it until all steps are complete
+sh _scripts/ask-for-admin.sh
 
+echo "${RED}This action is irreversible. Are you sure you want to proceed? (y/n)${NC}"
 
 read ANSWER
 
