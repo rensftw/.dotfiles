@@ -4,6 +4,8 @@ HELPER_DIR_PREFIX='_*'
 # Store all directory names in an array
 directories=($(ls -d */))
 
+echo "🐐 ${GREEN}Removing stow symlinks${NC}"
+
 # Ignore helper directories when unstowing
 for dir in "${directories[@]}"; do
     if [[ $dir != $HELPER_DIR_PREFIX ]]; then
