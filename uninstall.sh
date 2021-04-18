@@ -10,6 +10,9 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Ask for sudo and maintain it until all steps are complete
     sh _scripts/ask-for-admin.sh
 
+    # Uninstall all pip packages
+    pip freeze | xargs pip uninstall -y
+
     # Remove all dotfiles
     sh _scripts/unstow.sh
 
@@ -18,9 +21,6 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
 
     # Uninstall nvm and all artifacts
     sh _scripts/uninstall-nvm.sh
-
-    # Uninstall all pip packages
-    pip freeze | xargs pip uninstall -y
 
 elif [[ "$ANSWER" == "n" || "$ANSWER" == "no" ]]; then
     echo "${CYAN}No changes made. Quitting..${NC}"
