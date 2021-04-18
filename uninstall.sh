@@ -10,6 +10,9 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Ask for sudo and maintain it until all steps are complete
     sh _scripts/ask-for-admin.sh
 
+    # Remove all dotfiles
+    sh _scripts/unstow.sh
+
     # Remove all casks and formulae and then uninstall Homebrew itself
     sh _scripts/uninstall-homebrew.sh
 
@@ -18,9 +21,6 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
 
     # Uninstall all pip packages
     pip freeze | xargs pip uninstall -y
-
-    # Remove all dotfiles
-    sh _scripts/unstow.sh
 
 elif [[ "$ANSWER" == "n" || "$ANSWER" == "no" ]]; then
     echo "${CYAN}No changes made. Quitting..${NC}"
