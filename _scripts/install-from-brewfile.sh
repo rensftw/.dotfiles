@@ -5,3 +5,6 @@ brew tap homebrew/bundle
 # Install all taps, formulae, and casks from the Brewfile
 echo "📦 ${CYAN}Installing Homebrew packages${NC}"
 brew bundle install --all --cleanup --file _homebrew/Brewfile
+
+echo "🧹 ${CYAN}Clean default zsh artifacts${NC}"
+rm -rf .zshrc .zshenv .zsh zsh_plugins 
