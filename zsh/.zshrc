@@ -1,4 +1,11 @@
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/local/opt/python/libexec/bin:$HOME:/.zsh_plugins/pure:/usrc/local/share/zsh/site-functions:/usr/local/opt/curl/bin:$PATH"
+PATH="/usr/local/sbin:$PATH"
+PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/opt/python/libexec/bin:$PATH"
+PATH="$HOME/.zsh_plugins/pure:$PATH"
+PATH="/usr/local/share/zsh/site-functions:$PATH"
+PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="$HOME:$PATH"
+
 export LC_ALL=en_US.UTF-8
 export VIMRC_LOCATION="~/.vimrc"
 export ZSHRC_LOCATION="~/.zshrc"
