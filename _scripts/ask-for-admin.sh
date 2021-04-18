@@ -1,4 +1,4 @@
-echo "🔐 Some steps (like adding a new shell) require sudo access"
+echo "🔐 ${CYAN}Checking for sudo (might require password)${NC}" 
 
 # Ask for the administrator password upfront
 sudo -v
