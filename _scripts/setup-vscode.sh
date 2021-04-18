@@ -3,7 +3,7 @@ echo "${CYAN}Setting up VSCode...${NC}"
 VSCODE_DIR="$HOME/Library/Application Support/Code/User"
 
 if command -v code &> /dev/null; then
-    echo "${CYAN}🔌 Installing Code extensions${NC}"
+    echo "${CYAN}🧩 Installing Code extensions${NC}"
     while IFS= read -r extension; do
         _scripts/revolver start "$extension"
         code --install-extension "$extension" --force &> /dev/null
