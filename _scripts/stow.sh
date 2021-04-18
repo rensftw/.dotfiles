@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "🧹 ${CYAN}Clean default zsh artifacts${NC}"
+rm -rf .zshrc .zshenv .zsh zsh_plugins 
+
 # Helper directories begin with _ (e.g. _scripts)
 HELPER_DIR_PREFIX='_*'
 
