@@ -17,3 +17,8 @@ else
     # Set default shell for sudo
     sudo chsh -s $BREW_ZSH_PATH
 fi
+
+if [[ $SHELL =~ 'zsh' ]]; then
+    echo "🌈 ${CYAN} Sourcing .zshrc${NC}"
+    source ~/.zshrc
+fi
