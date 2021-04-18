@@ -6,6 +6,8 @@ PATH="/usr/local/share/zsh/site-functions:$PATH"
 PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="$HOME:$PATH"
 
+fpath+=$HOME/.zsh/pure
+
 export LC_ALL=en_US.UTF-8
 export VIMRC_LOCATION="~/.vimrc"
 export ZSHRC_LOCATION="~/.zshrc"
