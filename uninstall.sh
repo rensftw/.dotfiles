@@ -14,17 +14,20 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Uninstall nvm and all artifacts
     sh _scripts/uninstall-nvm.sh
 
-    # Uninstall pip and all packages
+    # Uninstall all pip packages
+    pip freeze | xargs pip uninstall -y
 
     # Remove all dotfiles
     sh _scripts/unstow.sh
 
-    # echo "YAY, answer was: $ANSWER"
 elif [[ "$ANSWER" == "n" || "$ANSWER" == "no" ]]; then
-    # echo "Oh noes! answer  was negative?! $ANSWER"
-    echo "No changes made. Exitting..."
+    echo "${CYAN}No changes made. Quitting..${NC}"
 else
-    echo "Please type y(es) or n(o)"
-    read SECOND_ANSWER
-    echo "Second answer was: $SECOND_ANSWER"
+    echo "${CYAN}Please type y(es) or n(o).${NC}"
+    echo "${CYAN}No changes made. Quitting.."${NC}
+    exit
+
+    # Could allow a retry instead of exitting?
+    # read SECOND_ANSWER
+    # echo "Second answer was: $SECOND_ANSWER"
 fi
