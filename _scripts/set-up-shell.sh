@@ -1,6 +1,12 @@
 BREW_ZSH_PATH="/usr/local/bin/zsh"
 
-# Only modify /etc/shells if the zsh path is missing
+# Give permissions to zsh
+sudo chmod -R 755 /usr/local/share/zsh
+sudo chmod -R 755 /usr/local/share/zsh-completions
+sudo chmod -R 755 /usr/local/share/zsh-syntax-highlighting
+sudo chmod -R 755 /usr/local/share/zsh/site-functions
+
+# Modify /etc/shells if the new zsh path is missing
 if ! grep -Fqx "$BREW_ZSH_PATH" /etc/shells; then
     echo "🎞 ${CYAN}Adding the zsh path to /etc/shells${NC}"
 
