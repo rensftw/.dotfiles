@@ -9,9 +9,9 @@ export PATH="$HOME:$PATH"
 fpath+=$HOME/.zsh/pure
 
 export LC_ALL=en_US.UTF-8
-export VIMRC_LOCATION="~/.vimrc"
-export ZSHRC_LOCATION="~/.zshrc"
-export HOMEBREW_BUNDLE_FILE="~/.dotfiles/_homebrew/Brewfile"
+export VIMRC_LOCATION="$HOME/.vimrc"
+export ZSHRC_LOCATION="$HOME/.zshrc"
+export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
 
 source $HOME/.aliases
 
@@ -19,7 +19,7 @@ source $HOME/.aliases
 autoload -U promptinit; promptinit
 prompt pure
 
-HISTFILE=~/.histfile
+HISTFILE=$HOME/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep
@@ -41,7 +41,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # FZF configuration
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 export FZF_DEFAULT_OPTS='--multi --inline-info --height 50% --layout=reverse --border'
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
