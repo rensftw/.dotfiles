@@ -1,6 +1,6 @@
 BREW_ZSH_PATH="/usr/local/bin/zsh"
 
-# Give permissions to zsh
+# Give permissions to zsh (fixes compaudit error)
 sudo chmod -R 755 /usr/local/share/zsh
 sudo chmod -R 755 /usr/local/share/zsh-completions
 sudo chmod -R 755 /usr/local/share/zsh-syntax-highlighting
