@@ -24,7 +24,7 @@ else
     sudo chsh -s $BREW_ZSH_PATH
 fi
 
-if [[ $SHELL =~ 'zsh' ]]; then
-    echo "🌈 ${CYAN} Sourcing .zshrc${NC}"
-    source $HOME/.zshrc
-fi
+# if [[ $SHELL =~ 'zsh' ]]; then
+#     echo "🌈 ${CYAN} Sourcing .zshrc${NC}"
+#     source $HOME/.zshrc
+# fi
