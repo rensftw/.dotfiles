@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Export ANSI escape codes for colors
+# Import ANSI escape codes for colors
 source _scripts/colors.sh
 
 echo "🏁 ${PURPLE}Beginning installation...${NC}"
