@@ -24,7 +24,3 @@ else
     sudo chsh -s $BREW_ZSH_PATH
 fi
 
-if [[ $SHELL =~ 'zsh' ]]; then
-    echo "🌈 ${CYAN}Applying zsh config${NC}"
-    exec zsh &> /dev/null
-fi

@@ -47,6 +47,10 @@ sh _scripts/setup-vscode.sh
 # Set up iTerm2 (theme + settings)
 sh _scripts/setup-iterm2.sh
 
-# add more _scripts, and eventually...
 echo "🎉 ${GREEN}Installation complete!${NC}"
 sh _scripts/goodbye.sh
+
+# Restart the session
+if [[ $SHELL =~ 'zsh' ]]; then
+    exec zsh &> /dev/null
+fi
