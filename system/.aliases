@@ -31,7 +31,7 @@ vf() {
 }
 
 # Process monitoring
-alias btm="btm --config ~/.dotfiles/_bottom/bottom.toml"
+alias btm="btm --config $HOME/.dotfiles/_bottom/bottom.toml"
 
 # Show active IP ports
 alias ap="sudo lsof -i -P -n | grep LISTEN"
@@ -55,7 +55,7 @@ alias sto-sof="speedtest -vo sp1.neterra.net"
 alias sto-ath="speedtest -vo speedtest2.cosmote.net"
 
 # Cool miscellaneous shortcuts
-alias plinkplonk="cat ~/develop/plink-plonk-cute.js | pbcopy"
+alias plinkplonk="cat $HOME/develop/plink-plonk-cute.js | pbcopy"
 weather() {
     combinedurl="v2.wttr.in/$1?m"
     echo "$combinedurl"
