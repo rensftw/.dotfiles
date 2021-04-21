@@ -26,14 +26,14 @@ setopt autocd beep
 unsetopt appendhistory
 bindkey -v
 
-# The following lines were added by compinstall aka zsh_completions setup
+# Set up zsh-completions
+fpath+=$HOME/.zsh/zsh-completions/src
 zstyle :compinstall filename '/Users/rensftw/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
 
 # nvm setup
 export NVM_DIR="$HOME/.nvm"
