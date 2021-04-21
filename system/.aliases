@@ -3,8 +3,8 @@
 ################################################################################
 
 # Include work-related aliases
-if [[ -n $HOME/.aliases.local ]]; then
-    source $HOME/.aliases.local
+if [[ -e $HOME/.aliases.work ]]; then
+    source $HOME/.aliases.work
 fi
 
 # Navigation aliases
