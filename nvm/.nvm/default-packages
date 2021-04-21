@@ -1,10 +1,10 @@
-code-complexity
 @vue/cli
+code-complexity
 eshost-cli
-eslint
 eslint-config-airbnb-base
 eslint-plugin-import
 eslint-plugin-vue
+eslint
 gtop
 http-server
 jest
