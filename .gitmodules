@@ -10,3 +10,6 @@
 [submodule "zsh/.zsh/zsh-completions"]
 	path = zsh/.zsh/zsh-completions
 	url = git@github.com:zsh-users/zsh-completions.git
+[submodule "zsh/.zsh/powerlevel10k"]
+	path = zsh/.zsh/powerlevel10k
+	url = git@github.com:romkatv/powerlevel10k.git
