@@ -6,8 +6,6 @@ PATH="/usr/local/share/zsh/site-functions:$PATH"
 PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="$HOME:$PATH"
 
-fpath+=$HOME/.zsh/pure
-
 export LC_ALL=en_US.UTF-8
 export VIMRC_LOCATION="$HOME/.vimrc"
 export ZSHRC_LOCATION="$HOME/.zshrc"
@@ -16,6 +14,7 @@ export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
 source $HOME/.aliases
 
 # Prompt setup
+fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 prompt pure
 
