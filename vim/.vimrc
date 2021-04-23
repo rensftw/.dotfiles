@@ -96,10 +96,12 @@ endif
 " General settings
 filetype plugin indent on
 set nocompatible
-set tabstop=4               " show existing tab with 4 spaces width
-set shiftwidth=4            " when indenting with '>', use 4 spaces width
-set expandtab               " on pressing tab, insert 4 spaces
+set tabstop=4                           " show existing tab with 4 spaces width
+set shiftwidth=4                        " when indenting with '>', use 4 spaces width
+set expandtab                           " on pressing tab, insert 4 spaces
 set softtabstop=4
+set list                                " show trailing whitespaces
+set listchars=trail:·,tab:»»,nbsp:×     " define characters for showing whitespaces
 set updatetime=100
 set backspace=indent,eol,start
 set wrap linebreak nolist
