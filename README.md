@@ -1,6 +1,4 @@
-# Getting started
-
-## On a clean machine
+## Installation
 With git:
 ```
 xcode-select --install
@@ -13,7 +11,16 @@ mkdir .dotfiles
 cd .dotfiles
 curl -L https://api.github.com/repos/rensftw/.dotfiles/tarball | tar xz --strip=1
 ```
+  
+## Setting up a new machine
+There are 3 main scripts:
+`install.sh`
+`backup.sh`
+`uninstall.sh`
 
+Directories starting with an underscore (_) contain helpers.
+All other directories are `stow` packages.
+  
 ## Screenshots
 Powerlevel10k Rainbow prompt with Glacier theme on iTerm2:
 ![Powerlevel10k Rainbow prompt with Glacier theme on iTerm2](./_snapshots/rainbow-prompt-with-glacier-theme.png)
