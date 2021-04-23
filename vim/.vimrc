@@ -219,6 +219,7 @@ let g:ale_linters = {
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'markdown': [],
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
 \   'html': ['prettier'],
