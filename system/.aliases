@@ -16,6 +16,7 @@ alias path="echo -e ${PATH//:/\\n}"
 alias c="clear"
 alias df="cd $HOME/.dotfiles"
 alias av="vim $HOME/.vimrc"
+alias az="vim $HOME/.zshrc"
 
 # Show hidden files and colorize the output of tree
 alias tree="tree -C"
