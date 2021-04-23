@@ -5,6 +5,10 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Set the correct encoding
+scriptencoding utf-8
+set encoding=utf-8
+
 " Plugins
 call plug#begin('~/.vim/plugged')
 " Additional language packs
