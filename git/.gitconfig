@@ -1,25 +1,32 @@
 [user]
 	name = Irena Angelova
 	email = rensftw@users.noreply.github.com
+
 [color]
-	ui = true
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = 11
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+    ui = true
+
+[core]
+    pager = delta
+
+[delta]
+    line-numbers = true
+    plus-style = "syntax #012800"
+    minus-style = "syntax #340001"
+    syntax-theme = Monokai Extended
+    navigate = true
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = yellow box
+
+[interactive]
+    diffFilter = delta --color-only
+
 [alias]
     compact-diff = !git --no-pager diff --compact-summary
     branch = !git --no-pager branch
-[pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 
 [pull]
 	rebase = false
