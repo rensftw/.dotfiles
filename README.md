@@ -1,11 +1,11 @@
 ## Installation
-With git:
+With git:  
 ```
 xcode-select --install
-git clone https://github.com/rensftw/.dotfiles
+git clone https://github.com/rensftw/.dotfiles.git 
 ```
   
-Without git:
+Without git:  
 ```
 mkdir .dotfiles
 cd .dotfiles
@@ -17,7 +17,7 @@ There are 3 main scripts:
 `install.sh`
 `backup.sh`
 `uninstall.sh`
-
+  
 Directories starting with an underscore (_) contain helpers.
 All other directories are `stow` packages.
   
@@ -27,3 +27,4 @@ Powerlevel10k Rainbow prompt with Glacier theme on iTerm2:
   
 Vim with Dracula theme:
 ![Vim with Dracula theme](./_snapshots/vim-with-dracula-theme.png)
+
