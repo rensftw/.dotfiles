@@ -104,7 +104,7 @@ set list                                " show trailing whitespaces
 set listchars=trail:·,tab:»»,nbsp:×     " define characters for showing whitespaces
 set updatetime=100
 set backspace=indent,eol,start
-set wrap linebreak nolist
+set wrap linebreak
 set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
