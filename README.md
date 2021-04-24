@@ -5,21 +5,19 @@ xcode-select --install
 git clone https://github.com/rensftw/.dotfiles.git 
 ```
   
-Without git:  
-```
-mkdir .dotfiles
-cd .dotfiles
-curl -L https://api.github.com/repos/rensftw/.dotfiles/tarball | tar xz --strip=1
-```
-  
 ## Setting up a new machine
-There are 3 main scripts:
-`install.sh`
-`backup.sh`
-`uninstall.sh`
+This setup has been tailored for and tested on macOS machines.  
+There are 3 main scripts for managing a new machine:  
+* `install.sh`: Installs all necessary tools/software using [`brew`](https://brew.sh/) and sets up config files using [`stow`](https://www.gnu.org/software/stow/)
+* `backup.sh`: Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages
+* `uninstall.sh`: Removes all global packages, dotfiles, and tools
+
   
-Directories starting with an underscore (_) contain helpers.
-All other directories are `stow` packages.
+## Using this setup
+Feel free to fork this repo and customize it to your own needs!  
+Here's some useful information for getting started:  
+* Directories starting with an underscore (_) contain helpers
+* All other directories are `stow` packages
   
 ## Screenshots
 [Powerlevel10k](https://github.com/romkatv/powerlevel10k/) Rainbow prompt with [Glacier](https://github.com/bahlo/iterm-colors#glacier) theme on [iTerm2](https://iterm2.com/):
