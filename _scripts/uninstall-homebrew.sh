@@ -25,3 +25,10 @@ sudo rm -rf /usr/local/opt
 sudo rm -rf /usr/local/sbin
 sudo rm -rf /usr/local/share
 sudo rm -rf /usr/local/var
+sudo rm -rf $HOME/.revolver
+sudo rm -rf $HOME/.gitignore
+sudo rm -rf $HOME/.viminfo
+sudo rm -rf $HOME/.vscode
+sudo rm -rf $HOME/.zcompdump
+sudo rm -rf $HOME/.zsh_history
+sudo rm -rf $HOME/.zsh_sessions
