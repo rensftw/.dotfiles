@@ -24,8 +24,10 @@ if [ -d "${VSCODE_DIR}" ]; then
     echo "${CYAN}⚡️ Adding custom Code snippets${NC}"
     ln -fn _vscode/custom-snippets.code-snippets "$VSCODE_DIR"/snippets
 
-    echo "${CYAN}💼 Adding work-related Code snippets${NC}"
-    ln -fn _vscode/work.code-snippets "$VSCODE_DIR"/snippets
+    if [[ -e _vscode/work.code-snippets ]]; then
+        echo "${CYAN}💼 Adding work-related Code snippets${NC}"
+        ln -fn _vscode/work.code-snippets "$VSCODE_DIR"/snippets
+    fi
 else
     echo "${RED}❌ Failed to install customizations. Cannot find VSCode application folder.${NC}"
     exit
