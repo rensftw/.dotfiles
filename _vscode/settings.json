@@ -166,5 +166,6 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.list.automaticKeyboardNavigation": false,
     "workbench.settings.editor": "json",
-    "gitlens.mode.active": "zen"
+    "gitlens.mode.active": "zen",
+    "terminal.integrated.fontFamily": "MesloLGS NF"
 }
