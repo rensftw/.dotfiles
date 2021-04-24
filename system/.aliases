@@ -123,6 +123,11 @@ gcb() {
   git checkout $(_gb)
 }
 
+# Interactive FZF prompt to remove changes
+gc() {
+  git checkout $(gsp)
+}
+
 # Interactive FZF prompt to stage files
 ga() {
   git add $(gsp)
