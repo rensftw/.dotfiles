@@ -17,9 +17,6 @@ sh _scripts/install-from-brewfile.sh
 # Welcome message
 sh _scripts/welcome.sh
 
-# Install Xcode command line tools
-sh _scripts/install-xcode-command-line-tools.sh
-
 # Register and fetch git submodules
 sh _scripts/unpack-submodules.sh
 
