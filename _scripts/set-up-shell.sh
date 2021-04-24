@@ -1,10 +1,10 @@
 BREW_ZSH_PATH="/usr/local/bin/zsh"
 
 # Give permissions to zsh (fixes compaudit error)
-sudo chmod -R 755 /usr/local/share/zsh
-sudo chmod -R 755 /usr/local/share/zsh-completions
-sudo chmod -R 755 /usr/local/share/zsh-syntax-highlighting
-sudo chmod -R 755 /usr/local/share/zsh/site-functions
+# sudo chmod -R 755 /usr/local/share/zsh
+# sudo chmod -R 755 /usr/local/share/zsh-completions
+# sudo chmod -R 755 /usr/local/share/zsh-syntax-highlighting
+# sudo chmod -R 755 /usr/local/share/zsh/site-functions
 
 # Modify /etc/shells if the new zsh path is missing
 if ! grep -Fqx "$BREW_ZSH_PATH" /etc/shells; then
@@ -23,4 +23,3 @@ else
     # Set default shell for sudo
     sudo chsh -s $BREW_ZSH_PATH
 fi
-
