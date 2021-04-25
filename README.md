@@ -1,13 +1,18 @@
 ## Installation
-With git:  
+Clean (installs XCode command line tools and git):
+```
+mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/.dotfiles/tarball | tar xz --strip=1
+```
+  
+As a git repo:   
 ```
 xcode-select --install
-git clone https://github.com/rensftw/.dotfiles.git 
+git clone https://github.com/rensftw/.dotfiles.git
 ```
   
 ## Setting up a new machine
-This setup has been tailored for and tested on macOS machines.  
-There are 3 main scripts for managing a new machine:  
+This setup has been tailored for and tested on macOS.  
+There are 3 main scripts:  
 * `install.sh`: Installs all necessary tools/software using [`brew`](https://brew.sh/) and sets up config files using [`stow`](https://www.gnu.org/software/stow/)
 * `backup.sh`: Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages
 * `uninstall.sh`: Removes all global packages, dotfiles, and tools
