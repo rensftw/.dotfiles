@@ -1,6 +1,6 @@
 [user]
-	name = Irena Angelova
-	email = rensftw@users.noreply.github.com
+    name = Irena Angelova
+    email = rensftw@users.noreply.github.com
 
 [color]
     ui = true
@@ -29,4 +29,4 @@
     branch = !git --no-pager branch
 
 [pull]
-	rebase = false
+    rebase = false
