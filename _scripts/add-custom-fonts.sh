@@ -1,4 +1,4 @@
-FONT_DIR="$HOME/Library/Fonts"
+FONT_DIR="/Library/Fonts"
 
 echo "🖍 ${CYAN} Add custom fonts${NC}"
 
@@ -9,5 +9,5 @@ fi
 
 for file in _fonts/*; do
     echo "Adding ${PURPLE}${file#_fonts/}${NC}"
-    cp "$file" $HOME/Library/Fonts
+    cp "$file" $FONT_DIR
 done
