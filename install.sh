@@ -20,8 +20,8 @@ sh _scripts/welcome.sh
 # Add custom fonts (Meslo NerdFont)
 sh _scripts/add-custom-fonts.sh
 
-# Register and fetch git submodules
-sh _scripts/unpack-submodules.sh
+# Fetch dependencies (as git modules or manually)
+sh _scripts/fetch-dependencies.sh
 
 # Set up nvm
 sh _scripts/install-nvm.sh
