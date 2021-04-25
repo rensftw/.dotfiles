@@ -10,19 +10,19 @@ else
 
     DOTFILES=$(PWD)
 
-    _scripts/revolver start "engine262"
+    echo "🧲 engine262"
     mkdir -p $DOTFILES/js-engines/engine262
     git clone https://github.com/engine262/engine262.git $DOTFILES/js-engines/engine262
 
-    _scripts/revolver update "zsh-syntax-highlighting"
+    echo "🧲 zsh-syntax-highlighting"
     mkdir -p $DOTFILES/zsh/.zsh/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $DOTFILES/zsh/.zsh/zsh-syntax-highlighting
 
-    _scripts/revolver update "zsh-completions"
+    echo "🧲 zsh-completions"
     mkdir -p $DOTFILES/zsh/.zsh/zsh-completions
     git clone https://github.com/zsh-users/zsh-completions.git $DOTFILES/zsh/.zsh/zsh-completions
 
-    _scripts/revolver update "powerlevel10k"
+    echo "🧲 powerlevel10k"
     mkdir -p $DOTFILES/zsh/.zsh/powerlevel10k
     git clone https://github.com/romkatv/powerlevel10k.git $DOTFILES/zsh/.zsh/powerlevel10k
 
