@@ -25,6 +25,4 @@ else
     echo "🧲 powerlevel10k"
     mkdir -p $DOTFILES/zsh/.zsh/powerlevel10k
     git clone https://github.com/romkatv/powerlevel10k.git $DOTFILES/zsh/.zsh/powerlevel10k
-
-    _scripts/revolver stop
 fi
