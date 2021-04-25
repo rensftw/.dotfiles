@@ -1,9 +1,11 @@
+# If .dotfiles is a git repo itself, add dependencies as git submodules
 if [[ -e .git ]]; then
     echo "🛢  ${CYAN}Unpacking git submodules${NC}"
 
     git submodule init
     git submodule update
 else
+    # Otherwise, clone each dependency as a normal repo
     echo "🚚 ${CYAN}Fetching dependencies${NC}"
 
     DOTFILES=$(PWD)
