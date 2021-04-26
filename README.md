@@ -13,9 +13,11 @@ git clone https://github.com/rensftw/.dotfiles.git
 ## Highlights
 * [`ranger`](https://github.com/ranger/ranger) for terminal file navigation
 * [`fzf`](https://github.com/junegunn/fzf) integration with vim and aliases for interactive git operations
+* [`rg`](https://github.com/BurntSushi/ripgrep) for searching
 * [`stow`](https://www.gnu.org/software/stow/) for dotfile management with symlinks
 * [`brew`](https://brew.sh/) for macOS package management
 * [`nvm`](https://github.com/nvm-sh/nvm) for Node version management
+* [`btm`](https://github.com/ClementTsang/bottom) for process monitoring
   
 ## Setting up a new machine
 This setup has been tailored for and tested on macOS.  
@@ -48,3 +50,6 @@ There are also bindings for:
 
 ![Staging git changes interactively, using fzf bindings](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-fzf-full-size.gif)
 
+  
+Bottom for process monitoring:
+![Bottom process manager](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/btm-process-manager.png)
