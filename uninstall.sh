@@ -17,7 +17,7 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Remove all dotfiles
     sh _scripts/unstow.sh
 
-    # Remove all casks and formulae and then uninstall Homebrew itself
+    # Remove all casks/taps/formulae and then uninstall Homebrew itself
     sh _scripts/uninstall-homebrew.sh
 
     # Uninstall nvm and all artifacts

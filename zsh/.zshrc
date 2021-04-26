@@ -1,7 +1,6 @@
 PATH="/usr/local/sbin:$PATH"
 PATH="/usr/local/bin:$PATH"
 PATH="/usr/local/opt/python/libexec/bin:$PATH"
-PATH="$HOME/.zsh_plugins/pure:$PATH"
 PATH="/usr/local/share/zsh/site-functions:$PATH"
 PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="$HOME:$PATH"
@@ -21,7 +20,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 source $HOME/.zsh/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 HISTFILE=$HOME/.histfile
@@ -36,7 +34,6 @@ fpath+=$HOME/.zsh/zsh-completions/src
 zstyle :compinstall filename '/Users/rensftw/.zshrc'
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
-
 autoload -Uz compinit
 compinit
 
