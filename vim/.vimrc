@@ -14,7 +14,7 @@ call plug#begin('~/.vim/plugged')
 " Additional language packs
 Plug 'sheerun/vim-polyglot'
 
-" FZF  integration with vim (fuzzy finder)
+" FZF integration with vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
