@@ -41,7 +41,10 @@ alias btm="btm --config $HOME/.dotfiles/_bottom/bottom.toml"
 alias ap="sudo lsof -i -P -n | grep LISTEN"
 
 # Analyze code complexity
-alias acc="npx code-complexity . --limit 20 --sort ratio"
+acc() {
+    echo "npx code-complexity . --limit 20 --sort complexity"
+    npx code-complexity . --limit 20 --sort complexity
+}
 
 # Create a shell script for installing VSCode plugins
 alias export-code-ext="code --list-extensions | xargs -L 1 echo code --install-extension  | sed 's/$/ --force/'"
