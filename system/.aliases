@@ -2,7 +2,7 @@
 # General aliases
 ################################################################################
 
-# Include work-related aliases
+# Include work-related aliases, if the file exists
 if [[ -e $HOME/.aliases.work ]]; then
     source $HOME/.aliases.work
 fi
@@ -19,7 +19,7 @@ alias df="cd $HOME/.dotfiles"
 alias av="vim $HOME/.vimrc"
 alias az="vim $HOME/.zshrc"
 
-# Show hidden files and colorize the output of tree
+# Colorize the output of tree
 alias tree="tree -C"
 
 # Find-in-file  (using ripgrep combined with preview)
