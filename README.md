@@ -38,12 +38,13 @@ Here's some useful information for getting started:
 Vim with [Dracula](https://draculatheme.com/vim) theme:
 ![Vim with Dracula theme](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/vim-with-dracula-theme.png)
   
-Interactive staging with a preview window for git (using fzf bindings):
+Interactive staging with a preview window for git (using fzf bindings):  
 There are also bindings for:
   * unstaging changes
   * discarding changes
   * inspecting stash entries
   * inspecting the git history of a branch (with commit preview)
   * switching between branches
+
 ![Staging git changes interactively, using fzf bindings](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-fzf-full-size.gif)
 
