@@ -37,4 +37,7 @@ Here's some useful information for getting started:
   
 Vim with [Dracula](https://draculatheme.com/vim) theme:
 ![Vim with Dracula theme](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/vim-with-dracula-theme.png)
+  
+Interactive staging in git using fzf bindings:
+![Staging git changes interactively, using fzf bindings](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-fzf-full-size.gif)
 
