@@ -46,15 +46,13 @@ acc() {
     npx code-complexity . --limit 20 --sort complexity
 }
 
-# Create a shell script for installing VSCode plugins
-alias export-code-ext="code --list-extensions | xargs -L 1 echo code --install-extension  | sed 's/$/ --force/'"
-
 # Update to the latest macOS and fetch the full installer
 alias fetch-macos-installer="softwareupdate --fetch-full-installer"
 
-# Internet connection speed shortcuts
 # What's my external IP?
 alias external-ip="curl ifconfig.me"
+
+# Internet connection speed shortcuts
 sto-servers() {
     echo "Open https://speedtestserver.com/"
 }
