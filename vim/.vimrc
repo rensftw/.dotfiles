@@ -61,13 +61,6 @@ Plug 'honza/vim-snippets'
 " Lint and fix-on-save
 Plug 'dense-analysis/ale'
 
-" Nerdtree and related utilities
-Plug 'preservim/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'preservim/nerdcommenter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
-
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -227,13 +220,6 @@ let g:ale_fixers = {
 \   'json': ['prettier'],
 \   'python': ['black'],
 \}
-
-" NERDTree remaps
-nnoremap <leader>n      :NERDTreeToggle<CR>
-nnoremap <C-f>          :NERDTreeFind<CR>
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
 
 " Normal remaps
 nnoremap Q              !!$SHELL<CR>
