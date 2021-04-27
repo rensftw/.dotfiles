@@ -14,7 +14,8 @@ alias grep="grep --color=auto --ignore-case"
 alias mkdir="mkdir -pv"
 alias path="echo -e ${PATH//:/\\n}"
 alias c="clear"
-alias rr="ranger ."
+alias r=". ranger"      # ranger navigates to the last directory opened
+alias rr="ranger ."     # ranger is limited to the directory it was originally called from
 alias df="cd $HOME/.dotfiles"
 alias av="vim $HOME/.vimrc"
 alias az="vim $HOME/.zshrc"
