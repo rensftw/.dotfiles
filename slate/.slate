@@ -38,6 +38,20 @@ bind 2:${hyper} ${topright}
 bind 3:${hyper} ${bottomleft}
 bind 4:${hyper} ${bottomright}
 
+# Resizing bindings
+bind =:${hyper} resize +5% +10%
+bind -:${hyper} resize -5% -10%
+bind j:${hyper} resize 0 +10%
+bind k:${hyper} resize 0 -10%
+bind h:${hyper} resize -10% 0
+bind l:${hyper} resize +10% 0
+
+# Movement bindings
+bind left:${triple}     nudge -50 +0
+bind right:${triple}    nudge +50 +0
+bind up:${triple}       nudge +0 -50
+bind down:${triple}     nudge +0 +50
+
 # Monitor switching bindings
 bind right:alt,ctrl throw 1 resize
 bind left:alt,ctrl throw 0 resize
