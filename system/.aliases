@@ -19,6 +19,7 @@ alias rr="ranger ."     # ranger is limited to the directory it was originally c
 alias df="cd $HOME/.dotfiles"
 alias av="vim $HOME/.vimrc"
 alias az="vim $HOME/.zshrc"
+alias aa="vim $HOME/.aliases"
 
 # Colorize the output of tree
 alias tree="tree -C"
@@ -175,6 +176,9 @@ alias gdmomo="git diff master...origin/master --compact-summary"
 
 # Delete all local branches except master and the branch I'm currently on
 alias gdab='git branch | egrep -v "(master|\*)" | xargs git branch -D'
+
+# Fetch
+alias gf="git fetch"
 
 # Fetch and show status
 alias gfs="git fetch && git status"
