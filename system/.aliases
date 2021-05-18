@@ -137,6 +137,12 @@ ga() {
   git add $(gsp)
 }
 
+
+# Interactive FZF prompt to stage chunks
+gap() {
+  git add -p $(gsp)
+}
+
 # Interactive FZF prompt to unstage files
 gr() {
   git reset $(gsp)
