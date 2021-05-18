@@ -3,18 +3,19 @@
 config defaultToCurrentScreen true
 
 # Abstract positions
-alias full          move screenOriginX;screenOriginY screenSizeX;screenSizeY
-alias lefthalf      move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
-alias righthalf     move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
-alias tophalf       move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
-alias bottomhalf    move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
-alias topleft       corner top-left resize:screenSizeX/2;screenSizeY/2
-alias topright      corner top-right resize:screenSizeX/2;screenSizeY/2
-alias bottomleft    corner bottom-left resize:screenSizeX/2;screenSizeY/2
-alias bottomright   corner bottom-right resize:screenSizeX/2;screenSizeY/2
-alias smallCenter   move screenOriginX+screenSizeX/6;screenOriginY+screenSizeY/6 screenSizeX/3;screenSizeY/3
-alias center        move screenOriginX+screenSizeX/6;screenOriginY+screenSizeY/6 2*screenSizeX/3;2*screenSizeY/3
-alias bigCenter     move screenOriginX+screenSizeX/12;screenOriginY+screenSizeY/12 10*screenSizeX/12;10*screenSizeY/12
+alias full                          move screenOriginX;screenOriginY screenSizeX;screenSizeY
+alias lefthalf                      move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias righthalf                     move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+alias tophalf                       move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
+alias bottomhalf                    move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
+alias topleft                       corner top-left resize:screenSizeX/2;screenSizeY/2
+alias topright                      corner top-right resize:screenSizeX/2;screenSizeY/2
+alias bottomleft                    corner bottom-left resize:screenSizeX/2;screenSizeY/2
+alias bottomright                   corner bottom-right resize:screenSizeX/2;screenSizeY/2
+alias smallCenter                   move screenOriginX+screenSizeX/6;screenOriginY+screenSizeY/6 screenSizeX/3;screenSizeY/3
+alias center                        move screenOriginX+screenSizeX/6;screenOriginY+screenSizeY/6 2*screenSizeX/3;2*screenSizeY/3
+alias bigCenter                     move screenOriginX+screenSizeX/12;screenOriginY+screenSizeY/12 10*screenSizeX/12;10*screenSizeY/12
+alias centerAnyWindow               move screenOriginX+screenSizeX/2-windowSizeX/2;screenOriginY+screenSizeY/2-windowSizeY/2 windowSizeX;windowSizeY
 
 # Bind command+option+b to google chrome
 bind b:cmd;alt focus 'Google Chrome'
@@ -26,6 +27,7 @@ alias hyper alt;cmd
 
 # Location bindings
 bind f:${hyper} ${full}
+bind =:${hyper} ${centerAnyWindow}
 bind x:${hyper} ${smallCenter}
 bind c:${hyper} ${center}
 bind v:${hyper} ${bigCenter}
