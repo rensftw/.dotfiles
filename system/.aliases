@@ -169,7 +169,7 @@ alias gb="git rev-parse --abbrev-ref HEAD | pbcopy"
 alias gdc="git diff --compact-summary"
 
 # What has happened to origin/master since I last pulled? (shows commits)
-alias glmomo="git log master..origin/master --oneline"
+alias glmomo='git log master..origin/master --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --color=always'
 
 # What has happened to origin/master since I last pulled? (shows file changes)
 alias gdmomo="git diff master...origin/master --compact-summary"
