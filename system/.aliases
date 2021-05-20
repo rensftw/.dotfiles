@@ -38,6 +38,7 @@ vf() {
 
 # Process monitoring
 alias btm="btm --config $HOME/.dotfiles/_bottom/bottom.toml"
+alias bt="bpytop"
 
 # Show active IP ports
 alias ap="sudo lsof -i -P -n | grep LISTEN"
