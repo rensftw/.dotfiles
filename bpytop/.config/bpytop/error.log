@@ -1,0 +1,30 @@
+19/05/21 (16:46:52) | ERROR: Exception when sending signal 15 to pid 154
+19/05/21 (16:46:52) | ERROR: [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "/usr/local/Cellar/bpytop/1.0.65/libexec/lib/python3.9/site-packages/bpytop.py", line 5447, in process_keys
+    os.kill(pid, sig)
+PermissionError: [Errno 1] Operation not permitted
+19/05/21 (16:46:56) | ERROR: Exception when sending signal 9 to pid 154
+19/05/21 (16:46:56) | ERROR: [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "/usr/local/Cellar/bpytop/1.0.65/libexec/lib/python3.9/site-packages/bpytop.py", line 5447, in process_keys
+    os.kill(pid, sig)
+PermissionError: [Errno 1] Operation not permitted
+19/05/21 (16:46:59) | ERROR: Exception when sending signal 9 to pid 154
+19/05/21 (16:46:59) | ERROR: [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "/usr/local/Cellar/bpytop/1.0.65/libexec/lib/python3.9/site-packages/bpytop.py", line 5447, in process_keys
+    os.kill(pid, sig)
+PermissionError: [Errno 1] Operation not permitted
+19/05/21 (16:46:59) | ERROR: Exception when sending signal 9 to pid 154
+19/05/21 (16:46:59) | ERROR: [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "/usr/local/Cellar/bpytop/1.0.65/libexec/lib/python3.9/site-packages/bpytop.py", line 5447, in process_keys
+    os.kill(pid, sig)
+PermissionError: [Errno 1] Operation not permitted
+19/05/21 (16:46:59) | ERROR: Exception when sending signal 9 to pid 154
+19/05/21 (16:46:59) | ERROR: [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "/usr/local/Cellar/bpytop/1.0.65/libexec/lib/python3.9/site-packages/bpytop.py", line 5447, in process_keys
+    os.kill(pid, sig)
+PermissionError: [Errno 1] Operation not permitted
