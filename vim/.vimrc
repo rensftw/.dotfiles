@@ -91,6 +91,12 @@ set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
 
+
+" Git integration
+" Jump between hunks
+nmap h <Plug>(GitGutterNextHunk)
+nmap H <Plug>(GitGutterPrevHunk)
+
 " Search highlighting
 " highlight search results
 set hlsearch
