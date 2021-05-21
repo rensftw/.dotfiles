@@ -1,6 +1,7 @@
 .DS_STORE
 vim/.vim/plugged
 vim/.vim/.netrwhist
+bpytop/.config/bpytop/error.log
 
 # Ignore work-related snippets
 vim/.vim/UltiSnips/markdown.snippets
