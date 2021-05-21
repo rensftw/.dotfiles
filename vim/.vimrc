@@ -99,6 +99,10 @@ nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 " FZF configuration
 let g:fzf_command_prefix = 'Fzf'
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'enter': 'vsplit' }
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
 nnoremap <silent> <leader>o     :FZF -m<CR>
 " Find term in current file
