@@ -77,6 +77,7 @@ set splitright
 set splitbelow
 colorscheme dracula
 let g:airline_theme='dracula'
+let g:airline_powerline_fonts=1
 " :colors darkblue    " use for debugging theme-related issues
 let g:python_highlight_all = 1
 " Enable true colors
