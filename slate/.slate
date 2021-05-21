@@ -21,39 +21,39 @@ alias centerAnyWindow               move screenOriginX+screenSizeX/2-windowSizeX
 bind b:cmd;alt focus 'Google Chrome'
 
 # The triple keys
-alias triple ctrl;alt;cmd
-alias triple2 alt;ctrl;shift
-alias hyper alt;cmd
+alias triple                        ctrl;alt;cmd
+alias triple2                       alt;ctrl;shift
+alias hyper                         alt;cmd
 
 # Location bindings
-bind f:${hyper} ${full}
-bind =:${hyper} ${centerAnyWindow}
-bind x:${hyper} ${smallCenter}
-bind c:${hyper} ${center}
-bind v:${hyper} ${bigCenter}
-bind left:${hyper} ${lefthalf}
-bind right:${hyper} ${righthalf}
-bind up:${hyper} ${tophalf}
-bind down:${hyper} ${bottomhalf}
-bind 1:${hyper} ${topleft}
-bind 2:${hyper} ${topright}
-bind 3:${hyper} ${bottomleft}
-bind 4:${hyper} ${bottomright}
+bind f:${hyper}                     ${full}
+bind =:${hyper}                     ${centerAnyWindow}
+bind x:${hyper}                     ${smallCenter}
+bind c:${hyper}                     ${center}
+bind v:${hyper}                     ${bigCenter}
+bind left:${hyper}                  ${lefthalf}
+bind right:${hyper}                 ${righthalf}
+bind up:${hyper}                    ${tophalf}
+bind down:${hyper}                  ${bottomhalf}
+bind 1:${hyper}                     ${topleft}
+bind 2:${hyper}                     ${topright}
+bind 3:${hyper}                     ${bottomleft}
+bind 4:${hyper}                     ${bottomright}
 
 # Resizing bindings
-bind =:${hyper} resize +5% +10%
-bind -:${hyper} resize -5% -10%
-bind j:${hyper} resize 0 +10%
-bind k:${hyper} resize 0 -10%
-bind h:${hyper} resize -10% 0
-bind l:${hyper} resize +10% 0
+bind =:${hyper}                     resize +5% +10%
+bind -:${hyper}                     resize -5% -10%
+bind j:${hyper}                     resize 0 +10%
+bind k:${hyper}                     resize 0 -10%
+bind h:${hyper}                     resize -10% 0
+bind l:${hyper}                     resize +10% 0
 
 # Movement bindings
-bind left:${triple}     nudge -50 +0
-bind right:${triple}    nudge +50 +0
-bind up:${triple}       nudge +0 -50
-bind down:${triple}     nudge +0 +50
+bind left:${triple}                 nudge -50 +0
+bind right:${triple}                nudge +50 +0
+bind up:${triple}                   nudge +0 -50
+bind down:${triple}                 nudge +0 +50
 
 # Monitor switching bindings
-bind right:alt,ctrl throw 1 resize
-bind left:alt,ctrl throw 0 resize
+bind right:alt,ctrl                 throw 1 resize
+bind left:alt,ctrl                  throw 0 resize
