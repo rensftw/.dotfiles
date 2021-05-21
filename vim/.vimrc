@@ -91,6 +91,12 @@ set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
 
+" Search highlighting
+" highlight search results
+set hlsearch
+" Make double-<Esc> clear search highlights
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+
 " FZF configuration
 let g:fzf_command_prefix = 'Fzf'
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
