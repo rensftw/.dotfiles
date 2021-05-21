@@ -39,18 +39,6 @@ Plug 'tpope/vim-surround'
 " Mappings for complementary commands like ]q, [q, etc
 Plug 'tpope/vim-unimpaired'
 
-" Simply delete and not cut (do not affect yank)
-Plug 'svermeulen/vim-cutlass'
-
-" Maintain a history of yanks you can cycle through when pasting
-Plug 'svermeulen/vim-yoink'
-
-" Operator motions for quick substitutions
-Plug 'svermeulen/vim-subversive'
-
-" Ensure the . operator works after plugin maps
-Plug 'tpope/vim-repeat'
-
 " Add identation that closely matches PEP 8
 Plug 'vim-scripts/indentpython'
 
@@ -103,10 +91,6 @@ set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
 
-" Keep some cut functionality
-nnoremap xx dd
-nnoremap X D
-
 " FZF configuration
 let g:fzf_command_prefix = 'Fzf'
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
@@ -152,28 +136,6 @@ xmap <Leader>R
     \ gvgr
     \ :cfdo %s/<C-r>s//g \| update
      \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-
-" Yoink mappings
-" Do not add delete operations to the yank historv
-let g:yoinkIncludeDeleteOperations = 1
-nmap <c-n>              <plug>(YoinkPostPasteSwapBack)
-nmap <c-p>              <plug>(YoinkPostPasteSwapForward)
-nmap p                  <plug>(YoinkPaste_p)
-nmap P                  <plug>(YoinkPaste_P)
-
-" Subversive mappings
-" s for substitute
-nmap s                  <plug>(SubversiveSubstitute)
-nmap ss                 <plug>(SubversiveSubstituteLine)
-nmap S                  <plug>(SubversiveSubstituteToEndOfLine)
-" Substitute over range
-nmap <leader>sr         <plug>(SubversiveSubstituteRange)
-xmap <leader>sr         <plug>(SubversiveSubstituteRange)
-nmap <leader>ss         <plug>(SubversiveSubstituteWordRange)
-" Subversive integration with yoink (for pasting in visual mode)
-xmap s <plug>(SubversiveSubstitute)
-xmap p <plug>(SubversiveSubstitute)
-xmap P <plug>(SubversiveSubstitute)
 
 " Snippets (trigger configuration)
 let g:UltiSnipsExpandTrigger="<tab>"
