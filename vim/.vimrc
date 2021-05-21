@@ -104,14 +104,14 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'enter': 'vsplit' }
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
-nnoremap <silent> <leader>o     :FZF -m<CR>
-" Find term in current file
-nnoremap <leader>f              :///gi<Left><Left><Left><Left>
+nnoremap <silent><leader>o     :FZF -m<CR>
+" Find term in file
+nnoremap f                      *
+vnoremap f                      y/\V<C-R>=escape(@",'/\')<CR><CR>
 " Find term in all files project-wide
-nnoremap <leader>F              :FzfRg<CR>
+nnoremap <leader>f              :FzfRg<CR>
 " Inspect buffers
 nnoremap <leader>b              :FzfBuffers<CR>
-" Find and replace in multiple files
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
