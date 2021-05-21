@@ -17,7 +17,7 @@ git clone https://github.com/rensftw/.dotfiles.git
 * [`stow`](https://www.gnu.org/software/stow/) for dotfile management with symlinks
 * [`brew`](https://brew.sh/) for macOS package management
 * [`nvm`](https://github.com/nvm-sh/nvm) for Node version management
-* [`btm`](https://github.com/ClementTsang/bottom) for process monitoring
+* [`BpyTOP`](https://github.com/aristocratos/bpytop) for process monitoring
   
 ## Setting up a new machine
 This setup has been tailored for and tested on macOS.  
@@ -51,5 +51,6 @@ There are also bindings for:
 ![Staging git changes interactively, using fzf bindings](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-fzf-full-size.gif)
 
   
-Bottom for process monitoring:
-![Bottom process manager](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/btm-process-manager.png)
+BpyTOP for process monitoring:
+![BpyTOP for process monitoring](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/bpytop-process-manager.png)
+
