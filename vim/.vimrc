@@ -97,6 +97,10 @@ set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
 
+" Synchronize the global clipboard with Vim's default register (which is
+" called 'unnamed')
+set clipboard^=unnamed
+
 " Search highlighting
 " highlight search results
 set hlsearch
