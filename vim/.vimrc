@@ -217,11 +217,20 @@ xnoremap p pgvy
 " Keep cursor at the bottom of the visual selection after you yank it.
 vmap y ygv<Esc>
 
-" Normal remaps
-nnoremap Q              !!$SHELL<CR>
+" Move 1 more lines up or down in normal and visual selection modes.
+nnoremap K              :m .-2<CR>==
+nnoremap J              :m .+1<CR>==
+vnoremap K              :m '<-2<CR>gv=gv
+vnoremap J              :m '>+1<CR>gv=gv
+
+" Terminal
+" Open terminal
 nnoremap <leader>t      :below terminal<CR>
 " Exit terminal mode
 tnoremap <esc><esc>     <C-\><C-n><C-w>w
+
+" Normal remaps
+nnoremap Q              !!$SHELL<CR>
 nnoremap <leader>av     :tabnew $VIMRC_LOCATION<CR>     " augment vimrc
 nnoremap <leader>az     :tabnew $ZSHRC_LOCATION<CR>     " augment zshrc
 nnoremap <leader>rv     :source $VIMRC_LOCATION<CR>     " reload vimrc
