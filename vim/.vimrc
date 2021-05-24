@@ -9,7 +9,9 @@ endif
 scriptencoding utf-8
 set encoding=utf-8
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 " Additional language packs
 Plug 'sheerun/vim-polyglot'
@@ -57,7 +59,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
-" Theme/UI
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Theme/UI settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 set t_Co=256
 set cursorline
@@ -68,14 +72,16 @@ let g:airline_theme='dracula'
 let g:airline_powerline_fonts=1
 " :colors darkblue    " use for debugging theme-related issues
 let g:python_highlight_all = 1
-" Enable true colors
+" Enable true colors, if possible
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
 set nocompatible
 set tabstop=4                           " show existing tab with 4 spaces width
@@ -91,23 +97,26 @@ set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
 
-" Git integration
-let g:gitgutter_preview_win_floating = 1
-" Show a hunk preview
-nmap hp <Plug>(GitGutterPreviewHunk)
-" Jump between hunks
-nmap h <Plug>(GitGutterNextHunk)
-nmap H <Plug>(GitGutterPrevHunk)
-" Stage hunk
-nmap hs <Plug>(GitGutterStageHunk)
-" Undo hunk
-nmap hu <Plug>(GitGutterUndoHunk)
-
 " Search highlighting
 " highlight search results
 set hlsearch
 " Make double-<Esc> clear search highlights
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GitGutter integration
+let g:gitgutter_preview_win_floating = 1
+" Show a hunk preview
+nmap hp                 <Plug>(GitGutterPreviewHunk)
+" Jump between hunks
+nmap h                  <Plug>(GitGutterNextHunk)
+nmap H                  <Plug>(GitGutterPrevHunk)
+" Stage hunk
+nmap ha                 <Plug>(GitGutterStageHunk)
+" Undo hunk
+nmap hu                 <Plug>(GitGutterUndoHunk)
 
 " FZF configuration
 let g:fzf_command_prefix = 'Fzf'
@@ -116,14 +125,14 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'enter': 'vsplit' }
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
-nnoremap <silent><leader>o     :FZF -m<CR>
+nnoremap                <silent><leader>o     :FZF -m<CR>
 " Find term in file
-nnoremap f                      *
-vnoremap f                      y/\V<C-R>=escape(@",'/\')<CR><CR>
+nnoremap f              *
+vnoremap f              y/\V<C-R>=escape(@",'/\')<CR><CR>
 " Find term in all files project-wide
-nnoremap <leader>f              :FzfRg<CR>
+nnoremap <leader>f      :FzfRg<CR>
 " Inspect buffers
-nnoremap <leader>b              :FzfBuffers<CR>
+nnoremap <leader>b      :FzfBuffers<CR>
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
@@ -133,40 +142,21 @@ command! -bang -nargs=* Rg
   \ <q-args>, 1, fzf#vim#with_preview(), <bang>0)
 
 " Grepper configuration
-let g:grepper={}
-let g:grepper.tools=["rg"]
-xmap gr <plug>(GrepperOperator)
+let g:grepper = {}
+let g:grepper.tools = ["rg"]
+xmap gr                 <plug>(GrepperOperator)
 
-" Find and replace in current file
-" Type a replacement term and press . to repeat the replacement again. Useful
-" for replacing a few instances of the term (comparable to multiple cursors).
-nnoremap <silent> r :let @/='\<'.expand('<cword>').'\>'<CR>cgn
-xnoremap <silent> r "sy:let @/=@s<CR>cgn
-
-" Find and replace project-wide
-" After searching for text, press this mapping to do a project wide find and
-" replace. It's similar to <leader>r except this one applies to all matches
-" across all files instead of just the current file.
-nnoremap <leader>R
-  \ :let @s='\<'.expand('<cword>').'\>'<CR>
-  \ :Grepper -cword -noprompt<CR>
-  \ :cfdo %s/<C-r>s//g \| update
-  \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-
-" The same as above except it works with a visual selection.
-xmap <leader>R
-    \ "sy
-    \ gvgr
-    \ :cfdo %s/<C-r>s//g \| update
-     \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-
-" Snippets (trigger configuration)
+" Ultisnips configuration
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" ALE configuration
+" Add remaps for linting and fixing
+nnoremap <leader>al     :ALELint<CR>
+nnoremap <leader>af     :ALEFix<CR>
 " Linting and fixing
 let g:ale_enabled = 1
 " Lint when opening a file
@@ -183,9 +173,6 @@ let g:airline#extensions#ale#enabled = 1
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_hover_to_preview = 0
-" Add remaps for linting and fixing
-nnoremap <leader>al      :ALELint<CR>
-nnoremap <leader>af      :ALEFix<CR>
 " Apply JS setting for Vue files as well
 let g:ale_linter_aliases = {'javascript': ['vue', 'javascript']}
 let g:ale_linters = {
@@ -206,6 +193,33 @@ let g:ale_fixers = {
 \   'json': ['prettier'],
 \   'python': ['black'],
 \}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Utilities
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Find and replace in current file
+" Type a replacement term and press . to repeat the replacement again. Useful
+" for replacing a few instances of the term (comparable to multiple cursors).
+nnoremap <silent>r      :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent>r      "sy:let @/=@s<CR>cgn
+
+" Find and replace project-wide
+" After searching for text, press this mapping to do a project wide find and
+" replace. It's similar to <leader>r except this one applies to all matches
+" across all files instead of just the current file.
+nnoremap <leader>R
+  \ :let @s='\<'.expand('<cword>').'\>'<CR>
+  \ :Grepper -cword -noprompt<CR>
+  \ :cfdo %s/<C-r>s//g \| update
+  \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
+" The same as above except it works with a visual selection.
+xmap <leader>R
+    \ "sy
+    \ gvgr
+    \ :cfdo %s/<C-r>s//g \| update
+     \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+
 
 " Basic autocommands
 " Auto-resize splits when Vim gets resized.
