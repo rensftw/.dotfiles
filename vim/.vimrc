@@ -133,6 +133,8 @@ vnoremap f              y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <leader>f      :FzfRg<CR>
 " Inspect buffers
 nnoremap <leader>b      :FzfBuffers<CR>
+" Browse commands
+nnoremap <leader>c      :FzfCommands<CR>
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
