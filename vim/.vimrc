@@ -212,7 +212,7 @@ let g:ale_fixers = {
 nnoremap Q              !!$SHELL<CR>
 nnoremap <leader>t      :below terminal<CR>
 " Exit terminal mode
-tnoremap <leader>T      <C-\><C-n>
+tnoremap <s-tab>        <C-\><C-n><C-w>w
 nnoremap <leader>av     :tabnew $VIMRC_LOCATION<CR>     " augment vimrc
 nnoremap <leader>az     :tabnew $ZSHRC_LOCATION<CR>     " augment zshrc
 nnoremap <leader>rv     :source $VIMRC_LOCATION<CR>     " reload vimrc
