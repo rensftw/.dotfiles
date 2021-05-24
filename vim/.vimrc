@@ -91,7 +91,6 @@ set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
 
-
 " Git integration
 let g:gitgutter_preview_win_floating = 1
 " Show a hunk preview
@@ -207,6 +206,16 @@ let g:ale_fixers = {
 \   'json': ['prettier'],
 \   'python': ['black'],
 \}
+
+" Prevent x from overriding what's in the clipboard.
+noremap x "_x
+noremap X "_x
+
+" Prevent selecting and pasting from overwriting what you originally copied.
+xnoremap p pgvy
+
+" Keep cursor at the bottom of the visual selection after you yank it.
+vmap y ygv<Esc>
 
 " Normal remaps
 nnoremap Q              !!$SHELL<CR>
