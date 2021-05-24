@@ -93,9 +93,16 @@ set rtp+=/usr/local/opt/fzf
 
 
 " Git integration
+let g:gitgutter_preview_win_floating = 1
+" Show a hunk preview
+nmap hp <Plug>(GitGutterPreviewHunk)
 " Jump between hunks
 nmap h <Plug>(GitGutterNextHunk)
 nmap H <Plug>(GitGutterPrevHunk)
+" Stage hunk
+nmap hs <Plug>(GitGutterStageHunk)
+" Undo hunk
+nmap hu <Plug>(GitGutterUndoHunk)
 
 " Search highlighting
 " highlight search results
