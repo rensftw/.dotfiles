@@ -105,7 +105,7 @@ set clipboard^=unnamed
 " highlight search results
 set hlsearch
 " Make double-<Esc> clear search highlights
-nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
+nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -129,7 +129,7 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'enter': 'vsplit' }
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
-nnoremap                <silent><leader>o     :FZF -m<CR>
+nnoremap <silent><leader>o     :FZF -m<CR>
 " Find term in file
 nnoremap f              *
 vnoremap f              y/\V<C-R>=escape(@",'/\')<CR><CR>
@@ -255,12 +255,12 @@ augroup END
 
 " Sensible remaps
 " Prevent x from overriding what's in the clipboard.
-noremap x "_x
-noremap X "_x
+noremap x               "_x
+noremap X               "_x
 " Prevent selecting and pasting from overwriting what you originally copied.
-xnoremap p pgvy
+xnoremap p              pgvy
 " Keep cursor at the bottom of the visual selection after you yank it.
-vmap y ygv<Esc>
+vmap y                  ygv<Esc>
 
 " Move 1 more lines up or down in normal and visual selection modes.
 nnoremap K              :m .-2<CR>==
