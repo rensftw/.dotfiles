@@ -207,13 +207,13 @@ let g:ale_fixers = {
 \   'python': ['black'],
 \}
 
+
+" Sensible defaults
 " Prevent x from overriding what's in the clipboard.
 noremap x "_x
 noremap X "_x
-
 " Prevent selecting and pasting from overwriting what you originally copied.
 xnoremap p pgvy
-
 " Keep cursor at the bottom of the visual selection after you yank it.
 vmap y ygv<Esc>
 
