@@ -1,14 +1,34 @@
+_Note: So far, this setup has been tailored for and tested only on macOS._  
+
 ## Installation
-Without VCS:
+Without version control:  
 ```sh
 mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/.dotfiles/tarball | tar xz --strip=1
 ```
   
-With git:  
+With git (recommended):  
 ```sh
 xcode-select --install  # required for clean installations, because macOS is not shipped with git
 git clone https://github.com/rensftw/.dotfiles.git
 ```
+  
+## Setting up a new machine (full install)
+Feeling adventurous? Try the entire setup as is!  
+There are comments/mnemonics for documenting keybindings in all config files (start with `.aliases` for some cool git tricks 🪄)  
+
+Here are 3 main scripts for managing this setup:  
+* `install.sh`:     Installs tools/software and sets up config files
+* `backup.sh`:      Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages
+* `uninstall.sh`:   Removes all global packages, tools, and config files
+
+  
+## Tailor this setup to your likes (partial install)
+Feel free to fork this repo and customize it to your own needs!  
+Here are some useful tips for getting started:  
+* Directories starting with an underscore (`_`) contain helpers
+* All other directories are `stow` packages
+* You can pick and choose what configs to adopt, for example: `stow -vt ~ zsh` will symlink only `zsh`-related configs
+* You can also delete any unnecessary tools/software from [Brewfile](./_homebrew/Brewfile)
   
 ## Highlights
 * [`ranger`](https://github.com/ranger/ranger) for terminal file navigation
@@ -18,20 +38,6 @@ git clone https://github.com/rensftw/.dotfiles.git
 * [`brew`](https://brew.sh/) for macOS package management
 * [`nvm`](https://github.com/nvm-sh/nvm) for Node version management
 * [`BpyTOP`](https://github.com/aristocratos/bpytop) for process monitoring
-  
-## Setting up a new machine
-This setup has been tailored for and tested on macOS.  
-There are 3 main scripts:  
-* `install.sh`: Installs tools/software and sets up config files
-* `backup.sh`: Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages
-* `uninstall.sh`: Removes all global packages, tools, and config files
-
-  
-## Using this setup
-Feel free to fork this repo and customize it to your own needs!  
-Here's some useful information for getting started:  
-* Directories starting with an underscore (_) contain helpers
-* All other directories are `stow` packages
   
 ## Screenshots
 [Powerlevel10k](https://github.com/romkatv/powerlevel10k/) Rainbow prompt with [Glacier](https://github.com/bahlo/iterm-colors#glacier) theme on [iTerm2](https://iterm2.com/):
