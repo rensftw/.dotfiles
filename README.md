@@ -1,15 +1,15 @@
 _Note: So far, this setup has been tailored for and tested only on macOS._  
 
 ## Installation
-Without version control:  
-```sh
-mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/.dotfiles/tarball | tar xz --strip=1
-```
-  
 With git (recommended):  
 ```sh
 xcode-select --install  # required for clean installations, because macOS is not shipped with git
 git clone https://github.com/rensftw/.dotfiles.git
+```
+  
+Without version control:  
+```sh
+mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/.dotfiles/tarball | tar xz --strip=1
 ```
   
 ## Setting up a new machine (full install)
