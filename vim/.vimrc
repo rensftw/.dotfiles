@@ -234,6 +234,9 @@ autocmd VimResized * wincmd =
 " Update a buffer's contents on focus if it changed outside of Vim.
 au FocusGained,BufEnter * :checktime
 
+" Update GitGutter's status after entering another window (the terminal window)
+au WinEnter * :GitGutterAll
+
 " Unset paste on InsertLeave.
 autocmd InsertLeave * silent! set nopaste
 
