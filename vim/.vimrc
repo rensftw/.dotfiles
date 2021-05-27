@@ -96,6 +96,16 @@ set wrap linebreak
 set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
+set termwinsize=20x0                    " terminal window uses 20 rows
+
+" Cursor settings
+" Solid underline cursor for normal mode and vertical bar for insert mode
+" For iTerm (docs: https://iterm2.com/documentation-one-page.html)
+" 0 - Block
+" 1 - Vertical bar
+" 2 - Underline
+let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
+let &t_EI = "\<Esc>]1337;CursorShape=2\x7"
 
 " Synchronize the global clipboard with Vim's default register (which is
 " called 'unnamed')
