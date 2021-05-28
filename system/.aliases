@@ -165,6 +165,12 @@ amibehind() {
   git log $CURRENT_BRANCH..origin/master --oneline
 }
 
+# What has happened to origin/master since I last pulled? (shows commits)
+alias glmomo='git log master..origin/master --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --color=always'
+
+# What has happened to origin/master since I last pulled? (shows file changes)
+alias gdmomo="git diff master...origin/master --compact-summary"
+
 # Show git status
 alias gs="git status"
 
@@ -173,12 +179,6 @@ alias gb="git rev-parse --abbrev-ref HEAD | pbcopy"
 
 # Show a compact summary of unstaged changes
 alias gdc="git diff --compact-summary"
-
-# What has happened to origin/master since I last pulled? (shows commits)
-alias glmomo='git log master..origin/master --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --color=always'
-
-# What has happened to origin/master since I last pulled? (shows file changes)
-alias gdmomo="git diff master...origin/master --compact-summary"
 
 # Delete all local branches except master and the branch I'm currently on
 alias gdab='git branch | egrep -v "(master|\*)" | xargs git branch -D'
