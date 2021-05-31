@@ -23,7 +23,7 @@ class mkcd(Command):
             match = re.search("^/|^~[^/]*/", dirname)
             if match:
                 self.fm.cd(match.group(0))
-                dirname = dirname[match.end(0) :]
+                dirname = dirname[match.end(0):]
 
             for m in re.finditer("[^/]+", dirname):
                 s = m.group(0)
@@ -32,14 +32,11 @@ class mkcd(Command):
                 ):
                     self.fm.cd(s)
                 else:
-                    ## We force ranger to load content before calling `scout`.
+                    # We force ranger to load content before calling `scout`.
                     self.fm.thisdir.load_content(schedule=False)
                     self.fm.execute_console("scout -ae ^{}$".format(s))
         else:
             self.fm.notify("file/directory exists!", bad=True)
-
-
-from collections import deque
 
 
 class fd_search(Command):
