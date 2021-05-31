@@ -145,6 +145,10 @@ nnoremap <leader>f      :FzfRg<CR>
 nnoremap <leader>b      :FzfBuffers<CR>
 " Browse commands
 nnoremap <leader>c      :FzfCommands<CR>
+" Show git status
+nnoremap <leader>gs     :FzfGFiles?<CR>
+" Show git log
+nnoremap <leader>gl     :FzfCommits<CR>
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
