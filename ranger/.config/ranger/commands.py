@@ -198,3 +198,58 @@ class fd_prev(Command):
             self.fm.select_file(fd_search.SEARCH_RESULTS[0])
         elif len(fd_search.SEARCH_RESULTS) == 1:
             self.fm.select_file(fd_search.SEARCH_RESULTS[0])
+
+
+class find_in_file(Command):
+    """
+    :find_in_file
+    Find a file by searching its contents.
+
+    ripgrep for searching inside files
+    fzf for previewing file contents
+
+    See:
+    https://github.com/junegunn/fzf
+    https://github.com/BurntSushi/ripgrep
+    """
+
+    def execute(self):
+        import subprocess
+        from ranger.ext.get_executables import get_executables
+
+        if self.arg(1):
+            search_string = self.rest(1)
+        else:
+            self.fm.notify("Usage: find_in_file <search string>", bad=True)
+            return
+
+        if "fzf" not in get_executables():
+            self.fm.notify("Could not find fzf in the PATH.", bad=True)
+            return
+
+        if "rg" not in get_executables():
+            self.fm.notify("Could not find rg in the PATH.", bad=True)
+            return
+
+        search = "--smart-case --files-with-matches --no-messages '%s'" % search_string
+        highlight = "highlight -O ansi -l {} 2> /dev/null"
+        rgMatches = (
+            "rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '%s'"
+        ) % search_string
+        rgEmpty = "rg --ignore-case --pretty --context 10 '%s' {}" % search_string
+        interactive_search_command = (
+            'rg {} | fzf --no-multi --preview "{} | {} || {}"'.format(
+                search, highlight, rgMatches, rgEmpty
+            )
+        )
+
+        rg_with_fzf = self.fm.execute_command(
+            interactive_search_command, universal_newlines=True, stdout=subprocess.PIPE
+        )
+        stdout, _ = rg_with_fzf.communicate()
+        if rg_with_fzf.returncode == 0:
+            selected = os.path.abspath(stdout.strip())
+            if os.path.isdir(selected):
+                self.fm.cd(selected)
+            else:
+                self.fm.select_file(selected)
