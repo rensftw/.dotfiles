@@ -23,7 +23,7 @@ class mkcd(Command):
             match = re.search("^/|^~[^/]*/", dirname)
             if match:
                 self.fm.cd(match.group(0))
-                dirname = dirname[match.end(0):]
+                dirname = dirname[match.end(0) :]
 
             for m in re.finditer("[^/]+", dirname):
                 s = m.group(0)
