@@ -107,10 +107,6 @@ set termwinsize=20x0                    " terminal window uses 20 rows
 let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
 let &t_EI = "\<Esc>]1337;CursorShape=2\x7"
 
-" Synchronize the global clipboard with Vim's default register (which is
-" called 'unnamed')
-set clipboard^=unnamed
-
 " Search highlighting
 " highlight search results
 set hlsearch
