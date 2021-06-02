@@ -5,7 +5,6 @@ eslint-config-airbnb-base
 eslint-plugin-import
 eslint-plugin-vue
 eslint
-gtop
 http-server
 jest
 jsvu
