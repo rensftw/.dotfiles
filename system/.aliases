@@ -127,6 +127,11 @@ gcb() {
   git checkout $(_gb)
 }
 
+# Mnemonic: git branch delete
+gbd() {
+  git branch -D $(_gb)
+}
+
 # Interactive FZF prompt to remove changes
 gc() {
   git checkout $(gsp)
