@@ -283,8 +283,8 @@ vnoremap J              :m '>+1<CR>gv=gv
 " Terminal
 " Open terminal
 nnoremap <leader>t      :below terminal<CR>
-" Exit terminal mode
-tnoremap <esc><esc>     <C-\><C-n><C-w>w
+" Exit terminal
+tnoremap <esc><esc>     <C-\><C-n>:q!<CR>
 
 " Normal remaps
 nnoremap Q              !!$SHELL<CR>
