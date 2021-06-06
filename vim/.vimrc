@@ -137,8 +137,7 @@ let g:fzf_action = {
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
 nnoremap <silent><leader>o     :FZF -m<CR>
 " Find term in file
-nnoremap f              *
-vnoremap f              y/\V<C-R>=escape(@",'/\')<CR><CR>
+vnoremap <leader>f              y/\V<C-R>=escape(@",'/\')<CR><CR>
 " Find term in all files project-wide
 nnoremap <leader>f      :FzfRg<CR>
 " Inspect buffers
