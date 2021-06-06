@@ -153,7 +153,7 @@ nnoremap <leader>gl     :FzfCommits<CR>
 "   Example: :Rg myterm -g '*.md'
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \ "rg --column --line-number --no-heading --color=always --smart-case " .
+  \ "rg --column --line-number --no-heading --color=always --smart-case -g '!{node_modules/*,.git/*}' " .
   \ <q-args>, 1, fzf#vim#with_preview(), <bang>0)
 
 " Grepper configuration
