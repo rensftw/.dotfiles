@@ -15,6 +15,7 @@ set encoding=utf-8
 call plug#begin('~/.vim/plugged')
 " Additional language packs
 Plug 'sheerun/vim-polyglot'
+Plug 'leafOfTree/vim-vue-plugin'
 
 " FZF integration with vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -116,6 +117,21 @@ nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vue syntax configuration
+let g:vim_vue_plugin_config = {
+      \'syntax': {
+      \   'template': ['html'],
+      \   'script': ['javascript'],
+      \   'style': ['css'],
+      \},
+      \'full_syntax': [],
+      \'initial_indent': [],
+      \'attribute': 0,
+      \'keyword': 0,
+      \'foldexpr': 0,
+      \'debug': 0,
+      \}
+
 " GitGutter integration
 let g:gitgutter_preview_win_floating = 1
 " Show a hunk preview
