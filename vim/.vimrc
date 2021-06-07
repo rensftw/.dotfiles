@@ -190,20 +190,23 @@ nnoremap <leader>al     :ALELint<CR>
 nnoremap <leader>af     :ALEFix<CR>
 " Linting and fixing
 let g:ale_enabled = 1
-" Lint when opening a file
+" Enable autocomplete
+let g:ale_completion_enabled = 1
+" Lint when opening a file and when a file is modified
 let g:ale_lint_on_enter = 1
-" Lint when the file is changed
 let g:ale_lint_on_text_changed = 'always'
 " Do not lint when saving/closing a file
 let g:ale_lint_on_save = 0
-" Fix lint error on file save
+" Fix lint errors on file save
 let g:ale_fix_on_save = 1
+" Show ALE errors in the sign column
 let g:ale_sign_column_always = 1
+" Show ALE status in airline
 let g:airline#extensions#ale#enabled = 1
 " Use the quickfix list instead of the loclist
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
-let g:ale_hover_to_preview = 0
+let g:ale_hover_to_preview = 1
 " Apply JS setting for Vue files as well
 let g:ale_linter_aliases = {'javascript': ['vue', 'javascript']}
 let g:ale_linters = {
