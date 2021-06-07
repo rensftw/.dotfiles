@@ -200,8 +200,8 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'always'
 " Do not lint when saving/closing a file
 let g:ale_lint_on_save = 0
-" Fix lint errors on file save
-let g:ale_fix_on_save = 1
+" Do not automatically fix - fixing should be intentional/manual
+let g:ale_fix_on_save = 0
 " Show ALE errors in the sign column
 let g:ale_sign_column_always = 1
 " Show ALE status in airline
