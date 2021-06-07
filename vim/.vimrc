@@ -52,6 +52,9 @@ Plug 'honza/vim-snippets'
 " Lint and fix-on-save
 Plug 'dense-analysis/ale'
 
+" Respect .editorconfig
+Plug 'editorconfig/editorconfig-vim'
+
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
