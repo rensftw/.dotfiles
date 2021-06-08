@@ -143,10 +143,8 @@ let g:gitgutter_preview_win_floating = 1
 " Show a hunk preview
 nmap hp                 <Plug>(GitGutterPreviewHunk)
 " Jump between hunks
-nmap h                  <Plug>(GitGutterNextHunk)
-nmap H                  <Plug>(GitGutterPrevHunk)
-" Stage hunk
-nmap ha                 <Plug>(GitGutterStageHunk)
+nmap ]h                 <Plug>(GitGutterNextHunk)
+nmap [h                 <Plug>(GitGutterPrevHunk)
 " Undo hunk
 nmap hu                 <Plug>(GitGutterUndoHunk)
 
@@ -166,10 +164,6 @@ nnoremap <leader>f      :FzfRg<CR>
 nnoremap <leader>b      :FzfBuffers<CR>
 " Browse commands
 nnoremap <leader>c      :FzfCommands<CR>
-" Show git status
-nnoremap <leader>gs     :FzfGFiles?<CR>
-" Show git log
-nnoremap <leader>gl     :FzfCommits<CR>
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
@@ -294,8 +288,10 @@ augroup END
 " Prevent x from overriding what's in the clipboard.
 noremap x               "_x
 noremap X               "_x
+
 " Prevent selecting and pasting from overwriting what you originally copied.
 xnoremap p              pgvy
+
 " Keep cursor at the bottom of the visual selection after you yank it.
 vmap y                  ygv<Esc>
 
