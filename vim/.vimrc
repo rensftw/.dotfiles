@@ -141,12 +141,12 @@ let g:vim_vue_plugin_config = {
 " GitGutter integration
 let g:gitgutter_preview_win_floating = 1
 " Show a hunk preview
-nmap hp                 <Plug>(GitGutterPreviewHunk)
+nnoremap hp             <Plug>(GitGutterPreviewHunk)
 " Jump between hunks
-nmap ]h                 <Plug>(GitGutterNextHunk)
-nmap [h                 <Plug>(GitGutterPrevHunk)
+nnoremap ]h             <Plug>(GitGutterNextHunk)
+nnoremap [h             <Plug>(GitGutterPrevHunk)
 " Undo hunk
-nmap hu                 <Plug>(GitGutterUndoHunk)
+nnoremap hu             <Plug>(GitGutterUndoHunk)
 
 " FZF configuration
 let g:fzf_command_prefix = 'Fzf'
