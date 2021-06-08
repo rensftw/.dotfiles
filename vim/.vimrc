@@ -42,6 +42,9 @@ Plug 'tpope/vim-surround'
 " Mappings for complementary commands like ]q, [q, etc
 Plug 'tpope/vim-unimpaired'
 
+" Allow vim-surroung and vim-unimpaired commands to be repeated with .
+Plug 'tpope/vim-repeat'
+
 " Add identation that closely matches PEP 8
 Plug 'vim-scripts/indentpython'
 
