@@ -301,6 +301,12 @@ nnoremap J              :m .+1<CR>==
 vnoremap K              :m '<-2<CR>gv=gv
 vnoremap J              :m '>+1<CR>gv=gv
 
+" Resize splits
+nnoremap <S-Up>           :resize +2<CR>
+nnoremap <S-Down>         :resize -2<CR>
+nnoremap <S-Left>         :vertical resize +2<CR>
+nnoremap <S-Right>        :vertical resize -2<CR>
+
 " Terminal
 " Open terminal
 nnoremap <leader>t      :below terminal<CR>
