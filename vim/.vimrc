@@ -30,12 +30,6 @@ Plug 'airblade/vim-gitgutter'
 " Comment stuff out
 Plug 'tpope/vim-commentary'
 
-" Briefly highlight which text was yanked
-Plug 'machakann/vim-highlightedyank'
-
-" Automatic closing of quotes, parenthesis, brackets, etc.
-Plug 'Raimondi/delimitMate'
-
 " Change, delete, add surroundings (parentheses, brackets, quotes, tags)
 Plug 'tpope/vim-surround'
 
@@ -44,6 +38,12 @@ Plug 'tpope/vim-unimpaired'
 
 " Allow vim-surroung and vim-unimpaired commands to be repeated with .
 Plug 'tpope/vim-repeat'
+
+" Briefly highlight which text was yanked
+Plug 'machakann/vim-highlightedyank'
+
+" Automatic closing of quotes, parenthesis, brackets, etc.
+Plug 'Raimondi/delimitMate'
 
 " Add identation that closely matches PEP 8
 Plug 'vim-scripts/indentpython'
