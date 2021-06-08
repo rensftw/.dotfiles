@@ -327,6 +327,13 @@ nnoremap tj             :tabprev<CR>
 nnoremap th             :tabfirst<CR>
 nnoremap tl             :tablast<CR>
 
+" Shortcut for buffer navigation
+nnoremap bn             :badd<Space>
+nnoremap bk             :bnext<CR>
+nnoremap bj             :bprevious<CR>
+nnoremap bh             :bfirst<CR>
+nnoremap bl             :blast<CR>
+
 " Shortcut split/window navigation
 nnoremap <C-h>          <C-w>h
 nnoremap <C-j>          <C-w>j
