@@ -118,8 +118,16 @@ let &t_EI = "\<Esc>]1337;CursorShape=2\x7"
 " Search highlighting
 " highlight search results
 set hlsearch
+" If a pattern contains an uppercase letter, the search is case insensitive,
+" otherwise it is not
+set ignorecase
+set smartcase
 " Make double-<Esc> clear search highlights
 nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
+
+" Enable wildmenu with completion
+set wildmenu
+set wildmode=list:longest,full
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
