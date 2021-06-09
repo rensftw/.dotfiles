@@ -16,10 +16,6 @@ call plug#begin('~/.vim/plugged')
 " Additional language packs
 Plug 'sheerun/vim-polyglot'
 Plug 'leafOfTree/vim-vue-plugin'
-Plug 'heavenshell/vim-jsdoc', {
-  \ 'for': ['javascript', 'javascript.jsx', 'typescript'],
-  \ 'do': 'make install'
-\}
 
 " FZF integration with vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -74,6 +70,7 @@ call plug#end()
 " Theme/UI settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
+let g:javascript_plugin_jsdoc = 1
 set t_Co=256
 set cursorline
 set splitright
