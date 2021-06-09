@@ -90,7 +90,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on
+filetype plugin indent on               " detect filetypes, apply filetype plugins, and indent files
 set nocompatible
 set tabstop=4                           " show existing tab with 4 spaces width
 set shiftwidth=4                        " when indenting with '>', use 4 spaces width
@@ -116,12 +116,10 @@ let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
 let &t_EI = "\<Esc>]1337;CursorShape=2\x7"
 
 " Search highlighting
-" highlight search results
-set hlsearch
-" If a pattern contains an uppercase letter, the search is case insensitive,
-" otherwise it is not
-set ignorecase
-set smartcase
+set hlsearch                            " highlight search results
+set ignorecase                          " search case insensitive
+set smartcase                           " only if there's uppercase letters
+set incsearch                           " show results as you type
 " Make double-<Esc> clear search highlights
 nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 
