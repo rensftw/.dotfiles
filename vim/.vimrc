@@ -36,7 +36,7 @@ Plug 'tpope/vim-surround'
 " Mappings for complementary commands like ]q, [q, etc
 Plug 'tpope/vim-unimpaired'
 
-" Allow vim-surroung and vim-unimpaired commands to be repeated with .
+" Allow vim-surround and vim-unimpaired commands to be repeated with .
 Plug 'tpope/vim-repeat'
 
 " Briefly highlight which text was yanked
@@ -45,7 +45,7 @@ Plug 'machakann/vim-highlightedyank'
 " Automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'Raimondi/delimitMate'
 
-" Add identation that closely matches PEP 8
+" Add indentation that closely matches PEP 8
 Plug 'vim-scripts/indentpython'
 
 " Custom snippets
