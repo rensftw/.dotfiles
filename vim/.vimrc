@@ -16,6 +16,10 @@ call plug#begin('~/.vim/plugged')
 " Additional language packs
 Plug 'sheerun/vim-polyglot'
 Plug 'leafOfTree/vim-vue-plugin'
+Plug 'heavenshell/vim-jsdoc', {
+  \ 'for': ['javascript', 'javascript.jsx', 'typescript'],
+  \ 'do': 'make install'
+\}
 
 " FZF integration with vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
