@@ -24,6 +24,9 @@ Plug 'junegunn/fzf.vim'
 " Find and replace in multiple files (lazy loaded)
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
+" Tags
+Plug 'ludovicchabant/vim-gutentags'
+
 " Show a git diff in the sign column
 Plug 'airblade/vim-gitgutter'
 
@@ -211,6 +214,7 @@ let g:ale_fix_on_save = 0
 let g:ale_sign_column_always = 1
 " Show ALE status in airline
 let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#gutentags#enabled = 1
 " Use the quickfix list instead of the loclist
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
