@@ -70,7 +70,6 @@ call plug#end()
 " Theme/UI settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-let g:javascript_plugin_jsdoc = 1
 set t_Co=256
 set cursorline
 set splitright
@@ -80,6 +79,7 @@ let g:airline_theme='dracula'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 0
 " :colors darkblue    " use for debugging theme-related issues
+let g:javascript_plugin_jsdoc = 1
 let g:python_highlight_all = 1
 " Enable true colors, if possible
 if exists('+termguicolors')
