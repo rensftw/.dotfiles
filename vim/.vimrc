@@ -127,6 +127,9 @@ set incsearch                           " show results as you type
 " Make double-<Esc> clear search highlights
 nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 
+" Allow Y to work like C and D in normal mode
+nnoremap <silent> Y             y$
+
 " Enable wildmenu with completion
 set wildmenu
 set wildmode=list:longest,full
