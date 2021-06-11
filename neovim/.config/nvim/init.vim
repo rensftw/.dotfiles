@@ -113,7 +113,7 @@ nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Airline settings
-let g:airline_theme='dracula'
+let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#ale#enabled = 1
