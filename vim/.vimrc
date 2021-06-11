@@ -132,7 +132,7 @@ nnoremap <silent> Y             y$
 
 " Enable wildmenu with completion
 set wildmenu
-set wildmode=list:longest,full
+" set wildmode=list:longest,full
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -354,7 +354,7 @@ nnoremap <C-j>          <C-w>j
 nnoremap <C-k>          <C-w>k
 nnoremap <C-l>          <C-w>l
 " Cycle through splits.
-nnoremap ,              <C-w>w
+" nnoremap ,              <C-w>w
 
 " Shortcut split/window opening
 nnoremap <leader>s      :split<Space>
