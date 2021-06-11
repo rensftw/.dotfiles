@@ -5,10 +5,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Set the correct encoding
-scriptencoding utf-8
-set encoding=utf-8
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -72,7 +68,6 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme/UI settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on
 set t_Co=256
 set cursorline
 set splitright
@@ -94,8 +89,6 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on               " detect filetypes, apply filetype plugins, and indent files
-set nocompatible
 set tabstop=4                           " show existing tab with 4 spaces width
 set shiftwidth=4                        " when indenting with '>', use 4 spaces width
 set expandtab                           " on pressing tab, insert 4 spaces
@@ -103,7 +96,6 @@ set softtabstop=4
 set list                                " show trailing whitespaces
 set listchars=trail:·,tab:»»,nbsp:×     " define characters for showing whitespaces
 set updatetime=100
-set backspace=indent,eol,start
 set wrap linebreak
 set number
 set relativenumber
@@ -119,20 +111,14 @@ set rtp+=/usr/local/opt/fzf
 let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
 let &t_EI = "\<Esc>]1337;CursorShape=2\x7"
 
-" Search highlighting
-set hlsearch                            " highlight search results
+" Search settings
 set ignorecase                          " search case insensitive
 set smartcase                           " only if there's uppercase letters
-set incsearch                           " show results as you type
 " Make double-<Esc> clear search highlights
 nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 
 " Allow Y to work like C and D in normal mode
 nnoremap <silent> Y             y$
-
-" Enable wildmenu with completion
-set wildmenu
-" set wildmode=list:longest,full
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
