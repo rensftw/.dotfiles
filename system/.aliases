@@ -17,9 +17,10 @@ alias c="clear"
 alias r=". ranger"      # ranger navigates to the last directory opened
 alias rr="ranger ."     # ranger is limited to the directory it was originally called from
 alias df="cd $HOME/.dotfiles"
-alias av="vim $HOME/.vimrc"
-alias az="vim $HOME/.zshrc"
-alias aa="vim $HOME/.aliases"
+alias av="nvim $HOME/.config/nvim/init.vim"
+alias az="nvim $HOME/.zshrc"
+alias aa="nvim $HOME/.aliases"
+alias v="nvim"
 
 # Colorize the output of tree
 alias tree="tree -C"
@@ -31,9 +32,9 @@ fif() {
   rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
-# Preview files and open the chosen files in vim
+# Preview files and open the chosen files in nvim
 vf() {
-  vim -o $(fzf --preview 'bat --color=always {}')
+  nvim -o $(fzf --preview 'bat --color=always {}')
 }
 
 # Process monitoring
