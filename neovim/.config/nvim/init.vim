@@ -74,7 +74,7 @@ set expandtab                           " on pressing tab, insert 4 spaces
 set softtabstop=4
 set list                                " show trailing whitespaces
 set listchars=trail:·,tab:»»,nbsp:×     " define characters for showing whitespaces
-set updatetime=100
+set updatetime=50                       " improve performance
 set wrap linebreak
 set number
 set relativenumber
