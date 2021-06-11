@@ -16,10 +16,10 @@ alias path="echo -e ${PATH//:/\\n}"
 alias c="clear"
 alias r=". ranger"      # ranger navigates to the last directory opened
 alias rr="ranger ."     # ranger is limited to the directory it was originally called from
-alias df="cd $HOME/.dotfiles"
-alias av="nvim $HOME/.config/nvim/init.vim"
-alias az="nvim $HOME/.zshrc"
-alias aa="nvim $HOME/.aliases"
+alias df="cd $DOTFILES_LOCATION"
+alias av="nvim $VIMRC_LOCATION"
+alias az="nvim $ZSHRC_LOCATION"
+alias aa="nvim $ALIASES_LOCATION"
 alias v="nvim"
 
 # Colorize the output of tree
