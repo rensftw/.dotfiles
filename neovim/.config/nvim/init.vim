@@ -92,6 +92,9 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
+" Allow Y to work like C and D in normal mode
+nnoremap <silent> Y             y$
+
 " Cursor settings
 set guicursor=n-v-c:hor100-blinkwait175-blinkoff150-blinkon175,
     \i-ci-ve:ver25,
@@ -101,13 +104,10 @@ set guicursor=n-v-c:hor100-blinkwait175-blinkoff150-blinkon175,
     \sm:block-blinkwait175-blinkoff150-blinkon175
 
 " Search settings
-set ignorecase                          " search case insensitive
-set smartcase                           " only if there's uppercase letters
+set ignorecase                          " search case insensitive, and becomes
+set smartcase                           " case sensitive when there's uppercase letters
 " Make double-<Esc> clear search highlights
 nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
-
-" Allow Y to work like C and D in normal mode
-nnoremap <silent> Y             y$
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
