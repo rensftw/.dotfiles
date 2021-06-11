@@ -85,8 +85,6 @@ set splitright
 set splitbelow
 colorscheme dracula
 " :colors darkblue    " use for debugging theme-related issues
-let g:javascript_plugin_jsdoc = 1
-let g:python_highlight_all = 1
 " Enable true colors, if possible
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -121,7 +119,9 @@ let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#gutentags#enabled = 1
 
-" Vue syntax configuration
+" Syntax configurations
+let g:javascript_plugin_jsdoc = 1
+let g:python_highlight_all = 1
 let g:vim_vue_plugin_config = {
       \'syntax': {
       \   'template': ['html'],
