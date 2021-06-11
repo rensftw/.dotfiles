@@ -100,7 +100,6 @@ set wrap linebreak
 set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
-" set termwinsize=20x0                    " terminal window uses 20 rows
 
 " Cursor settings
 " Solid underline cursor for normal mode and vertical bar for insert mode
