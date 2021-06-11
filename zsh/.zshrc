@@ -6,7 +6,9 @@ PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="$HOME:$PATH"
 
 export LC_ALL=en_US.UTF-8
-export VIMRC_LOCATION="$HOME/.vimrc"
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+export VIMRC_LOCATION="$HOME/.config/nvim/init.vim"
 export ZSHRC_LOCATION="$HOME/.zshrc"
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
 
