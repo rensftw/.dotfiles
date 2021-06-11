@@ -92,11 +92,8 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-" Allow Y to work like C and D in normal mode
-nnoremap <silent> Y             y$
-
 " Cursor settings
-set guicursor=n-v-c:hor100-blinkwait175-blinkoff150-blinkon175,
+set guicursor=n-v-c:block-blinkwait175-blinkoff150-blinkon175,
     \i-ci-ve:ver25,
     \r-cr:hor20,
     \o:hor50,
@@ -106,8 +103,6 @@ set guicursor=n-v-c:hor100-blinkwait175-blinkoff150-blinkon175,
 " Search settings
 set ignorecase                          " search case insensitive, and becomes
 set smartcase                           " case sensitive when there's uppercase letters
-" Make double-<Esc> clear search highlights
-nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -273,8 +268,9 @@ xmap <leader>R
     \ :cfdo %s/<C-r>s//g \| update
      \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
-
-" Basic autocommands
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocommands
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Auto-resize splits when Vim gets resized.
 autocmd VimResized * wincmd =
 
@@ -303,71 +299,74 @@ augroup CursorLine
     au WinLeave * setlocal nocursorline
 augroup END
 
-" Sensible remaps
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remaps
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make double-<Esc> clear search highlights
+nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
+
+" Allow Y to work like C and D in normal mode
+nnoremap <silent> Y             y$
+
 " Prevent x from overriding what's in the clipboard.
-noremap x               "_x
-noremap X               "_x
+noremap x                       "_x
+noremap X                       "_x
 
 " Prevent selecting and pasting from overwriting what you originally copied.
-xnoremap p              pgvy
+xnoremap p                      pgvy
 
 " Keep cursor at the bottom of the visual selection after you yank it.
-vmap y                  ygv<Esc>
+vmap y                          ygv<Esc>
 
 " Move 1 more lines up or down in normal and visual selection modes.
-nnoremap K              :m .-2<CR>==
-nnoremap J              :m .+1<CR>==
-vnoremap K              :m '<-2<CR>gv=gv
-vnoremap J              :m '>+1<CR>gv=gv
+nnoremap K                      :m .-2<CR>==
+nnoremap J                      :m .+1<CR>==
+vnoremap K                      :m '<-2<CR>gv=gv
+vnoremap J                      :m '>+1<CR>gv=gv
 
 " Resize splits
-nnoremap <S-Up>           :resize +2<CR>
-nnoremap <S-Down>         :resize -2<CR>
-nnoremap <S-Left>         :vertical resize +2<CR>
-nnoremap <S-Right>        :vertical resize -2<CR>
+nnoremap <S-Up>                 :resize +2<CR>
+nnoremap <S-Down>               :resize -2<CR>
+nnoremap <S-Left>               :vertical resize +2<CR>
+nnoremap <S-Right>              :vertical resize -2<CR>
 
 " Terminal
 " Toggle terminal on/off
-nnoremap <leader>t      :call TermToggle(20)<CR>
-tnoremap <leader>t      <C-\><C-n>:call TermToggle(12)<CR> 
-inoremap <C-t>          <Esc>:call TermToggle(20)<CR>
+nnoremap <leader>t              :call TermToggle(20)<CR>
+tnoremap <leader>t              <C-\><C-n>:call TermToggle(12)<CR> 
+inoremap <C-t>                  <Esc>:call TermToggle(20)<CR>
 " Navigate to/from terminal
-tnoremap <C-h>          <C-\><C-N><C-w>h
-tnoremap <C-j>          <C-\><C-N><C-w>j
-tnoremap <C-k>          <C-\><C-N><C-w>k
-tnoremap <C-l>          <C-\><C-N><C-w>l
+tnoremap <C-h>                  <C-\><C-N><C-w>h
+tnoremap <C-j>                  <C-\><C-N><C-w>j
+tnoremap <C-k>                  <C-\><C-N><C-w>k
+tnoremap <C-l>                  <C-\><C-N><C-w>l
 " Go back to normal mode
-tnoremap <esc>         <C-\><C-n>
+tnoremap <esc>                  <C-\><C-n>
 
 " Normal remaps
-nnoremap Q              !!$SHELL<CR>
-nnoremap <leader>av     :tabnew $VIMRC_LOCATION<CR>     " augment init.vim
-nnoremap <leader>az     :tabnew $ZSHRC_LOCATION<CR>     " augment zshrc
-nnoremap <leader>aa     :tabnew $ALIASES_LOCATION<CR>   " augment aliases
-nnoremap <leader>rv     :source $VIMRC_LOCATION<CR>     " reload vimrc
+nnoremap Q                      !!$SHELL<CR>
+nnoremap <leader>av             :tabnew $VIMRC_LOCATION<CR>     " augment init.vim
+nnoremap <leader>az             :tabnew $ZSHRC_LOCATION<CR>     " augment zshrc
+nnoremap <leader>aa             :tabnew $ALIASES_LOCATION<CR>   " augment aliases
+nnoremap <leader>rv             :source $VIMRC_LOCATION<CR>     " reload vimrc
 
 " Shortcut tabs navigation
-nnoremap tn             :tabnew<Space>
-nnoremap tk             :tabnext<CR>
-nnoremap tj             :tabprev<CR>
-nnoremap th             :tabfirst<CR>
-nnoremap tl             :tablast<CR>
+nnoremap tn                     :tabnew<Space>
+nnoremap tk                     :tabnext<CR>
+nnoremap tj                     :tabprev<CR>
+nnoremap th                     :tabfirst<CR>
+nnoremap tl                     :tablast<CR>
 
 " Shortcut for buffer navigation
-nnoremap bn             :badd<Space>
-nnoremap bk             :bnext<CR>
-nnoremap bj             :bprevious<CR>
-nnoremap bh             :bfirst<CR>
-nnoremap bl             :blast<CR>
+nnoremap bn                     :badd<Space>
+nnoremap bk                     :bnext<CR>
+nnoremap bj                     :bprevious<CR>
+nnoremap bh                     :bfirst<CR>
+nnoremap bl                     :blast<CR>
 
 " Shortcut split/window navigation
-nnoremap <C-h>          <C-w>h
-nnoremap <C-j>          <C-w>j
-nnoremap <C-k>          <C-w>k
-nnoremap <C-l>          <C-w>l
-" Cycle through splits.
-" nnoremap ,              <C-w>w
+nnoremap <C-h>                  <C-w>h
+nnoremap <C-j>                  <C-w>j
+nnoremap <C-k>                  <C-w>k
+nnoremap <C-l>                  <C-w>l
 
-" Shortcut split/window opening
-nnoremap <leader>s      :split<Space>
-nnoremap <leader>vs     :vsplit<Space>
