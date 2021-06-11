@@ -66,27 +66,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Theme/UI settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set t_Co=256
-set cursorline
-set splitright
-set splitbelow
-colorscheme dracula
-let g:airline_theme='dracula'
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 0
-" :colors darkblue    " use for debugging theme-related issues
-let g:javascript_plugin_jsdoc = 1
-let g:python_highlight_all = 1
-" Enable true colors, if possible
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabstop=4                           " show existing tab with 4 spaces width
@@ -100,6 +79,20 @@ set wrap linebreak
 set number
 set relativenumber
 set rtp+=/usr/local/opt/fzf
+set t_Co=256
+set cursorline
+set splitright
+set splitbelow
+colorscheme dracula
+" :colors darkblue    " use for debugging theme-related issues
+let g:javascript_plugin_jsdoc = 1
+let g:python_highlight_all = 1
+" Enable true colors, if possible
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+endif
 
 " Cursor settings
 set guicursor=n-v-c:hor100-blinkwait175-blinkoff150-blinkon175,
@@ -121,6 +114,13 @@ nnoremap <silent> Y             y$
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline settings
+let g:airline_theme='dracula'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#gutentags#enabled = 1
+
 " Vue syntax configuration
 let g:vim_vue_plugin_config = {
       \'syntax': {
@@ -199,9 +199,6 @@ let g:ale_lint_on_save = 0
 let g:ale_fix_on_save = 0
 " Show ALE errors in the sign column
 let g:ale_sign_column_always = 1
-" Show ALE status in airline
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#gutentags#enabled = 1
 " Use the quickfix list instead of the loclist
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
