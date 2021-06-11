@@ -102,13 +102,12 @@ set relativenumber
 set rtp+=/usr/local/opt/fzf
 
 " Cursor settings
-" Solid underline cursor for normal mode and vertical bar for insert mode
-" For iTerm (docs: https://iterm2.com/documentation-one-page.html)
-" 0 - Block
-" 1 - Vertical bar
-" 2 - Underline
-let &t_SI = "\<Esc>]1337;CursorShape=1\x7"
-let &t_EI = "\<Esc>]1337;CursorShape=2\x7"
+set guicursor=n-v-c:hor100-blinkwait175-blinkoff150-blinkon175,
+    \i-ci-ve:ver25,
+    \r-cr:hor20,
+    \o:hor50,
+    \a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,
+    \sm:block-blinkwait175-blinkoff150-blinkon175
 
 " Search settings
 set ignorecase                          " search case insensitive
