@@ -10,6 +10,8 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export VIMRC_LOCATION="$HOME/.config/nvim/init.vim"
 export ZSHRC_LOCATION="$HOME/.zshrc"
+export ALIASES_LOCATION="$HOME/.aliases"
+export DOTFILES_LOCATION="$HOME/.dotfiles"
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
 
 source $HOME/.aliases

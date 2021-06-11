@@ -342,8 +342,8 @@ tnoremap <esc>         <C-\><C-n>
 " Normal remaps
 nnoremap Q              !!$SHELL<CR>
 nnoremap <leader>av     :tabnew $VIMRC_LOCATION<CR>     " augment init.vim
-nnoremap <leader>az     :tabnew $ZSHRC_LOCATION<CR>                 " augment zshrc
-nnoremap <leader>aa     :tabnew $HOME/.aliases<CR>                  " augment aliases
+nnoremap <leader>az     :tabnew $ZSHRC_LOCATION<CR>     " augment zshrc
+nnoremap <leader>aa     :tabnew $ALIASES_LOCATION<CR>   " augment aliases
 nnoremap <leader>rv     :source $VIMRC_LOCATION<CR>     " reload vimrc
 
 " Shortcut tabs navigation
