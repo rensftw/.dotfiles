@@ -139,12 +139,12 @@ let g:vim_vue_plugin_config = {
 " GitGutter integration
 let g:gitgutter_preview_win_floating = 1
 " Show a hunk preview
-nnoremap hp             :GitGutterPreviewHunk<CR>
+nnoremap hp                     :GitGutterPreviewHunk<CR>
 " Jump between hunks
-nnoremap ]h             :GitGutterNextHunk<CR>
-nnoremap [h             :GitGutterPrevHunk<CR>
+nnoremap ]h                     :GitGutterNextHunk<CR>
+nnoremap [h                     :GitGutterPrevHunk<CR>
 " Undo hunk
-nnoremap hu             :GitGutterUndoHunk<CR>
+nnoremap hu                     :GitGutterUndoHunk<CR>
 
 " FZF configuration
 let g:fzf_command_prefix = 'Fzf'
@@ -153,15 +153,15 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'enter': 'vsplit' }
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
-nnoremap <silent><leader>o     :FZF -m<CR>
+nnoremap <silent><leader>o      :FZF -m<CR>
 " Find term in file
 vnoremap <leader>f              y/\V<C-R>=escape(@",'/\')<CR><CR>
 " Find term in all files project-wide
-nnoremap <leader>f      :FzfRg<CR>
+nnoremap <leader>f              :FzfRg<CR>
 " Inspect buffers
-nnoremap <leader>b      :FzfBuffers<CR>
+nnoremap <leader>b              :FzfBuffers<CR>
 " Browse commands
-nnoremap <leader>c      :FzfCommands<CR>
+nnoremap <leader>c              :FzfCommands<CR>
 
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
@@ -173,19 +173,19 @@ command! -bang -nargs=* Rg
 " Grepper configuration
 let g:grepper = {}
 let g:grepper.tools = ["rg"]
-xmap gr                 <plug>(GrepperOperator)
+xmap gr                         <plug>(GrepperOperator)
 
 " Ultisnips configuration
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit = "vertical"
 
 " ALE configuration
 " Add remaps for linting and fixing
-nnoremap <leader>al     :ALELint<CR>
-nnoremap <leader>af     :ALEFix<CR>
+nnoremap <leader>al             :ALELint<CR>
+nnoremap <leader>af             :ALEFix<CR>
 " Linting and fixing
 let g:ale_enabled = 1
 " Enable autocomplete
