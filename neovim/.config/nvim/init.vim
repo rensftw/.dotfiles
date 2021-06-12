@@ -160,8 +160,8 @@ nnoremap hu                     :GitGutterUndoHunk<CR>
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'enter': 'vsplit' }
+  \ 'ctrl-v': 'vsplit',
+  \ 'ctrl-x': 'split' }
 " Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
 nnoremap <silent><leader>o      :FZF -m<CR>
 " Find term in file
