@@ -1,5 +1,6 @@
 .DS_STORE
 neovim/.config/nvim/plugged
+neovim/.config/nvim/.netrwhist
 bpytop/.config/bpytop/error.log
 
 # Ignore work-related snippets
