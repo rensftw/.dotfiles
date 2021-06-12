@@ -101,8 +101,17 @@ set guicursor=n-v-c:block-blinkwait175-blinkoff150-blinkon175,
     \sm:block-blinkwait175-blinkoff150-blinkon175
 
 " Search settings
+set path+=**                            " search upwards and downwards the directory
 set ignorecase                          " search case insensitive, and becomes
 set smartcase                           " case sensitive when there's uppercase letters
+
+" Ignore folders
+set wildignore+=**/dist/*
+set wildignore+=**/coverage/*
+set wildignore+=**/node_modules/*
+set wildignore+=**/.git/*
+set wildignore+=*.pyc
+set wildignore+=*build/*
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
