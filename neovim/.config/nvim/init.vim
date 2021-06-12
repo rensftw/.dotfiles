@@ -222,7 +222,7 @@ let g:ale_fixers = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilities
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Helper for toggling the terminal
+" Helper for toggling the native terminal
 let g:term_buf = 0
 let g:term_win = 0
 function! TermToggle(height)
