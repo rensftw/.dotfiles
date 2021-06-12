@@ -314,6 +314,11 @@ augroup CursorLine
     au WinLeave * setlocal nocursorline
 augroup END
 
+" Write all changes to modified buffers,
+" close all buffers except the active one,
+" and return focus to the same spot it was initially
+command! BufOnly execute 'wa | %bdelete | edit # | normal `"'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -373,8 +378,6 @@ nnoremap [t                     :tabprev<CR>
 " Buffer navigation
 nnoremap ]b                     :bnext<CR>
 nnoremap [b                     :bprevious<CR>
-" Close all buffers except the active one
-" nnoremap bq                     :command w | %bd | e#<CR>
 
 " Shortcut split/window navigation
 nnoremap <C-h>                  <C-w>h
