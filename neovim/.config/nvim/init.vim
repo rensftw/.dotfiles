@@ -23,8 +23,9 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 " Tags
 Plug 'ludovicchabant/vim-gutentags'
 
-" Show a git diff in the sign column
+" Git utilities
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 " Comment stuff out
 Plug 'tpope/vim-commentary'
@@ -388,3 +389,8 @@ nnoremap <C-j>                  <C-w>j
 nnoremap <C-k>                  <C-w>k
 nnoremap <C-l>                  <C-w>l
 
+" Git conflict resolution
+nnoremap <leader>gb             :Git blame<CR>
+nnoremap <leader>gd             :Gvdiffsplit!<CR>
+nnoremap gdi                    :diffget //2<CR>
+nnoremap gdo                    :diffget //3<CR>
