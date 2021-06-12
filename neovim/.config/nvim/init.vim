@@ -392,5 +392,5 @@ nnoremap <C-l>                  <C-w>l
 " Git conflict resolution
 nnoremap <leader>gb             :Git blame<CR>
 nnoremap <leader>gd             :Gvdiffsplit!<CR>
-nnoremap gdi                    :diffget //2<CR>
-nnoremap gdo                    :diffget //3<CR>
+nnoremap gd[                    :diffget //2<CR>
+nnoremap gd]                    :diffget //3<CR>
