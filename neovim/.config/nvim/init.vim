@@ -116,6 +116,12 @@ set wildignore+=*build/*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Dracula settings
+let g:dracula_bold = 1
+let g:dracula_italic = 1
+let g:dracula_inverse = 1
+let g:dracula_colorterm = 1
+
 " Airline settings
 let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
