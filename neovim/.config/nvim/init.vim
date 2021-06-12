@@ -367,17 +367,14 @@ nnoremap <leader>rv             :source $VIMRC_LOCATION<CR>     " reload vimrc
 
 " Shortcut tabs navigation
 nnoremap tn                     :tabnew<Space>
-nnoremap tk                     :tabnext<CR>
-nnoremap tj                     :tabprev<CR>
-nnoremap th                     :tabfirst<CR>
-nnoremap tl                     :tablast<CR>
+nnoremap ]t                     :tabnext<CR>
+nnoremap [t                     :tabprev<CR>
 
-" Shortcut for buffer navigation
-nnoremap bn                     :badd<Space>
-nnoremap bk                     :bnext<CR>
-nnoremap bj                     :bprevious<CR>
-nnoremap bh                     :bfirst<CR>
-nnoremap bl                     :blast<CR>
+" Buffer navigation
+nnoremap ]b                     :bnext<CR>
+nnoremap [b                     :bprevious<CR>
+" Close all buffers except the active one
+" nnoremap bq                     :command w | %bd | e#<CR>
 
 " Shortcut split/window navigation
 nnoremap <C-h>                  <C-w>h
