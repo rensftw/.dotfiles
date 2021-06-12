@@ -71,15 +71,16 @@ call plug#end()
 set tabstop=4                           " show existing tab with 4 spaces width
 set shiftwidth=4                        " when indenting with '>', use 4 spaces width
 set expandtab                           " on pressing tab, insert 4 spaces
-set softtabstop=4
-set list                                " show trailing whitespaces
-set listchars=trail:·,tab:»»,nbsp:×     " define characters for showing whitespaces
+set softtabstop=4                       " edit as if tabs are 4 characters wide
+set list                                " show invisible characters
+set listchars=trail:·,tab:→\ ,nbsp:×    " define characters for showing whitespaces (eol:¬)
 set updatetime=50                       " improve performance
+set hidden                              " current buffer can be put into background
 set wrap linebreak
-set number
-set relativenumber
+set number                              " show the current line number
+set relativenumber                      " show relative line numbers 
 set rtp+=/usr/local/opt/fzf
-set t_Co=256
+set t_Co=256                            " explicitly tell vim that the terminal supports 256 colors
 set cursorline
 set splitright
 set splitbelow
@@ -102,8 +103,8 @@ set guicursor=n-v-c:block-blinkwait175-blinkoff150-blinkon175,
 
 " Search settings
 set path+=**                            " search upwards and downwards the directory
-set ignorecase                          " search case insensitive, and becomes
-set smartcase                           " case sensitive when there's uppercase letters
+set ignorecase                          " case-insensitive searching
+set smartcase                           " case-sensitive if expresson contains a capital letters
 
 " Ignore folders
 set wildignore+=**/dist/*
@@ -128,6 +129,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#gutentags#enabled = 1
+let g:airline#extensions#wordcount#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 1
 
 " Syntax configurations
 let g:javascript_plugin_jsdoc = 1
