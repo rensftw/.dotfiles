@@ -5,9 +5,9 @@ require('telescope').setup{
   defaults = {
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
-    selection_strategy = "reset",
     prompt_position = "top",
-    sorting_strategy = "descending",
+    selection_strategy = "reset",
+    sorting_strategy = "ascending",
     scroll_strategy = "cycle",
     color_devicons = true,
     winblend = 0,
@@ -36,6 +36,16 @@ require('telescope').setup{
           preview_width = 0.9,
         },
       },
+      vimgrep_arguments = {
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--hidden'
+        },
     },
     mappings = {
       i = {
