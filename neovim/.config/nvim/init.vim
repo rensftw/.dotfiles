@@ -13,9 +13,14 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'leafOfTree/vim-vue-plugin'
 
-" FZF integration with vim
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Treesitter (AST-based syntax highlighting)
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Telescope
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " Find and replace in multiple files (lazy loaded)
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
@@ -80,7 +85,6 @@ set hidden                              " current buffer can be put into backgro
 set wrap linebreak
 set number                              " show the current line number
 set relativenumber                      " show relative line numbers 
-set rtp+=/usr/local/opt/fzf
 set t_Co=256                            " explicitly tell vim that the terminal supports 256 colors
 set cursorline
 set splitright
@@ -159,30 +163,6 @@ nnoremap ]h                     :GitGutterNextHunk<CR>
 nnoremap [h                     :GitGutterPrevHunk<CR>
 " Undo hunk
 nnoremap hu                     :GitGutterUndoHunk<CR>
-
-" FZF configuration
-let g:fzf_command_prefix = 'Fzf'
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-v': 'vsplit',
-  \ 'ctrl-x': 'split' }
-" Open file (ctrl-t for new tab, ctrl-x and ctrl-v for new split)
-nnoremap <silent><leader>o      :FZF -m<CR>
-" Find term in file
-vnoremap <leader>f              y/\V<C-R>=escape(@",'/\')<CR><CR>
-" Find term in all files project-wide
-nnoremap <leader>f              :FzfRg<CR>
-" Inspect buffers
-nnoremap <leader>b              :FzfBuffers<CR>
-" Browse commands
-nnoremap <leader>c              :FzfCommands<CR>
-
-" Allow passing optional flags into the Rg command.
-"   Example: :Rg myterm -g '*.md'
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \ "rg --column --line-number --no-heading --color=always --smart-case -g '!{node_modules/*,.git/*}' " .
-  \ <q-args>, 1, fzf#vim#with_preview(), <bang>0)
 
 " Grepper configuration
 let g:grepper = {}
