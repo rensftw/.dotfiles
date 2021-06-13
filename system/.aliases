@@ -25,6 +25,7 @@ alias aa="nvim $ALIASES_LOCATION"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
+alias vn="~/neovim/nvim-osx64/bin/nvim"
 
 # Colorize the output of tree
 alias tree="tree -C"
