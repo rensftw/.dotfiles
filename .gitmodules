@@ -10,3 +10,6 @@
 [submodule "zsh/.zsh/powerlevel10k"]
 	path = zsh/.zsh/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "neovim/neovim-nightly"]
+	path = neovim/neovim-nightly
+	url = git@github.com:neovim/neovim.git
