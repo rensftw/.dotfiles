@@ -164,7 +164,7 @@ let g:vim_vue_plugin_config = {
       \}
 
 " Treesitter
-lua require "rensftw-nvim-treesitterrc"
+lua require "nvim-treesitter-rc"
 
 " Telescope
 nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
@@ -174,7 +174,7 @@ nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags(
 nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<cr>
 
 " Telescope's config
-lua require "rensftw-telescoperc"
+lua require "telescope-rc"
 
 " GitGutter integration
 let g:gitgutter_preview_win_floating = 1
