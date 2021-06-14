@@ -156,6 +156,9 @@ let g:vim_vue_plugin_config = {
       \'debug': 0,
       \}
 
+" Treesitter
+lua require "rensftw-nvim-treesitterrc"
+
 " Telescope
 nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
 nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<cr>
