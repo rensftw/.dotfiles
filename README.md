@@ -31,7 +31,7 @@ Here are some useful tips for getting started:
 * You can also delete any unnecessary tools/software from [Brewfile](./_homebrew/Brewfile)
   
 ## Highlights
-* [`neovim`](https://neovim.io/) for code editing
+* [`neovim nightly`](https://neovim.io/) for code editing
 * [`ranger`](https://github.com/ranger/ranger) for terminal file navigation
 * [`fzf`](https://github.com/junegunn/fzf) integration with (Neo)vim and aliases for interactive git operations
 * [`rg`](https://github.com/BurntSushi/ripgrep) for searching
