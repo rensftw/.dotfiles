@@ -135,7 +135,7 @@ let g:dracula_inverse = 1
 let g:dracula_colorterm = 1
 
 " Airline settings
-let g:airline_theme = 'night_owl'
+let g:airline_theme = 'oceanicnext'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
