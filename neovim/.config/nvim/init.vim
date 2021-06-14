@@ -157,9 +157,9 @@ let g:vim_vue_plugin_config = {
       \}
 
 " Telescope
-nnoremap <leader>ff             <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
+nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
 nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb             <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<cr>
 
