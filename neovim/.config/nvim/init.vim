@@ -70,6 +70,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'flazz/vim-colorschemes'
+Plug 'mhartington/oceanic-next'
+Plug 'haishanh/night-owl.vim'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -91,7 +94,7 @@ set t_Co=256                            " explicitly tell vim that the terminal 
 set cursorline
 set splitright
 set splitbelow
-colorscheme dracula
+colorscheme OceanicNext
 " :colors darkblue    " use for debugging theme-related issues
 " Enable true colors, if possible
 if exists('+termguicolors')
@@ -131,7 +134,7 @@ let g:dracula_inverse = 1
 let g:dracula_colorterm = 1
 
 " Airline settings
-let g:airline_theme = 'dracula'
+let g:airline_theme = 'night_owl'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
