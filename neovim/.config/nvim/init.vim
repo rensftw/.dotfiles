@@ -192,6 +192,7 @@ let g:coc_global_extensions = [
     \ 'coc-pyright',
     \ 'coc-sh',
     \ 'coc-swagger',
+    \ 'coc-tag',
     \ 'coc-tsserver',
     \ 'coc-vetur',
     \ 'coc-xml',
@@ -419,19 +420,18 @@ nnoremap gd[                    :diffget //2<CR>
 nnoremap gd]                    :diffget //3<CR>
 
 " Coc / Intellisense
+" Diagnostics
 " Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g                <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g                <Plug>(coc-diagnostic-next)
+nmap <silent> [d                <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d                <Plug>(coc-diagnostic-next)
+" Show all diagnostics in location list.
+nnoremap <silent><nowait> <leader>d        :<C-u>CocList diagnostics<cr>
 
 " GoTo code navigation.
 nmap <silent> gd                <Plug>(coc-definition)
 nmap <silent> gy                <Plug>(coc-type-definition)
-nmap <silent> gi                <Plug>(coc-implementation)
 nmap <silent> gr                <Plug>(coc-references)
 
-" Show all diagnostics.
-nnoremap <silent><nowait> <leader>cd        :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <leader>ce        :<C-u>CocList extensions<cr>
 " Search workspace symbols.
@@ -442,9 +442,9 @@ nnoremap <silent><nowait> <leader>ja        :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <leader>ka        :<C-u>CocPrev<CR>
 
 " Apply codeAction to the current buffer.
-nmap <leader>ac                 <Plug>(coc-codeaction)
+nmap <leader>ca                 <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf                 <Plug>(coc-fix-current)
+nmap <leader>cf                 <Plug>(coc-fix-current)
 " Apply codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a                  <Plug>(coc-codeaction-selected)
