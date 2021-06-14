@@ -2,6 +2,20 @@ local actions = require('telescope.actions')
 
 require('telescope').setup{
   defaults = {
+    vimgrep_arguments = {
+        'rg',
+        '--hidden',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+    },
+    file_ignore_patterns = {
+        '.git',
+        'node_modules'
+    },
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
     prompt_position = "top",
@@ -35,16 +49,6 @@ require('telescope').setup{
           preview_width = 0.9,
         },
       },
-      vimgrep_arguments = {
-          'rg',
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-          '--smart-case',
-          '--hidden'
-        },
     },
     mappings = {
       i = {
