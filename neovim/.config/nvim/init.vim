@@ -389,5 +389,7 @@ nnoremap <C-l>                  <C-w>l
 " Git conflict resolution
 nnoremap <leader>gb             :Git blame<CR>
 nnoremap <leader>gd             :Gvdiffsplit!<CR>
+nnoremap <leader>gdm            :Git difftool -y master<CR>
+nnoremap <leader>gh             :GitGutterLineHighlightsToggle<CR>
 nnoremap gd[                    :diffget //2<CR>
 nnoremap gd]                    :diffget //3<CR>
