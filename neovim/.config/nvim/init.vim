@@ -91,7 +91,6 @@ set autowrite                           " all modified buffers are written befor
 set wrap linebreak
 set number                              " show the current line number
 set relativenumber                      " show relative line numbers 
-set t_Co=256                            " explicitly tell vim that the terminal supports 256 colors
 set cursorline
 set splitright
 set splitbelow
