@@ -93,7 +93,6 @@ set number                              " show the current line number
 set relativenumber                      " show relative line numbers
 set nobackup                            " some servers have issues with backup files
 set nowritebackup
-set cmdheight=2                         " give more space for displaying messages
 set shortmess+=c                        " don't pass messages to |ins-completion-menu|
 set signcolumn=number                   " in recent versions vim can merge sign and number columns
 set cursorline
@@ -132,17 +131,17 @@ set wildignore+=*build/*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OceanicNext settings
+" OceanicNext configuration
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 
-" Dracula settings
+" Dracula configuration
 let g:dracula_bold = 1
 let g:dracula_italic = 1
 let g:dracula_inverse = 1
 let g:dracula_colorterm = 1
 
-" Airline settings
+" Airline configuration
 let g:airline_theme = 'oceanicnext'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -150,7 +149,7 @@ let g:airline#extensions#gutentags#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 
-" Syntax configurations
+" Syntax configuration
 let g:javascript_plugin_jsdoc = 1
 let g:python_highlight_all = 1
 let g:vim_vue_plugin_config = {
@@ -167,16 +166,18 @@ let g:vim_vue_plugin_config = {
       \'debug': 0,
       \}
 
-" Treesitter
+" Treesitter configuration
 lua require "nvim-treesitter-rc"
 
 " Telescope
 nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
+nnoremap <leader>gw             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<cr>
+nnoremap <leader>gd             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles" })<cr>
 nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<cr>
-" Telescope's config
+" Telescope's configuration
 lua require "telescope-rc"
 
 " CoC configuration
