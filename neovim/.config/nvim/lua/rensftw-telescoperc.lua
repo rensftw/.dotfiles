@@ -13,8 +13,9 @@ require('telescope').setup{
         '--smart-case',
     },
     file_ignore_patterns = {
-        '.git',
-        'node_modules'
+        '.git/',
+        'node_modules/',
+        'tags'
     },
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
@@ -23,7 +24,6 @@ require('telescope').setup{
     sorting_strategy = "ascending",
     scroll_strategy = "cycle",
     color_devicons = true,
-    winblend = 0,
     layout_strategy = "horizontal",
     layout_config = {
       width = 0.8,
