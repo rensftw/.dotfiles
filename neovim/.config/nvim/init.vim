@@ -87,6 +87,7 @@ set list                                " show invisible characters
 set listchars=trail:·,tab:→\ ,nbsp:×    " define characters for showing whitespaces (eol:¬)
 set updatetime=50                       " improve performance
 set hidden                              " current buffer can be put into background
+set autowrite                           " all modified buffers are written before closing
 set wrap linebreak
 set number                              " show the current line number
 set relativenumber                      " show relative line numbers 
@@ -390,6 +391,7 @@ nnoremap <C-l>                  <C-w>l
 nnoremap <leader>gb             :Git blame<CR>
 nnoremap <leader>gd             :Gvdiffsplit!<CR>
 nnoremap <leader>gdm            :Git difftool -y master<CR>
+nnoremap <leader>gdq            :Git difftool 
 nnoremap <leader>gh             :GitGutterLineHighlightsToggle<CR>
 nnoremap gd[                    :diffget //2<CR>
 nnoremap gd]                    :diffget //3<CR>
