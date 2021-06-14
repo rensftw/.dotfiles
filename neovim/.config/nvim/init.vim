@@ -163,6 +163,8 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>c  <cmd>Telescope commands<cr>
 
+" Telescope's config
+lua require "rensftw-telescoperc"
 
 " GitGutter integration
 let g:gitgutter_preview_win_floating = 1
