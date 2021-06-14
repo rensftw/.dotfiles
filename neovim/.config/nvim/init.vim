@@ -157,11 +157,11 @@ let g:vim_vue_plugin_config = {
       \}
 
 " Telescope
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>c  <cmd>Telescope commands<cr>
+nnoremap <leader>ff             <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb             <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<cr>
 
 " Telescope's config
 lua require "rensftw-telescoperc"
