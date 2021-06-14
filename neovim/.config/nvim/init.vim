@@ -208,9 +208,8 @@ let g:ale_lint_on_save = 0
 let g:ale_fix_on_save = 0
 " Show ALE errors in the sign column
 let g:ale_sign_column_always = 1
-" Use the quickfix list instead of the loclist
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
 let g:ale_hover_to_preview = 1
 " Apply JS setting for Vue files as well
 let g:ale_linter_aliases = {'javascript': ['vue', 'javascript']}
