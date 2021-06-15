@@ -57,10 +57,6 @@ Plug 'jiangmiao/auto-pairs'
 " Add indentation that closely matches PEP 8
 Plug 'vim-scripts/indentpython'
 
-" Custom snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
 " Respect .editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
@@ -180,6 +176,7 @@ let g:coc_global_extensions = [
     \ 'coc-highlight',
     \ 'coc-html',
     \ 'coc-json',
+    \ 'coc-snippets',
     \ 'coc-prettier',
     \ 'coc-pyright',
     \ 'coc-sh',
@@ -221,13 +218,6 @@ let g:gitgutter_preview_win_floating = 1
 let g:grepper = {}
 let g:grepper.tools = ["rg"]
 xmap gr                         <plug>(GrepperOperator)
-
-" " Ultisnips configuration
-" let g:UltiSnipsExpandTrigger = "<tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit = "vertical"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilities
