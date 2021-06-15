@@ -1,9 +1,13 @@
 {
+    "diagnostic.enableSign": true,
+    "diagnostic.infoSign": "●",
+    "diagnostic.hintSign": "○",
+    "diagnostic.warningSign": "⚠",
+    "diagnostic.errorSign": "✖",
     "snippets.extends": {
         "javascriptreact": ["javascript"],
         "typescript": ["javascript"],
         "mdx": ["md"]
     }
 }
-
 
