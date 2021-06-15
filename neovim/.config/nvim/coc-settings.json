@@ -8,6 +8,7 @@
     "git.removedSign.text": "┃",
     "git.changedSign.text": "┃",
     "git.changeRemovedSign.text": "┃",
+    "git.changedSign.hlGroup": "IncSearch",         // This hack should only be needed with the OceanicNext colorscheme
     "git.blameUseRealTime": true,
     "snippets.extends": {
         "javascriptreact": ["javascript"],
