@@ -31,14 +31,15 @@ Here are some useful tips for getting started:
 * You can also delete any unnecessary tools/software from [Brewfile](./_homebrew/Brewfile)
   
 ## Highlights
-* [`neovim nightly`](https://neovim.io/) for code editing
+* [`neovim nightly`](https://neovim.io/) + [`telescope`](https://github.com/nvim-telescope/telescope.nvim) + [coc](https://github.com/neoclide/coc.nvim) for code editing
 * [`ranger`](https://github.com/ranger/ranger) for terminal file navigation
-* [`fzf`](https://github.com/junegunn/fzf) integration with (Neo)vim and aliases for interactive git operations
+* [`fzf`](https://github.com/junegunn/fzf) for interactive git operations
 * [`rg`](https://github.com/BurntSushi/ripgrep) for searching
 * [`stow`](https://www.gnu.org/software/stow/) for dotfile management with symlinks
 * [`brew`](https://brew.sh/) for macOS package management
 * [`nvm`](https://github.com/nvm-sh/nvm) for Node version management
 * [`BpyTOP`](https://github.com/aristocratos/bpytop) for process monitoring
+* [`slate`](https://github.com/jigish/slate) for window management
   
 ## Screenshots
 [Powerlevel10k](https://github.com/romkatv/powerlevel10k/) Rainbow prompt with [Glacier](https://github.com/bahlo/iterm-colors#glacier) theme on [iTerm2](https://iterm2.com/):
@@ -47,14 +48,7 @@ Here are some useful tips for getting started:
 (Neo)vim with [Dracula](https://draculatheme.com/vim) theme:
 ![(Neo)vim with Dracula theme](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/vim-with-dracula-theme.png)
   
-Interactive staging with a preview window for git (using fzf bindings):  
-There are also bindings for:
-  * unstaging changes
-  * discarding changes
-  * inspecting stash entries
-  * inspecting the git history of a branch (with commit preview)
-  * switching between branches
-
+Interactive git operations with fzf:
 ![Staging git changes interactively, using fzf bindings](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-fzf-full-size.gif)
 
   
