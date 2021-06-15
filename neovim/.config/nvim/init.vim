@@ -390,6 +390,9 @@ nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags(
 nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<cr>
 
 " Git
+" Copy remote URL to clipboard
+nnoremap <leader>gu             :CocCommand git.copyUrl<CR>
+
 " Hunk navigation
 nnoremap hp                     :CocCommand git.chunkInfo<CR>
 nnoremap hu                     :CocCommand git.chunkUndo<CR>
