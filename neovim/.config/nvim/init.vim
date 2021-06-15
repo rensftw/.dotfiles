@@ -88,14 +88,14 @@ set listchars=trail:·,tab:→\ ,nbsp:×    " define characters for showing whit
 set updatetime=50                       " improve performance
 set hidden                              " current buffer can be put into background
 set autowrite                           " all modified buffers are written before closing
-set wrap linebreak
+set wrap linebreak                      " wrap long lines
 set number                              " show the current line number
 set relativenumber                      " show relative line numbers
 set nobackup                            " some servers have issues with backup files
-set nowritebackup
+set nowritebackup                       " do not make a backup before overwriting a file
 set shortmess+=c                        " don't pass messages to |ins-completion-menu|
 set signcolumn=yes                      " always show the sign column
-set cursorline
+set cursorline                          " highlight the line where the cursor is
 set splitright
 set splitbelow
 colorscheme OceanicNext
@@ -107,7 +107,7 @@ if exists('+termguicolors')
     set termguicolors
 endif
 
-" Cursor settings
+" Cursor shape/blinking settings
 set guicursor=n-v-c:block-blinkwait175-blinkoff150-blinkon175,
     \i-ci-ve:ver25,
     \r-cr:hor20,
@@ -169,14 +169,6 @@ let g:vim_vue_plugin_config = {
 " Treesitter configuration
 lua require "nvim-treesitter-rc"
 
-" Telescope
-nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
-nnoremap <leader>gw             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<cr>
-nnoremap <leader>gd             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles" })<cr>
-nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<cr>
 " Telescope's configuration
 lua require "telescope-rc"
 
@@ -202,9 +194,7 @@ let g:coc_global_extensions = [
 " Add (Neo)Vim's native statusline support.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-"" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+" Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr><TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -226,25 +216,18 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 " GitGutter integration
 let g:gitgutter_preview_win_floating = 1
-" Show a hunk preview
-nnoremap hp                     :GitGutterPreviewHunk<CR>
-" Jump between hunks
-nnoremap ]h                     :GitGutterNextHunk<CR>
-nnoremap [h                     :GitGutterPrevHunk<CR>
-" Undo hunk
-nnoremap hu                     :GitGutterUndoHunk<CR>
 
 " Grepper configuration
 let g:grepper = {}
 let g:grepper.tools = ["rg"]
 xmap gr                         <plug>(GrepperOperator)
 
-" Ultisnips configuration
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit = "vertical"
+" " Ultisnips configuration
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit = "vertical"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilities
@@ -363,7 +346,7 @@ xnoremap p                      pgvy
 " Keep cursor at the bottom of the visual selection after you yank it.
 vmap y                          ygv<Esc>
 
-" Move 1 more lines up or down in normal and visual selection modes.
+" Move 1 or more lines up or down in normal and visual selection modes.
 nnoremap K                      :m .-2<CR>==
 nnoremap J                      :m .+1<CR>==
 vnoremap K                      :m '<-2<CR>gv=gv
@@ -410,36 +393,47 @@ nnoremap <C-j>                  <C-w>j
 nnoremap <C-k>                  <C-w>k
 nnoremap <C-l>                  <C-w>l
 
-" Git conflict resolution
-nnoremap <leader>gb             :Git blame<CR>
-nnoremap <leader>gd             :Gvdiffsplit!<CR>
-nnoremap <leader>gdm            :Git difftool -y master<CR>
-nnoremap <leader>gdq            :Git difftool 
+" Telescope
+nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
+nnoremap <leader>ow             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<cr>
+nnoremap <leader>od             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<cr>
+nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<cr>
+
+" Git
+" Hunk navigation
+nnoremap hp                     :GitGutterPreviewHunk<CR>
+nnoremap hu                     :GitGutterUndoHunk<CR>
+nnoremap ]h                     :GitGutterNextHunk<CR>
+nnoremap [h                     :GitGutterPrevHunk<CR>
+
+" Conflict resolution
 nnoremap <leader>gh             :GitGutterLineHighlightsToggle<CR>
+nnoremap <leader>gb             :Git blame<CR>
+nnoremap <leader>gp             :Gvdiffsplit!<CR>
+nnoremap <leader>gdm            :Git difftool -y master<CR>
+nnoremap <leader>gd             :Git difftool -y 
 nnoremap gd[                    :diffget //2<CR>
 nnoremap gd]                    :diffget //3<CR>
 
 " Coc / Intellisense
-" Diagnostics
-" Use `[g` and `]g` to navigate diagnostics
+" Show all diagnostics in location list
+nnoremap <silent><nowait> <leader>d        :<C-u>CocList diagnostics<cr>
+" Navigate diagnostics
 nmap <silent> [d                <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d                <Plug>(coc-diagnostic-next)
-" Show all diagnostics in location list.
-nnoremap <silent><nowait> <leader>d        :<C-u>CocList diagnostics<cr>
 
-" GoTo code navigation.
+" GoTo code navigation
 nmap <silent> gd                <Plug>(coc-definition)
 nmap <silent> gy                <Plug>(coc-type-definition)
 nmap <silent> gr                <Plug>(coc-references)
 
-" Manage extensions.
+" Manage extensions
 nnoremap <silent><nowait> <leader>ce        :<C-u>CocList extensions<cr>
-" Search workspace symbols.
+" Search workspace symbols
 nnoremap <silent><nowait> <leader>fs        :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <leader>ja        :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <leader>ka        :<C-u>CocPrev<CR>
 
 " Apply codeAction to the current buffer.
 nmap <leader>ca                 <Plug>(coc-codeaction)
@@ -457,15 +451,3 @@ nmap <leader>rn                 <Plug>(coc-rename)
 xmap <leader>f                  <Plug>(coc-format-selected)
 nmap <leader>f                  <Plug>(coc-format-selected)
 
-" Use K to show documentation in preview window.
-nnoremap <silent> K             :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
