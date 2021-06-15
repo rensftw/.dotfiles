@@ -4,6 +4,11 @@
     "diagnostic.hintSign": "○",
     "diagnostic.warningSign": "⚠",
     "diagnostic.errorSign": "✖",
+    "git.addedSign.text": "┃",
+    "git.removedSign.text": "┃",
+    "git.changedSign.text": "┃",
+    "git.changeRemovedSign.text": "┃",
+    "git.blameUseRealTime": true,
     "snippets.extends": {
         "javascriptreact": ["javascript"],
         "typescript": ["javascript"],

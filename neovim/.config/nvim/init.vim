@@ -33,7 +33,6 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'ludovicchabant/vim-gutentags'
 
 " Git utilities
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " Comment stuff out
@@ -176,6 +175,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:coc_global_extensions = [
     \ 'coc-css',
     \ 'coc-eslint',
+    \ 'coc-git',
     \ 'coc-highlight',
     \ 'coc-html',
     \ 'coc-json',
@@ -213,9 +213,6 @@ inoremap <silent><expr>         <c-space> coc#refresh()
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" GitGutter integration
-let g:gitgutter_preview_win_floating = 1
 
 " Grepper configuration
 let g:grepper = {}
@@ -279,9 +276,6 @@ autocmd VimResized * wincmd =
 
 " Update a buffer's contents on focus if it changed outside of Vim.
 au FocusGained,BufEnter * :checktime
-
-" Update GitGutter's status after entering another window (the terminal window)
-au WinEnter * :GitGutterAll
 
 " Unset paste on InsertLeave.
 autocmd InsertLeave * silent! set nopaste
@@ -397,13 +391,14 @@ nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()
 
 " Git
 " Hunk navigation
-nnoremap hp                     :GitGutterPreviewHunk<CR>
-nnoremap hu                     :GitGutterUndoHunk<CR>
-nnoremap ]h                     :GitGutterNextHunk<CR>
-nnoremap [h                     :GitGutterPrevHunk<CR>
+nnoremap hp                     :CocCommand git.chunkInfo<CR>
+nnoremap hu                     :CocCommand git.chunkUndo<CR>
+nmap ]h                         <Plug>(coc-git-nextchunk)
+nmap [h                         <Plug>(coc-git-prevchunk)
 
 " Conflict resolution
-nnoremap <leader>gh             :GitGutterLineHighlightsToggle<CR>
+nmap ]c                         <Plug>(coc-git-nextconflict)
+nmap [c                         <Plug>(coc-git-prevconflict)
 nnoremap <leader>gb             :Git blame<CR>
 nnoremap <leader>gp             :Gvdiffsplit!<CR>
 nnoremap <leader>gdm            :Git difftool -y master<CR>
