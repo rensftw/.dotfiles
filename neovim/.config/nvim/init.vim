@@ -94,7 +94,7 @@ set relativenumber                      " show relative line numbers
 set nobackup                            " some servers have issues with backup files
 set nowritebackup
 set shortmess+=c                        " don't pass messages to |ins-completion-menu|
-set signcolumn=number                   " in recent versions vim can merge sign and number columns
+set signcolumn=yes                      " always show the sign column
 set cursorline
 set splitright
 set splitbelow
