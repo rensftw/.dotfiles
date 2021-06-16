@@ -175,6 +175,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:coc_global_extensions = [
     \ 'coc-css',
     \ 'coc-eslint',
+    \ 'coc-explorer',
     \ 'coc-git',
     \ 'coc-highlight',
     \ 'coc-html',
@@ -379,6 +380,9 @@ nnoremap <C-h>                  <C-w>h
 nnoremap <C-j>                  <C-w>j
 nnoremap <C-k>                  <C-w>k
 nnoremap <C-l>                  <C-w>l
+
+" Explorer
+nnoremap <leader>e               :CocCommand explorer<CR>
 
 " Telescope
 nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
