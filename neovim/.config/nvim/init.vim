@@ -160,9 +160,6 @@ let g:vim_vue_plugin_config = {
 
 " Treesitter configuration
 lua require "nvim-treesitter-rc"
-set foldlevelstart=99           " start unfolded
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 
 " Telescope's configuration
 lua require "telescope-rc"
