@@ -50,9 +50,6 @@ Plug 'tpope/vim-repeat'
 " Briefly highlight which text was yanked
 Plug 'machakann/vim-highlightedyank'
 
-" Automatic closing of quotes, parenthesis, brackets, etc.
-Plug 'jiangmiao/auto-pairs'
-
 " Add indentation that closely matches PEP 8
 Plug 'vim-scripts/indentpython'
 
@@ -181,6 +178,7 @@ let g:coc_global_extensions = [
     \ 'coc-html',
     \ 'coc-json',
     \ 'coc-snippets',
+    \ 'coc-pairs',
     \ 'coc-prettier',
     \ 'coc-pyright',
     \ 'coc-sh',
