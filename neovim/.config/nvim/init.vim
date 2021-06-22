@@ -421,8 +421,8 @@ nnoremap <leader>gb             :Git blame<CR>
 nnoremap <leader>gp             :Gvdiffsplit!<CR>
 nnoremap <leader>gdm            :Git difftool -y master<CR>
 nnoremap <leader>gd             :Git difftool -y 
-nnoremap gd[                    :diffget //2<CR>
-nnoremap gd]                    :diffget //3<CR>
+nnoremap [g                     :diffget //2<CR>
+nnoremap ]g                     :diffget //3<CR>
 
 " Coc / Intellisense
 " Show all diagnostics in location list
