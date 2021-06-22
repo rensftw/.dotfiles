@@ -349,6 +349,9 @@ xnoremap p                      pgvy
 " Keep cursor at the bottom of the visual selection after you yank it.
 vmap y                          ygv<Esc>
 
+" Copy to the shared register
+nnoremap <leader>y              "+yiw
+
 " Move 1 or more lines up or down in normal and visual selection modes.
 nnoremap K                      :m .-2<CR>==
 nnoremap J                      :m .+1<CR>==
@@ -411,6 +414,8 @@ nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()
 " Git
 " Copy remote URL to clipboard
 nnoremap <leader>gu             :CocCommand git.copyUrl<CR>
+" Copy relative file path to clipboard
+nnoremap <leader>p              :let @+ = expand("%")
 
 " Hunk navigation
 nnoremap hp                     :CocCommand git.chunkInfo<CR>
