@@ -140,6 +140,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#gutentags#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline_filetype_overrides = {
+      \ 'coc-explorer':  [ 'CoC Explorer', '' ],
+      \ 'vim-plug': [ 'Plugins', '' ],
+      \ }
 
 " Syntax configuration
 let g:javascript_plugin_jsdoc = 1
