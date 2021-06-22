@@ -168,6 +168,7 @@ lua require "telescope-rc"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:coc_global_extensions = [
     \ 'coc-css',
+    \ 'coc-emmet',
     \ 'coc-eslint',
     \ 'coc-explorer',
     \ 'coc-git',
