@@ -384,8 +384,7 @@ nnoremap <leader>az             :tabnew $ZSHRC_LOCATION<CR>     " augment zshrc
 nnoremap <leader>aa             :tabnew $ALIASES_LOCATION<CR>   " augment aliases
 nnoremap <leader>rv             :source $VIMRC_LOCATION<CR>     " reload vimrc
 
-" Shortcut tabs navigation
-nnoremap tn                     :tabnew<Space>
+" Tab navigation
 nnoremap ]t                     :tabnext<CR>
 nnoremap [t                     :tabprev<CR>
 
@@ -393,7 +392,7 @@ nnoremap [t                     :tabprev<CR>
 nnoremap ]b                     :bnext<CR>
 nnoremap [b                     :bprevious<CR>
 
-" Shortcut split/window navigation
+" Split/window navigation
 nnoremap <C-h>                  <C-w>h
 nnoremap <C-j>                  <C-w>j
 nnoremap <C-k>                  <C-w>k
@@ -403,19 +402,27 @@ nnoremap <C-l>                  <C-w>l
 nnoremap <leader>e               :CocCommand explorer<CR>
 
 " Telescope
-nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
-nnoremap <leader>ow             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<cr>
-nnoremap <leader>od             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<cr>
-nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<cr>
+nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<CR>
+nnoremap <leader>ow             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<CR>
+nnoremap <leader>od             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<CR>
+nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<CR>
+nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<CR>
+nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<CR>
 
 " Git
 " Copy remote URL to clipboard
 nnoremap <leader>gu             :CocCommand git.copyUrl<CR>
 " Copy relative file path to clipboard
-nnoremap <leader>p              :let @+ = expand("%")
+nnoremap <leader>p              :let @+ = expand("%")<CR>
+" See change history for the current file
+nnoremap <leader>gb             :Git blame<CR>
+" Open current file changes in a vertical split
+nnoremap <leader>gs             :Gvdiffsplit!<CR>
+" Compare current branch changes with master (populates quickfix list)
+nnoremap <leader>gdm            :Git difftool -y master<CR>
+" Compare with another branch
+nnoremap <leader>gd             :Git difftool -y 
 
 " Hunk navigation
 nnoremap hp                     :CocCommand git.chunkInfo<CR>
@@ -426,16 +433,12 @@ nmap [h                         <Plug>(coc-git-prevchunk)
 " Conflict resolution
 nmap ]c                         <Plug>(coc-git-nextconflict)
 nmap [c                         <Plug>(coc-git-prevconflict)
-nnoremap <leader>gb             :Git blame<CR>
-nnoremap <leader>gp             :Gvdiffsplit!<CR>
-nnoremap <leader>gdm            :Git difftool -y master<CR>
-nnoremap <leader>gd             :Git difftool -y 
-nnoremap [g                     :diffget //2<CR>
-nnoremap ]g                     :diffget //3<CR>
+nnoremap [r                     :diffget //2<CR>
+nnoremap ]r                     :diffget //3<CR>
 
 " Coc / Intellisense
 " Show all diagnostics in location list
-nnoremap <silent><nowait> <leader>d        :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <leader>d        :<C-u>CocList diagnostics<CR>
 " Navigate diagnostics
 nmap <silent> [d                <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d                <Plug>(coc-diagnostic-next)
@@ -446,14 +449,14 @@ nmap <silent> gy                <Plug>(coc-type-definition)
 nmap <silent> gr                <Plug>(coc-references)
 
 " Manage extensions
-nnoremap <silent><nowait> <leader>ce        :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <leader>ce        :<C-u>CocList extensions<CR>
 " Search workspace symbols
-nnoremap <silent><nowait> <leader>fs        :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <leader>fs        :<C-u>CocList -I symbols<CR>
 
 " Apply codeAction to the current buffer.
 nmap <leader>ca                 <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>cf                 <Plug>(coc-fix-current)
+nmap <leader>af                 <Plug>(coc-fix-current)
 " Apply codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a                  <Plug>(coc-codeaction-selected)
