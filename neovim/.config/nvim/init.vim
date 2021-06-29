@@ -431,8 +431,10 @@ nmap ]h                         <Plug>(coc-git-nextchunk)
 nmap [h                         <Plug>(coc-git-prevchunk)
 
 " Conflict resolution
+" Navigate conflict instances
 nmap ]c                         <Plug>(coc-git-nextconflict)
 nmap [c                         <Plug>(coc-git-prevconflict)
+" Choose which side to use for resolution
 nnoremap [r                     :diffget //2<CR>
 nnoremap ]r                     :diffget //3<CR>
 
