@@ -467,7 +467,7 @@ nmap <leader>a                  <Plug>(coc-codeaction-selected)
 " Symbol renaming.
 nmap <leader>rn                 <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f                  <Plug>(coc-format-selected)
-nmap <leader>f                  <Plug>(coc-format-selected)
+" Format then loaded buffer.
+xmap <leader>f                  <Plug>(coc-format)
+nmap <leader>f                  <Plug>(coc-format)
 
