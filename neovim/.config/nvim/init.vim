@@ -453,7 +453,7 @@ nmap <silent> gr                <Plug>(coc-references)
 " Manage extensions
 nnoremap <silent><nowait> <leader>ce        :<C-u>CocList extensions<CR>
 " Search workspace symbols
-nnoremap <silent><nowait> <leader>fs        :<C-u>CocList -I symbols<CR>
+nnoremap <silent><nowait> <leader>s         :<C-u>CocList -I symbols<CR>
 
 " Apply codeAction to the current buffer.
 nmap <leader>ca                 <Plug>(coc-codeaction)
