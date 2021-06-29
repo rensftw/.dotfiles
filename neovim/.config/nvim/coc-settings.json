@@ -10,6 +10,9 @@
     "git.changeRemovedSign.text": "┃",
     "git.changedSign.hlGroup": "IncSearch",         // This hack should only be needed with the OceanicNext colorscheme
     "git.blameUseRealTime": true,
+    "list.source.symbols.excludes": ["*/node_modules/*"],
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
     "snippets.extends": {
         "javascriptreact": ["javascript"],
         "typescript": ["javascript"],
