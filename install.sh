@@ -17,9 +17,6 @@ sh _scripts/install-from-brewfile.sh
 # Welcome message
 sh _scripts/welcome.sh
 
-# Add custom fonts (Meslo NerdFont)
-sh _scripts/add-custom-fonts.sh
-
 # Fetch dependencies (as git modules or manually)
 sh _scripts/fetch-dependencies.sh
 
