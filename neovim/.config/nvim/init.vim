@@ -65,6 +65,9 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'flazz/vim-colorschemes'
 Plug 'mhartington/oceanic-next'
 Plug 'haishanh/night-owl.vim'
+
+" Dev icons for coc-explorer (needs to be loaded last)
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
