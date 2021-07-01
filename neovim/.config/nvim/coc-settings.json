@@ -1,4 +1,5 @@
 {
+    "explorer.icon.enableNerdfont": true,
     "diagnostic.enableSign": true,
     "diagnostic.infoSign": "●",
     "diagnostic.hintSign": "○",
