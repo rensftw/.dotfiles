@@ -26,6 +26,9 @@ Plug 'nvim-telescope/telescope.nvim'
 " Coc / Intellisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Documentation comments
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+
 " Tags
 Plug 'ludovicchabant/vim-gutentags'
 
@@ -161,6 +164,26 @@ let g:vim_vue_plugin_config = {
       \'foldexpr': 0,
       \'debug': 0,
       \}
+
+" Documentation comments
+let g:doge_filetype_aliases = {
+\  'javascript': [
+\    'vue',
+\    'javascript.jsx',
+\    'javascriptreact',
+\    'javascript.tsx',
+\    'typescriptreact',
+\    'typescript',
+\    'typescript.tsx',
+\    ]
+\}
+
+let g:doge_javascript_settings = {
+\  'destructuring_props': 1,
+\  'omit_redundant_param_types': 0,
+\}
+
+
 
 " Treesitter configuration
 lua require "nvim-treesitter-rc"
