@@ -26,9 +26,6 @@ Plug 'nvim-telescope/telescope.nvim'
 " Coc / Intellisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Find and replace in multiple files (lazy loaded)
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-
 " Tags
 Plug 'ludovicchabant/vim-gutentags'
 
@@ -232,12 +229,6 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 
-
-" Grepper configuration
-let g:grepper = {}
-let g:grepper.tools = ["rg"]
-xmap gr                         <plug>(GrepperOperator)
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utilities
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -269,23 +260,6 @@ endfunction
 " for replacing a few instances of the term (comparable to multiple cursors).
 nnoremap <silent>r      :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent>r      "sy:let @/=@s<CR>cgn
-
-" Find and replace project-wide
-" After searching for text, press this mapping to do a project wide find and
-" replace. It's similar to <leader>r except this one applies to all matches
-" across all files instead of just the current file.
-nnoremap <leader>R
-  \ :let @s='\<'.expand('<cword>').'\>'<CR>
-  \ :Grepper -cword -noprompt<CR>
-  \ :cfdo %s/<C-r>s//g \| update
-  \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-
-" The same as above except it works with a visual selection.
-xmap <leader>R
-    \ "sy
-    \ gvgr
-    \ :cfdo %s/<C-r>s//g \| update
-     \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
