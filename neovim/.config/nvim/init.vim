@@ -370,15 +370,13 @@ nnoremap <S-Right>              :vertical resize -2<CR>
 " Terminal
 " Toggle terminal on/off
 nnoremap <leader>t              :call TermToggle(20)<CR>
-tnoremap <leader>t              <C-\><C-n>:call TermToggle(12)<CR> 
+tnoremap <Esc>                  <C-\><C-n>:call TermToggle(12)<CR>
 inoremap <C-t>                  <Esc>:call TermToggle(20)<CR>
 " Navigate to/from terminal
 tnoremap <C-h>                  <C-\><C-N><C-w>h
 tnoremap <C-j>                  <C-\><C-N><C-w>j
 tnoremap <C-k>                  <C-\><C-N><C-w>k
 tnoremap <C-l>                  <C-\><C-N><C-w>l
-" Go back to normal mode
-tnoremap <esc>                  <C-\><C-n>
 
 " Normal remaps
 nnoremap Q                      !!$SHELL<CR>
