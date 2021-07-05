@@ -285,12 +285,6 @@ function! TermToggle(height)
     endif
 endfunction
 
-" Find and replace in current file
-" Type a replacement term and press . to repeat the replacement again. Useful
-" for replacing a few instances of the term (comparable to multiple cursors).
-nnoremap <silent>r      :let @/='\<'.expand('<cword>').'\>'<CR>cgn
-xnoremap <silent>r      "sy:let @/=@s<CR>cgn
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -445,6 +439,15 @@ nmap [c                         <Plug>(coc-git-prevconflict)
 " Choose which side to use for resolution
 nnoremap [r                     :diffget //2<CR>
 nnoremap ]r                     :diffget //3<CR>
+
+" Find and replace
+" In current buffer
+" Type a replacement term and press . to repeat the replacement again. Useful
+" for replacing a few instances of the term (comparable to multiple cursors).
+nnoremap <silent>r              :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent>r              "sy:let @/=@s<CR>cgn
+" Project-wide
+nnoremap <leader>r              :CocSearch --smart-case 
 
 " Coc / Intellisense
 " Show all diagnostics in location list
