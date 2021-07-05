@@ -184,8 +184,6 @@ let g:doge_javascript_settings = {
 \  'omit_redundant_param_types': 0,
 \}
 
-
-
 " Treesitter configuration
 lua require "nvim-treesitter-rc"
 
@@ -402,8 +400,8 @@ nnoremap <leader>e               :CocCommand explorer<CR>
 
 " Telescope
 nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<CR>
-nnoremap <leader>ow             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<CR>
-nnoremap <leader>od             <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<CR>
+nnoremap <leader>w              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<CR>
+nnoremap <leader>.              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<CR>
 nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<CR>
