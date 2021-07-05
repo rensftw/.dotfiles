@@ -66,6 +66,9 @@ Plug 'flazz/vim-colorschemes'
 Plug 'mhartington/oceanic-next'
 Plug 'haishanh/night-owl.vim'
 
+" Remove distractions
+Plug 'junegunn/goyo.vim'
+
 " Dev icons for coc-explorer (needs to be loaded last)
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
@@ -147,6 +150,11 @@ let g:airline_filetype_overrides = {
       \ 'coc-explorer':  [ 'CoC Explorer', '' ],
       \ 'vim-plug': [ 'Plugins', '' ],
       \ }
+
+" Goyo configuration
+let g:goyo_width = 120
+let g:goyo_height = 90
+let g:goyo_linenr = 1
 
 " Syntax configuration
 let g:javascript_plugin_jsdoc = 1
@@ -397,6 +405,9 @@ nnoremap <C-l>                  <C-w>l
 
 " Explorer
 nnoremap <leader>e               :CocCommand explorer<CR>
+
+" Zen mode
+nnoremap <leader>z               :Goyo<CR>
 
 " Telescope
 nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<CR>
