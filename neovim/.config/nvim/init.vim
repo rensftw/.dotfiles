@@ -166,6 +166,7 @@ let g:vim_vue_plugin_config = {
       \}
 
 " Documentation comments
+let g:doge_mapping = '<leader>jd'
 let g:doge_filetype_aliases = {
 \  'javascript': [
 \    'vue',
