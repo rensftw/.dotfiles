@@ -407,7 +407,7 @@ nnoremap <leader>z               :Goyo<CR>
 nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<CR>
 nnoremap <leader>w              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<CR>
 nnoremap <leader>.              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<CR>
-nnoremap <leader>fg             <cmd>lua require('telescope.builtin').live_grep()<CR>
+nnoremap <leader>f              <cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<CR>
@@ -479,6 +479,6 @@ nmap <leader>a                  <Plug>(coc-codeaction-selected)
 nmap <leader>rn                 <Plug>(coc-rename)
 
 " Format then loaded buffer.
-xmap <leader>f                  <Plug>(coc-format)
-nmap <leader>f                  <Plug>(coc-format)
+xmap <leader>=                  <Plug>(coc-format)
+nmap <leader>=                  <Plug>(coc-format)
 
