@@ -50,7 +50,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 export FZF_DEFAULT_OPTS='--multi --inline-info --height 50% --layout=reverse --border'
 export FZF_COMPLETION_TRIGGER='~~'
-export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
+export FZF_DEFAULT_COMMAND="fd --type file --hidden --no-ignore"
 
 # zsh-syntax-highlighting.zsh must be sourced at the end of .zshrc
 # (https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file)
