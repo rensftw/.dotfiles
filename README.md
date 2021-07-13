@@ -34,8 +34,8 @@ Here are some useful tips for getting started:
 * [`neovim nightly`](https://neovim.io/) + [`telescope`](https://github.com/nvim-telescope/telescope.nvim) + [`coc`](https://github.com/neoclide/coc.nvim) for code editing
 * [`ranger`](https://github.com/ranger/ranger) for terminal file navigation
 * [`fzf`](https://github.com/junegunn/fzf) for fuzzy finding and interactive git operations
-* [`rg`](https://github.com/BurntSushi/ripgrep) for searching files
-* [`fd`](https://github.com/sharkdp/fd) for listing files
+* [`rg`](https://github.com/BurntSushi/ripgrep) for searching file contents
+* [`fd`](https://github.com/sharkdp/fd) for listing filesystem entries
 * [`stow`](https://www.gnu.org/software/stow/) for dotfile management with symlinks
 * [`brew`](https://brew.sh/) for macOS package management
 * [`nvm`](https://github.com/nvm-sh/nvm) for Node version management
