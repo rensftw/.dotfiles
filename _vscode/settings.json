@@ -9,7 +9,8 @@
     "diffEditor.renderSideBySide": true,
     "editor.cursorBlinking": "phase",
     "editor.cursorStyle": "line",
-    "editor.fontSize": 12,
+    "editor.fontFamily": "FiraCode Nerd Font mono",
+    "editor.fontSize": 13,
     "editor.formatOnPaste": false,
     "editor.formatOnSave": false,
     "editor.linkedEditing": true,
@@ -157,14 +158,16 @@
     "workbench.activityBar.visible": true,
     "workbench.colorTheme": "Night Owl",
     "workbench.editor.enablePreview": true,
-    "workbench.editorAssociations": [
-        {
-            "filenamePattern": "*.ipynb",
-            "viewType": "jupyter.notebook.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
     "workbench.fontAliasing": "antialiased",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.list.automaticKeyboardNavigation": false,
-    "workbench.settings.editor": "json"
+    "workbench.settings.editor": "json",
+    "write-good.languages": [
+        "markdown",
+        "plaintext",
+        "yaml"
+    ]
 }
