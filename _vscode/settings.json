@@ -10,6 +10,7 @@
     "editor.cursorBlinking": "phase",
     "editor.cursorStyle": "line",
     "editor.fontFamily": "FiraCode Nerd Font mono",
+    "editor.fontLigatures": true,
     "editor.fontSize": 13,
     "editor.formatOnPaste": false,
     "editor.formatOnSave": false,
