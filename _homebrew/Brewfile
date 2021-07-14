@@ -56,6 +56,7 @@ cask "keepassxc"
 cask "logitech-options"
 cask "microsoft-edge"
 cask "opera"
+cask "opera-gx"
 cask "postman"
 cask "quicklook-json"
 cask "safari-technology-preview"
@@ -68,6 +69,7 @@ cask "visual-studio-code"
 cask "vivaldi"
 cask "vlc"
 cask "vmware-fusion"
+cask "zsa-wally"
 mas "Amphetamine", id: 937984704
 mas "Keynote", id: 409183694
 mas "Monosnap", id: 540348655
