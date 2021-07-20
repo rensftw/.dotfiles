@@ -20,6 +20,9 @@ sh _scripts/welcome.sh
 # Fetch dependencies (as git modules or manually)
 sh _scripts/fetch-dependencies.sh
 
+# Setup neovim-nightly
+sh _scripts/setup-neovim-nightly.sh
+
 # Set up nvm
 sh _scripts/install-nvm.sh
 
