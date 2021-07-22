@@ -76,7 +76,7 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = " "
+let mapleader=" "                       " use <space> as the leader key
 set tabstop=4                           " show existing tab with 4 spaces width
 set shiftwidth=4                        " when indenting with '>', use 4 spaces width
 set expandtab                           " on pressing tab, insert 4 spaces
@@ -94,8 +94,8 @@ set nowritebackup                       " do not make a backup before overwritin
 set shortmess+=c                        " don't pass messages to |ins-completion-menu|
 set signcolumn=yes                      " always show the sign column
 set cursorline                          " highlight the line where the cursor is
-set splitright
-set splitbelow
+set splitright                          " horizontal split should split to the right
+set splitbelow                          " vertical split should split below
 colorscheme OceanicNext
 " :colors darkblue    " use for debugging theme-related issues
 " Enable true colors, if possible
