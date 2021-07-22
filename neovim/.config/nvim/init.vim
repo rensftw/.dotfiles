@@ -142,6 +142,10 @@ let g:dracula_colorterm = 1
 " Airline configuration
 let g:airline_theme = 'oceanicnext'
 let g:airline_powerline_fonts = 1
+let g:airline_symbols = {
+        \ 'branch': 'ᚠ',
+        \ 'dirty': '!'
+      \ }
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#gutentags#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
