@@ -12,4 +12,4 @@
 	url = https://github.com/romkatv/powerlevel10k.git
 [submodule "neovim/neovim-nightly"]
 	path = neovim/neovim-nightly
-	url = git@github.com:neovim/neovim.git
+	url = https://github.com/neovim/neovim.git
