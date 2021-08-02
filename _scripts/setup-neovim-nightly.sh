@@ -1,6 +1,10 @@
 echo "🌙 ${CYAN}Setting up neovim-nightly${NC}"
 
-NEOVIM_NIGHTLY_DIR="$HOME/.dotfiles/neovim/neovim-nightly"
+DOTFILES_DIR="$HOME/.dotfiles"
+NEOVIM_NIGHTLY_DIR="$DOTFILES_DIR/neovim/neovim-nightly"
+
+# Got to neovim directory
+cd $NEOVIM_NIGHTLY_DIR
 
 # Clean old build (if there is one)
 make distclean
@@ -10,3 +14,6 @@ make CMAKE_BUILD_TYPE=Release
 
 # Install Neovim globally
 sudo make install
+
+# Go back to dotfile directory
+cd $DOTFILES_DIR
