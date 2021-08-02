@@ -23,6 +23,9 @@ sh _scripts/fetch-dependencies.sh
 # Setup neovim-nightly
 sh _scripts/setup-neovim-nightly.sh
 
+# Install (neo)vim plugins
+sh _scripts/install-vim-plugins.sh
+
 # Set up nvm
 sh _scripts/install-nvm.sh
 
@@ -37,9 +40,6 @@ sh _scripts/install-latest-node.sh
 
 # Install Python packages
 sh _scripts/install-pip-packages.sh
-
-# Install vim plugins
-sh _scripts/install-vim-plugins.sh
 
 # Set up VSCode (packages, keybindings, settings, custom snippets)
 sh _scripts/setup-vscode.sh
