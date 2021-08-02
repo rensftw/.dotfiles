@@ -1,6 +1,6 @@
 echo "🌙 ${CYAN}Setting up neovim-nightly${NC}"
 
-NEOVIM_NIGHTLY_DIR = "$HOME/.dotfiles/neovim/neovim-nightly"
+NEOVIM_NIGHTLY_DIR="$HOME/.dotfiles/neovim/neovim-nightly"
 
 # Clean old build (if there is one)
 make distclean
