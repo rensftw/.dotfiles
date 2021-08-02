@@ -190,8 +190,8 @@ alias gb="git rev-parse --abbrev-ref HEAD | pbcopy"
 # Show a compact summary of unstaged changes
 alias gdc="git diff --compact-summary"
 
-# Delete all local branches except master and the branch I'm currently on
-alias gdab='git branch | egrep -v "(master|\*)" | xargs git branch -D'
+# Delete all local branches except main/master and the branch I'm currently on
+alias gdab='git branch | egrep -v "(master|main|\*)" | xargs git branch -D'
 
 # Fetch
 alias gf="git fetch"
