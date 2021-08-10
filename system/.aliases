@@ -127,6 +127,12 @@ _gb() {
   sed 's#^remotes/##'
 }
 
+# Is the base branch main or master?
+_mb() {
+    BRANCHES=$(git branch)
+    [[ $BRANCHES =~ 'main' ]] && echo 'main' || echo 'master'
+}
+
 # Mnemonic: git checkout branch
 gcb() {
   git checkout $(_gb)
@@ -165,21 +171,32 @@ gsa() {
 
 # Mnemonic: current branch commits
 cbcommits() {
+  MAIN_BRANCH=$(_mb)
   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  git log origin/master..$CURRENT_BRANCH --oneline
+
+  git log origin/$MAIN_BRANCH..$CURRENT_BRANCH --oneline
 }
 
-# Mnemonic: Am I behind origin/master?
+# Mnemonic: Am I behind origin/main?
 amibehind() {
+  MAIN_BRANCH=$(_mb)
   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  git log $CURRENT_BRANCH..origin/master --oneline
+
+  git log $CURRENT_BRANCH..origin/$MAIN_BRANCH --oneline
 }
 
-# What has happened to origin/master since I last pulled? (shows commits)
-alias glmomo='git log master..origin/master --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --color=always'
+# What has happened to origin/main since I last pulled? (shows commits)
+glmomo() {
+  MAIN_BRANCH=$(_mb)
 
-# What has happened to origin/master since I last pulled? (shows file changes)
-alias gdmomo="git diff master...origin/master --compact-summary"
+  git log $MAIN_BRANCH..origin/$MAIN_BRANCH --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --color=always
+}
+
+# What has happened to origin/main since I last pulled? (shows file changes)
+gdmomo() {
+  MAIN_BRANCH=$(_mb)
+  git diff $MAIN_BRANCH...origin/$MAIN_BRANCH --compact-summary
+}
 
 # Show git status
 alias gs="git status"
