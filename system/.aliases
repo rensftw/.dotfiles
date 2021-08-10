@@ -201,8 +201,8 @@ gdmomo() {
 # Show git status
 alias gs="git status"
 
-# Add current git branch name to the clipboard
-alias gb="git rev-parse --abbrev-ref HEAD | pbcopy"
+# List local branches
+alias gb="git branch"
 
 # Show a compact summary of unstaged changes
 alias gdc="git diff --compact-summary"
