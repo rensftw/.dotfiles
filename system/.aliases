@@ -22,14 +22,13 @@ alias az="nvim $ZSHRC_LOCATION"
 alias aa="nvim $ALIASES_LOCATION"
 
 # Use neovim by default
-alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
 
 # Colorize the output of tree
 alias tree="tree -C"
 
-# Find-in-file  (using ripgrep combined with preview)
+# Find-in-file  (using ripgrep for searching and FZF for previews)
 # usage: fif <searchTerm>
 fif() {
   if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
@@ -59,7 +58,7 @@ alias fetch-macos-installer="softwareupdate --fetch-full-installer"
 # What's my external IP?
 alias external-ip="curl ifconfig.me"
 
-# Internet connection speed shortcuts
+# Internet connection speed test shortcuts
 sto-servers() {
     echo "Open https://speedtestserver.com/"
 }
