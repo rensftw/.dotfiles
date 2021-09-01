@@ -408,7 +408,7 @@ nnoremap <leader>e               :CocCommand explorer<CR>
 nnoremap <leader>z               :Goyo<CR>
 
 " Telescope
-nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true })<CR>
+nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files({ hidden = true, previewer = false })<CR>
 nnoremap <leader>w              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<CR>
 nnoremap <leader>.              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<CR>
 nnoremap <leader>f              <cmd>lua require('telescope.builtin').live_grep()<CR>
