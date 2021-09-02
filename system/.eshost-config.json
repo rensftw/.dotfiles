@@ -25,6 +25,14 @@
       "type": "xs",
       "path": ".jsvu/xs"
     },
+    "GraalJS": {
+        "type": "graaljs",
+        "path": ".jsvu/graaljs"
+    },
+    "Hermes": {
+        "type": "hermes",
+        "path": ".jsvu/hermes"
+    },
     "engine262": {
       "type": "engine262",
       "path": "engine262/bin/engine262.js"
