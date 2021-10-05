@@ -153,7 +153,6 @@
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "vale.core.useCLI": true,
     "vale.server.provideFixes": false,
-    "vale.valeCLI.config": "/Users/rensftw/work/website/vale/.vale.ini",
     "window.title": "${rootName}",
     "workbench.activityBar.visible": true,
     "workbench.colorTheme": "Night Owl",
