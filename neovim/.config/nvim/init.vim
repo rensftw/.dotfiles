@@ -144,7 +144,8 @@ let g:airline_theme = 'oceanicnext'
 let g:airline_powerline_fonts = 1
 let g:airline_symbols = {
         \ 'branch': 'ᚠ',
-        \ 'dirty': '!'
+        \ 'dirty': '!',
+        \ 'spell': '§'
       \ }
 " Display only the filename in statusline
 let g:airline_section_c = '%t'
