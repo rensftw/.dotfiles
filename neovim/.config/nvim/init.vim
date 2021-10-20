@@ -146,7 +146,10 @@ let g:airline_symbols = {
         \ 'branch': 'ᚠ',
         \ 'dirty': '!'
       \ }
+" Display only the filename in statusline
+let g:airline_section_c = '%t'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#gutentags#enabled = 1
 let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
