@@ -148,6 +148,19 @@ let g:airline_symbols = {
       \ }
 " Display only the filename in statusline
 let g:airline_section_c = '%t'
+" Configure whitespace checks
+" indent: mixed indent within a line
+" long:   overlong lines
+" trailing: trailing whitespace
+" mixed-indent-file: different indentation in different lines
+" conflicts: checks for conflict markers
+  let g:airline#extensions#whitespace#checks =
+    \  [ 'indent', 'trailing', 'mixed-indent-file', 'conflicts' ]
+" Disable trailing whitespace checks for vim files
+  let g:airline#extensions#whitespace#skip_indent_check_ft =
+   \  {'vim': ['trailing']}
+" Disable showing the spelling language
+let g:airline_detect_spelllang = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#gutentags#enabled = 1
