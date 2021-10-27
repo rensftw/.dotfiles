@@ -3,7 +3,8 @@ _Note: So far, this setup has been tailored for and tested only on macOS._
 ## Installation
 With git (recommended):  
 ```sh
-xcode-select --install  # required for clean installations, because macOS is not shipped with git
+xcode-select --install              # required for clean installations, because macOS is not shipped with git
+softwareupdate --install-rosetta    # required for Apple Silicon-based machines
 git clone https://github.com/rensftw/.dotfiles.git
 ```
   
@@ -28,7 +29,7 @@ Here are some useful tips for getting started:
 * Directories starting with an underscore (`_`) contain helpers
 * All other directories are `stow` packages
 * You can pick and choose what configs to adopt, for example: `stow -vt ~ zsh` will symlink only `zsh`-related configs
-* You can also delete any unnecessary tools/software from [Brewfile](./_homebrew/Brewfile)
+* You can delete any unnecessary tools/software from [Brewfile](./_homebrew/Brewfile)
   
 ## Highlights
 * [`neovim nightly`](https://neovim.io/) + [`telescope`](https://github.com/nvim-telescope/telescope.nvim) + [`coc`](https://github.com/neoclide/coc.nvim) for code editing
