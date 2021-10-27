@@ -67,9 +67,7 @@ cask "visual-studio-code"
 cask "vivaldi"
 cask "vlc"
 cask "vmware-fusion"
-cask "zsa-wally"
 mas "Amphetamine", id: 937984704
-mas "GoodNotes", id: 1444383602
 mas "Keynote", id: 409183694
 mas "Monosnap", id: 540348655
 mas "Numbers", id: 409203825
