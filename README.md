@@ -17,6 +17,7 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 Feeling adventurous? Try the entire setup as is!  
 There are comments/mnemonics for documenting keybindings in all config files (start with `.aliases` for some cool git tricks 🪄)  
 
+_Note:_ Make sure you have logged into the Mac App Store first.
 Here are 3 main scripts for managing this setup:  
 * `install.sh`:     Installs tools/software and sets up config files
 * `backup.sh`:      Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages
