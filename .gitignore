@@ -2,6 +2,7 @@
 neovim/.config/nvim/plugged
 neovim/.config/nvim/.netrwhist
 bpytop/.config/bpytop/error.log
+__pycache__
 
 # Ignore work-related snippets
 neovim/.config/nvim/UltiSnips/markdown.snippets
