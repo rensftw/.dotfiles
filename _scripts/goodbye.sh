@@ -1,5 +1,1 @@
-source _scripts/colors.sh
-
-echo "${GREEN}"
-figlet -f 'big' 'Bye!'
-echo "${NC}"
+figlet -f 'big' 'Bye!' | lolcat --spread '1.0'
