@@ -12,9 +12,6 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
 
     echo "🏁 ${PURPLE}Beginning installation...${NC}"
 
-    # Ask for sudo and maintain it until all steps are complete
-    sh _scripts/ask-for-admin.sh
-
     # Install Homebrew
     sh _scripts/install-homebrew.sh
 
