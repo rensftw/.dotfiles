@@ -14,39 +14,6 @@ sh _scripts/install-homebrew.sh
 # Install all the packages defined in Brewfile (taps, formulae, casks, and MAS apps)
 sh _scripts/install-from-brewfile.sh
 
-# Welcome message
-sh _scripts/welcome.sh
-
-# Fetch dependencies (as git modules or manually)
-sh _scripts/fetch-dependencies.sh
-
-# Link dotfiles with stow
-sh _scripts/stow.sh
-
-# Reload to start using ZSH
-sh _scripts/set-up-shell.sh
-
-# Setup neovim-nightly
-sh _scripts/setup-neovim-nightly.sh
-
-# Install (neo)vim plugins
-sh _scripts/install-vim-plugins.sh
-
-# Set up nvm
-sh _scripts/install-nvm.sh
-
-# Install the latest LTS node with the default global packages
-sh _scripts/install-latest-node.sh
-
-# Install Python packages
-sh _scripts/install-pip-packages.sh
-
-# Set up VSCode (packages, keybindings, settings, custom snippets)
-sh _scripts/setup-vscode.sh
-
-# Set up iTerm2 (theme + settings)
-sh _scripts/setup-iterm2.sh
-
 echo "🎉 ${GREEN}Installation complete!${NC}"
 sh _scripts/goodbye.sh
 
