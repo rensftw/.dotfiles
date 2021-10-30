@@ -37,3 +37,7 @@ sh _scripts/setup-vscode.sh
 
 # Set up iTerm2 (theme + settings)
 sh _scripts/setup-iterm2.sh
+
+echo "🧰 ${GREEN}Tools ready to use!${NC}"
+sh _scripts/tools-ready.sh
+
