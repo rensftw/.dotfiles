@@ -1,37 +1,41 @@
 _Note: So far, this setup has been tailored for and tested only on macOS._  
 
-## Installation
-With git (recommended):  
+## Download
+With git (recommended):
 ```sh
 xcode-select --install              # required for clean installations, because macOS is not shipped with git
 softwareupdate --install-rosetta    # required for Apple Silicon-based machines
 git clone https://github.com/rensftw/.dotfiles.git
 ```
-  
-Without version control:  
+
+
+Git-free download:
 ```sh
 mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/.dotfiles/tarball | tar xz --strip=1
 ```
-  
-## Setting up a new machine (full install)
-Feeling adventurous? Try the entire setup as is!  
-There are comments/mnemonics for documenting keybindings in all config files (start with `.aliases` for some cool git tricks 🪄)  
 
-_Note:_ Make sure you have logged into the Mac App Store first.
-Here are 3 main scripts for managing this setup:  
-* `install.sh`:     Installs tools/software and sets up config files
-* `backup.sh`:      Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages
-* `uninstall.sh`:   Removes all global packages, tools, and config files
 
-  
+## Scripts
+There are 3 main scripts for managing this setup:  
+* `install.sh`:       Installs Homebrew and all formulae/casks defined in Brewfile.
+* `configure.sh`:     Fetches dev tools and sets ups config files.
+* `backup.sh`:        Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages
+* `uninstall.sh`:     Removes all global packages, tools, and config files
+
+
+Feeling adventurous? Try the entire setup as is.  
+There are comments/mnemonics for documenting keybindings in `.aliases` (look out for some cool git tricks 🧙‍♀️)
+
+
 ## Tailor this setup to your likes (partial install)
-Feel free to fork this repo and customize it to your own needs!  
+Feel free to fork this repo and customize it to your own needs 🏎   
 Here are some useful tips for getting started:  
-* Directories starting with an underscore (`_`) contain helpers
-* All other directories are `stow` packages
-* You can pick and choose what configs to adopt, for example: `stow -vt ~ zsh` will symlink only `zsh`-related configs
-* You can delete any unnecessary tools/software from [Brewfile](./_homebrew/Brewfile)
-  
+* Pick and choose what tools/software to install from [Brewfile](./_homebrew/Brewfile).
+* Directories starting with an underscore (`_`) contain helper scripts/
+* All other directories are `stow` packages and contain dotfiles.
+* Stow allows symlinking individual packages, for example: `stow -vt ~ zsh` will symlink only `zsh`-related config files.
+
+
 ## Highlights
 * [`neovim nightly`](https://neovim.io/) + [`telescope`](https://github.com/nvim-telescope/telescope.nvim) + [`coc`](https://github.com/neoclide/coc.nvim) for code editing
 * [`ranger`](https://github.com/ranger/ranger) for terminal file navigation
