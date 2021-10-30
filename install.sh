@@ -20,6 +20,12 @@ sh _scripts/welcome.sh
 # Fetch dependencies (as git modules or manually)
 sh _scripts/fetch-dependencies.sh
 
+# Link dotfiles with stow
+sh _scripts/stow.sh
+
+# Reload to start using ZSH
+sh _scripts/set-up-shell.sh
+
 # Setup neovim-nightly
 sh _scripts/setup-neovim-nightly.sh
 
@@ -29,13 +35,7 @@ sh _scripts/install-vim-plugins.sh
 # Set up nvm
 sh _scripts/install-nvm.sh
 
-# Link dotfiles with stow
-sh _scripts/stow.sh
-
-# Reload to start using ZSH
-sh _scripts/set-up-shell.sh
-
-# Install the lates LTS node with the default global packages
+# Install the latest LTS node with the default global packages
 sh _scripts/install-latest-node.sh
 
 # Install Python packages
