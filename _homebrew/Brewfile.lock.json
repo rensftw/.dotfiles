@@ -17,7 +17,7 @@
         "revision": "00bb6bce9de3da9224bd630912da9bf48b574e8f"
       },
       "homebrew/core": {
-        "revision": "eb747bab5637caa75693ec34480afbf9fe210877"
+        "revision": "4a875987f372a06da9630ad256b964d67bf80082"
       },
       "teamookla/speedtest": {
         "revision": "54de6fd9058cddb1a8ffc0a9628441539ca5480c"
@@ -1731,7 +1731,7 @@
       "monterey": {
         "HOMEBREW_VERSION": "3.3.1-47-gdae9a34",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "eb747bab5637caa75693ec34480afbf9fe210877",
+        "Homebrew/homebrew-core": "4a875987f372a06da9630ad256b964d67bf80082",
         "CLT": "12.5.0.22.9",
         "Xcode": "12.5.1",
         "macOS": "12.0.1"
