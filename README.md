@@ -46,7 +46,7 @@ Here are some useful tips for getting started:
 * [`brew`](https://brew.sh/) for macOS package management
 * [`nvm`](https://github.com/nvm-sh/nvm) for Node version management
 * [`BpyTOP`](https://github.com/aristocratos/bpytop) for process monitoring
-* [`slate`](https://github.com/jigish/slate) for window management
+* [`Rectangle`](https://github.com/rxhanson/Rectangle) for window management
 
 
 ## Screenshots
