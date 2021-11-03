@@ -535,6 +535,11 @@
 				<key>date</key>
 				<date>2021-10-30T18:28:58Z</date>
 			</dict>
+			<key>http://kapeli.com/feeds/D3JS.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2021-11-03T13:32:29Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/Django.xml</key>
 			<dict>
 				<key>date</key>
@@ -584,6 +589,11 @@
 			<dict>
 				<key>date</key>
 				<date>2021-10-30T18:32:13Z</date>
+			</dict>
+			<key>http://kapeli.com/feeds/SVG.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2021-11-03T13:33:21Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/TypeScript.xml</key>
 			<dict>
