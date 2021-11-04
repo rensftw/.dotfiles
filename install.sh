@@ -13,8 +13,17 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Install Homebrew
     sh _scripts/install-homebrew.sh
 
-    # Install all the packages defined in Brewfile (taps, formulae, casks, and MAS apps)
+    # Install all packages defined in Brewfile (taps, formulae, casks, and MAS apps)
     sh _scripts/install-from-brewfile.sh
+
+    # Install Node version manager (nvlatestm)
+    sh _scripts/install-nvm.sh
+
+    # Install the current LTS Node version with the default global packages
+    sh _scripts/install-latest-node.sh
+
+    # Install Python packages
+    sh _scripts/install-pip-packages.sh
 
     echo "🎉 ${GREEN}Installation complete!${NC}"
     sh _scripts/goodbye.sh
