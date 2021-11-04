@@ -20,8 +20,8 @@ sh _scripts/set-up-shell.sh
 # Build neovim-nightly
 sh _scripts/build-neovim-nightly.sh
 
-# Install (neo)vim plugins
-sh _scripts/install-vim-plugins.sh
+# Install neovim plugins
+sh _scripts/install-neovim-plugins.sh
 
 # Set up VSCode (packages, keybindings, settings, custom snippets)
 sh _scripts/setup-vscode.sh
