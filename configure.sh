@@ -15,7 +15,7 @@ sh _scripts/fetch-dependencies.sh
 sh _scripts/stow.sh
 
 # Reload to start using ZSH
-sh _scripts/set-up-shell.sh
+sh _scripts/setup-shell.sh
 
 # Build neovim-nightly
 sh _scripts/build-neovim-nightly.sh
