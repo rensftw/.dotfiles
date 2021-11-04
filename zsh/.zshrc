@@ -52,6 +52,20 @@ export FZF_DEFAULT_OPTS='--multi --inline-info --height 50% --layout=reverse --b
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --no-ignore"
 
+# Add syntax highlighting for man pages
+function man() {
+  env \
+    LESS_TERMCAP_md=$(tput bold; tput setaf 4) \
+    LESS_TERMCAP_me=$(tput sgr0) \
+    LESS_TERMCAP_mb=$(tput blink) \
+    LESS_TERMCAP_us=$(tput setaf 2) \
+    LESS_TERMCAP_ue=$(tput sgr0) \
+    LESS_TERMCAP_so=$(tput smso) \
+    LESS_TERMCAP_se=$(tput rmso) \
+    PAGER="${commands[less]:-$PAGER}" \
+    man "$@"
+}
+
 # zsh-syntax-highlighting.zsh must be sourced at the end of .zshrc
 # (https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file)
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
