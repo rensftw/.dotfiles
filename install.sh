@@ -7,9 +7,7 @@ echo "This script requires Terminal.app to have full disk access privileges.\nTo
 echo "${YELLOW_BLINK}Proceed? (y/n)${NC}"
 read ANSWER
 
-
 if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
-
     echo "🏁 ${PURPLE}Beginning installation...${NC}"
 
     # Install Homebrew
@@ -21,10 +19,7 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     echo "🎉 ${GREEN}Installation complete!${NC}"
     sh _scripts/goodbye.sh
 
-    # Restart the session
-    if [[ $SHELL =~ 'zsh' ]]; then
-        exec zsh &> /dev/null
-    fi
+    exit
 else
     echo "${CYAN}No changes made. Quitting.."${NC}
     exit
