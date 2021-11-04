@@ -20,7 +20,7 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     sh _scripts/install-nvm.sh
 
     # Install the current LTS Node version with the default global packages
-    sh _scripts/install-latest-node.sh
+    sh _scripts/install-lts-node.sh
 
     # Install Python packages
     sh _scripts/install-pip-packages.sh
