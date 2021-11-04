@@ -7,8 +7,8 @@ HELPER_DIR_PREFIX='_*'
 # Store all directory names in an array
 DIRECTORIES=($(ls -d */))
 
-# Ignore helper directories when stowing
 for dir in "${DIRECTORIES[@]}"; do
+    # Ignore helper directories when stowing
     if [[ $dir != $HELPER_DIR_PREFIX ]]; then
         echo "🔗 Linking ${PURPLE}${dir%/}${NC}"
         stow -vt ~ $dir

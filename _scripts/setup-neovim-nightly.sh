@@ -1,4 +1,4 @@
-echo "🌙 ${CYAN}Setting up neovim-nightly${NC}"
+echo "🌙 ${CYAN}Building neovim-nightly${NC}"
 
 DOTFILES_DIR="$HOME/.dotfiles"
 NEOVIM_NIGHTLY_DIR="$DOTFILES_DIR/neovim/neovim-nightly"
