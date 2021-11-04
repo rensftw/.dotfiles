@@ -26,8 +26,14 @@ sh _scripts/install-neovim-plugins.sh
 # Set up VSCode (packages, keybindings, settings, custom snippets)
 sh _scripts/setup-vscode.sh
 
+# Set up Rectangle
+sh _scripts/setup-rectangle.sh
+
 # Set up iTerm2 (theme + settings)
 sh _scripts/setup-iterm2.sh
+
+# Set up Dash
+sh _scripts/setup-dash.sh
 
 echo "🧰 ${GREEN}Configuration complete.${NC}"
 sh _scripts/tools-ready.sh
