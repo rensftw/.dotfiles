@@ -18,7 +18,7 @@ sh _scripts/stow.sh
 sh _scripts/set-up-shell.sh
 
 # Build neovim-nightly
-sh _scripts/setup-neovim-nightly.sh
+sh _scripts/build-neovim-nightly.sh
 
 # Install (neo)vim plugins
 sh _scripts/install-vim-plugins.sh
