@@ -17,16 +17,7 @@ sh _scripts/stow.sh
 # Reload to start using ZSH
 sh _scripts/set-up-shell.sh
 
-# Install Node version manager (nvm)
-sh _scripts/install-nvm.sh
-
-# Install the current LTS Node version with the default global packages
-sh _scripts/install-latest-node.sh
-
-# Install Python packages
-sh _scripts/install-pip-packages.sh
-
-# Setup neovim-nightly
+# Build neovim-nightly
 sh _scripts/setup-neovim-nightly.sh
 
 # Install (neo)vim plugins
