@@ -154,7 +154,7 @@ defaults write com.apple.dock tilesize -int 36
 defaults write com.apple.dock mineffect -string "genie"
 
 # Put the Dock on the left of the screen
-defaults write com.apple.dock orientation -string "left"
+defaults write com.apple.dock orientation -string "bottom"
 
 # Minimize windows into their application’s icon
 defaults write com.apple.dock minimize-to-application -bool true
