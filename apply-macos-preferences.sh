@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 # Inspiration https://mths.be/macos
+# Import ANSI escape codes for colors
+source _scripts/colors.sh
+
+echo "This script will apply macOS preferences and then restart the computer."
+echo "${YELLOW_BLINK}Proceed? (y/n)${NC}"
+read ANSWER
+
+if [ $ANSWER != "y" ]; then
+    exit
+fi
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -119,9 +129,6 @@ defaults write com.apple.finder ShowStatusBar -bool true
 
 # Finder: show path bar
 defaults write com.apple.finder ShowPathbar -bool true
-
-# Display full POSIX path as Finder window title
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # When performing a search, search the current folder by default
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
@@ -352,4 +359,8 @@ for app in "Activity Monitor" \
 	killall "${app}" &> /dev/null
 done
 
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+echo "${GREEN}Preferences have been applied.${NC}"
+echo "${YELLOW_BLINK}Restarting computer in 1 minute.${NC}"
+
+# Restart computer
+sudo shutdown -r +1
