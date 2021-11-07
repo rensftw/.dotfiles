@@ -18,10 +18,11 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 
 ## Scripts
 There are 4 main scripts for managing this setup:
-* `install.sh`:       Installs Homebrew and all formulae/casks defined in `Brewfile`.
-* `configure.sh`:     Configures dev tools.
-* `backup.sh`:        Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages.
-* `uninstall.sh`:     Removes all packages, tools, and config files.
+* `apply-macos-preferences.sh`:     Applies macOS system preferences.
+* `install.sh`:                     Installs Homebrew and all formulae/casks defined in `Brewfile`.
+* `configure.sh`:                   Configures dev tools and applies dotfiles.
+* `backup.sh`:                      Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages.
+* `uninstall.sh`:                   Removes all packages, tools, and config files.
 
 
 Feeling adventurous? Try the entire setup as is.  
