@@ -545,6 +545,11 @@
 				<key>date</key>
 				<date>2021-10-30T19:39:23Z</date>
 			</dict>
+			<key>http://kapeli.com/feeds/Docker.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2021-11-08T12:34:29Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/Express.xml</key>
 			<dict>
 				<key>date</key>
