@@ -62,9 +62,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'flazz/vim-colorschemes'
 Plug 'mhartington/oceanic-next'
 Plug 'haishanh/night-owl.vim'
+Plug 'Luxed/ayu-vim'
 
 " Remove distractions
 Plug 'junegunn/goyo.vim'
@@ -96,14 +96,17 @@ set signcolumn=yes                      " always show the sign column
 set cursorline                          " highlight the line where the cursor is
 set splitright                          " horizontal split should split to the right
 set splitbelow                          " vertical split should split below
-colorscheme OceanicNext
-" :colors darkblue    " use for debugging theme-related issues
 " Enable true colors, if possible
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
+" Ayu theme (ayu config needs to be before colorscheme definition)
+let g:ayu_italic_comment = 1
+let g:ayucolor = 'dark'
+colorscheme ayu
+" :colors darkblue    " use for debugging theme-related issues
 
 " Cursor shape/blinking settings
 set guicursor=n-v-c:block-blinkwait175-blinkoff150-blinkon175,
@@ -140,7 +143,7 @@ let g:dracula_inverse = 1
 let g:dracula_colorterm = 1
 
 " Airline configuration
-let g:airline_theme = 'oceanicnext'
+let g:airline_theme = 'ayu_dark'
 let g:airline_powerline_fonts = 1
 let g:airline_symbols = {
         \ 'dirty': '!',
