@@ -99,6 +99,17 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 300
 
 ###############################################################################
+# Terminal.app                                                                #
+###############################################################################
+
+# Only use UTF-8 in Terminal.app
+defaults write com.apple.terminal StringEncodings -array 4
+
+# Enable Secure Keyboard Entry in Terminal.app
+# See: https://security.stackexchange.com/a/47786/8918
+defaults write com.apple.terminal SecureKeyboardEntry -bool true
+
+###############################################################################
 # Finder                                                                      #
 ###############################################################################
 
@@ -305,6 +316,7 @@ for app in "Activity Monitor" \
 	"cfprefsd" \
 	"Dock" \
 	"Finder" \
+    "Terminal" \
 	"Mail" \
 	"Safari" \
 	"SystemUIServer"; do
