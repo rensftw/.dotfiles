@@ -3,8 +3,8 @@
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
-echo "This script will apply macOS preferences and then restart the computer."
-echo "${YELLOW_BLINK}Proceed? (y/n)${NC}"
+echo "This script will apply macOS preferences and then restart the computer.
+${YELLOW_BLINK}Proceed? (y/n)${NC}"
 read ANSWER
 
 if [ $ANSWER != "y" ]; then
@@ -314,5 +314,5 @@ done
 echo "${GREEN}Preferences have been applied.${NC}"
 echo "${YELLOW_BLINK}Restarting computer in 1 minute.${NC}"
 
-# Restart computer
+# Restart computer in 1 minute
 sudo shutdown -r +1
