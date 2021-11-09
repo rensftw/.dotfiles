@@ -1,6 +1,7 @@
-PATH="/usr/local/opt/python/libexec/bin:$PATH"
-PATH="/usr/local/share/zsh/site-functions:$PATH"
-PATH="/usr/local/opt/curl/bin:$PATH"
+local BREW_PREFIX="$(brew --prefix)"
+PATH="$BREW_PREFIX/opt/python/libexec/bin:$PATH"
+PATH="$BREW_PREFIX/share/zsh/site-functions:$PATH"
+
 export PATH="$HOME:$PATH"
 
 export LC_ALL=en_US.UTF-8
