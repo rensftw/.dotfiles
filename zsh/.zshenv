@@ -1,6 +1,6 @@
 ARCH=$(arch)
 
-# Export global brew variables:
+# Export global homebrew variables:
 if [[ $ARCH =~ 'arm' ]]; then
     # For Apple Silicon mac
     PATH=$PATH:/opt/homebrew/bin
