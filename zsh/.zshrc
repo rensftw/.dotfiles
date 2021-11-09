@@ -1,5 +1,3 @@
-PATH="/usr/local/sbin:$PATH"
-PATH="/usr/local/bin:$PATH"
 PATH="/usr/local/opt/python/libexec/bin:$PATH"
 PATH="/usr/local/share/zsh/site-functions:$PATH"
 PATH="/usr/local/opt/curl/bin:$PATH"
