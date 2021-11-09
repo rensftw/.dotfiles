@@ -1,7 +1,7 @@
 {
     "explorer.icon.enableNerdfont": true,
     "explorer.file.showHiddenFiles": true,
-    "explorer.focus": false,
+    "explorer.focus": true,
     "diagnostic.enableSign": true,
     "diagnostic.infoSign": "🔵",
     "diagnostic.hintSign": "⚪️",
