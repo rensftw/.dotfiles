@@ -34,7 +34,7 @@ bindkey -v
 
 # Set up zsh-completions
 fpath+=$HOME/.zsh/zsh-completions/src
-zstyle :compinstall filename '/Users/rensftw/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
 autoload -Uz compinit
