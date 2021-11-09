@@ -570,6 +570,11 @@
 				<key>date</key>
 				<date>2021-10-30T18:33:24Z</date>
 			</dict>
+			<key>http://kapeli.com/feeds/Lua_5.4.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2021-11-09T13:00:58Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/Markdown.xml</key>
 			<dict>
 				<key>date</key>
@@ -660,7 +665,7 @@
 	<key>searchAndFocusKey</key>
 	<dict>
 		<key>keyCode</key>
-		<integer>2</integer>
+		<integer>42</integer>
 		<key>modifiers</key>
 		<integer>2304</integer>
 	</dict>
