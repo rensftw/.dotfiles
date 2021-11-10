@@ -39,7 +39,7 @@ brew "tree"
 brew "vale"
 brew "zlib"
 brew "zsh"
-brew "teamookla/speedtest/speedtest"
+brew "teamookla/speedtest/speedtest", link: false
 cask "brave-browser"
 cask "calibre"
 cask "chromium"
