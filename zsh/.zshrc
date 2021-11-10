@@ -1,5 +1,6 @@
-local BREW_PREFIX="$(brew --prefix)"
-PATH="$BREW_PREFIX/share/zsh/site-functions:$PATH"
+PATH="$(brew --prefix)/share/zsh/site-functions:$PATH"
+# curl is keg-only, so we need to manually add  it to our PATH
+PATH="$(brew --prefix curl)/bin:$PATH"
 
 export PATH="$HOME:$PATH"
 
