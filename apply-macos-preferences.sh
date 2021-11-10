@@ -316,7 +316,6 @@ for app in "Activity Monitor" \
 	"cfprefsd" \
 	"Dock" \
 	"Finder" \
-    "Terminal" \
 	"Mail" \
 	"Safari" \
 	"SystemUIServer"; do
