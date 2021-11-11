@@ -1,9 +1,6 @@
 [submodule "js-engines/engine262"]
 	path = js-engines/engine262
 	url = https://github.com/engine262/engine262.git
-[submodule "zsh/.zsh_plugins/zsh-syntax-highlighting"]
-	path = zsh/.zsh/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "zsh/.zsh/zsh-completions"]
 	path = zsh/.zsh/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
