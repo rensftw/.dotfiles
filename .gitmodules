@@ -1,9 +1,6 @@
 [submodule "js-engines/engine262"]
 	path = js-engines/engine262
 	url = https://github.com/engine262/engine262.git
-[submodule "zsh/.zsh/zsh-completions"]
-	path = zsh/.zsh/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
 [submodule "zsh/.zsh/powerlevel10k"]
 	path = zsh/.zsh/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git

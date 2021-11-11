@@ -33,7 +33,7 @@ unsetopt appendhistory
 bindkey -v
 
 # Set up zsh-completions
-fpath+=$HOME/.zsh/zsh-completions/src
+FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 zstyle :compinstall filename "$HOME/.zshrc"
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
