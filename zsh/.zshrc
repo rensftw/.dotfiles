@@ -32,9 +32,6 @@ setopt autocd beep
 unsetopt appendhistory
 bindkey -v
 
-# curl setup
-export CURL_CA_BUNDLE="$(brew --prefix ca-certificates)/share/ca-certificates/cacert.pem"
-
 # zsh-completions setup
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 zstyle :compinstall filename "$HOME/.zshrc"
