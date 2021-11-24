@@ -540,6 +540,11 @@
 				<key>date</key>
 				<date>2021-11-03T13:32:29Z</date>
 			</dict>
+			<key>http://kapeli.com/feeds/Dart.xml</key>
+			<dict>
+				<key>date</key>
+				<date>2021-11-24T16:24:14Z</date>
+			</dict>
 			<key>http://kapeli.com/feeds/Django.xml</key>
 			<dict>
 				<key>date</key>
