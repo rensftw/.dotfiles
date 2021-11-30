@@ -15,6 +15,9 @@ export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
 
 source $HOME/.aliases
 
+# (Optional) Fix brew warning about ""config" scripts exist outside your system or Homebrew directories"
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
 # Prompt setup
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
