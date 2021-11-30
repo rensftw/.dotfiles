@@ -17,9 +17,6 @@ sh _scripts/stow.sh
 # Reload to start using ZSH
 sh _scripts/setup-shell.sh
 
-# Build neovim-nightly
-sh _scripts/build-neovim-nightly.sh
-
 # Install neovim plugins
 sh _scripts/install-neovim-plugins.sh
 
