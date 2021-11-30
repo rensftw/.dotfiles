@@ -580,6 +580,20 @@
 		<dict>
 			<key>~/Library/Application Support/Dash/DocSets/JavaScript/JavaScript.docset</key>
 			<string>js:</string>
+			<key>~/Library/Application Support/Dash/DocSets/Markdown/Markdown.docset</key>
+			<string>md:</string>
+			<key>~/Library/Application Support/Dash/DocSets/Python_3/Python 3.docset</key>
+			<string>py:</string>
+			<key>~/Library/Application Support/Dash/GitHub/facebookjest/facebook-jest.docset</key>
+			<string>jest:</string>
+			<key>~/Library/Application Support/Dash/GitHub/testinglibrarycypresstestinglibrary/testing-library-cypress-testing-library.docset</key>
+			<string>tl:</string>
+			<key>~/Library/Application Support/Dash/GitHub/testinglibrarydomtestinglibrary/testing-library-dom-testing-library.docset</key>
+			<string>tl:</string>
+			<key>~/Library/Application Support/Dash/GitHub/testinglibrarytestinglibrarydocs/testing-library-testing-library-docs.docset</key>
+			<string>tl:</string>
+			<key>~/Library/Application Support/Dash/GitHub/testinglibraryvuetestinglibrary/testing-library-vue-testing-library.docset</key>
+			<string>tl:</string>
 		</dict>
 	</dict>
 	<key>feeds</key>
