@@ -1,6 +1,3 @@
 [submodule "js-engines/engine262"]
 	path = js-engines/engine262
 	url = https://github.com/engine262/engine262.git
-[submodule "neovim/neovim-nightly"]
-	path = neovim/neovim-nightly
-	url = https://github.com/neovim/neovim.git
