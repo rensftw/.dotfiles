@@ -13,8 +13,4 @@ else
     echo "🧲 engine262"
     mkdir -p $DOTFILES/js-engines/engine262
     git clone https://github.com/engine262/engine262.git $DOTFILES/js-engines/engine262
-
-    echo "🧲 neovim-nightly"
-    mkdir -p $DOTFILES/neovim/neovim-nightly
-    git clone https://github.com/neovim/neovim.git $DOTFILES/neovim/neovim-nightly
 fi
