@@ -7,9 +7,8 @@ echo "${RED}This action is irreversible. Are you sure you want to proceed? (y/n)
 read ANSWER
 
 if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
-    # Uninstall all pip packages
-    echo "🐍 ${GREEN}Removing pip packages${NC}"
-    pip freeze | xargs pip uninstall -y
+    # Remove pyenv artifacts
+    sh _scripts/uninstall-pyenv.sh
 
     # Remove all dotfiles
     sh _scripts/unstow.sh
