@@ -1,4 +1,4 @@
-BREW_ZSH_PATH="/usr/local/bin/zsh"
+BREW_ZSH_PATH="$(brew --prefix)/bin/zsh"
 
 # Give permissions to zsh (fixes compaudit error)
 sudo chmod -R 755 $(brew --prefix)/share/zsh
@@ -12,9 +12,9 @@ if ! grep -Fqx "$BREW_ZSH_PATH" /etc/shells; then
 fi
 
 if [[ $SHELL == $BREW_ZSH_PATH ]]; then
-    echo "🐚 ${CYAN}The default shell is usr/local/bin/zsh${NC}"
+    echo "🐚 ${CYAN}The default shell is $BREW_ZSH_PATH ${NC}"
 else
-    echo "🐚 ${CYAN}Changing the default shell to zsh${NC}"
+    echo "🐚 ${CYAN}Changing the default shell to $BREW_ZSH_PATH ${NC}"
     # Set default shell for current user
     chsh -s $BREW_ZSH_PATH
 

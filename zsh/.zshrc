@@ -1,4 +1,5 @@
 PATH="$(brew --prefix)/share/zsh/site-functions:$PATH"
+PATH="$(brew --prefix fzf)/bin:$PATH"
 # curl is keg-only, so we need to manually add  it to our PATH
 PATH="$(brew --prefix curl)/bin:$PATH"
 
@@ -53,7 +54,12 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
 # FZF configuration
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+FZF_PREFIX=$(brew --prefix fzf)
+# Auto-completion
+[[ $- == *i* ]] && source "$FZF_PREFIX/shell/completion.zsh" 2> /dev/null
+# Key bindings
+source "$FZF_PREFIX/shell/key-bindings.zsh"
+# Default flags
 export FZF_DEFAULT_OPTS='--multi --inline-info --height 50% --layout=reverse --border'
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --no-ignore"
