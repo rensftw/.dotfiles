@@ -444,8 +444,8 @@ nnoremap <leader>p              :let @+ = expand("%")<CR>
 nnoremap <leader>gb             :Git blame<CR>
 " Open current file changes in a vertical split
 nnoremap <leader>gs             :Gvdiffsplit!<CR>
-" Compare current branch changes with master (populates quickfix list)
-nnoremap <leader>gdm            :Git difftool -y master<CR>
+" Compare current branch changes with main (populates quickfix list)
+nnoremap <leader>gdm            :Git difftool -y main<CR>
 " Compare with another branch
 nnoremap <leader>gd             :Git difftool -y 
 
