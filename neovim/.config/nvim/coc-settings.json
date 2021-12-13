@@ -1,6 +1,9 @@
 {
+    "eslint.run": "onType",
+    "prettier.eslintIntegration": true,
     "explorer.icon.enableNerdfont": true,
     "explorer.file.showHiddenFiles": true,
+    "explorer.file.reveal.auto": true,
     "explorer.focus": true,
     "diagnostic.enableSign": true,
     "diagnostic.infoSign": "🔵",
