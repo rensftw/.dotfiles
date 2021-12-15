@@ -496,7 +496,7 @@ nmap <leader>af                 <Plug>(coc-fix-current)
 " Apply codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a                  <Plug>(coc-codeaction-selected)
-nmap <leader>a                  <Plug>(coc-codeaction-selected)
+nmap <leader>a                  <Plug>(coc-codeaction-line)
 
 " Symbol renaming.
 nmap <leader>rn                 <Plug>(coc-rename)
