@@ -37,6 +37,9 @@ Plug 'tpope/vim-fugitive'
 " Comment stuff out
 Plug 'numToStr/Comment.nvim'
 
+" Autopairs
+Plug 'windwp/nvim-autopairs'
+
 " Change, delete, add surroundings (parentheses, brackets, quotes, tags)
 Plug 'tpope/vim-surround'
 
@@ -172,6 +175,7 @@ lua require "telescope-rc"
 
 " Comment.nvim configuration
 lua require('Comment').setup()
+lua require('nvim-autopairs').setup()
 
 " File navigator configuration
 lua require "nvim-tree-rc"
@@ -186,7 +190,6 @@ let g:coc_global_extensions = [
     \ 'coc-highlight',
     \ 'coc-html',
     \ 'coc-json',
-    \ 'coc-pairs',
     \ 'coc-prettier',
     \ 'coc-pyright',
     \ 'coc-sh',
