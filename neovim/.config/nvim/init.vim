@@ -33,6 +33,7 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " Git utilities
 Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
 
 " Comment stuff out
 Plug 'numToStr/Comment.nvim'
@@ -403,16 +404,10 @@ nnoremap <leader>gdm            :Git difftool -y main<CR>
 " Compare with another branch
 nnoremap <leader>gd             :Git difftool -y 
 
-" Hunk navigation
-nnoremap hp                     :CocCommand git.chunkInfo<CR>
-nnoremap hu                     :CocCommand git.chunkUndo<CR>
-nmap ]h                         <Plug>(coc-git-nextchunk)
-nmap [h                         <Plug>(coc-git-prevchunk)
-
-" Conflict resolution
-" Navigate conflict markers
-nmap ]c                         <Plug>(coc-git-nextconflict)
-nmap [c                         <Plug>(coc-git-prevconflict)
+" " Conflict resolution
+" " Navigate conflict markers
+" nmap ]c                         <Plug>(coc-git-nextconflict)
+" nmap [c                         <Plug>(coc-git-prevconflict)
 " Choose which side to use for resolution
 nnoremap [r                     :diffget //2<CR>
 nnoremap ]r                     :diffget //3<CR>
