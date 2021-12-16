@@ -36,7 +36,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
 
 " Comment stuff out
-Plug 'tpope/vim-commentary'
+Plug 'numToStr/Comment.nvim'
 
 " Change, delete, add surroundings (parentheses, brackets, quotes, tags)
 Plug 'tpope/vim-surround'
@@ -218,8 +218,11 @@ let g:doge_javascript_settings = {
 " Treesitter configuration
 lua require "nvim-treesitter-rc"
 
-" Telescope's configuration
+" Telescope configuration
 lua require "telescope-rc"
+
+" Comment.nvim configuration
+lua require('Comment').setup()
 
 " CoC configuration
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
