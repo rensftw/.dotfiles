@@ -19,6 +19,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
 
+" File explorer
+Plug 'kyazdani42/nvim-tree.lua'
+
 " Coc / Intellisense
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -63,9 +66,6 @@ Plug 'Luxed/ayu-vim'
 
 " Remove distractions
 Plug 'junegunn/goyo.vim'
-
-" Dev icons for coc-explorer (needs to be loaded last)
-Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -173,13 +173,15 @@ lua require "telescope-rc"
 " Comment.nvim configuration
 lua require('Comment').setup()
 
+" File navigator configuration
+lua require "nvim-tree-rc"
+
 " CoC configuration
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 let g:coc_global_extensions = [
     \ 'coc-css',
     \ 'coc-emmet',
     \ 'coc-eslint',
-    \ 'coc-explorer',
     \ 'coc-git',
     \ 'coc-highlight',
     \ 'coc-html',
@@ -370,7 +372,7 @@ nnoremap <C-k>                  <C-w>k
 nnoremap <C-l>                  <C-w>l
 
 " Explorer
-nnoremap <leader>e               :CocCommand explorer<CR>
+nnoremap <leader>e               :NvimTreeFindFileToggle<CR>
 
 " Zen mode
 nnoremap <leader>z               :Goyo<CR>
