@@ -360,9 +360,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Make double-<Esc> clear search highlights
 nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 
-" Allow Y to work like C and D in normal mode
-nnoremap <silent> Y             y$
-
 " Prevent x from overriding what's in the clipboard.
 noremap x                       "_x
 noremap X                       "_x
