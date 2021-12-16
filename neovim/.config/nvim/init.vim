@@ -9,10 +9,6 @@ endif
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
-" Additional language packs
-Plug 'sheerun/vim-polyglot'
-Plug 'leafOfTree/vim-vue-plugin'
-
 " Treesitter (AST-based syntax highlighting)
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -178,23 +174,6 @@ let g:airline_filetype_overrides = {
 let g:goyo_width = 120
 let g:goyo_height = 90
 let g:goyo_linenr = 1
-
-" Syntax configuration
-let g:javascript_plugin_jsdoc = 1
-let g:python_highlight_all = 1
-let g:vim_vue_plugin_config = {
-      \'syntax': {
-      \   'template': ['html'],
-      \   'script': ['javascript'],
-      \   'style': ['css'],
-      \},
-      \'full_syntax': [],
-      \'initial_indent': [],
-      \'attribute': 0,
-      \'keyword': 0,
-      \'foldexpr': 0,
-      \'debug': 0,
-      \}
 
 " Documentation comments
 let g:doge_mapping = '<leader>jd'
