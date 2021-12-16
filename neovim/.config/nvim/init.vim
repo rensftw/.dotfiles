@@ -52,9 +52,8 @@ Plug 'vim-scripts/indentpython'
 " Respect .editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Lualine
+Plug 'nvim-lualine/lualine.nvim'
 
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -138,38 +137,6 @@ let g:dracula_italic = 1
 let g:dracula_inverse = 1
 let g:dracula_colorterm = 1
 
-" Airline configuration
-let g:airline_theme = 'ayu_dark'
-let g:airline_powerline_fonts = 1
-let g:airline_symbols = {
-        \ 'dirty': '!',
-        \ 'spell': '§'
-      \ }
-" Display only the filename in statusline
-let g:airline_section_c = '%t'
-" Configure whitespace checks
-" indent: mixed indent within a line
-" long:   overlong lines
-" trailing: trailing whitespace
-" mixed-indent-file: different indentation in different lines
-" conflicts: checks for conflict markers
-  let g:airline#extensions#whitespace#checks =
-    \  [ 'indent', 'trailing', 'mixed-indent-file', 'conflicts' ]
-" Disable trailing whitespace checks for vim files
-  let g:airline#extensions#whitespace#skip_indent_check_ft =
-   \  {'vim': ['trailing']}
-" Disable showing the spelling language
-let g:airline_detect_spelllang = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#gutentags#enabled = 1
-let g:airline#extensions#wordcount#enabled = 1
-let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline_filetype_overrides = {
-      \ 'coc-explorer':  [ 'CoC Explorer', '' ],
-      \ 'vim-plug': [ 'Plugins', '' ],
-      \ }
-
 " Goyo configuration
 let g:goyo_width = 120
 let g:goyo_height = 90
@@ -193,6 +160,9 @@ let g:doge_javascript_settings = {
 \  'destructuring_props': 1,
 \  'omit_redundant_param_types': 0,
 \}
+
+" Lualine configuration
+lua require "lualine-rc"
 
 " Treesitter configuration
 lua require "nvim-treesitter-rc"
