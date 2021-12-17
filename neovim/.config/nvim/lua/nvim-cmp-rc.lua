@@ -7,8 +7,8 @@ cmp.setup({
         end,
     },
     mapping = {
-        ['<C-up>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-down>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<S-up>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<S-down>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<CR>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<C-y>'] = cmp.config.disable,
         ['<C-e>'] = cmp.mapping({
@@ -21,5 +21,41 @@ cmp.setup({
         { name = 'nvim_lsp' },
         { name = 'ultisnips' },
         { name = 'buffer' },
-    })
+    }),
+    formatting = {
+        format = function(entry, vim_item)
+            vim_item.menu = ({
+                nvim_lsp = '',
+                buffer   = '',
+            })[entry.source.name]
+            vim_item.kind = ({
+                Text          = '',
+                Method        = '',
+                Function      = '',
+                Constructor   = '',
+                Field         = '',
+                Variable      = '',
+                Class         = '',
+                Interface     = 'ﰮ',
+                Module        = '',
+                Property      = '',
+                Unit          = '',
+                Value         = '',
+                Enum          = '',
+                Keyword       = '',
+                Snippet       = '﬌',
+                Color         = '',
+                File          = '',
+                Reference     = '',
+                Folder        = '',
+                EnumMember    = '',
+                Constant      = '',
+                Struct        = '',
+                Event         = '',
+                Operator      = 'ﬦ',
+                TypeParameter = '',
+            })[vim_item.kind]
+            return vim_item
+        end
+    },
 })
