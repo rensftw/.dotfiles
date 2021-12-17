@@ -13,12 +13,12 @@ require('gitsigns').setup {
 
     ['n <leader>ha'] = '<cmd>Gitsigns stage_hunk<CR>',
     ['v <leader>ha'] = ':Gitsigns stage_hunk<CR>',
-    ['n <leader>hu'] = '<cmd>Gitsigns undo_stage_hunk<CR>',
-    ['n <leader>hr'] = '<cmd>Gitsigns reset_hunk<CR>',
-    ['v <leader>hr'] = ':Gitsigns reset_hunk<CR>',
-    ['n <leader>hR'] = '<cmd>Gitsigns reset_buffer<CR>',
+    ['n <leader>hu'] = '<cmd>Gitsigns reset_hunk<CR>',
+    ['v <leader>hu'] = ':Gitsigns reset_hunk<CR>',
     ['n <leader>hp'] = '<cmd>Gitsigns preview_hunk<CR>',
-    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
+    ['n <leader>hA'] = '<cmd>Gitsigns stage_buffer<CR>',
+    ['n <leader>hU'] = '<cmd>Gitsigns reset_buffer<CR>',
+    ['n <leader>gb'] = '<cmd>Gitsigns toggle_current_line_blame<CR>',
   },
   current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
 }

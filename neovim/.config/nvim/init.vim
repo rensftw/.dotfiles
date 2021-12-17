@@ -327,7 +327,7 @@ nnoremap <leader>w              <cmd>lua require('telescope.builtin').find_files
 nnoremap <leader>.              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<CR>
 nnoremap <leader>f              <cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<CR>
-nnoremap <leader>h              <cmd>lua require('telescope.builtin').help_tags()<CR>
+nnoremap <leader>?              <cmd>lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<CR>
 
 " Git
@@ -336,7 +336,7 @@ nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()
 " Copy relative file path to clipboard
 nnoremap <leader>p              :let @+ = expand("%")<CR>
 " See change history for the current file
-nnoremap <leader>gb             :Git blame<CR>
+nnoremap <leader>gB             :Git blame<CR>
 " Open current file changes in a vertical split
 nnoremap <leader>gs             :Gvdiffsplit!<CR>
 " Compare current branch changes with main (populates quickfix list)
