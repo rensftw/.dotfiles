@@ -9,7 +9,6 @@ cmp.setup({
     mapping = {
         ['<S-up>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<S-down>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<CR>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<C-y>'] = cmp.config.disable,
         ['<C-e>'] = cmp.mapping({
             i = cmp.mapping.abort(),
@@ -59,3 +58,10 @@ cmp.setup({
         end
     },
 })
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
