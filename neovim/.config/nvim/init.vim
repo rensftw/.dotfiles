@@ -187,7 +187,7 @@ lua require "telescope-rc"
 " Comment.nvim configuration
 lua require('Comment').setup()
 lua require('nvim-autopairs').setup()
-lua require'colorizer'.setup()
+lua require('colorizer').setup()
 lua require('toggleterm').setup()
 
 " File navigator configuration
