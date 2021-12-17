@@ -237,7 +237,7 @@ augroup END
 " Write all changes to modified buffers,
 " close all buffers except the active one,
 " and return focus to the same spot it was initially
-command! BufOnly execute 'wa | %bdelete | edit # | normal `"'
+command! BufOnly execute 'wa | %bdelete | edit # | bdelete # | normal `"'
 
 " " Coc
 " " Highlight the symbol and its references when holding the cursor.
