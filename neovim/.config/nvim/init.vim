@@ -35,6 +35,9 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
+" Toggle-able terminal
+Plug 'akinsho/toggleterm.nvim'
+
 " Comment stuff out
 Plug 'numToStr/Comment.nvim'
 
@@ -177,6 +180,7 @@ lua require "telescope-rc"
 " Comment.nvim configuration
 lua require('Comment').setup()
 lua require('nvim-autopairs').setup()
+lua require('toggleterm').setup()
 
 " File navigator configuration
 lua require "nvim-tree-rc"
@@ -345,9 +349,9 @@ nnoremap <S-Right>              :vertical resize -2<CR>
 
 " Terminal
 " Toggle terminal on/off
-nnoremap <tab>                  :call TermToggle(20)<CR>
-tnoremap <s-tab>                <C-\><C-n>:call TermToggle(12)<CR>
-inoremap <C-t>                  <Esc>:call TermToggle(20)<CR>
+nnoremap <tab>                  :ToggleTerm size=20 direction=horizontal<CR>
+tnoremap <s-tab>                <C-\><C-n>:ToggleTermToggleAll<CR>
+inoremap <C-t>                  <Esc>:ToggleTerm size=20 direction=horizontal<CR>
 " Navigate to/from terminal
 tnoremap <C-h>                  <C-\><C-N><C-w>h
 tnoremap <C-j>                  <C-\><C-N><C-w>j
