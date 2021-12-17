@@ -346,7 +346,7 @@ nnoremap <S-Right>              :vertical resize -2<CR>
 " Terminal
 " Toggle terminal on/off
 nnoremap <tab>                  :call TermToggle(20)<CR>
-tnoremap <s-tab>              <C-\><C-n>:call TermToggle(12)<CR>
+tnoremap <s-tab>                <C-\><C-n>:call TermToggle(12)<CR>
 inoremap <C-t>                  <Esc>:call TermToggle(20)<CR>
 " Navigate to/from terminal
 tnoremap <C-h>                  <C-\><C-N><C-w>h
