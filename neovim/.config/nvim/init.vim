@@ -22,8 +22,17 @@ Plug 'nvim-telescope/telescope.nvim'
 " File explorer
 Plug 'kyazdani42/nvim-tree.lua'
 
-" Coc / Intellisense
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+" completion sources:
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 " Documentation comments
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
@@ -98,6 +107,7 @@ set signcolumn=yes                      " always show the sign column
 set cursorline                          " highlight the line where the cursor is
 set splitright                          " horizontal split should split to the right
 set splitbelow                          " vertical split should split below
+set completeopt=menuone,noinsert,noselect " do not auto-complete
 " Enable true colors, if possible
 if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -185,90 +195,18 @@ lua require('toggleterm').setup()
 " File navigator configuration
 lua require "nvim-tree-rc"
 
-" CoC configuration
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-let g:coc_global_extensions = [
-    \ 'coc-css',
-    \ 'coc-emmet',
-    \ 'coc-eslint',
-    \ 'coc-git',
-    \ 'coc-highlight',
-    \ 'coc-html',
-    \ 'coc-json',
-    \ 'coc-prettier',
-    \ 'coc-pyright',
-    \ 'coc-sh',
-    \ 'coc-snippets',
-    \ 'coc-swagger',
-    \ 'coc-tag',
-    \ 'coc-tsserver',
-    \ 'coc-vetur',
-    \ 'coc-xml',
-    \ 'coc-yaml',
-    \ ]
+" LSP
+lua require "lspconfig-rc"
 
-" Add (Neo)Vim's native statusline support.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" Completion
+lua require "nvim-cmp-rc"
 
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr><TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB>          pumvisible() ? "\<C-p>" : "\<C-h>"
+" Git signs
+lua require "gitsigns-rc"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr>         <c-space> coc#refresh()
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Use tab for navigating snippets
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Utilities
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Helper for toggling the native terminal
-let g:term_buf = 0
-let g:term_win = 0
-function! TermToggle(height)
-    if win_gotoid(g:term_win)
-        hide
-    else
-        botright new
-        exec "resize " . a:height
-        try
-            exec "buffer " . g:term_buf
-        catch
-            call termopen($SHELL, {"detach": 0})
-            let g:term_buf = bufnr("")
-            set nonumber
-            set norelativenumber
-            set signcolumn=no
-        endtry
-        startinsert!
-        let g:term_win = win_getid()
-    endif
-endfunction
+" Ultisnips config
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
@@ -303,18 +241,18 @@ augroup END
 " and return focus to the same spot it was initially
 command! BufOnly execute 'wa | %bdelete | edit # | normal `"'
 
-" Coc
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" " Coc
+" " Highlight the symbol and its references when holding the cursor.
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+"
+" " Add `:Format` command to format current buffer.
+" command! -nargs=0 Format :call CocAction('format')
+"
+" " Add `:Fold` command to fold current buffer.
+" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+"
+" " Add `:OR` command for organize imports of the current buffer.
+" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps
@@ -397,7 +335,7 @@ nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()
 
 " Git
 " Copy remote URL to clipboard
-nnoremap <leader>gu             :CocCommand git.copyUrl<CR>
+" nnoremap <leader>gu             :CocCommand git.copyUrl<CR>
 " Copy relative file path to clipboard
 nnoremap <leader>p              :let @+ = expand("%")<CR>
 " See change history for the current file
@@ -424,38 +362,38 @@ nnoremap ]r                     :diffget //3<CR>
 nnoremap <silent>r              :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent>r              "sy:let @/=@s<CR>cgn
 " Project-wide
-nnoremap <leader>r              :CocSearch --smart-case 
+" nnoremap <leader>r              :CocSearch --smart-case 
 
-" Coc / Intellisense
-" Show all diagnostics in location list
-nnoremap <silent><nowait> <leader>d        :<C-u>CocList diagnostics<CR>
-" Navigate diagnostics
-nmap <silent> [d                <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d                <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation
-nmap <silent> gd                <Plug>(coc-definition)
-nmap <silent> gy                <Plug>(coc-type-definition)
-nmap <silent> gr                <Plug>(coc-references)
-
-" Manage extensions
-nnoremap <silent><nowait> <leader>ce        :<C-u>CocList extensions<CR>
-" Search workspace symbols
-nnoremap <silent><nowait> <leader>s         :<C-u>CocList -I symbols<CR>
-
-" Apply codeAction to the current buffer.
-nmap <leader>ca                 <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>af                 <Plug>(coc-fix-current)
-" Apply codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a                  <Plug>(coc-codeaction-selected)
-nmap <leader>a                  <Plug>(coc-codeaction-line)
-
-" Symbol renaming.
-nmap <leader>rn                 <Plug>(coc-rename)
-
-" Format then loaded buffer.
-xmap <leader>=                  <Plug>(coc-format)
-nmap <leader>=                  <Plug>(coc-format)
-
+" " Coc / Intellisense
+" " Show all diagnostics in location list
+" nnoremap <silent><nowait> <leader>d        :<C-u>CocList diagnostics<CR>
+" " Navigate diagnostics
+" nmap <silent> [d                <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]d                <Plug>(coc-diagnostic-next)
+"
+" " GoTo code navigation
+" nmap <silent> gd                <Plug>(coc-definition)
+" nmap <silent> gy                <Plug>(coc-type-definition)
+" nmap <silent> gr                <Plug>(coc-references)
+"
+" " Manage extensions
+" nnoremap <silent><nowait> <leader>ce        :<C-u>CocList extensions<CR>
+" " Search workspace symbols
+" nnoremap <silent><nowait> <leader>s         :<C-u>CocList -I symbols<CR>
+"
+" " Apply codeAction to the current buffer.
+" nmap <leader>ca                 <Plug>(coc-codeaction)
+" " Apply AutoFix to problem on the current line.
+" nmap <leader>af                 <Plug>(coc-fix-current)
+" " Apply codeAction to the selected region.
+" " Example: `<leader>aap` for current paragraph
+" xmap <leader>a                  <Plug>(coc-codeaction-selected)
+" nmap <leader>a                  <Plug>(coc-codeaction-line)
+"
+" " Symbol renaming.
+" nmap <leader>rn                 <Plug>(coc-rename)
+"
+" " Format then loaded buffer.
+" xmap <leader>=                  <Plug>(coc-format)
+" nmap <leader>=                  <Plug>(coc-format)
+"

@@ -1,4 +1,5 @@
 @vue/cli
+bash-language-server
 code-complexity
 eshost-cli
 eslint-config-airbnb-base
@@ -13,5 +14,7 @@ npkill
 npm
 prettier
 speed-test
+typescript-language-server
 typescript
+vscode-langservers-extracted
 yarn
