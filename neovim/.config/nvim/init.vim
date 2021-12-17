@@ -272,6 +272,7 @@ vmap y                          ygv<Esc>
 
 " Copy to the shared register
 nnoremap <leader>y              "+yiw
+vnoremap <leader>y              "*y 
 
 " Move 1 or more lines up or down in normal and visual selection modes.
 nnoremap K                      :m .-2<CR>==
