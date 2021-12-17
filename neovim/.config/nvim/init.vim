@@ -75,10 +75,12 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'nvim-lualine/lualine.nvim'
 
 " Themes
-Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'mhartington/oceanic-next'
 Plug 'haishanh/night-owl.vim'
 Plug 'Luxed/ayu-vim'
+
+" Colorizer for CSS files
+Plug 'norcalli/nvim-colorizer.lua'
 
 " Remove distractions
 Plug 'junegunn/goyo.vim'
@@ -148,12 +150,6 @@ set wildignore+=*build/*
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 
-" Dracula configuration
-let g:dracula_bold = 1
-let g:dracula_italic = 1
-let g:dracula_inverse = 1
-let g:dracula_colorterm = 1
-
 " Goyo configuration
 let g:goyo_width = 120
 let g:goyo_height = 90
@@ -190,6 +186,7 @@ lua require "telescope-rc"
 " Comment.nvim configuration
 lua require('Comment').setup()
 lua require('nvim-autopairs').setup()
+lua require'colorizer'.setup()
 lua require('toggleterm').setup()
 
 " File navigator configuration
@@ -363,37 +360,7 @@ nnoremap <silent>r              :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent>r              "sy:let @/=@s<CR>cgn
 " Project-wide
 " nnoremap <leader>r              :CocSearch --smart-case 
-
-" " Coc / Intellisense
-" " Show all diagnostics in location list
-" nnoremap <silent><nowait> <leader>d        :<C-u>CocList diagnostics<CR>
-" " Navigate diagnostics
-" nmap <silent> [d                <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]d                <Plug>(coc-diagnostic-next)
-"
-" " GoTo code navigation
-" nmap <silent> gd                <Plug>(coc-definition)
-" nmap <silent> gy                <Plug>(coc-type-definition)
-" nmap <silent> gr                <Plug>(coc-references)
-"
-" " Manage extensions
-" nnoremap <silent><nowait> <leader>ce        :<C-u>CocList extensions<CR>
-" " Search workspace symbols
-" nnoremap <silent><nowait> <leader>s         :<C-u>CocList -I symbols<CR>
-"
-" " Apply codeAction to the current buffer.
-" nmap <leader>ca                 <Plug>(coc-codeaction)
-" " Apply AutoFix to problem on the current line.
-" nmap <leader>af                 <Plug>(coc-fix-current)
-" " Apply codeAction to the selected region.
-" " Example: `<leader>aap` for current paragraph
-" xmap <leader>a                  <Plug>(coc-codeaction-selected)
-" nmap <leader>a                  <Plug>(coc-codeaction-line)
-"
-" " Symbol renaming.
-" nmap <leader>rn                 <Plug>(coc-rename)
-"
-" " Format then loaded buffer.
+" Formatting + fixing all autofixable stuff
 " xmap <leader>=                  <Plug>(coc-format)
 " nmap <leader>=                  <Plug>(coc-format)
 "
