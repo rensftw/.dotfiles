@@ -25,6 +25,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'folke/trouble.nvim'
 " completion sources:
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -189,6 +190,7 @@ lua require('Comment').setup()
 lua require('nvim-autopairs').setup()
 lua require('colorizer').setup()
 lua require('toggleterm').setup()
+lua require "trouble-rc"
 
 " File navigator configuration
 lua require "nvim-tree-rc"
@@ -359,6 +361,10 @@ nnoremap ]r                     :diffget //3<CR>
 " for replacing a few instances of the term (comparable to multiple cursors).
 nnoremap <silent>r              :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent>r              "sy:let @/=@s<CR>cgn
+
+" Diagnostics
+nnoremap <leader>d              :TroubleToggle<CR>
+
 " Project-wide
 " nnoremap <leader>r              :CocSearch --smart-case 
 " Formatting + fixing all autofixable stuff
