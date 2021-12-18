@@ -76,8 +76,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'nvim-lualine/lualine.nvim'
 
 " Themes
-Plug 'mhartington/oceanic-next'
-Plug 'haishanh/night-owl.vim'
 Plug 'Luxed/ayu-vim'
 
 " Colorizer for CSS files
