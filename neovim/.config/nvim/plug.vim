@@ -9,6 +9,9 @@ endif
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.config/nvim/plugged')
+" Dashboard
+Plug('goolord/alpha-nvim')
+
 " Treesitter (AST-based syntax highlighting)
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
