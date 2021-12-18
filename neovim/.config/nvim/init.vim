@@ -1,5 +1,3 @@
-runtime ./plug.vim
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -30,10 +28,6 @@ if exists('+termguicolors')
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     set termguicolors
 endif
-" Ayu theme (ayu config needs to be before colorscheme definition)
-let g:ayu_italic_comment = 1
-let g:ayucolor = 'dark'
-colorscheme ayu
 
 " Cursor shape/blinking settings
 set guicursor=n-v-c:block-blinkwait175-blinkoff150-blinkon175,
@@ -59,22 +53,30 @@ set wildignore+=*build/*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-lua require('lualine-rc')
-lua require('nvim-treesitter-rc')
-lua require('telescope-rc')
-lua require('trouble-rc')
-lua require('nvim-tree-rc')
-lua require('lspconfig-rc')
-lua require('nvim-cmp-rc')
-lua require('gitsigns-rc')
-lua require('ultisnips-rc')
-lua require('goyo-rc')
-lua require('doge-rc')
+runtime ./plug.vim
+runtime ./keymaps.vim
 
-lua require('Comment').setup()
-lua require('nvim-autopairs').setup()
-lua require('colorizer').setup()
-lua require('toggleterm').setup()
+" Ayu theme (ayu config needs to be before colorscheme definition)
+let g:ayu_italic_comment = 1
+let g:ayucolor = 'dark'
+colorscheme ayu     " needs to be called after vim plug
+
+lua require 'lualine-rc'
+lua require 'nvim-treesitter-rc'
+lua require 'telescope-rc'
+lua require 'trouble-rc'
+lua require 'nvim-tree-rc'
+lua require 'lspconfig-rc'
+lua require 'nvim-cmp-rc'
+lua require 'gitsigns-rc'
+lua require 'ultisnips-rc'
+lua require 'goyo-rc'
+lua require 'doge-rc'
+
+lua require 'Comment'.setup()
+lua require 'nvim-autopairs'.setup()
+lua require 'colorizer'.setup()
+lua require 'toggleterm'.setup()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
@@ -109,4 +111,3 @@ augroup END
 " and return focus to the same spot it was initially
 command! BufOnly execute 'wa | %bdelete | edit # | bdelete # | normal `"'
 
-runtime ./keymaps.vim
