@@ -2,6 +2,7 @@ PATH="$(brew --prefix)/share/zsh/site-functions:$PATH"
 PATH="$(brew --prefix fzf)/bin:$PATH"
 # curl is keg-only, so we need to manually add  it to our PATH
 PATH="$(brew --prefix curl)/bin:$PATH"
+PATH="$(brew --prefix lua-language-server)/bin:$PATH"
 
 export PATH="$HOME:$PATH"
 
