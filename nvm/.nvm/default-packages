@@ -1,6 +1,8 @@
 @vue/cli
 bash-language-server
 code-complexity
+diagnostic-languageserver
+emmet-ls
 eshost-cli
 eslint-config-airbnb-base
 eslint-plugin-import
@@ -16,5 +18,7 @@ prettier
 speed-test
 typescript-language-server
 typescript
+vls
 vscode-langservers-extracted
+yaml-language-server
 yarn
