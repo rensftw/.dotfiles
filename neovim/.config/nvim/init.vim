@@ -63,25 +63,6 @@ set wildignore+=*build/*
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 
-" Documentation comments
-let g:doge_mapping = '<leader>jd'
-let g:doge_filetype_aliases = {
-\  'javascript': [
-\    'vue',
-\    'javascript.jsx',
-\    'javascriptreact',
-\    'javascript.tsx',
-\    'typescriptreact',
-\    'typescript',
-\    'typescript.tsx',
-\    ]
-\}
-
-let g:doge_javascript_settings = {
-\  'destructuring_props': 1,
-\  'omit_redundant_param_types': 0,
-\}
-
 lua require('lualine-rc')
 lua require('nvim-treesitter-rc')
 lua require('telescope-rc')
@@ -92,6 +73,7 @@ lua require('nvim-cmp-rc')
 lua require('gitsigns-rc')
 lua require('ultisnips-rc')
 lua require('goyo-rc')
+lua require('doge-rc')
 
 lua require('Comment').setup()
 lua require('nvim-autopairs').setup()
