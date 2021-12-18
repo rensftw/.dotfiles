@@ -18,6 +18,9 @@ vmap y                          ygv<Esc>
 nnoremap <leader>y              "+yiw
 vnoremap <leader>y              "*y 
 
+" Delete all other buffers
+nnoremap B                      :BufOnly<CR>
+
 " Move 1 or more lines up or down in normal and visual selection modes.
 nnoremap K                      :m .-2<CR>==
 nnoremap J                      :m .+1<CR>==
