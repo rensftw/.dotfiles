@@ -63,11 +63,6 @@ set wildignore+=*build/*
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 
-" Goyo configuration
-let g:goyo_width = 120
-let g:goyo_height = 90
-let g:goyo_linenr = 1
-
 " Documentation comments
 let g:doge_mapping = '<leader>jd'
 let g:doge_filetype_aliases = {
@@ -96,6 +91,7 @@ lua require('lspconfig-rc')
 lua require('nvim-cmp-rc')
 lua require('gitsigns-rc')
 lua require('ultisnips-rc')
+lua require('goyo-rc')
 
 lua require('Comment').setup()
 lua require('nvim-autopairs').setup()
