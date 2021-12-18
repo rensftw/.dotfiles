@@ -34,7 +34,6 @@ endif
 let g:ayu_italic_comment = 1
 let g:ayucolor = 'dark'
 colorscheme ayu
-" :colors darkblue    " use for debugging theme-related issues
 
 " Cursor shape/blinking settings
 set guicursor=n-v-c:block-blinkwait175-blinkoff150-blinkon175,
@@ -110,7 +109,7 @@ lua require('toggleterm').setup()
 autocmd VimResized * wincmd =
 
 " Update a buffer's contents on focus if it changed outside of Vim.
-au FocusGained,BufEnter * :checktime
+autocmd FocusGained,BufEnter * :checktime
 
 " Unset paste on InsertLeave.
 autocmd InsertLeave * silent! set nopaste
