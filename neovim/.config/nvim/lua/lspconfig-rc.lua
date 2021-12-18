@@ -1,7 +1,7 @@
 local nvim_lsp = require('lspconfig')
 
 -- Toggle inline LSP warnings/errors
-virtual_text = {}
+local virtual_text = {}
 virtual_text.show = true
 virtual_text.toggle = function()
     virtual_text.show = not virtual_text.show
@@ -14,8 +14,7 @@ virtual_text.toggle = function()
     end
 end
 
-
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -67,59 +66,27 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
-nvim_lsp.bashls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
+local servers = {
+    'bashls',
+    'sumneko_lua',
+    'html',
+    'cssls',
+    'emmet_ls',
+    'yamlls',
+    'eslint',
+    'jsonls',
+    'vuels',
+    'tsserver',
 }
-
-nvim_lsp.sumneko_lua.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-nvim_lsp.html.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-nvim_lsp.cssls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-nvim_lsp.emmet_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-nvim_lsp.yamlls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-nvim_lsp.eslint.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        format = {enable = true}
+for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = {
+            debounce_text_changes = 150,
+        }
     }
-}
-
-nvim_lsp.jsonls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-
-}
-
-nvim_lsp.vuels.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
-nvim_lsp.tsserver.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+end
 
 nvim_lsp.diagnosticls.setup {
   on_attach = on_attach,
@@ -158,7 +125,6 @@ nvim_lsp.diagnosticls.setup {
         command = 'eslint_d',
         rootPatterns = { '.git' },
         args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
-        rootPatterns = { '.git' },
       },
       prettier = {
         command = 'prettier_d_slim',
@@ -176,7 +142,6 @@ nvim_lsp.diagnosticls.setup {
       less = 'prettier',
       typescript = 'prettier',
       typescriptreact = 'prettier',
-      json = 'prettier',
       markdown = 'prettier',
     }
   }
