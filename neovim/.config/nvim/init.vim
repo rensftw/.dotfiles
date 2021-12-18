@@ -78,6 +78,7 @@ lua require 'ultisnips-rc'
 lua require 'goyo-rc'
 lua require 'doge-rc'
 lua require 'autopairs-rc'
+lua require 'alpha-rc'
 
 lua require 'Comment'.setup()
 lua require 'colorizer'.setup()
