@@ -65,6 +65,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
 local servers = {
     'bashls',
     'sumneko_lua',
+    'vimls',
     'html',
     'cssls',
     'emmet_ls',
