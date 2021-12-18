@@ -24,8 +24,9 @@ Plug 'kyazdani42/nvim-tree.lua'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-cmp'
+Plug 'tami5/lspsaga.nvim'
 Plug 'folke/trouble.nvim'
+Plug 'hrsh7th/nvim-cmp'
 " completion sources:
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
