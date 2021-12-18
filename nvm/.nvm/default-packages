@@ -18,6 +18,7 @@ prettier
 speed-test
 typescript-language-server
 typescript
+vim-language-server
 vls
 vscode-langservers-extracted
 yaml-language-server
