@@ -1,6 +1,12 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap Q                      :wqall<CR>
+nnoremap W                      :wall<CR>
+
+" Delete all other buffers
+nnoremap B                      :BufOnly<CR>
+
 " Make double-<Esc> clear search highlights
 nnoremap <silent><Esc><Esc>     <Esc>:nohlsearch<CR><Esc>
 
@@ -17,9 +23,6 @@ vmap y                          ygv<Esc>
 " Copy to the shared register
 nnoremap <leader>y              "+yiw
 vnoremap <leader>y              "*y 
-
-" Delete all other buffers
-nnoremap B                      :BufOnly<CR>
 
 " Move 1 or more lines up or down in normal and visual selection modes.
 nnoremap K                      :m .-2<CR>==
@@ -45,8 +48,7 @@ tnoremap <C-j>                  <C-\><C-n><C-w>j
 tnoremap <C-k>                  <C-\><C-n><C-w>k
 tnoremap <C-l>                  <C-\><C-n><C-w>l
 
-" Normal remaps
-nnoremap Q                      !!$SHELL<CR>
+" Navigation shortcuts
 nnoremap <leader>av             :tabnew $VIMRC_LOCATION<CR>     " augment init.vim
 nnoremap <leader>az             :tabnew $ZSHRC_LOCATION<CR>     " augment zshrc
 nnoremap <leader>aa             :tabnew $ALIASES_LOCATION<CR>   " augment aliases
