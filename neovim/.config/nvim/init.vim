@@ -88,37 +88,20 @@ let g:doge_javascript_settings = {
 \  'omit_redundant_param_types': 0,
 \}
 
-" Lualine configuration
-lua require "lualine-rc"
+lua require('lualine-rc')
+lua require('nvim-treesitter-rc')
+lua require('telescope-rc')
+lua require('trouble-rc')
+lua require('nvim-tree-rc')
+lua require('lspconfig-rc')
+lua require('nvim-cmp-rc')
+lua require('gitsigns-rc')
+lua require('ultisnips-rc')
 
-" Treesitter configuration
-lua require "nvim-treesitter-rc"
-
-" Telescope configuration
-lua require "telescope-rc"
-
-" Comment.nvim configuration
 lua require('Comment').setup()
 lua require('nvim-autopairs').setup()
 lua require('colorizer').setup()
 lua require('toggleterm').setup()
-lua require "trouble-rc"
-
-" File navigator configuration
-lua require "nvim-tree-rc"
-
-" LSP
-lua require "lspconfig-rc"
-
-" Completion
-lua require "nvim-cmp-rc"
-
-" Git signs
-lua require "gitsigns-rc"
-
-" Ultisnips config
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Autocommands
