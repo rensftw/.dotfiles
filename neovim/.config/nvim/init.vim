@@ -77,9 +77,9 @@ lua require 'gitsigns-rc'
 lua require 'ultisnips-rc'
 lua require 'goyo-rc'
 lua require 'doge-rc'
+lua require 'autopairs-rc'
 
 lua require 'Comment'.setup()
-lua require 'nvim-autopairs'.setup()
 lua require 'colorizer'.setup()
 lua require 'toggleterm'.setup()
 
