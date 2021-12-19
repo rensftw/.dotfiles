@@ -39,7 +39,7 @@ Here are some useful tips for getting started:
 
 
 ## Highlights
-* [`neovim nightly`](https://neovim.io/) + [`telescope`](https://github.com/nvim-telescope/telescope.nvim) + [`coc`](https://github.com/neoclide/coc.nvim) for code editing
+* [`neovim`](https://neovim.io/) + [`packer`](https://github.com/wbthomason/packer.nvim) + [`telescope`](https://github.com/nvim-telescope/telescope.nvim)
 * [`ranger`](https://github.com/ranger/ranger) for terminal file navigation
 * [`fzf`](https://github.com/junegunn/fzf) for fuzzy finding and interactive git operations
 * [`rg`](https://github.com/BurntSushi/ripgrep) for searching file contents
