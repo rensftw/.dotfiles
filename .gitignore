@@ -1,4 +1,5 @@
 .DS_STORE
+neovim/.config/nvim/plugin/packer_compiled.lua
 neovim/.config/nvim/.netrwhist
 bpytop/.config/bpytop/error.log
 __pycache__
