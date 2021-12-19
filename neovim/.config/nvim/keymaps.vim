@@ -38,8 +38,8 @@ nnoremap <S-Right>              :vertical resize -2<CR>
 
 " Terminal
 " Toggle terminal on/off
-nnoremap <tab>                  :ToggleTerm size=20 direction=horizontal<CR>
-tnoremap <S-tab>                <C-\><C-n>:ToggleTermToggleAll<CR>
+nnoremap <c-\>                  :ToggleTerm size=20 direction=horizontal<CR>
+tnoremap <c-\>                  <C-\><C-n>:ToggleTermToggleAll<CR>
 tnoremap <C-t>                  <C-\><C-n> 2:ToggleTerm<CR>
 inoremap <C-t>                  <Esc>:ToggleTerm size=20 direction=horizontal<CR>
 " Navigate to/from terminal
