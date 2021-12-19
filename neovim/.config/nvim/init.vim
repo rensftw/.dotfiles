@@ -53,7 +53,7 @@ set wildignore+=*build/*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Imports
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-runtime ./plug.vim
+lua require 'plugins'
 runtime ./keymaps.vim
 runtime ./autocommands.vim
 
