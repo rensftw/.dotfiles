@@ -5,7 +5,6 @@ require'nvim-tree'.setup{
 }
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
--- default mappings
 local list = {
   { key = {"<CR>", "l", "<2-LeftMouse>"}, cb = tree_cb("edit") },
   { key = {"<BS>", "h"},                  cb = tree_cb("close_node") },
@@ -25,4 +24,12 @@ local list = {
   { key = "[h",                           cb = tree_cb("prev_git_item") },
   { key = "]h",                           cb = tree_cb("next_git_item") },
   { key = "?",                            cb = tree_cb("toggle_help") },
+}
+
+require'nvim-tree'.setup {
+    view = {
+        mappings = {
+            list = list
+        }
+    }
 }
