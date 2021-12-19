@@ -92,6 +92,9 @@ return require('packer').startup(function(use)
     -- Remove distractions
     use 'junegunn/goyo.vim'
 
+    -- Markdown preview
+    use 'ellisonleao/glow.nvim'
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
