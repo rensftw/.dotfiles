@@ -83,6 +83,9 @@ nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<
 nnoremap <leader>?              <cmd>lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<CR>
 
+" Preview markdown
+nnoremap <leader>mp             :Glow<CR>
+
 " Git
 " Copy remote URL to clipboard
 " nnoremap <leader>gu             :CocCommand git.copyUrl<CR>
