@@ -1,8 +1,7 @@
 BREW_ZSH_PATH="$(brew --prefix)/bin/zsh"
 
-# Give permissions to zsh (fixes compaudit error)
-sudo chmod -R 755 $(brew --prefix)/share/zsh
-sudo chmod -R 755 $(brew --prefix)/share/zsh/site-functions
+# Give permissions to Brew's share directory (fixes compaudit error)
+sudo chmod -R 755 $(brew --prefix)/share
 
 # Modify /etc/shells if the new zsh path is missing
 if ! grep -Fqx "$BREW_ZSH_PATH" /etc/shells; then
