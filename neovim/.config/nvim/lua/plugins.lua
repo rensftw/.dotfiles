@@ -89,9 +89,6 @@ return require('packer').startup(function(use)
     -- Colorizer for CSS files
     use 'norcalli/nvim-colorizer.lua'
 
-    -- Remove distractions
-    use 'junegunn/goyo.vim'
-
     -- Markdown preview
     use 'ellisonleao/glow.nvim'
 
