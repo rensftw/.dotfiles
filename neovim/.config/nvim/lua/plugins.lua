@@ -85,7 +85,6 @@ return require('packer').startup(function(use)
 
     -- Themes
     use 'Luxed/ayu-vim'
-    use 'bluz71/vim-nightfly-guicolors'
     use 'folke/tokyonight.nvim'
 
     -- Colorizer for CSS files
