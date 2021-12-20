@@ -79,6 +79,7 @@ nnoremap <leader>o              <cmd>lua require('telescope.builtin').find_files
 nnoremap <leader>w              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/work" })<CR>
 nnoremap <leader>.              <cmd>lua require('telescope.builtin').find_files({ cwd = "$HOME/.dotfiles", hidden = true })<CR>
 nnoremap <leader>f              <cmd>lua require('telescope.builtin').live_grep()<CR>
+nnoremap <leader>g              <cmd>lua require('telescope.builtin').git_status()<CR>
 nnoremap <leader>b              <cmd>lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>?              <cmd>lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>c              <cmd>lua require('telescope.builtin').commands()<CR>
