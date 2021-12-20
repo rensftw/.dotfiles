@@ -60,10 +60,10 @@ runtime ./autocommands.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Ayu theme (ayu config needs to be before colorscheme definition)
-let g:ayu_italic_comment = 1
-let g:ayucolor = 'dark'
-colorscheme ayu     " needs to be called after vim plug
+" " Ayu theme (ayu config needs to be before colorscheme definition)
+" let g:ayu_italic_comment = 1
+" let g:ayucolor = 'dark'
+colorscheme rose-pine     " needs to be called after vim plug
 
 lua require 'lualine-rc'
 lua require 'nvim-treesitter-rc'
