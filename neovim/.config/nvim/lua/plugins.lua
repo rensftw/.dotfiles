@@ -85,6 +85,7 @@ return require('packer').startup(function(use)
 
     -- Themes
     use 'Luxed/ayu-vim'
+    use {'rose-pine/neovim', as ='rose-pine'}
 
     -- Colorizer for CSS files
     use 'norcalli/nvim-colorizer.lua'
