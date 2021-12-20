@@ -60,10 +60,12 @@ runtime ./autocommands.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " Ayu theme (ayu config needs to be before colorscheme definition)
+" Theme configs
 " let g:ayu_italic_comment = 1
 " let g:ayucolor = 'dark'
-colorscheme rose-pine     " needs to be called after vim plug
+let g:tokyonight_style = 'night'
+let g:tokyonight_lualine_bold = 'true'
+colorscheme tokyonight
 
 lua require 'lualine-rc'
 lua require 'nvim-treesitter-rc'
