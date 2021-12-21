@@ -20,6 +20,7 @@ cmp.setup({
         { name = 'nvim_lsp' },
         { name = 'ultisnips' },
         { name = 'buffer' },
+        { name = 'path' },
     }),
     formatting = {
         format = function(entry, vim_item)
