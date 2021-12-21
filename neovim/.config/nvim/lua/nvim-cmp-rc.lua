@@ -18,6 +18,7 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'nvim_lua' },
         { name = 'ultisnips' },
         { name = 'buffer' },
         { name = 'path' },
@@ -26,6 +27,7 @@ cmp.setup({
         format = function(entry, vim_item)
             vim_item.menu = ({
                 nvim_lsp = '',
+                nvim_lua = '',
                 buffer   = '',
             })[entry.source.name]
             vim_item.kind = ({
