@@ -101,9 +101,9 @@ nvim_lsp.efm.setup {
                     lintCommand = 'vale --output=$HOME/.config/vale/output.tmpl ${INPUT}',
                     lintStdin= false,
                     lintFormats = {
-                        '%f:%l:%c:%trror:%m',
-                        '%f:%l:%c:%tarning:%m',
-                        -- '%f:%l:%c:%tgestion:%m',
+                        '%f:%l:%c:%trror %m',
+                        '%f:%l:%c:%tarning %m',
+                        '%f:%l:%c:%tuggestion %m',
                     }
                 },
             }
