@@ -76,7 +76,6 @@ local servers = {
     'jsonls',
     'vuels',
     'tsserver',
-    'efm',
 }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
@@ -87,3 +86,27 @@ for _, lsp in ipairs(servers) do
         }
     }
 end
+
+nvim_lsp.efm.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    settings = {
+        rootMarkers = {".git/"},
+        languages = {
+            markdown = {
+                {
+                    lintCommand = 'vale --output=$HOME/.config/vale/output.tmpl ${INPUT}',
+                    lintStdin= false,
+                    lintFormats = {
+                        '%f:%l:%c:%trror:%m',
+                        '%f:%l:%c:%tarning:%m',
+                        -- '%f:%l:%c:%tgestion:%m',
+                    }
+                },
+            }
+        }
+    }
+}
