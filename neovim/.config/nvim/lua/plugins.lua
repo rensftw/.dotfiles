@@ -85,7 +85,6 @@ return require('packer').startup(function(use)
     use 'nvim-lualine/lualine.nvim'
 
     -- Themes
-    use 'Luxed/ayu-vim'
     use 'folke/tokyonight.nvim'
 
     -- Colorizer for CSS files

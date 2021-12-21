@@ -60,9 +60,6 @@ runtime ./autocommands.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Theme configs
-" let g:ayu_italic_comment = 1
-" let g:ayucolor = 'dark'
 let g:tokyonight_style = 'night'
 let g:tokyonight_lualine_bold = 'true'
 colorscheme tokyonight
