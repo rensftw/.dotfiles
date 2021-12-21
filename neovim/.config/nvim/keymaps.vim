@@ -33,8 +33,8 @@ vnoremap J                      :m '>+1<CR>gv=gv
 " Resize splits
 nnoremap <S-Up>                 :resize +2<CR>
 nnoremap <S-Down>               :resize -2<CR>
-nnoremap <S-Left>               :vertical resize +2<CR>
-nnoremap <S-Right>              :vertical resize -2<CR>
+nnoremap <S-Right>               :vertical resize +2<CR>
+nnoremap <S-Left>              :vertical resize -2<CR>
 
 " Terminal
 " Toggle terminal on/off
