@@ -12,6 +12,21 @@ Virtual_text.toggle = function()
     })
 end
 
+local highlight_symbol_under_cursor = function (client)
+    if client.resolved_capabilities.document_highlight then
+        vim.cmd [[
+        hi LspReferenceRead cterm=bold ctermbg=red guibg=#414868
+        hi LspReferenceText cterm=bold ctermbg=red guibg=#414868
+        hi LspReferenceWrite cterm=bold ctermbg=red guibg=#414868
+        augroup lsp_document_highlight
+            autocmd! * <buffer>
+            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+        ]]
+    end
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -55,6 +70,8 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     vim.api.nvim_command [[augroup END]]
   end
+
+  highlight_symbol_under_cursor(client)
 end
 
 -- Set up completion using nvim_cmp with LSP source
