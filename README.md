@@ -17,11 +17,13 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 
 
 ## Scripts
-* `apply-macos-preferences.sh`:     Applies sensible macOS preferences.
-* `install.sh`:                     Installs Homebrew and all formulae/casks defined in `Brewfile`.
-* `configure.sh`:                   Configures tools and applies dotfiles.
-* `backup.sh`:                      Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages.
-* `uninstall.sh`:                   Removes all packages, tools, and config files.
+|Script                         |Description                                                                                        |
+|:------------------------------|:--------------------------------------------------------------------------------------------------|
+| `apply-macos-preferences.sh`  | Applies sensible macOS defaults.                                                                  |
+| `install.sh`                  | Installs Homebrew and all formulae/casks defined in `Brewfile`.                                   |
+| `configure.sh`                | Configures tools and applies dotfiles.                                                            |
+| `backup.sh`                   | Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages.|
+| `uninstall.sh`                | Removes all packages, tools, and config files.                                                    |
 
 
 ## Highlights
