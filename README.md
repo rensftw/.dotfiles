@@ -61,6 +61,7 @@ Neovim with [Tokyo Night](https://github.com/folke/tokyonight.nvim) theme:
 
 
 Interactive git operations with fzf:
+
 https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4
 
 
