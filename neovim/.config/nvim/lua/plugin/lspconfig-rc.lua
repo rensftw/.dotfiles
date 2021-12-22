@@ -71,7 +71,6 @@ local servers = {
     'html',
     'cssls',
     'emmet_ls',
-    'yamlls',
     'eslint',
     'vuels',
     'tsserver',
@@ -92,8 +91,24 @@ nvim_lsp.jsonls.setup {
     flags = {
         debounce_text_changes = 150,
     },
-    settings = require 'lsp.jsonls-rc'.settings,
-    setup = require 'lsp.jsonls-rc'.setup,
+    settings = {
+        json = {
+            schemas = require('schemastore').json.schemas(),
+        },
+    },
+}
+
+nvim_lsp.yamlls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    settings = {
+        yarml = {
+            schemaStore = {enable = true}
+        }
+    }
 }
 
 nvim_lsp.efm.setup {

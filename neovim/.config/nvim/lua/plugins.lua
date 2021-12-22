@@ -40,6 +40,9 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-nvim-lua'
 
+    -- JSON schemas
+    use "b0o/schemastore.nvim"
+
     -- Snippets
     use 'SirVer/ultisnips'
     use 'quangnguyen30192/cmp-nvim-ultisnips'
