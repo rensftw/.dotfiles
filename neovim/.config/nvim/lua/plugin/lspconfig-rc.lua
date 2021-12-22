@@ -1,12 +1,16 @@
 local nvim_lsp = require('lspconfig')
 
--- Disable virtual text
-local config = {
-    virtual_text = false,
-    update_in_insert = true,
-    severity_sort = true,
-}
-vim.diagnostic.config(config)
+-- Toggle iniline diagnostics
+Virtual_text = {}
+Virtual_text.show = true
+Virtual_text.toggle = function()
+    Virtual_text.show = not Virtual_text.show
+    vim.diagnostic.config({
+        virtual_text = Virtual_text.show,
+        update_in_insert = true,
+        severity_sort = true,
+    })
+end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -18,17 +22,17 @@ local on_attach = function(client, bufnr)
 
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'H', '<cmd>Lspsaga hover_doc<CR>', opts)
+  buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', 'H', '<cmd>Lspsaga hover_doc<CR>', opts)
   --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>Lspsaga rename<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>Lspsaga range_code_action<CR>', opts)
-  -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>d', '<cmd>lua Virtual_text.toggle()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
