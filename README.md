@@ -1,4 +1,4 @@
-_Note: This setup is tailored for and tested on macOS._
+_Note: This setup is built for and tested on macOS._
 
 
 ## Download
@@ -17,25 +17,11 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 
 
 ## Scripts
-There are 4 main scripts for managing this setup:
-* `apply-macos-preferences.sh`:     Applies macOS system preferences.
+* `apply-macos-preferences.sh`:     Applies sensible macOS preferences.
 * `install.sh`:                     Installs Homebrew and all formulae/casks defined in `Brewfile`.
-* `configure.sh`:                   Configures dev tools and applies dotfiles.
+* `configure.sh`:                   Configures tools and applies dotfiles.
 * `backup.sh`:                      Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages.
 * `uninstall.sh`:                   Removes all packages, tools, and config files.
-
-
-Feeling adventurous? Try the entire setup as is.  
-There are comments/mnemonics for documenting each keybinding in `.aliases` (look out for some cool git tricks 🧙‍♀️)
-
-
-## Tailor this setup to your likes (partial install)
-Feel free to fork this repo and customize it to your own needs 🏎   
-Here are some useful tips for getting started:  
-* Pick and choose what tools/software to install from [Brewfile](./_homebrew/Brewfile).
-* Directories starting with an underscore (`_`) contain helper scripts.
-* All other directories are `stow` packages and contain dotfiles.
-* Stow allows symlinking individual packages, for example: `stow -vt ~ zsh` will symlink only `zsh`-related config files.
 
 
 ## Highlights
@@ -67,4 +53,15 @@ https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-
 
 BpyTOP for process monitoring:
 ![BpyTOP for process monitoring](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/bpytop-process-manager.png)
+
+
+## Tailor this setup to your likes (partial install)
+> [`.aliases`](./system/.aliases) has interactive git commands and other magic tricks.
+
+Feel free to fork this repo and customize it to your own needs 🏎   
+Tips for getting started:  
+* Pick and choose what tools/software to install from [Brewfile](./_homebrew/Brewfile).
+* Directories starting with an underscore (`_`) contain helper scripts.
+* All other directories are `stow` packages and contain dotfiles.
+* Stow allows symlinking individual packages, for example: `stow -vt ~ zsh` will symlink only `zsh`-related config files.
 
