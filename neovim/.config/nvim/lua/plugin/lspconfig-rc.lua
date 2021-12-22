@@ -1,40 +1,5 @@
 local nvim_lsp = require('lspconfig')
-
--- Toggle iniline diagnostics
-Virtual_text = {}
-Virtual_text.show = true
-Virtual_text.toggle = function()
-    Virtual_text.show = not Virtual_text.show
-    vim.diagnostic.config({
-        virtual_text = Virtual_text.show,
-        update_in_insert = true,
-        severity_sort = true,
-    })
-end
-
-local highlight_symbol_under_cursor = function (client)
-    if client.resolved_capabilities.document_highlight then
-        vim.cmd [[
-        hi LspReferenceRead cterm=bold ctermbg=red guibg=#414868
-        hi LspReferenceText cterm=bold ctermbg=red guibg=#414868
-        hi LspReferenceWrite cterm=bold ctermbg=red guibg=#414868
-        augroup lsp_document_highlight
-            autocmd! * <buffer>
-            autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-            autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-        ]]
-    end
-end
-
-local enable_formatting_for_eligible_clients = function (client)
-    if client.resolved_capabilities.document_formatting then
-        vim.api.nvim_command [[augroup Format]]
-        vim.api.nvim_command [[autocmd! * <buffer>]]
-        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-        vim.api.nvim_command [[augroup END]]
-    end
-end
+local lsp_utils = require('lsp.utils')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -73,8 +38,8 @@ local on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = true
   end
 
-  enable_formatting_for_eligible_clients(client);
-  highlight_symbol_under_cursor(client)
+  lsp_utils.enable_formatting_for_eligible_clients(client);
+  lsp_utils.highlight_symbol_under_cursor(client)
 end
 
 -- Set up completion using nvim_cmp with LSP source
