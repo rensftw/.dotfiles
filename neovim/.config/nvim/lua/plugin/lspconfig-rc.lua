@@ -1,18 +1,12 @@
 local nvim_lsp = require('lspconfig')
 
--- Toggle inline LSP warnings/errors
-local virtual_text = {}
-virtual_text.show = true
-virtual_text.toggle = function()
-    virtual_text.show = not virtual_text.show
-    if virtual_text.show == true then
-        print('Show diagnostics')
-        vim.lsp.diagnostic.enable()
-    else
-        print('Hide diagnostics')
-        vim.lsp.diagnostic.disable()
-    end
-end
+-- Disable virtual text
+local config = {
+    virtual_text = false,
+    update_in_insert = true,
+    severity_sort = true,
+}
+vim.diagnostic.config(config)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -34,7 +28,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>Lspsaga rename<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>Lspsaga range_code_action<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua virtual_text.toggle()<CR>', opts)
+  -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
