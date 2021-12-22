@@ -1,4 +1,4 @@
-_Note: So far, this setup has been tailored for and tested only on macOS._
+_Note: This setup is tailored for and tested on macOS._
 
 
 ## Download
