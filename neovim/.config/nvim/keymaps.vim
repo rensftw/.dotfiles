@@ -114,7 +114,7 @@ nnoremap <silent>r              :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent>r              "sy:let @/=@s<CR>cgn
 
 " Diagnostics
-nnoremap <leader>d              :TroubleToggle<CR>
+nnoremap <leader>D              :TroubleToggle<CR>
 
 " Project-wide
 " nnoremap <leader>r              :CocSearch --smart-case 
