@@ -52,17 +52,16 @@ Here are some useful tips for getting started:
 
 
 ## Screenshots
-[Powerlevel10k](https://github.com/romkatv/powerlevel10k/) Rainbow prompt with [Glacier](https://github.com/bahlo/iterm-colors#glacier) theme on [iTerm2](https://iterm2.com/):
-![Powerlevel10k Rainbow prompt with Glacier theme on iTerm2](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/single-line-rainbow-prompt-glacier-theme.png)
+[Powerlevel10k](https://github.com/romkatv/powerlevel10k/) Rainbow prompt with modified [Tokyo Night](https://github.com/folke/tokyonight.nvim) theme on [iTerm2](https://iterm2.com/):
+![Powerlevel10k Rainbow prompt with modified Tokyo Night theme on iTerm2](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/iterm-with-modified-tokyonight-theme.png)
 
 
-Neovim with [ayu](https://github.com/Luxed/ayu-vim) theme:
-![Neovim with ayu theme](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-ayu-theme.png)
+Neovim with [Tokyo Night](https://github.com/folke/tokyonight.nvim) theme:
+![Neovim with Tokyo Night theme](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-tokyonight-theme.png)
 
 
 Interactive git operations with fzf:
-![Staging git changes interactively, using fzf bindings](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-fzf-full-size.gif)
-
+https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-commands-with-fzf.mp4
 
 BpyTOP for process monitoring:
 ![BpyTOP for process monitoring](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/bpytop-process-manager.png)
