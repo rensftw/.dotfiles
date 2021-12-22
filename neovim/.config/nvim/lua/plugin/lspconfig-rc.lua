@@ -73,7 +73,6 @@ local servers = {
     'emmet_ls',
     'yamlls',
     'eslint',
-    'jsonls',
     'vuels',
     'tsserver',
 }
@@ -86,6 +85,16 @@ for _, lsp in ipairs(servers) do
         }
     }
 end
+
+nvim_lsp.jsonls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    settings = require 'lsp.jsonls-rc'.settings,
+    setup = require 'lsp.jsonls-rc'.setup,
+}
 
 nvim_lsp.efm.setup {
     on_attach = on_attach,
