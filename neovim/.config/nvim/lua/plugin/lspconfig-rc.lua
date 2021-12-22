@@ -27,6 +27,15 @@ local highlight_symbol_under_cursor = function (client)
     end
 end
 
+local enable_formatting_for_eligible_clients = function (client)
+    if client.resolved_capabilities.document_formatting then
+        vim.api.nvim_command [[augroup Format]]
+        vim.api.nvim_command [[autocmd! * <buffer>]]
+        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+        vim.api.nvim_command [[augroup END]]
+    end
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -64,13 +73,7 @@ local on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = true
   end
 
-  if client.resolved_capabilities.document_formatting then
-    vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-    vim.api.nvim_command [[augroup END]]
-  end
-
+  enable_formatting_for_eligible_clients(client);
   highlight_symbol_under_cursor(client)
 end
 
