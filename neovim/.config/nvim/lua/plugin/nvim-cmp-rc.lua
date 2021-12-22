@@ -27,7 +27,7 @@ cmp.setup({
     formatting = {
         format = function(entry, vim_item)
             vim_item.menu = ({
-                nvim_lsp = '',
+                nvim_lsp = '〄',
                 nvim_lua = '',
                 buffer   = '',
             })[entry.source.name]
