@@ -61,7 +61,8 @@ Neovim with [Tokyo Night](https://github.com/folke/tokyonight.nvim) theme:
 
 
 Interactive git operations with fzf:
-https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-commands-with-fzf.mp4
+https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4
+
 
 BpyTOP for process monitoring:
 ![BpyTOP for process monitoring](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/bpytop-process-manager.png)
