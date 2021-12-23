@@ -39,10 +39,9 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 * [`Rectangle`](https://github.com/rxhanson/Rectangle) for window management
 
 
+### Screenshots
 <details>
-    <summary>
-        <h2>Screenshots</h2>
-    </summary>
+    <summary>Expand</summary>
     <div>
         <p>
             <a href="https://github.com/romkatv/powerlevel10k/">Powerlevel10k</a> Rainbow prompt with modified <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> on <a href="https://iterm2.com/">iTerm</a>
