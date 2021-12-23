@@ -1,21 +1,20 @@
-local command = vim.api.nvim_command
 -- Auto-resize splits when Vim gets resized.
-command [[autocmd VimResized * wincmd =]]
+vim.api.nvim_command [[autocmd VimResized * wincmd =]]
 
 -- Update a buffer's contents on focus if it changed outside of Vim.
-command [[autocmd FocusGained,BufEnter * :checktime]]
+vim.api.nvim_command [[autocmd FocusGained,BufEnter * :checktime]]
 
 -- Unset paste on InsertLeave.
-command [[autocmd InsertLeave * silent! set nopaste]]
+vim.api.nvim_command [[autocmd InsertLeave * silent! set nopaste]]
 
 -- Make sure all types of requirements.txt files get syntax highlighting.
-command [[autocmd BufNewFile,BufRead requirements*.txt set ft=python]]
+vim.api.nvim_command [[autocmd BufNewFile,BufRead requirements*.txt set ft=python]]
 
 -- Make sure .aliases, .bash_aliases and similar files get syntax highlighting.
-command [[autocmd BufNewFile,BufRead .*aliases* set ft=sh]]
+vim.api.nvim_command [[autocmd BufNewFile,BufRead .*aliases* set ft=sh]]
 
 -- Ensure tabs don't get converted to spaces in Makefiles.
-command [[autocmd FileType make setlocal noexpandtab]]
+vim.api.nvim_command [[autocmd FileType make setlocal noexpandtab]]
 
 -- Only show the cursor line in the active buffer.
 vim.cmd [[
@@ -29,4 +28,4 @@ vim.cmd [[
 -- Write all changes to modified buffers,
 -- close all buffers except the active one,
 -- and return focus to the same spot it was initially
-command [[command! BufOnly execute 'wa | %bdelete | edit # | bdelete # | normal `"']]
+vim.api.nvim_command [[command! BufOnly execute 'wa | %bdelete | edit # | bdelete # | normal `"']]
