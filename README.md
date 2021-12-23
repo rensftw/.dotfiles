@@ -10,7 +10,7 @@ git clone https://github.com/rensftw/.dotfiles.git
 ```
 
 
-Git-free download:
+Without git:
 ```sh
 mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/.dotfiles/tarball | tar xz --strip=1
 ```
