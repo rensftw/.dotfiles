@@ -53,9 +53,9 @@ set wildignore+=*build/*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Imports
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-lua require 'plugins'
-lua require 'keymaps'
-lua require 'autocommands'
+lua require 'user.plugins'
+lua require 'user.keymaps'
+lua require 'user.autocommands'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
