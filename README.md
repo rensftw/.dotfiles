@@ -54,6 +54,7 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
     </div>
     <div>
         <p>Interactive git operations with fzf:</p>
+        https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4
         <embed
             src="https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4"
             autostart="false"
