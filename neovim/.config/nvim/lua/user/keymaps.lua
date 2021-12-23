@@ -21,6 +21,10 @@ map('x', 'p', 'pgvy', opts)
 -- Keep cursor at the bottom of the visual selection after you yank it.
 map('v', 'y', 'ygv<Esc>', opts)
 
+-- Stay in indent mode
+map('v', '>', '>gv', opts)
+map('v', '<', '<gv', opts)
+
 -- Copy to the shared register
 map('n', '<leader>y', '"+yiw', opts)
 map('v', '<leader>y', '"*y', opts)
