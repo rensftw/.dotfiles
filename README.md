@@ -39,22 +39,34 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 * [`Rectangle`](https://github.com/rxhanson/Rectangle) for window management
 
 
-## Screenshots
-[Powerlevel10k](https://github.com/romkatv/powerlevel10k/) Rainbow prompt with modified [Tokyo Night](https://github.com/folke/tokyonight.nvim) theme on [iTerm2](https://iterm2.com/):
-![Powerlevel10k Rainbow prompt with modified Tokyo Night theme on iTerm2](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/iterm-with-modified-tokyonight-theme.png)
-
-
-Neovim with [Tokyo Night](https://github.com/folke/tokyonight.nvim) theme:
-![Neovim with Tokyo Night theme](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-tokyonight-theme.png)
-
-
-Interactive git operations with fzf:
-
-https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4
-
-
-BpyTOP for process monitoring:
-![BpyTOP for process monitoring](https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/bpytop-process-manager.png)
+<details>
+    <summary>
+        <h2>Screenshots</h2>
+    </summary>
+    <div>
+        <p>
+            <a href="https://github.com/romkatv/powerlevel10k/">Powerlevel10k</a> Rainbow prompt with modified <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> on <a href="https://iterm2.com/">iTerm</a>
+        </p>
+        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/iterm-with-modified-tokyonight-theme.png"/>
+    </div>
+    <div>
+        <p>Neovim with <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> theme:<p>
+        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-tokyonight-theme.png"/>
+    </div>
+    <div>
+        <p>Interactive git operations with fzf:</p>
+        <embed
+            src="https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4"
+            autostart="false"
+            height="600"
+            width="800"
+        />
+    </div>
+    <div>
+        <p>BpyTOP for process monitoring:<p>
+        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/bpytop-process-manager.png" />
+    </div>
+</details>
 
 
 ## Tailor this setup to your likes (partial install)
