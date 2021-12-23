@@ -34,7 +34,7 @@ vim.o.guicursor = vim.o.guicursor .. 'sm:block-blinkwait175-blinkoff150-blinkon1
 
 
 -- Search settings
-vim.o.path = vim.o.path .. '**'                          -- search upwards and downwards the directory
+vim.o.path = vim.o.path .. '**'                 -- search upwards and downwards the directory
 vim.o.ignorecase = true                         -- case-insensitive searching
 vim.o.smartcase = true                          -- case-sensitive if expresson contains a capital letters
 
