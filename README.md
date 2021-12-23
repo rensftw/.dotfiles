@@ -41,7 +41,7 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 
 ### Screenshots
 <details>
-    <summary>Expand</summary>
+    <summary>Expand 📸</summary>
     <div>
         <p>
             <a href="https://github.com/romkatv/powerlevel10k/">Powerlevel10k</a> Rainbow prompt with modified <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> on <a href="https://iterm2.com/">iTerm</a>
