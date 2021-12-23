@@ -153,3 +153,13 @@ cmp.setup({
         end
     },
 })
+
+-- Use cmdline & path source for ':'.
+cmp.setup.cmdline(':', {
+    completion = { autocomplete = false },
+    sources = cmp.config.sources({
+        { name = 'path' }
+        }, {
+        { name = 'cmdline' }
+    })
+})
