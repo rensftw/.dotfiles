@@ -54,7 +54,7 @@ set wildignore+=*build/*
 " Imports
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua require 'plugins'
-runtime ./keymaps.vim
+lua require 'keymaps'
 runtime ./autocommands.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
