@@ -55,7 +55,7 @@ set wildignore+=*build/*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua require 'plugins'
 lua require 'keymaps'
-runtime ./autocommands.vim
+lua require 'autocommands'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
