@@ -49,7 +49,6 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
 
 local servers = {
     'bashls',
-    'sumneko_lua',
     'vimls',
     'html',
     'cssls',
@@ -90,6 +89,21 @@ nvim_lsp.yamlls.setup {
     settings = {
         yarml = {
             schemaStore = {enable = true}
+        }
+    }
+}
+
+nvim_lsp['sumneko_lua'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {'vim'}
+            }
         }
     }
 }
