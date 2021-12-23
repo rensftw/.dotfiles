@@ -11,70 +11,35 @@ local servers = {
     'vimls',
     'html',
     'cssls',
+    'jsonls',
+    'yamlls',
     'emmet_ls',
     'eslint',
     'vuels',
     'tsserver',
+    'sumneko_lua',
+    'efm',
 }
 
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        on_attach = config.on_attach,
-        capabilities = capabilities,
-        flags = {
-            debounce_text_changes = 150,
-        }
-    }
-end
-
-nvim_lsp.jsonls.setup {
-    on_attach = config.on_attach,
-    capabilities = capabilities,
-    flags = {
-        debounce_text_changes = 150,
-    },
-    settings = {
+local server_settings = {
+    jsonls = {
         json = {
             schemas = require('schemastore').json.schemas(),
         },
     },
-}
-
-nvim_lsp.yamlls.setup {
-    on_attach = config.on_attach,
-    capabilities = capabilities,
-    flags = {
-        debounce_text_changes = 150,
-    },
-    settings = {
-        yarml = {
+    yamlls = {
+        yaml = {
             schemaStore = {enable = true}
         }
-    }
-}
-
-nvim_lsp['sumneko_lua'].setup {
-    on_attach = config.on_attach,
-    capabilities = capabilities,
-    flags = {
-        debounce_text_changes = 150,
     },
-    settings = {
+    sumneko_lua = {
         Lua = {
             diagnostics = {
                 globals = {'vim'}
             }
         }
-    }
-}
-
-nvim_lsp.efm.setup {
-    on_attach = config.on_attach,
-    capabilities = capabilities,
-    flags = {
-        debounce_text_changes = 150,
     },
-    settings = {
+    efm = {
         rootMarkers = {".git/"},
         languages = {
             markdown = {
@@ -89,5 +54,16 @@ nvim_lsp.efm.setup {
                 },
             }
         }
-    }
+    },
 }
+
+for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup {
+        on_attach = config.on_attach,
+        capabilities = capabilities,
+        flags = {
+            debounce_text_changes = 150,
+        },
+        settings = server_settings[lsp] or {}
+    }
+end
