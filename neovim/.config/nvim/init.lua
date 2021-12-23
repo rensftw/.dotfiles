@@ -1,6 +1,6 @@
 -- Globals
 require 'user.options'
-require 'user.plugins'
+require 'user.plugin-manager'
 require 'user.keymaps'
 require 'user.autocommands'
 
