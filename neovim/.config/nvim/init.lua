@@ -1,13 +1,9 @@
 -- Globals
 require 'user.options'
 require 'user.plugin-manager'
+require('user.theme')
 require 'user.keymaps'
 require 'user.autocommands'
-
--- Theme
-vim.g.tokyonight_style = 'night'
-vim.g.tokyonight_lualine_bold = 'true'
-vim.cmd [[colorscheme tokyonight]]
 
 -- LSP setup
 require 'lsp.setup-lsp-servers'
