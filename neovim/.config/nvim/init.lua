@@ -1,7 +1,7 @@
 -- Globals
 require 'user.options'
 require 'user.packer'
-require('user.theme')
+require 'user.theme'
 require 'user.keymaps'
 require 'user.autocommands'
 
@@ -20,7 +20,7 @@ require 'plugin.gitsigns-rc'
 require 'plugin.ultisnips-rc'
 require 'plugin.doge-rc'
 require 'plugin.autopairs-rc'
-require 'plugin.alpha-rc'
+-- require 'plugin.alpha-rc'
 
 require 'Comment'.setup()
 require 'colorizer'.setup()
