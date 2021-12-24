@@ -3,6 +3,7 @@ neovim/.config/nvim/plugin/packer_compiled.lua
 neovim/.config/nvim/.netrwhist
 bpytop/.config/bpytop/error.log
 __pycache__
+Session.vim
 
 # Ignore work-related snippets
 neovim/.config/nvim/UltiSnips/markdown.snippets
