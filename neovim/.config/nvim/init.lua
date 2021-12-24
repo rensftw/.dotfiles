@@ -20,7 +20,7 @@ require 'plugin.gitsigns-rc'
 require 'plugin.ultisnips-rc'
 require 'plugin.doge-rc'
 require 'plugin.autopairs-rc'
--- require 'plugin.alpha-rc'
+require 'plugin.alpha-rc'
 
 require 'Comment'.setup()
 require 'colorizer'.setup()
