@@ -55,6 +55,7 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {'buffers'},
+    lualine_y = {function() return vim.fn.ObsessionStatus('⟳ ', '⏻︎') end},
     lualine_z = {'tabs'},
     },
   extensions = {
