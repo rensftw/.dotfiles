@@ -30,6 +30,9 @@ return require('packer').startup(function(use)
     -- File explorer
     use 'kyazdani42/nvim-tree.lua'
 
+    -- Add indent guides
+    use 'lukas-reineke/indent-blankline.nvim'
+
     -- LSP
     use 'neovim/nvim-lspconfig'
     use 'tami5/lspsaga.nvim'
