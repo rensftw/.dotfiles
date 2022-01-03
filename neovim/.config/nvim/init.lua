@@ -21,6 +21,7 @@ require 'plugin.ultisnips-rc'
 require 'plugin.doge-rc'
 require 'plugin.autopairs-rc'
 require 'plugin.alpha-rc'
+require 'plugin.indent-blankline-rc'
 
 require 'Comment'.setup()
 require 'colorizer'.setup()

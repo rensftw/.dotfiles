@@ -3,8 +3,6 @@ vim.o.tabstop = 4                                -- show existing tab with 4 spa
 vim.o.shiftwidth = 4                             -- when indenting with '>', use 4 spaces width
 vim.o.softtabstop = 4                            -- edit as if tabs are 4 characters wide
 vim.o.expandtab = true                           -- on pressing tab, insert 4 spaces
-vim.o.list = true                                -- show invisible characters
-vim.o.listchars = 'trail:·,tab:→ ,nbsp:×'      -- define characters for showing whitespaces (eol:¬)
 vim.o.updatetime = 50                            -- improve performance
 vim.o.hidden = true                              -- current buffer can be put into background
 vim.o.autowrite = true                           -- all modified buffers are written before closing
@@ -19,6 +17,15 @@ vim.o.cursorline = true                          -- highlight the line where the
 vim.o.splitright = true                          -- horizontal split should split to the right
 vim.o.splitbelow = true                          -- vertical split should split below
 vim.o.completeopt = 'menuone,noinsert,noselect'  -- do not auto-complete
+
+-- Show invisible characters
+vim.o.list = true
+-- vim.opt.listchars:append('space:·')
+-- vim.opt.listchars:append('eol:↴')
+vim.opt.listchars:append('trail:·')
+vim.opt.listchars:append('tab:→ ')
+vim.opt.listchars:append('nbsp:×')
+
 -- Enable true colors, if possible
 vim.o.termguicolors = true
 vim.g['&t_8f'] = "\\<Esc>[38;2;%lu;%lu;%lum"
