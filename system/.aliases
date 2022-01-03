@@ -24,6 +24,7 @@ alias aa="nvim $ALIASES_LOCATION"
 # Use neovim by default
 alias vi="nvim"
 alias v="nvim"
+alias vs="nvim -S"      # open neovim with session
 
 # Colorize the output of tree
 alias tree="tree -C"
