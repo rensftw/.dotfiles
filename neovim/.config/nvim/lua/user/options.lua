@@ -32,11 +32,16 @@ vim.o.guicursor = vim.o.guicursor .. 'o:hor50,'
 vim.o.guicursor = vim.o.guicursor .. 'a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,'
 vim.o.guicursor = vim.o.guicursor .. 'sm:block-blinkwait175-blinkoff150-blinkon175'
 
-
 -- Search settings
 vim.o.path = vim.o.path .. '**'                 -- search upwards and downwards the directory
 vim.o.ignorecase = true                         -- case-insensitive searching
 vim.o.smartcase = true                          -- case-sensitive if expresson contains a capital letters
+
+-- Grep settings
+-- example search with glob pattern:
+-- grep 'return this.items' --glob '*.js'
+vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
+vim.o.grepformat = '%f:%l:%c:%m'
 
 -- Ignore folders
 vim.o.wildignore = '**/dist/*'
