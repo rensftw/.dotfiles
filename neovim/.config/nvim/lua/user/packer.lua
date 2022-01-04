@@ -58,9 +58,6 @@ return require('packer').startup(function(use)
     -- Documentation comments
     use {'kkoomen/vim-doge', run = ':call doge#install()'}
 
-    -- Tags
-    use 'ludovicchabant/vim-gutentags'
-
     -- Git utilities
     use 'tpope/vim-fugitive'
     use 'lewis6991/gitsigns.nvim'
