@@ -1,6 +1,7 @@
 @vue/cli
 bash-language-server
 code-complexity
+corepack
 diagnostic-languageserver
 emmet-ls
 eshost-cli
