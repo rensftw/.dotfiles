@@ -9,7 +9,7 @@
 			<key>ASCII_Tables</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-01T15:27:56Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -25,7 +25,7 @@
 			<key>Ack</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:26:59Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -46,7 +46,7 @@
 			<key>Axios</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-01T15:27:58Z</date>
+				<date>2022-01-04T20:32:58Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -62,7 +62,7 @@
 			<key>Bash_Shortcuts</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:01Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -80,7 +80,7 @@
 			<key>CSS_Device_Media_Queries</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:12Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -96,7 +96,7 @@
 			<key>Conventional_Commits</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:10Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -112,7 +112,7 @@
 			<key>Crontab</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-01T15:28:09Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -128,7 +128,7 @@
 			<key>Docker</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:17Z</date>
+				<date>2022-01-04T20:32:56Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -144,7 +144,7 @@
 			<key>Dockerfile</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:18Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -160,7 +160,7 @@
 			<key>Emoji</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:23Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -176,7 +176,7 @@
 			<key>Git</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:27Z</date>
+				<date>2022-01-04T20:32:56Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -197,7 +197,7 @@
 			<key>HTML_Entities</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:44Z</date>
+				<date>2022-01-04T20:32:58Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -213,7 +213,7 @@
 			<key>HTML_Head_Elements</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:43Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -229,7 +229,7 @@
 			<key>HTTP_Header_Fields</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:40Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -245,7 +245,7 @@
 			<key>HTTP_Status_Codes</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:38Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -261,7 +261,7 @@
 			<key>Kubernetes</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:51Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -277,7 +277,7 @@
 			<key>LaTeX_Math_Symbols</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:56Z</date>
+				<date>2022-01-04T20:32:59Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -293,7 +293,7 @@
 			<key>Licenses</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-01T15:28:21Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -309,7 +309,7 @@
 			<key>Unix_File_Permissions</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:28:18Z</date>
+				<date>2022-01-04T20:32:56Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -327,7 +327,7 @@
 			<key>Vim</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:28:19Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -343,7 +343,7 @@
 			<key>Vimdiff</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-01T15:28:40Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -359,7 +359,7 @@
 			<key>YAML</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:28:30Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -375,7 +375,7 @@
 			<key>iTerm2</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:45Z</date>
+				<date>2022-01-04T20:32:58Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -396,7 +396,7 @@
 			<key>npm</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:27:59Z</date>
+				<date>2022-01-04T20:32:57Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -438,7 +438,7 @@
 			<key>facebook/jest</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-29T17:12:00Z</date>
+				<date>2022-01-04T20:39:56Z</date>
 				<key>entry</key>
 				<dict>
 					<key>name</key>
@@ -452,7 +452,7 @@
 			<key>testing-library/cypress-testing-library</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-30T13:50:25Z</date>
+				<date>2022-01-04T20:33:11Z</date>
 				<key>entry</key>
 				<dict>
 					<key>name</key>
@@ -466,7 +466,7 @@
 			<key>testing-library/dom-testing-library</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-30T13:50:22Z</date>
+				<date>2022-01-04T20:33:41Z</date>
 				<key>entry</key>
 				<dict>
 					<key>name</key>
@@ -480,7 +480,7 @@
 			<key>testing-library/testing-library-docs</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-30T13:50:56Z</date>
+				<date>2022-01-04T20:34:29Z</date>
 				<key>entry</key>
 				<dict>
 					<key>name</key>
@@ -494,7 +494,7 @@
 			<key>testing-library/vue-testing-library</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-30T13:50:37Z</date>
+				<date>2022-01-04T20:33:13Z</date>
 				<key>entry</key>
 				<dict>
 					<key>name</key>
@@ -603,112 +603,112 @@
 			<key>http://kapeli.com/feeds/Ansible.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:35:59Z</date>
+				<date>2022-01-04T20:34:42Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Bash.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:32:58Z</date>
+				<date>2022-01-04T20:32:59Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/CMake.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:35:58Z</date>
+				<date>2022-01-04T20:33:11Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/CSS.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:28:58Z</date>
+				<date>2022-01-04T20:34:19Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/D3JS.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-03T13:32:29Z</date>
+				<date>2022-01-04T20:34:45Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Dart.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-24T16:24:14Z</date>
+				<date>2022-01-04T20:34:42Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Django.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:39:23Z</date>
+				<date>2022-01-04T20:34:05Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Docker.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-08T12:34:29Z</date>
+				<date>2022-01-04T20:33:58Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Express.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-03T13:23:50Z</date>
+				<date>2022-01-04T20:37:42Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Flask.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:39:20Z</date>
+				<date>2022-01-04T20:34:47Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/HTML.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:28:47Z</date>
+				<date>2022-01-04T20:35:31Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/JavaScript.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:33:24Z</date>
+				<date>2022-01-04T20:39:02Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Lua_5.4.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-09T13:00:58Z</date>
+				<date>2022-01-04T20:34:06Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Markdown.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:31:57Z</date>
+				<date>2022-01-04T20:37:33Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/NodeJS.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-03T13:23:48Z</date>
+				<date>2022-01-04T20:34:58Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/NumPy.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:39:26Z</date>
+				<date>2022-01-04T20:35:30Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Python_3.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:39:20Z</date>
+				<date>2022-01-04T20:35:51Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/React.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:32:13Z</date>
+				<date>2022-01-04T20:34:50Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/SVG.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-11-03T13:33:21Z</date>
+				<date>2022-01-04T20:37:57Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/TypeScript.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:39:40Z</date>
+				<date>2022-01-04T20:35:44Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/Vim.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T19:39:32Z</date>
+				<date>2022-01-04T20:37:34Z</date>
 			</dict>
 			<key>http://kapeli.com/feeds/VueJS.xml</key>
 			<dict>
 				<key>date</key>
-				<date>2021-10-30T18:29:17Z</date>
+				<date>2022-01-04T20:37:46Z</date>
 			</dict>
 		</dict>
 		<key>uninstalled</key>
