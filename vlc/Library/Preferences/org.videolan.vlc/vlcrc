@@ -1,5 +1,5 @@
 ﻿###
-###  vlc 3.0.12
+###  vlc 3.0.16
 ###
 
 ###
@@ -551,7 +551,7 @@ macosx-dim-keyboard=1
 #sout-avi-subject=
 
 # Encoder (string)
-#sout-avi-encoder=VLC Media Player - 3.0.12 Vetinari
+#sout-avi-encoder=VLC Media Player - 3.0.16 Vetinari
 
 # Keywords (string)
 #sout-avi-keywords=
@@ -3454,6 +3454,11 @@ subsdec-encoding=Windows-1251
 
 # Discontinuous Transmission (boolean)
 #sout-speex-dtx=0
+
+[libass] # Subtitle renderers using libass
+
+# Additional fonts directory (string)
+#ssa-fontsdir=
 
 [ddummy] # Dummy decoder
 
