@@ -18,6 +18,7 @@ MaxvanderSchee.web-accessibility
 mikestead.dotenv
 mohsen1.prettify-json
 ms-python.python
+ms-python.vscode-pylance
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
