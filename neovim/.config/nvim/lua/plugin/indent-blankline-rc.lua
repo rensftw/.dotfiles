@@ -25,7 +25,7 @@ vim.g.indent_blankline_context_patterns = {
 }
 
 vim.g.indent_blankline_buftype_exclude = { 'terminal' }
-vim.g.indent_blankline_filetype_exclude = { 'alpha' }
+vim.g.indent_blankline_filetype_exclude = { 'alpha', 'help' }
 
 require('indent_blankline').setup {
     space_char_blankline = " ",
