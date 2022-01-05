@@ -2,7 +2,6 @@
 bash-language-server
 code-complexity
 corepack
-diagnostic-languageserver
 emmet-ls
 eshost-cli
 eslint-config-airbnb-base
@@ -23,4 +22,3 @@ vim-language-server
 vls
 vscode-langservers-extracted
 yaml-language-server
-yarn
