@@ -1,9 +1,3 @@
-require'nvim-tree'.setup{
-    git = {
-        ignore = false
-    }
-}
-
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 local list = {
   { key = {"<CR>", "l", "<2-LeftMouse>"}, cb = tree_cb("edit") },
@@ -27,6 +21,9 @@ local list = {
 }
 
 require'nvim-tree'.setup {
+    git = {
+        ignore = false
+    },
     view = {
         mappings = {
             list = list
