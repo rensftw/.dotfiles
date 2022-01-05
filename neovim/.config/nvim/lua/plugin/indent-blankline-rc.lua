@@ -24,6 +24,9 @@ vim.g.indent_blankline_context_patterns = {
     'operation_type'
 }
 
+vim.g.indent_blankline_buftype_exclude = { 'terminal' }
+vim.g.indent_blankline_filetype_exclude = { 'alpha' }
+
 require('indent_blankline').setup {
     space_char_blankline = " ",
     show_current_context = true,
