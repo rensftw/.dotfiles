@@ -1,7 +1,6 @@
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
-
 if [[ -n $HOMEBREW_BUNDLE_FILE ]] && command -v brew &> /dev/null; then
     echo "🧼 ${GREEN}Clean up Homebrew cache and dangling dependencies${NC}"
     # Remove stale lock files and outdated downloads for all formulae and casks, and remove old versions of installed formulae.
