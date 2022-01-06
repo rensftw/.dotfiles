@@ -24,5 +24,3 @@ source _scripts/install-pip-packages.sh
 echo "🎉 ${GREEN}Installation complete!${NC}"
 source _scripts/goodbye.sh
 
-exit
-
