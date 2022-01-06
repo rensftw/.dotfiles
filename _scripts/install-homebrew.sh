@@ -6,10 +6,8 @@ else
     echo "🍺 ${CYAN}Installing Homebrew${NC}"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    # Apple Silicon macs do not automatically include Brew in the global PATH
-    if [[ $ARCH =~ 'arm' ]]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
+    # Manually export brew variables, since dotfiles have not been stowed yet
+    source _scripts/export-brew-variables.sh
 
     # Disable Homebrew analytics (which are on by default)
     brew analytics off
