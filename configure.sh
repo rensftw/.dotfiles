@@ -4,34 +4,34 @@
 source _scripts/colors.sh
 
 # Welcome message
-sh _scripts/welcome.sh
+source _scripts/welcome.sh
 
 echo "🛠  ${PURPLE}Beginning tool configuration...${NC}"
 
 # Fetch dependencies (as git modules or manually)
-sh _scripts/fetch-dependencies.sh
+source _scripts/fetch-dependencies.sh
 
 # Link dotfiles with stow
-sh _scripts/stow.sh
+source _scripts/stow.sh
 
 # Reload to start using ZSH
-sh _scripts/setup-shell.sh
+source _scripts/setup-shell.sh
 
 # Install neovim plugins
-sh _scripts/install-neovim-plugins.sh
+source _scripts/install-neovim-plugins.sh
 
 # Set up VSCode (packages, keybindings, settings, custom snippets)
-sh _scripts/setup-vscode.sh
+source _scripts/setup-vscode.sh
 
 # Set up iTerm2 (theme + settings)
-sh _scripts/setup-iterm2.sh
+source _scripts/setup-iterm2.sh
 
 # Set up Rectangle
-sh _scripts/setup-rectangle.sh
+source _scripts/setup-rectangle.sh
 
 # Set up Dash
-sh _scripts/setup-dash.sh
+source _scripts/setup-dash.sh
 
 echo "🧰 ${GREEN}Configuration complete.${NC}"
-sh _scripts/tools-ready.sh
+source _scripts/tools-ready.sh
 

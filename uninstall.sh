@@ -8,16 +8,16 @@ read ANSWER
 
 if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Remove pyenv artifacts
-    sh _scripts/uninstall-pyenv.sh
+    source _scripts/uninstall-pyenv.sh
 
     # Remove all dotfiles
-    sh _scripts/unstow.sh
+    source _scripts/unstow.sh
 
     # Remove all casks/taps/formulae and then uninstall Homebrew itself
-    sh _scripts/uninstall-homebrew.sh
+    source _scripts/uninstall-homebrew.sh
 
     # Uninstall nvm and all artifacts
-    sh _scripts/uninstall-nvm.sh
+    source _scripts/uninstall-nvm.sh
 else
     echo "${CYAN}No changes made. Quitting.."${NC}
     exit
