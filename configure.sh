@@ -1,6 +1,9 @@
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
+# Manually export brew variables, since dotfiles have not been stowed yet
+source _scripts/export-brew-variables.sh
+
 # Welcome message
 source _scripts/welcome.sh
 
