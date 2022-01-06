@@ -8,6 +8,9 @@ map('n', 'W', ':wall<CR>', opts)
 -- Delete all other buffers
 map('n', 'B', ':BufOnly<CR>', opts)
 
+-- Close all other tabs
+map('n', 'T', ':tabonly<CR>', opts)
+
 -- Make double-<Esc> clear search highlights
 map('n', '<Esc><Esc>', '<Esc>:nohlsearch<CR><Esc>', opts)
 
