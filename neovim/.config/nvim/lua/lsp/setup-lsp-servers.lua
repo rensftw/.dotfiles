@@ -50,9 +50,9 @@ local server_settings = {
                     lintCommand = 'vale --output=$HOME/.config/vale/output.tmpl ${INPUT}',
                     lintStdin= false,
                     lintFormats = {
-                        '%f:%l:%c:%trror %m',
-                        '%f:%l:%c:%tarning %m',
-                        '%f:%l:%c:%tuggestion %m',
+                        '%f:%l:%c:%trror:%m',
+                        '%f:%l:%c:%tarning:%m',
+                        '%f:%l:%c:%tuggestion:%m',
                     }
                 },
             }

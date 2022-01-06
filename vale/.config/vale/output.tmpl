@@ -2,9 +2,9 @@
 {{- /* See also https://docs.errata.ai/vale/cli#template-examples */ -}}
 {{- /* https://github.com/errata-ai/vale/issues/350 */ -}}
 {{- range .Files}}
-	{{- $p := .Path -}}
-	{{- range .Alerts -}}
-		{{- printf "%s:%d:%d:%s %s" $p .Line (index .Span 0) .Severity .Message }}
-	{{end -}}
+{{- $p := .Path -}}
+{{- range .Alerts -}}
+{{- printf "%s:%d:%d:%s:[%s] %s" $p .Line (index .Span 0) .Severity .Check .Message }}
+{{end -}}
 {{end}}
 
