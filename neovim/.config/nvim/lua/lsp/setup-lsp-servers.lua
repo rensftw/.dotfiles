@@ -52,7 +52,7 @@ local server_settings = {
                     lintFormats = {
                         '%f:%l:%c:%trror:%m',
                         '%f:%l:%c:%tarning:%m',
-                        '%f:%l:%c:%tuggestion:%m',
+                        '%f:%l:%c:%tnfo:%m',
                     }
                 },
             }
