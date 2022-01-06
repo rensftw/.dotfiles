@@ -1,4 +1,5 @@
-vim.g.mapleader = " "                            -- use <space> as the leader key
+vim.g.mapleader = ' '                            -- use <space> as the leader key
+vim.o.mouse = 'nv'                               -- enable mouse support for normal an visual modes
 vim.o.tabstop = 4                                -- show existing tab with 4 spaces width
 vim.o.shiftwidth = 4                             -- when indenting with '>', use 4 spaces width
 vim.o.softtabstop = 4                            -- edit as if tabs are 4 characters wide
@@ -28,8 +29,8 @@ vim.opt.listchars:append('nbsp:×')
 
 -- Enable true colors, if possible
 vim.o.termguicolors = true
-vim.g['&t_8f'] = "\\<Esc>[38;2;%lu;%lu;%lum"
-vim.g['&t_8b'] = "\\<Esc>[48;2;%lu;%lu;%lum"
+vim.g['&t_8f'] = '\\<Esc>[38;2;%lu;%lu;%lum'
+vim.g['&t_8b'] = '\\<Esc>[48;2;%lu;%lu;%lum'
 
 -- Cursor shape/blinking settings
 vim.o.guicursor = 'n-v-c:block-blinkwait175-blinkoff150-blinkon175,'
