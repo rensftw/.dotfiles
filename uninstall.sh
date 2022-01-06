@@ -1,5 +1,4 @@
-#!/bin/zsh
-
+# Import ANSI escape codes for colors
 source _scripts/colors.sh
 
 echo "${RED}This action is irreversible. Are you sure you want to proceed? (y/n)${NC}"
