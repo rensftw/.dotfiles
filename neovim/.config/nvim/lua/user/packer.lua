@@ -3,7 +3,7 @@ local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
 -- Automatically install Packer
 if fn.empty(fn.glob(install_path)) > 0 then
- fn.system({
+    packer_bootstrap = fn.system({
         'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
         install_path
     })
@@ -100,4 +100,10 @@ return require('packer').startup(function(use)
 
     -- Markdown preview
     use 'ellisonleao/glow.nvim'
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end)

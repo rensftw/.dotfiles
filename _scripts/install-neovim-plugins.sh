@@ -1,3 +1,3 @@
 echo "🔌 ${CYAN}Installing vim plugins${NC}"
 
-nvim --headless +'PackerInstall' +qall > /dev/null
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
