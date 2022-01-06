@@ -29,3 +29,11 @@ vim.cmd [[
 -- close all buffers except the active one,
 -- and return focus to the same spot it was initially
 vim.api.nvim_command [[command! BufOnly execute 'wa | %bdelete | edit # | bdelete # | normal `"']]
+
+-- Git show a commit using difftool
+    -- function! GitShowHelper(commitHash)
+    --     execute Git show commitHash~ commitHash
+    -- endfunction
+
+vim.api.nvim_command [[command! -nargs=1 GitShow execute 'Git difftool -y <args>~ <args>']]
+
