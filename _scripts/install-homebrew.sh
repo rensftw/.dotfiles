@@ -8,7 +8,7 @@ else
 
     # Apple Silicon macs do not automatically include Brew in the global PATH
     if [[ $ARCH =~ 'arm' ]]; then
-        eval $(/opt/homebrew/bin/brew shellenv)
+        eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
 
     # Disable Homebrew analytics (which are on by default)
