@@ -13,5 +13,4 @@ else
 
     # Disable Homebrew analytics (which are on by default)
     brew analytics off
-    exit
 fi

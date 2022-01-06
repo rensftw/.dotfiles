@@ -11,7 +11,6 @@ if command -v code &> /dev/null; then
     done < _vscode/vscode-extensions
 else
     echo "❌ ${RED}Failed to install Code extensions. Cannot find code CLI.${NC}"
-    exit
 fi
 
 if [ -d "${VSCODE_DIR}" ]; then
@@ -30,5 +29,4 @@ if [ -d "${VSCODE_DIR}" ]; then
     fi
 else
     echo "❌ ${RED}Failed to install customizations. Cannot find VSCode application folder.${NC}"
-    exit
 fi
