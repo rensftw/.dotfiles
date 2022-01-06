@@ -1,6 +1,7 @@
 [user]
     name = Irena Angelova
     email = 22574186+rensftw@users.noreply.github.com
+	signingKey = FBB982E0340190AE
 
 [color]
     ui = true
@@ -30,3 +31,5 @@
 
 [pull]
     rebase = false
+[commit]
+	gpgsign = true
