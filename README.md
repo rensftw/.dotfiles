@@ -40,8 +40,11 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 
 
 ### Screenshots
+Interactive git operations with fzf 🎥
+https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4
+
 <details>
-    <summary>Expand 📸</summary>
+    <summary>Expand for more screenshots 📸</summary>
     <div>
         <p>
             <a href="https://github.com/romkatv/powerlevel10k/">Powerlevel10k</a> Rainbow prompt with modified <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> on <a href="https://iterm2.com/">iTerm</a>
@@ -51,16 +54,6 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
     <div>
         <p>Neovim with <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> theme:<p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-tokyonight-theme.png"/>
-    </div>
-    <div>
-        <p>Interactive git operations with fzf:</p>
-        https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4
-        <embed
-            src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-commands-with-fzf.mp4"
-            autostart="false"
-            height="600"
-            width="800"
-        />
     </div>
     <div>
         <p>BpyTOP for process monitoring:<p>
