@@ -1,12 +1,7 @@
-@vue/cli
 bash-language-server
 code-complexity
-corepack
 emmet-ls
 eshost-cli
-eslint-config-airbnb-base
-eslint-plugin-import
-eslint-plugin-vue
 eslint
 http-server
 jest
