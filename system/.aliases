@@ -89,11 +89,6 @@ weather() {
     curl "v2.wttr.in/$1?m"
 }
 
-# App shortcut aliases
-alias chrome="open -a /Applications/Google\ Chrome.app"
-alias ff="open -a Firefox.app"
-alias cds='open -a Google\ Chrome --args --user-data-dir="/tmp/chrome_dev_test" --disable-web-security'
-
 # List all homebrew leaves and their dependencies
 # Source: https://stackoverflow.com/questions/41029842/easy-way-to-have-homebrew-list-all-package-dependencies
 # Sample output:
