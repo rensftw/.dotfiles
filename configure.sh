@@ -9,9 +9,6 @@ source _scripts/welcome.sh
 
 echo "🛠  ${PURPLE}Beginning tool configuration...${NC}"
 
-# Fetch dependencies (as git modules or manually)
-source _scripts/fetch-dependencies.sh
-
 # Link dotfiles with stow
 source _scripts/stow.sh
 
