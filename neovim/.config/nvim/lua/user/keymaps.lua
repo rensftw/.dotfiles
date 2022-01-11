@@ -28,6 +28,14 @@ map('v', 'y', 'ygv<Esc>', opts)
 map('v', '>', '>gv', opts)
 map('v', '<', '<gv', opts)
 
+-- Center search results
+map('n', 'n', 'nzz', opts)
+map('n', 'N', 'Nzz', opts)
+map('n', '*', '*zz', opts)
+map('n', '#', '#zz', opts)
+map('n', 'g*', 'g*zz', opts)
+map('n', 'g#', 'g#zz', opts)
+
 -- Copy to the shared register
 map('n', '<leader>y', '"+yiw', opts)
 map('v', '<leader>y', '"*y', opts)
