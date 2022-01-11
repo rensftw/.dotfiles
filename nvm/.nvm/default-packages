@@ -1,11 +1,9 @@
 bash-language-server
 code-complexity
 emmet-ls
-eshost-cli
 eslint
 http-server
 jest
-jsvu
 nodemon
 npkill
 npm
