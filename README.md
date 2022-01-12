@@ -40,26 +40,32 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 
 
 ### Screenshots
-Interactive git operations with fzf 🎥
-
-https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4
-
 <details>
-    <summary>Expand for more screenshots 📸</summary>
+    <summary>Expand to see screenshots 📸</summary>
     <div>
         <p>
             <a href="https://github.com/romkatv/powerlevel10k/">Powerlevel10k</a> Rainbow prompt with modified <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> on <a href="https://iterm2.com/">iTerm</a>
         </p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/iterm-with-modified-tokyonight-theme.png"/>
     </div>
+    <br />
+    <div>
+        <p>
+            Interactive git operations with <a href="https://github.com/junegunn/fzf">fzf</a> 🎥
+            <a href="https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4">video</a>
+        </p>
+    </div>
+    <br />
     <div>
         <p>Neovim with customized <a href="https://github.com/goolord/alpha-nvim">Alpha start screen</a> and dynamic quotes</p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-start-screen.png"/>
     </div>
+    <br />
     <div>
         <p>Neovim with <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> theme:<p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-tokyonight-theme.png"/>
     </div>
+    <br />
     <div>
         <p>BpyTOP for process monitoring:<p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/bpytop-process-manager.png" />
