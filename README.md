@@ -50,15 +50,6 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
     </div>
     <br />
     <div>
-        <p>
-            Interactive git operations with <a href="https://github.com/junegunn/fzf">fzf</a>
-        </p>
-        <p>
-            🎥 <a href="https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4">video</a>
-        </p>
-    </div>
-    <br />
-    <div>
         <p>Neovim with customized <a href="https://github.com/goolord/alpha-nvim">Alpha start screen</a> and dynamic quotes</p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-start-screen.png"/>
     </div>
@@ -66,6 +57,15 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
     <div>
         <p>Neovim with <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> theme:<p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-tokyonight-theme.png"/>
+    </div>
+    <br />
+    <div>
+        <p>
+            Interactive git operations with <a href="https://github.com/junegunn/fzf">fzf</a>
+        </p>
+        <p>
+            🎥 <a href="https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4">video</a>
+        </p>
     </div>
     <br />
     <div>
