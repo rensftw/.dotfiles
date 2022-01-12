@@ -53,6 +53,10 @@ https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/iterm-with-modified-tokyonight-theme.png"/>
     </div>
     <div>
+        <p>Neovim with customized <a href="https://github.com/goolord/alpha-nvim">Alpha start screen</a> and dynamic quotes</p>
+        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-start-screen.png"/>
+    </div>
+    <div>
         <p>Neovim with <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> theme:<p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-tokyonight-theme.png"/>
     </div>
