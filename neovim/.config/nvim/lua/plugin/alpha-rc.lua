@@ -59,11 +59,12 @@ section.subtitle.val = nvim_version_info .. plugins_info
 -- Set menu
 section.buttons = { type = 'group', opts = { spacing =1 } }
 section.buttons.val = {
-    button( "e", "  New file" , ":ene <BAR> startinsert <CR>"),
-    button( "f", "  Find file", ":Telescope find_files previewer=false<CR>"),
-    button( "r", "↺  Recent"   , ":Telescope oldfiles previewer=false<CR>"),
-    button( "s", "  Settings" , ":e $VIMRC_LOCATION | :cd %:p:h | split . | wincmd k | pwd<CR>"),
-    button( "q", "✖  Quit NVIM", ":qa<CR>"),
+    button( "n", "  New file" ,        ":ene <BAR> startinsert <CR>"),
+    button( "f", "  Find file",        ":Telescope find_files previewer=false<CR>"),
+    button( "r", "↺  Recent"   ,        ":Telescope oldfiles previewer=false<CR>"),
+    button( "u", "  Update plugins",   ":PackerSync<CR>"),
+    button( "s", "  Settings" ,        ":e $VIMRC_LOCATION | :cd %:p:h | split . | wincmd k | pwd<CR>"),
+    button( "q", "✖  Quit NVIM",        ":qa<CR>"),
 }
 
 section.footer = { type = 'text', opts = { position = 'center', hl = 'Number' } }
