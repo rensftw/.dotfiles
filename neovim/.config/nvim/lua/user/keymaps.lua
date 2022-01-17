@@ -112,6 +112,8 @@ map('n', '<leader>gs', ':Gvdiffsplit!<CR>', opts)
 map('n', '<leader>gdm', ':Git difftool -y main<CR>', opts)
 -- Compare with any branch
 map('n', '<leader>gd', ':Git difftool -y', opts)
+-- Open a 3 way diff (useful for conflict resolution)
+map('n', '<leader>3', ':Gdiffsplit!<CR>', opts)
 
 -- Conflict resolution
 -- Choose which side to use for resolution
