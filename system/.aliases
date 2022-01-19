@@ -26,6 +26,9 @@ alias vi="nvim"
 alias v="nvim"
 alias vs="nvim -S"      # open neovim with session
 
+# System information (neofetch)
+alias si="neofetch --uptime_shorthand tiny --memory_percent on --refresh_rate on"
+
 # Colorize the output of tree
 alias tree="tree -C"
 
