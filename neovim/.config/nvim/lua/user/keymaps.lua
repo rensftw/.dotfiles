@@ -106,14 +106,13 @@ map('n', '<leader>mp', ':Glow<CR>', opts)
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
 -- See blame history for the current file
 map('n', '<leader>gB', ':Git blame<CR>', opts)
--- Open current file changes in a vertical split
+-- Open current file changes in a vertical split.
+-- This opens a 3-way diff if there are git conflict markers in the buffer.
 map('n', '<leader>gs', ':Gvdiffsplit!<CR>', opts)
 -- Compare current branch changes with main (populates quickfix list)
 map('n', '<leader>gdm', ':Git difftool -y main<CR>', opts)
 -- Compare with any branch
 map('n', '<leader>gd', ':Git difftool -y', opts)
--- Open a 3 way diff (useful for conflict resolution)
-map('n', '<leader>3', ':Gdiffsplit!<CR>', opts)
 
 -- Conflict resolution
 -- Choose which side to use for resolution
