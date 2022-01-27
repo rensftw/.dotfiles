@@ -8,7 +8,6 @@ nodemon
 npkill
 npm
 prettier
-speed-test
 typescript-language-server
 typescript
 vim-language-server
