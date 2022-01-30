@@ -45,8 +45,11 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
 
-    -- Session managements
+    -- Session management
     use 'tpope/vim-obsession'
+
+    -- Smooth scrolling
+    use 'karb94/neoscroll.nvim'
 
     -- JSON schemas
     use "b0o/schemastore.nvim"
