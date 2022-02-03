@@ -31,6 +31,9 @@ alias ta="tmux attach"
 alias tk="tmux kill-server"
 alias tl="tmux ls"
 
+# Kill background processes (like suspended jobs)
+alias kill-bg='kill -KILL ${${(v)jobstates##*:*:}%=*}'
+
 # System information (neofetch)
 alias si="neofetch --uptime_shorthand tiny --memory_percent on --refresh_rate on"
 
