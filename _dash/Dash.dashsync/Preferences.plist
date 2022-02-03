@@ -9,7 +9,7 @@
 			<key>ASCII_Tables</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:40Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -25,7 +25,7 @@
 			<key>Ack</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:41Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -46,7 +46,7 @@
 			<key>Axios</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:58Z</date>
+				<date>2022-01-31T12:39:43Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -62,7 +62,7 @@
 			<key>Bash_Shortcuts</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:37Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -80,7 +80,7 @@
 			<key>CSS_Device_Media_Queries</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:40Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -96,7 +96,7 @@
 			<key>Conventional_Commits</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-02-01T12:59:55Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -112,7 +112,7 @@
 			<key>Crontab</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:42Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -128,7 +128,7 @@
 			<key>Docker</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:56Z</date>
+				<date>2022-01-31T12:39:37Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -144,7 +144,7 @@
 			<key>Dockerfile</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:39Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -160,7 +160,7 @@
 			<key>Emoji</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:40Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -176,7 +176,7 @@
 			<key>Git</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-06T20:46:32Z</date>
+				<date>2022-01-31T12:39:39Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -197,7 +197,7 @@
 			<key>HTML_Entities</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:58Z</date>
+				<date>2022-01-31T12:39:43Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -213,7 +213,7 @@
 			<key>HTML_Head_Elements</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:42Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -229,7 +229,7 @@
 			<key>HTTP_Header_Fields</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:37Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -245,7 +245,7 @@
 			<key>HTTP_Status_Codes</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:40Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -261,7 +261,7 @@
 			<key>Kubernetes</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:41Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -277,7 +277,7 @@
 			<key>LaTeX_Math_Symbols</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:59Z</date>
+				<date>2022-01-31T12:39:42Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -293,7 +293,7 @@
 			<key>Licenses</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:42Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -309,7 +309,7 @@
 			<key>Unix_File_Permissions</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:56Z</date>
+				<date>2022-01-31T12:39:38Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -327,7 +327,7 @@
 			<key>Vim</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:38Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -343,7 +343,7 @@
 			<key>Vimdiff</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:39Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -359,7 +359,7 @@
 			<key>YAML</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:38Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -375,7 +375,7 @@
 			<key>iTerm2</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:58Z</date>
+				<date>2022-01-31T12:39:44Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
@@ -396,7 +396,7 @@
 			<key>npm</key>
 			<dict>
 				<key>date</key>
-				<date>2022-01-04T20:32:57Z</date>
+				<date>2022-01-31T12:39:43Z</date>
 				<key>entry</key>
 				<dict>
 					<key>aliases</key>
