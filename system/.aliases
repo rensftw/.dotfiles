@@ -28,6 +28,7 @@ alias vs="nvim -S"      # open neovim with session
 
 # tmux
 alias ta="tmux attach"
+alias tk="tmux kill-server"
 alias tl="tmux ls"
 
 # System information (neofetch)
