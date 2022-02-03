@@ -11,9 +11,6 @@ map('n', 'B', ':BufOnly<CR>', opts)
 -- Close all other tabs
 map('n', 'T', ':tabonly<CR>', opts)
 
--- Make double-<Esc> clear search highlights
-map('n', '<Esc><Esc>', '<Esc>:nohlsearch<CR><Esc>', opts)
-
 -- Prevent x from overriding what's in the clipboard.
 map('n', 'x', '"_x', opts)
 map('n', 'X', '"_x', opts)

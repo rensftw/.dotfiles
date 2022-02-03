@@ -32,14 +32,10 @@ require('telescope').setup{
             preview_cutoff = 120,
 
             horizontal = {
-                -- width_padding = 0.1,
-                -- height_padding = 0.1,
                 preview_width = 0.5,
             },
 
             vertical = {
-                -- width_padding = 0.05,
-                -- height_padding = 1,
                 width = 0.9,
                 height = 0.95,
                 preview_height = 0.5,
@@ -49,11 +45,6 @@ require('telescope').setup{
                 horizontal = {
                     preview_width = 0.9,
                 },
-            },
-        },
-        mappings = {
-            i = {
-                ['<esc>'] = actions.close
             },
         },
     },
