@@ -19,6 +19,7 @@ local servers = {
     'tsserver',
     'sumneko_lua',
     'efm',
+    'dockerls',
 }
 
 local server_settings = {
