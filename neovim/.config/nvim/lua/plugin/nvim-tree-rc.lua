@@ -25,6 +25,7 @@ require'nvim-tree'.setup {
         ignore = false
     },
     view = {
+        width = 60,
         mappings = {
             list = list
         }
