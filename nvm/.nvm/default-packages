@@ -5,6 +5,7 @@ emmet-ls
 eslint
 http-server
 jest
+neovim
 nodemon
 npkill
 npm
