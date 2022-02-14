@@ -40,7 +40,12 @@ require('lualine').setup {
                 },
             }
     },
-    lualine_c = {'filename'},
+        lualine_c = {
+            {
+                'filename',
+                path = 1,                       -- Shows relative path
+            }
+        },
     lualine_x = {'filetype', 'fileformat', 'encoding'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
