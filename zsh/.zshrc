@@ -14,6 +14,8 @@ export ZSHRC_LOCATION="$HOME/.zshrc"
 export ALIASES_LOCATION="$HOME/.aliases"
 export DOTFILES_LOCATION="$HOME/.dotfiles"
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
+# GPG needs to know TTY to work properly: https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+export GPG_TTY=$(tty)
 
 source $HOME/.aliases
 
