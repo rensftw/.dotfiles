@@ -24,6 +24,9 @@ require'nvim-tree'.setup {
     git = {
         ignore = false
     },
+    update_focused_file = {
+        enable = true
+    },
     view = {
         width = 60,
         mappings = {
