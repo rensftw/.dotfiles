@@ -9,6 +9,7 @@ require 'user.autocommands'
 require 'lsp.setup-lsp-servers'
 
 -- Plugin configuration
+require 'plugin.nvim-web-devicons-rc'
 require 'plugin.lualine-rc'
 require 'plugin.nvim-treesitter-rc'
 require 'plugin.telescope-rc'
