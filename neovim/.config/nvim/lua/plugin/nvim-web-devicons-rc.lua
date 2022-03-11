@@ -54,6 +54,12 @@ require'nvim-web-devicons'.setup {
             cterm_color = "59",
             name = "GitIgnore",
         },
+        ["sh"] = {
+            icon = "",
+            color = "#4daab7",
+            cterm_color = "59",
+            name = "Sh",
+        },
     };
     -- globally enable default icons (default to false)
     -- will get overriden by `get_icons` option
