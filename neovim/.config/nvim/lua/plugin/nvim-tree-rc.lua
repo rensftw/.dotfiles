@@ -1,4 +1,12 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+
+vim.g.nvim_tree_icons = {
+    folder = {
+        default = '',
+        open = '',
+    },
+}
+
 local list = {
   { key = {"<CR>", "l", "<2-LeftMouse>"}, cb = tree_cb("edit") },
   { key = {"<BS>", "h"},                  cb = tree_cb("close_node") },
