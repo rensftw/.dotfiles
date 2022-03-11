@@ -16,15 +16,6 @@ vim.api.nvim_command [[autocmd BufNewFile,BufRead .*aliases* set ft=sh]]
 -- Ensure tabs don't get converted to spaces in Makefiles.
 vim.api.nvim_command [[autocmd FileType make setlocal noexpandtab]]
 
--- Only show the cursor line in the active buffer.
-vim.cmd [[
-    augroup CursorLine
-        au!
-        au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-        au WinLeave * setlocal nocursorline
-    augroup END
-]]
-
 -- Write all changes to modified buffers,
 -- close all buffers except the active one,
 -- and return focus to the same spot it was initially
