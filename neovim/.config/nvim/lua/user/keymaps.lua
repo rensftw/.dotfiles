@@ -94,6 +94,9 @@ map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers()<CR>', opt
 map('n', '<leader>?', '<cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
 map('n', '<leader>c', '<cmd>lua require("telescope.builtin").commands()<CR>', opts)
 
+-- Symbols outline
+map('n', '<leader>s', ':SymbolsOutline<CR>', opts)
+
 -- Preview markdown
 map('n', '<leader>mp', ':Glow<CR>', opts)
 
