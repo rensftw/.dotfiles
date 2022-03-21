@@ -2,7 +2,7 @@
 vim.g.doge_mapping = '<leader>jd'
 vim.g.doge_filetype_aliases = {
     javascript = {
-        'vue',
+        -- 'vue', -- https://github.com/kkoomen/vim-doge/issues/324
         'javascript.jsx',
         'javascriptreact',
         'javascript.tsx',
