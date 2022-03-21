@@ -125,6 +125,3 @@ map('n', '[r', ':diffget //2<CR>', opts)
 map('n', 'r', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn", opts)
 map('x', 'r', '"sy:let @/=@s<CR>cgn', opts)
 
--- Diagnostics
-map('n', '<leader>D', ':TroubleToggle<CR>', opts)
-
