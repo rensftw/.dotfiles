@@ -97,9 +97,6 @@ map('n', '<leader>c', '<cmd>lua require("telescope.builtin").commands()<CR>', op
 -- Symbols outline
 map('n', '<leader>s', ':SymbolsOutline<CR>', opts)
 
--- Preview markdown
-map('n', '<leader>mp', ':Glow<CR>', opts)
-
 -- Git
 -- Copy relative file path to clipboard
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
