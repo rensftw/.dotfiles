@@ -39,7 +39,6 @@ return require('packer').startup(function(use)
     -- LSP
     use 'neovim/nvim-lspconfig'
     use 'tami5/lspsaga.nvim'
-    use 'folke/trouble.nvim'
     use 'hrsh7th/nvim-cmp'
     -- completion sources:
     use 'hrsh7th/cmp-nvim-lsp'
