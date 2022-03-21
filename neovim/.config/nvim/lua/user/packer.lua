@@ -104,7 +104,7 @@ return require('packer').startup(function(use)
     use 'norcalli/nvim-colorizer.lua'
 
     -- Markdown preview
-    use 'ellisonleao/glow.nvim'
+    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
 
     -- Seamless vim + tmux navigation
     use 'christoomey/vim-tmux-navigator'
