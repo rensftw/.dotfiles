@@ -2,6 +2,7 @@ local ls = require('luasnip')
 local types = require('luasnip.util.types')
 local javascript_snippets = require('snippets.javascript');
 local html_snippets = require('snippets.html')
+local comment_snippets = require('snippets.comments')
 -- local work_snippets = require('snippets.work')
 
 ls.config.set_config({
@@ -30,6 +31,7 @@ ls.config.set_config({
 })
 
 ls.snippets = {
+    all = comment_snippets,
     javascript = javascript_snippets,
     html = html_snippets,
     -- markdown = work_snippets
