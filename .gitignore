@@ -14,5 +14,5 @@ tmux/.tmux/resurrect/*
 tmux/.tmux/plugins/*
 
 # work-related snippets
-neovim/.config/nvim/UltiSnips/markdown.snippets
+neovim/.config/nvim/lua/snippets/work.lua
 _vscode/work.code-snippets
