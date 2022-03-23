@@ -60,8 +60,8 @@ return require('packer').startup(function(use)
     use "b0o/schemastore.nvim"
 
     -- Snippets
-    use 'SirVer/ultisnips'
-    use 'quangnguyen30192/cmp-nvim-ultisnips'
+    use 'L3MON4D3/LuaSnip'
+    use 'saadparwaiz1/cmp_luasnip'
 
     -- Documentation comments
     use {'kkoomen/vim-doge', run = ':call doge#install()'}
