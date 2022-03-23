@@ -7,19 +7,19 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
 )
 
 local servers = {
+    'tsserver',
+    'jsonls',
+    'vuels',
+    'eslint',
+    'html',
+    'emmet_ls',
+    'cssls',
+    'yamlls',
     'bashls',
     'vimls',
-    'html',
-    'cssls',
-    'jsonls',
-    'yamlls',
-    'emmet_ls',
-    'eslint',
-    'vuels',
-    'tsserver',
     'sumneko_lua',
-    'efm',
     'dockerls',
+    'efm',
 }
 
 local server_settings = {
