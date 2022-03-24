@@ -51,7 +51,7 @@ cmp.setup({
             vim_item.menu = ({
                 nvim_lsp = '〄',
                 nvim_lua = '',
-                luasnip = '𝕊 𝓢',
+                luasnip = '𝓢',
                 buffer   = '',
             })[entry.source.name]
             vim_item.kind = ({
