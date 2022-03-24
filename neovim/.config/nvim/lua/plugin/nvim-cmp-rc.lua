@@ -34,8 +34,8 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-        ['<S-up>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
-        ['<S-down>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
+        ['<C-k>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
+        ['<C-j>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
         ['<C-a>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
