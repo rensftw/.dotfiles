@@ -9,16 +9,14 @@ local c = ls.choice_node
 local function print_random_emoji()
     local emoji = {
         '🦄', '🚧', '📚', '🍯', '📮', '🐌', '🧵', '🧩',
-        '🤖', '🎙', '🍔', '💖', '🪖', '👑', '⚙️', '🧤',
+        '🤖', '🥜', '🍔', '💖', '🍀', '👑', '🔥', '🧤',
         '🚨', '🚗', '🎃', '💄', '👾', '🧠', '🦷', '🐲',
         '👒', '🌞', '🌈', '🐝', '🐡', '🌳', '🍇','🍓',
         '🥨', '🧀', '🍥', '🏀', '🏓', '🥊', '🎸', '🎯',
     }
 
     math.randomseed(os.time())
-    local random_emoji = emoji[math.random(1, 40)]
-    print(vim.inspect(random_emoji))
-    return random_emoji
+    return emoji[math.random(1, 40)]
 end
 
 local console_log = s(
