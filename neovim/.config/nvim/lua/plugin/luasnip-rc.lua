@@ -30,12 +30,10 @@ ls.config.set_config({
 	store_selection_keys = "<Tab>",
 })
 
-ls.snippets = {
-    all = comment_snippets,
-    javascript = javascript_snippets,
-    html = html_snippets,
-    -- markdown = work_snippets
-}
+ls.add_snippets('all', comment_snippets)
+ls.add_snippets('javascript', javascript_snippets)
+ls.add_snippets('html', html_snippets)
+-- ls.add_snippets('markdown', work_snippets)
 
 vim.api.nvim_set_keymap('i', '<C-s>', '<Plug>luasnip-next-choice', {})
 vim.api.nvim_set_keymap('s', '<C-s>', '<Plug>luasnip-next-choice', {})
