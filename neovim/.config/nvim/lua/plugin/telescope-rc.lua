@@ -1,5 +1,3 @@
-local actions = require('telescope.actions')
-
 require('telescope').setup{
     defaults = {
         vimgrep_arguments = {
@@ -48,6 +46,11 @@ require('telescope').setup{
             },
         },
     },
+    pickers = {
+        find_files = {
+            find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+        }
+    }
 }
 
 require('telescope').load_extension('fzf')
