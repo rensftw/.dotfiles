@@ -37,7 +37,7 @@ lspsaga.setup {
     exec = '<CR>',
   },
   definition_preview_icon = '  ',
-  border_style = 'single',
+  border_style = 'round',
   rename_prompt_prefix = '➤',
   server_filetype_map = {},
   diagnostic_prefix_format = '%d. ',
