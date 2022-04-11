@@ -1,6 +1,6 @@
 ---@diagnostic disable: different-requires
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 -- Automatically install Packer
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -18,13 +18,12 @@ return require('packer').startup(function(use)
     use 'goolord/alpha-nvim'
 
     -- Treesitter (AST-based syntax highlighting)
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     -- Telescope
     use 'kyazdani42/nvim-web-devicons'
-    use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use 'nvim-telescope/telescope.nvim'
 
     -- File explorer
@@ -64,7 +63,7 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
 
     -- Documentation comments
-    use {'kkoomen/vim-doge', run = ':call doge#install()'}
+    use { 'kkoomen/vim-doge', run = ':call doge#install()' }
 
     -- Git utilities
     use 'tpope/vim-fugitive'
@@ -107,7 +106,7 @@ return require('packer').startup(function(use)
     use 'norcalli/nvim-colorizer.lua'
 
     -- Markdown preview
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+    use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
 
     -- Seamless vim + tmux navigation
     use 'christoomey/vim-tmux-navigator'
