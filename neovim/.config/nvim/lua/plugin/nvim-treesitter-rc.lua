@@ -1,6 +1,39 @@
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = "maintained", -- install all parsers with maintainers
+require 'nvim-treesitter.configs'.setup {
+    ensure_installed = {
+        'bash',
+        'c',
+        'cmake',
+        'comment',
+        'cpp',
+        'css',
+        'dockerfile',
+        'go',
+        'graphql',
+        'help',
+        'html',
+        'http',
+        'javascript',
+        'jsdoc',
+        'json',
+        'jsonc',
+        'latex',
+        'lua',
+        'make',
+        'markdown', --experimental
+        'pug',
+        'python',
+        'regex',
+        'ruby',
+        'rust',
+        'scss',
+        'svelte',
+        'toml',
+        'tsx',
+        'typescript',
+        'vim',
+        'vue',
+        'yaml',
+    },
     highlight = { enable = true },
     indent = { enable = true },
 }
-
