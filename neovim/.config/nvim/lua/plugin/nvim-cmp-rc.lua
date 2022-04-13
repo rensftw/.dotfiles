@@ -2,8 +2,8 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 
 local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 cmp.setup({
@@ -34,13 +34,18 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-        ['<C-k>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
-        ['<C-j>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
-        ['<C-a>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
+        ['<C-k>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-j>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<C-a>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
-    documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    window = {
+        completion = {
+            border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+        },
+        documentation = {
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        }
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -54,7 +59,7 @@ cmp.setup({
             vim_item.menu = ({
                 nvim_lsp = '〄',
                 nvim_lua = '',
-                luasnip = '𝓢',
+                luasnip  = '𝓢',
                 buffer   = '',
             })[entry.source.name]
             vim_item.kind = ({
@@ -94,7 +99,7 @@ cmp.setup.cmdline(':', {
     completion = { autocomplete = false },
     sources = cmp.config.sources({
         { name = 'path' }
-        }, {
+    }, {
         { name = 'cmdline' }
     })
 })
