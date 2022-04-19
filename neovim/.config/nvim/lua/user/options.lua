@@ -19,6 +19,32 @@ vim.o.splitright = true                          -- horizontal split should spli
 vim.o.splitbelow = true                          -- vertical split should split below
 vim.o.completeopt = 'menuone,noinsert,noselect'  -- do not auto-complete
 
+-- Folds
+-- source: https://essais.co/better-folding-in-neovim/
+-- za: toggle fold (based on indentation)
+-- zM: close all folds in the buffer
+-- zR: open all folds in the buffer
+vim.api.nvim_exec([[
+    set foldexpr=nvim_treesitter#foldexpr()
+]], true)
+vim.opt.foldmethod = 'indent'
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
+vim.opt.fillchars = 'fold: '
+vim.api.nvim_exec([[
+    set foldtext=CustomFoldText()
+
+    function! CustomFoldText()
+      let indentation = indent(v:foldstart - 1)
+      let foldSize = 1 + v:foldend - v:foldstart
+      let foldSizeStr = " " . foldSize . " lines "
+      let foldLevelStr = repeat("+--", v:foldlevel)
+      let expansionString = repeat(" ", indentation)
+
+      return expansionString . foldLevelStr . foldSizeStr
+    endfunction
+]], true)
+
 -- Show invisible characters
 vim.o.list = true
 -- vim.opt.listchars:append('space:·')
