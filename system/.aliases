@@ -221,7 +221,7 @@ amibehind() {
 glmomo() {
   MAIN_BRANCH=$(_mb)
 
-  git log $MAIN_BRANCH..origin/$MAIN_BRANCH --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --color=always
+  git log $MAIN_BRANCH..origin/$MAIN_BRANCH --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%C(cyan)%C(bold)%an%C(auto))" --color=always
 }
 
 # What has happened to origin/main since I last pulled? (shows file changes)
