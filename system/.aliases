@@ -149,6 +149,13 @@ gstash() {
   cut -d: -f1
 }
 
+# Export git stash changes to a patchfile
+# source: https://stackoverflow.com/questions/3973034/export-a-stash-to-another-computer
+share-stash() {
+    STASH_ENTRY=$(gstash)
+    git stash show $STASH_ENTRY -p > changes.patch
+}
+
 # Git branch with commit log preview
 _gb() {
   is_in_git_repo || return
