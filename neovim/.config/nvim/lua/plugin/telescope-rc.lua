@@ -1,5 +1,13 @@
-require('telescope').setup{
+require('telescope').setup {
     defaults = {
+        mappings = {
+            n = {
+                ['dd'] = require('telescope.actions').delete_buffer
+            },
+            i = {
+                ['<c-d>'] = require('telescope.actions').delete_buffer
+            }
+        },
         vimgrep_arguments = {
             'rg',
             '--hidden',
@@ -54,4 +62,3 @@ require('telescope').setup{
 }
 
 require('telescope').load_extension('fzf')
-
