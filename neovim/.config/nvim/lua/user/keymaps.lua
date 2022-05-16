@@ -1,6 +1,6 @@
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 
-local opts = {noremap = true, silent = true}
+local opts = { silent = true }
 
 map('n', 'Q', ':wqall<CR>', opts)
 map('n', 'W', ':wall<CR>', opts)
@@ -121,4 +121,3 @@ map('n', '[r', ':diffget //2<CR>', opts)
 -- for replacing a few instances of the term (comparable to multiple cursors).
 map('n', 'r', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn", opts)
 map('x', 'r', '"sy:let @/=@s<CR>cgn', opts)
-
