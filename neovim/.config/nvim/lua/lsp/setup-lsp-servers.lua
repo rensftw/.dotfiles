@@ -33,68 +33,78 @@ local servers = {
     'efm',
 }
 
-local server_settings = {
+local server_config = {
     jsonls = {
-        json = {
-            schemas = require('schemastore').json.schemas(),
-        },
+        settings = {
+            json = {
+                schemas = require('schemastore').json.schemas(),
+            },
+        }
+    },
+    volar = {
+        init_options = {
+            typescript = {
+                serverPath = get_global_typescript_server()
+            }
+        }
     },
     yamlls = {
-        yaml = {
-            schemaStore = { enable = true }
+        settings = {
+            yaml = {
+                schemaStore = { enable = true }
+            }
         }
     },
     sumneko_lua = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT'
-            },
-            diagnostics = {
-                globals = { 'vim' }
-            },
-            telemetry = {
-                enable = false
-            }
-        }
-    },
-    efm = {
-        rootMarkers = { ".git/" },
-        languages = {
-            markdown = {
-                {
-                    lintCommand = 'vale --output=$HOME/.config/vale/output.tmpl ${INPUT}',
-                    lintStdin = false,
-                    lintFormats = {
-                        '%f:%l:%c:%trror:%m',
-                        '%f:%l:%c:%tarning:%m',
-                        '%f:%l:%c:%tnfo:%m',
-                    }
+        settings = {
+            Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT'
                 },
+                diagnostics = {
+                    globals = { 'vim' }
+                },
+                telemetry = {
+                    enable = false
+                }
             }
         }
     },
-}
-
-local server_init_options = {
-    volar = {
-        typescript = {
-            serverPath = get_global_typescript_server()
-        }
-    },
     efm = {
-        documentFormatting = false
+        init_options = {
+            documentFormatting = false
+        },
+        settings = {
+            rootMarkers = { ".git/" },
+            languages = {
+                markdown = {
+                    {
+                        lintCommand = 'vale --output=$HOME/.config/vale/output.tmpl ${INPUT}',
+                        lintStdin = false,
+                        lintFormats = {
+                            '%f:%l:%c:%trror:%m',
+                            '%f:%l:%c:%tarning:%m',
+                            '%f:%l:%c:%tnfo:%m',
+                        }
+                    },
+                }
+            }
+        }
     },
 }
 
 for _, lsp in ipairs(servers) do
+    local settings = server_config[lsp] and server_config[lsp].settings or {}
+    local init_options = server_config[lsp] and server_config[lsp].init_options or {}
+
     nvim_lsp[lsp].setup {
         on_attach = config.on_attach,
         capabilities = capabilities,
         flags = {
             debounce_text_changes = 150,
         },
-        settings = server_settings[lsp] or {},
-        init_options = server_init_options[lsp] or {}
+        settings = settings,
+        init_options = init_options,
     }
 end
