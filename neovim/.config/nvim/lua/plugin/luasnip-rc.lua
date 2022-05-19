@@ -32,6 +32,7 @@ ls.config.set_config({
 
 ls.add_snippets('all', comment_snippets)
 ls.add_snippets('javascript', javascript_snippets)
+ls.add_snippets('vue', javascript_snippets)
 ls.add_snippets('html', html_snippets)
 -- ls.add_snippets('markdown', work_snippets)
 
