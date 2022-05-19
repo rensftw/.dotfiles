@@ -12,7 +12,7 @@ Virtual_text.toggle = function()
     })
 end
 
-local highlight_symbol_under_cursor = function (client)
+local highlight_symbol_under_cursor = function(client)
     if client.resolved_capabilities.document_highlight then
         vim.cmd [[
         hi LspReferenceRead cterm=bold ctermbg=red guibg=#414868
@@ -27,7 +27,7 @@ local highlight_symbol_under_cursor = function (client)
     end
 end
 
-local enable_formatting_for_eligible_clients = function (client)
+local enable_formatting_for_eligible_clients = function(client)
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -42,7 +42,7 @@ M.on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
     -- Mappings
-    local opts = { noremap=true, silent=true }
+    local opts = { noremap = true, silent = true }
 
     buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -65,7 +65,7 @@ M.on_attach = function(client, bufnr)
     buf_set_keymap('n', '<S-down>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", opts)
 
     -- formatting
-    if client.name == 'tsserver' then
+    if client.name == 'tsserver' or client.name == 'volar' then
         client.resolved_capabilities.document_formatting = false
     end
 
