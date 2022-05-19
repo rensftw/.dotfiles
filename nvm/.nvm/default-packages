@@ -1,3 +1,4 @@
+@volar/vue-language-server
 bash-language-server
 code-complexity
 dockerfile-language-server-nodejs
@@ -13,7 +14,6 @@ prettier
 typescript-language-server
 typescript
 vim-language-server
-vls
 vscode-langservers-extracted
 yaml-language-server
 yarn

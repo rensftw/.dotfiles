@@ -3,13 +3,24 @@ local config = require('lsp.lspconfig-rc')
 
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
+    vim.lsp.protocol.make_client_capabilities()
 )
+
+-- Retrieve the global TS server library for the currently active node version
+local function get_global_typescript_server()
+    local command = 'which node'
+    local handle = io.popen(command)
+    local result = handle:read()
+    handle:close()
+
+    local globalNodePath = string.gsub(result, 'bin/node', '')
+    return globalNodePath .. 'lib/node_modules/typescript/lib/tsserverlibrary.js'
+end
 
 local servers = {
     'tsserver',
     'jsonls',
-    'vuels',
+    'volar',
     'eslint',
     'html',
     'emmet_ls',
@@ -30,7 +41,7 @@ local server_settings = {
     },
     yamlls = {
         yaml = {
-            schemaStore = {enable = true}
+            schemaStore = { enable = true }
         }
     },
     sumneko_lua = {
@@ -40,7 +51,7 @@ local server_settings = {
                 version = 'LuaJIT'
             },
             diagnostics = {
-                globals = {'vim'}
+                globals = { 'vim' }
             },
             telemetry = {
                 enable = false
@@ -48,12 +59,12 @@ local server_settings = {
         }
     },
     efm = {
-        rootMarkers = {".git/"},
+        rootMarkers = { ".git/" },
         languages = {
             markdown = {
                 {
                     lintCommand = 'vale --output=$HOME/.config/vale/output.tmpl ${INPUT}',
-                    lintStdin= false,
+                    lintStdin = false,
                     lintFormats = {
                         '%f:%l:%c:%trror:%m',
                         '%f:%l:%c:%tarning:%m',
@@ -65,6 +76,17 @@ local server_settings = {
     },
 }
 
+local server_init_options = {
+    volar = {
+        typescript = {
+            serverPath = get_global_typescript_server()
+        }
+    },
+    efm = {
+        documentFormatting = false
+    },
+}
+
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = config.on_attach,
@@ -72,6 +94,16 @@ for _, lsp in ipairs(servers) do
         flags = {
             debounce_text_changes = 150,
         },
-        settings = server_settings[lsp] or {}
+        settings = server_settings[lsp] or {},
+        init_options = server_init_options[lsp] or {}
     }
 end
+
+-- nvim_lsp.volar.setup {
+--     on_attach = config.on_attach,
+--     capabilities = capabilities,
+--     flags = {
+--         debounce_text_changes = 150,
+--     },
+--     init_options = server_init_options.volar or {}
+-- }
