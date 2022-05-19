@@ -47,7 +47,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-cmdline'
 
     -- Show LSP status during startup
-    use "j-hui/fidget.nvim"
+    use 'j-hui/fidget.nvim'
 
     -- Session management
     use 'tpope/vim-obsession'
@@ -56,7 +56,7 @@ return require('packer').startup(function(use)
     use 'karb94/neoscroll.nvim'
 
     -- JSON schemas
-    use "b0o/schemastore.nvim"
+    use 'b0o/schemastore.nvim'
 
     -- Snippets
     use 'L3MON4D3/LuaSnip'
