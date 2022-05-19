@@ -98,12 +98,3 @@ for _, lsp in ipairs(servers) do
         init_options = server_init_options[lsp] or {}
     }
 end
-
--- nvim_lsp.volar.setup {
---     on_attach = config.on_attach,
---     capabilities = capabilities,
---     flags = {
---         debounce_text_changes = 150,
---     },
---     init_options = server_init_options.volar or {}
--- }
