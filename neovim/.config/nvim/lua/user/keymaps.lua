@@ -89,7 +89,7 @@ map('n', '<leader>w', '<cmd>lua require("telescope.builtin").find_files({ cwd = 
 map('n', '<leader>.', '<cmd>lua require("telescope.builtin").find_files({ cwd = "$HOME/.dotfiles", hidden = true })<CR>', opts)
 map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").live_grep()<CR>', opts)
 map('n', '<leader>fw', '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.expand("<cword>")})<CR>', opts)
-map('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<CR>', opts)
+map('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status({ initial_mode = "normal" })<CR>', opts)
 map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers({ initial_mode = "normal" })<CR>', opts)
 map('n', '<leader>?', '<cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
 map('n', '<leader>c', '<cmd>lua require("telescope.builtin").commands()<CR>', opts)
