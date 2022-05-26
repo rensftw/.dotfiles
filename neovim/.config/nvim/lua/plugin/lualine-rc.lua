@@ -28,7 +28,6 @@ require('lualine').setup {
         lualine_a = { 'mode' },
         lualine_b = {
             'branch',
-            'diff',
             {
                 'diagnostics',
                 sources = { 'nvim_diagnostic', 'coc' },
@@ -40,12 +39,7 @@ require('lualine').setup {
                 },
             }
         },
-        lualine_c = {
-            {
-                'filename',
-                path = 1, -- Shows relative path
-            }
-        },
+        lualine_c = { 'diff' },
         lualine_x = { 'filetype', 'fileformat', 'encoding' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
@@ -59,7 +53,12 @@ require('lualine').setup {
         lualine_z = {}
     },
     tabline = {
-        lualine_a = { 'buffers' },
+        lualine_a = {
+            {
+                'filename',
+                path = 1, -- Shows relative path
+            }
+        },
         lualine_y = { function() return vim.fn.ObsessionStatus('⟳ ', '⏻︎') end },
         lualine_z = { 'tabs' },
     },
