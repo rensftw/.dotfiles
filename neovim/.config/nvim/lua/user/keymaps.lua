@@ -101,7 +101,9 @@ map('n', '<leader>s', ':SymbolsOutline<CR>', opts)
 -- Copy relative file path to clipboard
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
 -- See blame history for the current file
-map('n', '<leader>gB', ':Git blame<CR>', opts)
+map('n', '<leader>gb', ':Git blame<CR>', opts)
+-- Show git commit log
+map('n', '<leader>gl', ':Gclog<CR>', opts)
 -- Open current file changes in a vertical split.
 -- This opens a 3-way diff if there are git conflict markers in the buffer.
 map('n', '<leader>gds', ':Gvdiffsplit!<CR>', opts)
