@@ -18,7 +18,7 @@ require('gitsigns').setup {
         ['n <leader>hp'] = '<cmd>Gitsigns preview_hunk<CR>',
         ['n <leader>hA'] = '<cmd>Gitsigns stage_buffer<CR>',
         ['n <leader>hU'] = '<cmd>Gitsigns reset_buffer<CR>',
-        ['n <leader>gb'] = '<cmd>Gitsigns toggle_current_line_blame<CR>',
+        ['n <leader>gB'] = '<cmd>Gitsigns toggle_current_line_blame<CR>',
     },
     current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
 }
