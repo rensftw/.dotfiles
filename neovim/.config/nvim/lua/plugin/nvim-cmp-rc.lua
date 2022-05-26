@@ -41,12 +41,8 @@ cmp.setup({
         ['<C-a>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     },
     window = {
-        completion = {
-            border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-        },
-        documentation = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-        }
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
