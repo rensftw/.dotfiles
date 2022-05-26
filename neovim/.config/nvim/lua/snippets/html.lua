@@ -17,13 +17,13 @@ local html5 = s('html5', fmt([[
 </body>
 </html>
 ]], {
-        i(1, 'device-width'),
-        i(2, '1.0'),
-        i(3, 'Document'),
-        i(4)
-    }))
+    i(1, 'device-width'),
+    i(2, '1.0'),
+    i(3, 'Document'),
+    i(4)
+}))
 
-local script = s('script:import', fmt("<script src='{}'></script>", {i(1, 'index.js')}))
+local script = s('script:import', fmt("<script src='{}'></script>", { i(1, 'index.js') }))
 
 local snippets = {
     html5,
@@ -31,4 +31,3 @@ local snippets = {
 }
 
 return snippets
-
