@@ -23,4 +23,3 @@ vim.api.nvim_command [[command! BufOnly execute 'wa | %bdelete | edit # | bdelet
 
 -- Git show a commit using difftool
 vim.api.nvim_command [[command! -nargs=1 GitShow execute 'Git difftool -y <args>~ <args>']]
-
