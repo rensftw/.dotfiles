@@ -34,7 +34,7 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-        ['<Esc>'] = cmp.mapping.close(),
+        ['<C-c>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<C-k>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-j>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
