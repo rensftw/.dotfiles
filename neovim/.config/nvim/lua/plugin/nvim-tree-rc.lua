@@ -1,11 +1,5 @@
 local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
 
-vim.g.nvim_tree_icons = {
-    folder = {
-        default = '',
-        open = '',
-    },
-}
 
 local list = {
     { key = { '<CR>', 'l', '<2-LeftMouse>' }, cb = tree_cb('edit') },
@@ -29,6 +23,7 @@ local list = {
 }
 
 require 'nvim-tree'.setup {
+    auto_reload_on_write = true,
     git = {
         ignore = false
     },
@@ -39,6 +34,16 @@ require 'nvim-tree'.setup {
         width = 60,
         mappings = {
             list = list
+        }
+    },
+    renderer = {
+        icons = {
+            glyphs = {
+                folder = {
+                    default = '',
+                    open = '',
+                }
+            }
         }
     }
 }
