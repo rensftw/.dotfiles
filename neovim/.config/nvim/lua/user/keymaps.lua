@@ -100,6 +100,13 @@ map('n', '<leader>s', ':SymbolsOutline<CR>', opts)
 -- Git
 -- Copy relative file path to clipboard
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
+-- Next/previous hunk
+map('n', ']h', '<cmd>Gitsigns next_hunk<CR>', opts)
+map('n', '[h', '<cmd>Gitsigns prev<CR>', opts)
+-- Preview hunk
+map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>', opts)
+-- Toggle git blame for the current line
+map('n', '<leader>gB', '<cmd>Gitsigns toggle_current_line_blame<CR>', opts)
 -- See blame history for the current file
 map('n', '<leader>gb', ':Git blame<CR>', opts)
 -- Show git commit log
