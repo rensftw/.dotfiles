@@ -105,6 +105,11 @@ map('n', ']h', '<cmd>Gitsigns next_hunk<CR>', opts)
 map('n', '[h', '<cmd>Gitsigns prev<CR>', opts)
 -- Preview hunk
 map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>', opts)
+-- Reset hunk
+map('n', '<leader>hu', '<cmd>Gitsigns reset_hunk<CR>', opts)
+map('v', '<leader>hu', ':Gitsigns reset_hunk<CR>', opts)
+-- Reset changes in the entire buffer
+map('n', '<leader>hU', '<cmd>Gitsigns reset_buffer<CR>', opts)
 -- Toggle git blame for the current line
 map('n', '<leader>gB', '<cmd>Gitsigns toggle_current_line_blame<CR>', opts)
 -- See blame history for the current file
