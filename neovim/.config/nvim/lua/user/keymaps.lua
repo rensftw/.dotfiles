@@ -101,7 +101,7 @@ map('n', '<leader>s', ':SymbolsOutline<CR>', opts)
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
 -- Next/previous hunk
 map('n', ']h', '<cmd>Gitsigns next_hunk<CR>', opts)
-map('n', '[h', '<cmd>Gitsigns prev<CR>', opts)
+map('n', '[h', '<cmd>Gitsigns prev_hunk<CR>', opts)
 -- Preview hunk
 map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>', opts)
 -- Reset hunk
