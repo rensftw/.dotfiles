@@ -20,6 +20,7 @@ alias df="cd $DOTFILES_LOCATION"
 alias av="nvim $VIMRC_LOCATION"
 alias az="nvim $ZSHRC_LOCATION"
 alias aa="nvim $ALIASES_LOCATION"
+alias obsidian="cd $OBSIDIAN_LOCATION && nvim ."
 
 # Use neovim by default
 alias vi="nvim"
