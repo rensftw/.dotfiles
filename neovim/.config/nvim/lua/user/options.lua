@@ -1,5 +1,5 @@
 vim.g.mapleader = ' ' -- use <space> as the leader key
-vim.o.mouse = 'nv' -- enable mouse support for normal an visual modes
+vim.o.mouse = '' -- disable mouse support
 vim.o.tabstop = 4 -- show existing tab with 4 spaces width
 vim.o.shiftwidth = 4 -- when indenting with '>', use 4 spaces width
 vim.o.softtabstop = 4 -- edit as if tabs are 4 characters wide
@@ -58,13 +58,13 @@ vim.o.termguicolors = true
 vim.g['&t_8f'] = '\\<Esc>[38;2;%lu;%lu;%lum'
 vim.g['&t_8b'] = '\\<Esc>[48;2;%lu;%lu;%lum'
 
--- Cursor shape/blinking settings
-vim.o.guicursor = 'n-v-c:block-blinkwait175-blinkoff150-blinkon175,'
-vim.o.guicursor = vim.o.guicursor .. 'i-ci-ve:ver25,'
-vim.o.guicursor = vim.o.guicursor .. 'r-cr:hor20,'
-vim.o.guicursor = vim.o.guicursor .. 'o:hor50,'
-vim.o.guicursor = vim.o.guicursor .. 'a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,'
-vim.o.guicursor = vim.o.guicursor .. 'sm:block-blinkwait175-blinkoff150-blinkon175'
+-- -- Cursor shape/blinking settings
+-- vim.o.guicursor = 'n-v-c:block-blinkwait175-blinkoff150-blinkon175,'
+-- vim.o.guicursor = vim.o.guicursor .. 'i-ci-ve:ver25,'
+-- vim.o.guicursor = vim.o.guicursor .. 'r-cr:hor20,'
+-- vim.o.guicursor = vim.o.guicursor .. 'o:hor50,'
+-- vim.o.guicursor = vim.o.guicursor .. 'a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,'
+-- vim.o.guicursor = vim.o.guicursor .. 'sm:block-blinkwait175-blinkoff150-blinkon175'
 
 -- Search settings
 vim.o.path = vim.o.path .. '**' -- search upwards and downwards the directory
