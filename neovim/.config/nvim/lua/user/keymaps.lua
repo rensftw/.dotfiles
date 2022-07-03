@@ -140,8 +140,8 @@ map('n', 'r', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn", opts)
 map('x', 'r', '"sy:let @/=@s<CR>cgn', opts)
 
 -- Harpoon navigation
-map('n', '<leader>m', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
-map('n', '<leader>z', '<cmd>lua require("harpoon.mark").add_file()<CR>', opts)
+map('n', '<leader>0', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
+map('n', '<leader>=', '<cmd>lua require("harpoon.mark").add_file()<CR>', opts)
 map('n', '<leader>1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', opts)
 map('n', '<leader>2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', opts)
 map('n', '<leader>3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', opts)
