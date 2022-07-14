@@ -170,7 +170,15 @@ _gb() {
 # Is the base branch main or master?
 _mb() {
     BRANCHES=$(git branch)
-    [[ $BRANCHES =~ 'main' ]] && echo 'main' || echo 'master'
+    if [[ $BRANCHES =~ 'main' ]]; then
+        echo 'main'
+    elif [[ $BRANCHES =~ 'master' ]]; then
+        echo 'master'
+    elif [[ $BRANCHES =~ 'develop' ]]; then
+        echo 'develop'
+    else
+        echo 'not found'
+    fi
 }
 
 # Mnemonic: git checkout branch
