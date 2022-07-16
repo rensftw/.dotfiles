@@ -12,9 +12,6 @@ source _scripts/install-from-brewfile.sh
 # Install Node version manager (nvm)
 source _scripts/install-nvm.sh
 
-# Install the current LTS Node version with the default global packages
-source _scripts/install-lts-node.sh
-
 # Install Python
 source _scripts/install-python.sh
 
