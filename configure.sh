@@ -18,6 +18,9 @@ source _scripts/stow.sh
 # Reload to start using ZSH
 source _scripts/setup-shell.sh
 
+# Symlink Veracrypt binary
+source _scripts/symlink-veracrypt-binary.sh
+
 # Install the current LTS Node version with the default global packages
 source _scripts/install-lts-node.sh
 
