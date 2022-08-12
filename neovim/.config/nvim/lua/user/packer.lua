@@ -23,18 +23,9 @@ return require('packer').startup(function(use)
     -- Telescope
     use 'kyazdani42/nvim-web-devicons'
     use 'nvim-lua/plenary.nvim'
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use 'nvim-telescope/telescope.nvim'
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use 'ThePrimeagen/harpoon'
-
-    -- File explorer
-    use 'kyazdani42/nvim-tree.lua'
-
-    -- Symbols
-    use 'simrat39/symbols-outline.nvim'
-
-    -- Add indent guides
-    use 'lukas-reineke/indent-blankline.nvim'
 
     -- LSP
     use 'neovim/nvim-lspconfig'
@@ -52,6 +43,15 @@ return require('packer').startup(function(use)
 
     -- Session management
     use 'tpope/vim-obsession'
+
+    -- File explorer
+    use 'kyazdani42/nvim-tree.lua'
+
+    -- Symbols
+    use 'simrat39/symbols-outline.nvim'
+
+    -- Add indent guides
+    use 'lukas-reineke/indent-blankline.nvim'
 
     -- Smooth scrolling
     use 'karb94/neoscroll.nvim'
