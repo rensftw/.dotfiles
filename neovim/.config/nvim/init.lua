@@ -24,7 +24,6 @@ require 'plugin.alpha-rc'
 require 'plugin.indent-blankline-rc'
 require 'plugin.vim-tmux-navigator-rc'
 require 'plugin.fidget-rc'
-require 'plugin.harpoon-rc'
 
 require 'Comment'.setup()
 require 'colorizer'.setup()
