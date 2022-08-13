@@ -44,10 +44,10 @@ map('v', 'K', ":m '<-2<CR>gv=gv", opts)
 map('v', 'J', ":m '>+1<CR>gv=gv", opts)
 
 -- Resize splits
-map('n', '<S-up>', ':resize +2<CR>', opts)
-map('n', '<S-down', ':resize -3<CR>', opts)
-map('n', '<S-right>', ':vertical resize +2<CR>', opts)
-map('n', '<S-left>', ':vertical resize -2<CR>', opts)
+map('n', '+', ':resize +2<CR>', opts)
+map('n', '_', ':resize -3<CR>', opts)
+map('n', '=', ':vertical resize +2<CR>', opts)
+map('n', '-', ':vertical resize -2<CR>', opts)
 
 -- Terminal
 -- Toggle terminal on/off
