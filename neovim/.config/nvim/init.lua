@@ -27,5 +27,4 @@ require 'plugin.fidget-rc'
 
 require 'Comment'.setup()
 require 'colorizer'.setup()
-require 'toggleterm'.setup()
 require 'neoscroll'.setup()

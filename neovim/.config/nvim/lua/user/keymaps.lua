@@ -49,17 +49,6 @@ map('n', '_', ':resize -3<CR>', opts)
 map('n', '=', ':vertical resize +2<CR>', opts)
 map('n', '-', ':vertical resize -2<CR>', opts)
 
--- Terminal
--- Toggle terminal on/off
-map('n', '<C-t>', ':ToggleTerm size=20 direction=horizontal<CR>', opts)
-map('t', '<C-t>', '<C-\\><C-n>:ToggleTermToggleAll<CR>', opts)
-map('i', '<C-t>', '<Esc>:ToggleTerm size=20 direction=horizontal<CR>', opts)
--- Navigate to/from terminal
-map('t', '<C-h>', '<C-\\><C-n><C-w>h', opts)
-map('t', '<C-j>', '<C-\\><C-n><C-w>j', opts)
-map('t', '<C-k>', '<C-\\><C-n><C-w>k', opts)
-map('t', '<C-l>', '<C-\\><C-n><C-w>l', opts)
-
 -- Navigation shortcuts
 map('n', '<leader>av', ':tabnew $VIMRC_LOCATION<CR>', opts)
 map('n', '<leader>az', ':tabnew $ZSHRC_LOCATION<CR>', opts)
