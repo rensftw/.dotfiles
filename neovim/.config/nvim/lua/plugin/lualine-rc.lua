@@ -80,6 +80,5 @@ require('lualine').setup {
         'quickfix',
         'fugitive',
         'nvim-tree',
-        'toggleterm'
     },
 }
