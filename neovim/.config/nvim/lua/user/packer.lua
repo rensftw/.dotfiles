@@ -26,6 +26,18 @@ return require('packer').startup(function(use)
     use 'nvim-telescope/telescope.nvim'
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+    -- DAP / Debugging
+    use 'mfussenegger/nvim-dap'
+    use 'nvim-telescope/telescope-dap.nvim'
+    use 'rcarriga/nvim-dap-ui'
+    use 'theHamsta/nvim-dap-virtual-text'
+    use 'mxsdev/nvim-dap-vscode-js'
+    use {
+        'microsoft/vscode-js-debug',
+        opt = true,
+        run = 'npm install --legacy-peer-deps && npm run compile'
+    }
+
     -- LSP
     use 'neovim/nvim-lspconfig'
     use 'tami5/lspsaga.nvim'
@@ -36,6 +48,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
+    use 'rcarriga/cmp-dap'
 
     -- Show LSP status during startup
     use 'j-hui/fidget.nvim'

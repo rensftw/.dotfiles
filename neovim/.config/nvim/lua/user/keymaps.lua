@@ -72,6 +72,16 @@ map('n', '<C-l>', '<C-w>l', opts)
 -- Explorer
 map('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', opts)
 
+-- DAP / Debugging
+map('n', '<Tab>b', '<cmd>lua require("dap").toggle_breakpoint()<CR>', opts)
+map('n', '<Tab>u', '<cmd>lua require("dapui").toggle()<CR>', opts)
+map('n', '<Tab>a', '<cmd>lua require("dap").attach()<CR>', opts)
+map('n', '<Tab>h', '<cmd>lua require("dap").continue()<CR>', opts)
+map('n', '<Tab>j', '<cmd>lua require("dap").step_over()<CR>', opts)
+map('n', '<Tab>i', '<cmd>lua require("dap").step_into()<CR>', opts)
+map('n', '<Tab>k', '<cmd>lua require("dap").step_out()<CR>', opts)
+map('n', '<Tab>q', '<cmd>lua require("dap").terminate({terminateDebugee = true})<CR>', opts)
+
 -- Telescope
 map('n', '<leader>o', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', opts)
 map('n', '<leader>.', '<cmd>lua require("telescope.builtin").find_files({cwd = "$HOME/.dotfiles", hidden = true})<CR>',
