@@ -100,3 +100,10 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
+
+-- Supply completions in DAP buffers
+cmp.setup.filetype({ 'dap-repl', 'dapui_watches' }, {
+    sources = {
+        { name = 'dap' },
+    },
+})

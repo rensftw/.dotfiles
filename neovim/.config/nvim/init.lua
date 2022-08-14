@@ -8,6 +8,10 @@ require 'user.autocommands'
 -- LSP setup
 require 'lsp.setup-lsp-servers'
 
+-- DAP setup
+require 'dap.dap-rc'
+require 'nvim-dap-virtual-text'.setup()
+
 -- Plugin configuration
 require 'plugin.nvim-web-devicons-rc'
 require 'plugin.lualine-rc'
