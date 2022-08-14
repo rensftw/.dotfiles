@@ -81,6 +81,7 @@ map('n', '<Tab>j', '<cmd>lua require("dap").step_over()<CR>', opts)
 map('n', '<Tab>i', '<cmd>lua require("dap").step_into()<CR>', opts)
 map('n', '<Tab>k', '<cmd>lua require("dap").step_out()<CR>', opts)
 map('n', '<Tab>q', '<cmd>lua require("dap").terminate({terminateDebugee = true})<CR>', opts)
+map('n', '<Tab>s', '<cmd>lua require("telescope").extensions.dap.frames({initial_mode = "normal"})<CR>', opts)
 
 -- Telescope
 map('n', '<leader>o', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', opts)
