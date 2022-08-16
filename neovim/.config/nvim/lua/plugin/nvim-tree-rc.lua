@@ -20,6 +20,7 @@ local list = {
     { key = '[h', cb = tree_cb('prev_git_item') },
     { key = ']h', cb = tree_cb('next_git_item') },
     { key = '?', cb = tree_cb('toggle_help') },
+    { key = '-', cb = tree_cb('') }, -- Overwrite default mapping for -, so it can be used for resizing the tree split
 }
 
 require 'nvim-tree'.setup {
