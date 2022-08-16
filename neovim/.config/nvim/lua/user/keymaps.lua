@@ -83,6 +83,12 @@ map('n', '<Tab>k', '<cmd>lua require("dap").step_out()<CR>', opts)
 map('n', '<Tab>q', '<cmd>lua require("dap").terminate({terminateDebugee = true})<CR>', opts)
 map('n', '<Tab>s', '<cmd>lua require("telescope").extensions.dap.frames({initial_mode = "normal"})<CR>', opts)
 
+-- DAP terminal navigation
+map('t', '<C-h>', '<C-\\><C-n><C-w>h', opts)
+map('t', '<C-j>', '<C-\\><C-n><C-w>j', opts)
+map('t', '<C-k>', '<C-\\><C-n><C-w>k', opts)
+map('t', '<C-l>', '<C-\\><C-n><C-w>l', opts)
+
 -- Telescope
 map('n', '<leader>o', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', opts)
 map('n', '<leader>.', '<cmd>lua require("telescope.builtin").find_files({cwd = "$HOME/.dotfiles", hidden = true})<CR>',
