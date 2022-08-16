@@ -122,7 +122,9 @@ map('n', '<leader>hU', '<cmd>Gitsigns reset_buffer<CR>', opts)
 -- Toggle git blame for the current line
 map('n', '<leader>gB', '<cmd>Gitsigns toggle_current_line_blame<CR>', opts)
 -- See blame history for the current file
-map('n', '<leader>gb', ':Git blame<CR>', opts)
+map('n', '<leader>gbf', ':Git blame<CR>', opts)
+-- Show git history for the current line
+map('n', '<leader>gbl', ':GitBlameLine<CR>', opts)
 -- Show git commit log
 map('n', '<leader>gl', ':Gclog<CR>', opts)
 -- Open current file changes in a vertical split.
