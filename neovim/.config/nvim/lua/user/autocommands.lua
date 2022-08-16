@@ -15,11 +15,3 @@ vim.api.nvim_command [[autocmd BufNewFile,BufRead .*aliases* set ft=sh]]
 
 -- Ensure tabs don't get converted to spaces in Makefiles.
 vim.api.nvim_command [[autocmd FileType make setlocal noexpandtab]]
-
--- Write all changes to modified buffers,
--- close all buffers except the active one,
--- and return focus to the same spot it was initially
-vim.api.nvim_command [[command! BufOnly execute 'wa | %bdelete | edit # | bdelete # | normal `"']]
-
--- Git show a commit using difftool
-vim.api.nvim_command [[command! -nargs=1 GitShow execute 'Git difftool -y <args>~ <args>']]

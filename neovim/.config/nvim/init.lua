@@ -4,6 +4,7 @@ require 'user.packer'
 require 'user.theme'
 require 'user.keymaps'
 require 'user.autocommands'
+require 'user.commands'
 
 -- LSP setup
 require 'lsp.setup-lsp-servers'
