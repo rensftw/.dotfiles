@@ -68,6 +68,9 @@ export FZF_DEFAULT_OPTS='--multi --inline-info --height 50% --layout=reverse --b
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --no-ignore"
 
+# Integration between ZSH+TMUX (needed for dynamic pane titles)
+source $DOTFILES_LOCATION/zsh/zsh-titles.plugin.zsh
+
 # zsh-syntax-highlighting.zsh must be sourced at the end of .zshrc
 # (https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file)
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
