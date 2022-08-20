@@ -18,6 +18,7 @@ vim.o.cursorline = true -- highlight the line where the cursor is
 vim.o.splitright = true -- horizontal split should split to the right
 vim.o.splitbelow = true -- vertical split should split below
 vim.o.completeopt = 'menuone,noinsert,noselect' -- do not auto-complete
+vim.o.laststatus = 3 -- show one global statusline
 
 -- Folds
 -- source: https://essais.co/better-folding-in-neovim/
