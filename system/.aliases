@@ -256,7 +256,7 @@ alias gb="git branch"
 alias gdc="git diff --compact-summary"
 
 # Delete all local branches except main/master and the branch I'm currently on
-alias gdab='git branch | egrep -v "(master|main|\*)" | xargs git branch -D'
+alias gdab='git branch | egrep -v "(master|main|develop|\*)" | xargs git branch -D'
 
 # Fetch
 alias gf="git fetch"
