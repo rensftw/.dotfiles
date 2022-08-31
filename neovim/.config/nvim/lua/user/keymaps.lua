@@ -91,13 +91,12 @@ map('t', '<C-l>', '<C-\\><C-n><C-w>l', opts)
 
 -- Telescope
 map('n', '<leader>o', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', opts)
-map('n', '<leader>.', '<cmd>lua require("telescope.builtin").find_files({cwd = "$HOME/.dotfiles", hidden = true})<CR>',
-    opts)
+-- map('n', '<leader>oa', '<cmd>lua require("telescope.builtin").find_files({hidden = true, no_ignore = true, previewer = false})<CR>', opts)
+map('n', '<leader>.', '<cmd>lua require("telescope.builtin").find_files({cwd = "$HOME/.dotfiles", hidden = true})<CR>', opts)
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', opts)
 map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").live_grep()<CR>', opts)
-map('n', '<leader>fw',
-    '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.expand("<cword>"), initial_mode = "normal"})<CR>'
-    , opts)
+map('n', '<leader>fa', '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.input("  filter grep > "), initial_mode = "normal"})<CR>', opts)
+map('n', '<leader>fw', '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.expand("<cword>"), initial_mode = "normal"})<CR>', opts)
 map('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status({initial_mode = "normal"})<CR>', opts)
 map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers({initial_mode = "normal"})<CR>', opts)
 map('n', '<leader>?', '<cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
