@@ -101,7 +101,7 @@ map('n', '<leader>.', '<cmd>lua require("telescope.builtin").find_files({cwd = "
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', opts)
 map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").live_grep()<CR>', opts)
 map('n', '<leader>fa',
-    '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.input("  filter grep > "), initial_mode = "normal"})<CR>'
+    '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.input("  filter grep ❯ "), initial_mode = "normal"})<CR>'
     , opts)
 map('n', '<leader>fw',
     '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.expand("<cword>"), initial_mode = "normal"})<CR>'
