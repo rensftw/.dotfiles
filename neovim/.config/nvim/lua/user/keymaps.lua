@@ -111,9 +111,6 @@ map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers({initial_mo
 map('n', '<leader>?', '<cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
 map('n', '<leader>c', '<cmd>lua require("telescope.builtin").commands()<CR>', opts)
 
--- Symbols outline
-map('n', '<leader>s', ':SymbolsOutline<CR>', opts)
-
 -- Git
 -- Copy relative file path to clipboard
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
