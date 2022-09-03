@@ -1,13 +1,16 @@
 local telescope = require('telescope');
+local actions = require('telescope.actions');
 
 telescope.setup {
     defaults = {
         mappings = {
             n = {
-                ['dd'] = require('telescope.actions').delete_buffer
+                ['dd'] = actions.delete_buffer,
+                ['<CR>'] = actions.select_default + actions.center, -- center result
             },
             i = {
-                ['<c-d>'] = require('telescope.actions').delete_buffer
+                ['<c-d>'] = actions.delete_buffer,
+                ['<CR>'] = actions.select_default + actions.center, -- center result
             }
         },
         vimgrep_arguments = {
