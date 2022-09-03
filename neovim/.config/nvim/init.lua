@@ -12,6 +12,7 @@ require 'treesitter-context'.setup()
 
 -- LSP setup
 require 'lsp.setup-lsp-servers'
+require 'lsp.lsp-signature-rc'
 
 -- DAP setup
 require 'dap.dap-rc'
