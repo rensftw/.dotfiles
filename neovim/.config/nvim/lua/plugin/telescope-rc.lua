@@ -6,11 +6,19 @@ telescope.setup {
         mappings = {
             n = {
                 ['dd'] = actions.delete_buffer,
-                ['<CR>'] = actions.select_default + actions.center, -- center result
+                -- center results
+                ['<CR>'] = actions.select_default + actions.center,
+                ['<c-t>'] = actions.file_tab + actions.center,
+                ['<c-v>'] = actions.file_vsplit + actions.center,
+                ['<c-x>'] = actions.file_split + actions.center,
             },
             i = {
                 ['<c-d>'] = actions.delete_buffer,
-                ['<CR>'] = actions.select_default + actions.center, -- center result
+                -- center results
+                ['<CR>'] = actions.select_default + actions.center,
+                ['<c-t>'] = actions.file_tab + actions.center,
+                ['<c-v>'] = actions.file_vsplit + actions.center,
+                ['<c-x>'] = actions.file_split + actions.center,
             }
         },
         vimgrep_arguments = {
