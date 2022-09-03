@@ -61,9 +61,6 @@ return require('packer').startup(function(use)
     -- File explorer
     use 'kyazdani42/nvim-tree.lua'
 
-    -- Symbols
-    use 'simrat39/symbols-outline.nvim'
-
     -- Add indent guides
     use 'lukas-reineke/indent-blankline.nvim'
 
