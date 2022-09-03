@@ -6,6 +6,10 @@ require 'user.keymaps'
 require 'user.autocommands'
 require 'user.commands'
 
+-- Treesitter
+require 'plugin.nvim-treesitter-rc'
+require 'treesitter-context'.setup()
+
 -- LSP setup
 require 'lsp.setup-lsp-servers'
 
@@ -16,7 +20,6 @@ require 'nvim-dap-virtual-text'.setup()
 -- Plugin configuration
 require 'plugin.nvim-web-devicons-rc'
 require 'plugin.lualine-rc'
-require 'plugin.nvim-treesitter-rc'
 require 'plugin.telescope-rc'
 require 'plugin.nvim-tree-rc'
 require 'plugin.lspsaga-rc'
