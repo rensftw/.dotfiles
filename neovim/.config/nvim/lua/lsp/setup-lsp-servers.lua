@@ -38,6 +38,7 @@ local server_config = {
         settings = {
             json = {
                 schemas = require('schemastore').json.schemas(),
+                validate = { enable = true },
             },
         }
     },
