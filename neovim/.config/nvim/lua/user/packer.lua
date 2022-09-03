@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
 
     -- Treesitter (AST-based syntax highlighting)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     -- Telescope
     use 'kyazdani42/nvim-web-devicons'
