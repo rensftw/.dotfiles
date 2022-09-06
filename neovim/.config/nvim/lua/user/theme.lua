@@ -1,4 +1,7 @@
-vim.g.tokyonight_style = 'night'
-vim.g.tokyonight_lualine_bold = 'true'
+require('tokyonight').setup({
+    style = 'night',
+    lualine_bold = true,
+    sidebars = { 'help', 'packer' },
+})
 
 vim.cmd [[colorscheme tokyonight]]
