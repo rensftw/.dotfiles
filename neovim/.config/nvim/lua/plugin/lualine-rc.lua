@@ -65,8 +65,8 @@ require('lualine').setup {
     },
     sections = {
         lualine_a = { 'mode' },
-        lualine_b = {
-            'branch',
+        lualine_b = { 'branch' },
+        lualine_c = {
             {
                 'diagnostics',
                 sources = { 'nvim_diagnostic', 'coc' },
@@ -76,10 +76,10 @@ require('lualine').setup {
                     color_warn = { fg = colors.yellow },
                     color_info = { fg = colors.cyan },
                 },
-            }
+            },
+            { 'diff', source = diff_source },
         },
-        lualine_c = { { 'diff', source = diff_source } },
-        lualine_x = { 'filetype', 'fileformat', 'encoding' },
+        lualine_x = { 'filetype', 'encoding' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
     },
