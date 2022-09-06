@@ -28,6 +28,12 @@ local function diff_source()
     end
 end
 
+local obsession = {
+    component = function()
+        return vim.fn.ObsessionStatus('⟳ ', '⏻︎')
+    end
+}
+
 require('lualine').setup {
     options = {
         icons_enabled = true,
@@ -73,7 +79,7 @@ require('lualine').setup {
                 path = 1, -- Shows relative path
             }
         },
-        lualine_y = { function() return vim.fn.ObsessionStatus('⟳ ', '⏻︎') end },
+        lualine_y = { { obsession.component } },
         lualine_z = { 'tabs' },
     },
     extensions = {
