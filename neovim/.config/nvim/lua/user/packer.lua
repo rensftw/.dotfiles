@@ -61,6 +61,9 @@ return require('packer').startup(function(use)
     -- File explorer
     use 'kyazdani42/nvim-tree.lua'
 
+    -- Haproon
+    use 'ThePrimeagen/harpoon'
+
     -- Add indent guides
     use 'lukas-reineke/indent-blankline.nvim'
 
