@@ -18,6 +18,9 @@ source _scripts/install-python.sh
 # Install Python packages
 source _scripts/install-pip-packages.sh
 
+# Install Rust
+source _scripts/install-rustup.sh
+
 echo "🎉 ${GREEN}Installation complete!${NC}"
 source _scripts/goodbye.sh
 

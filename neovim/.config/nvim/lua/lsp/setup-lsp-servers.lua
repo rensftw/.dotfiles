@@ -31,6 +31,7 @@ local servers = {
     'sumneko_lua',
     'dockerls',
     'efm',
+    'rust_analyzer'
 }
 
 local server_config = {
