@@ -1,22 +1,23 @@
-# Copyright 2015 John Reese
-# Licensed under the MIT license
-#
+# Customized plugin - original by Amethyst Reese
+# https://github.com/amyreese/zsh-titles/blob/master/titles.plugin.zsh
+
 # Update terminal/tmux window titles based on location/command
 
 function update_title() {
   local a
   # escape '%' in $1, make nonprintables visible
   a=${(V)1//\%/\%\%}
-  print -nz "%20>...>$a"
+  #  NOTE: Allow title to take up to 75% of pane width
+  print -nz "%75>...>$a"
   read -rz a
   # remove newlines
   a=${a//$'\n'/}
   if [[ -n "$TMUX" ]] && [[ $TERM == screen* || $TERM == tmux* ]]; then
-    print -n "\ek${(%)a}:${(%)2}\e\\"
+    print -n "\ek${(%)a}\e\\"
   elif [[ "$TERM" =~ "screen*" ]]; then
-    print -n "\ek${(%)a}:${(%)2}\e\\"
+    print -n "\ek${(%)a}\e\\"
   elif [[ "$TERM" =~ "xterm*" || "$TERM" = "alacritty" || "$TERM" =~ "st*" ]]; then
-    print -n "\e]0;${(%)a}:${(%)2}\a"
+    print -n "\e]0;${(%)a}\a"
   elif [[ "$TERM" =~ "^rxvt-unicode.*" ]]; then
     printf '\33]2;%s:%s\007' ${(%)a} ${(%)2}
   fi
@@ -24,7 +25,7 @@ function update_title() {
 
 # called just before the prompt is printed
 function _zsh_title__precmd() {
-  update_title "zsh" "%20<...<%~"
+  update_title "zsh" "%20"
 }
 
 # called just before a command is executed
