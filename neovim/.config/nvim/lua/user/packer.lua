@@ -99,9 +99,6 @@ return require('packer').startup(function(use)
     -- Allow vim-surround and vim-unimpaired commands to be repeated with .
     use 'tpope/vim-repeat'
 
-    -- Briefly highlight which text was yanked
-    use 'machakann/vim-highlightedyank'
-
     -- Add indentation that closely matches PEP 8
     use 'vim-scripts/indentpython'
 
