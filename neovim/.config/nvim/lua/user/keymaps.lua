@@ -11,6 +11,13 @@ map('n', 'B', ':BufOnly<CR>', opts)
 -- Close all other tabs
 map('n', 'T', ':tabonly<CR>', opts)
 
+-- Yank to the end of line
+map('n', 'Y', 'yg$', opts)
+
+-- Yank to clipboard
+map('n', '<leader>y', '\"+y', opts)
+map('v', '<leader>y', '\"+y', opts)
+
 -- Prevent x from overriding what's in the clipboard.
 map('n', 'x', '"_x', opts)
 map('n', 'X', '"_x', opts)
@@ -25,6 +32,10 @@ map('v', 'y', 'ygv<Esc>', opts)
 map('v', '>', '>gv', opts)
 map('v', '<', '<gv', opts)
 
+-- Center scrolling
+map('n', '<C-d>', '<C-d>zz', opts)
+map('n', '<C-u>', '<C-u>zz', opts)
+
 -- Center search results
 map('n', 'n', 'nzz', opts)
 map('n', 'N', 'Nzz', opts)
@@ -36,10 +47,6 @@ map('n', 'g#', 'g#zz', opts)
 -- Center quickfix results when navigating
 map('n', ']q', '<cmd>cnext<CR>zz', opts)
 map('n', '[q', '<cmd>cprev<CR>zz', opts)
-
--- Copy to the shared register
-map('n', '<leader>y', '"+yiw', opts)
-map('v', '<leader>y', '"*y', opts)
 
 -- Move 1 or more lines up or down in normal and visual selection modes.
 map('n', 'K', ':m .-2<CR>==', opts)
