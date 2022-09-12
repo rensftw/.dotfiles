@@ -1,3 +1,6 @@
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
 -- Auto-resize splits when Vim gets resized.
 vim.api.nvim_command [[autocmd VimResized * wincmd =]]
 
@@ -15,3 +18,16 @@ vim.api.nvim_command [[autocmd BufNewFile,BufRead .*aliases* set ft=sh]]
 
 -- Ensure tabs don't get converted to spaces in Makefiles.
 vim.api.nvim_command [[autocmd FileType make setlocal noexpandtab]]
+
+-- Briefly highlighting yank selection
+local yank_group = augroup('HighlightYank', {})
+autocmd('TextYankPost', {
+    group = yank_group,
+    pattern = '*',
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = 'IncSearch',
+            timeout = 100,
+        })
+    end,
+})
