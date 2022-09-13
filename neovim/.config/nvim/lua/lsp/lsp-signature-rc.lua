@@ -1,5 +1,5 @@
 require 'lsp_signature'.setup({
-    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    bind = false, -- Set to false so that it works with LSP saga
     handler_opts = { border = 'rounded' },
     hint_enable = false,
     max_width = 80,
