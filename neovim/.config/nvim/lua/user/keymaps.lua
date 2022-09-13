@@ -60,12 +60,6 @@ map('n', '_', ':resize -3<CR>', opts)
 map('n', '=', ':vertical resize +2<CR>', opts)
 map('n', '-', ':vertical resize -2<CR>', opts)
 
--- Navigation shortcuts
-map('n', '<leader>av', ':tabnew $VIMRC_LOCATION<CR>', opts)
-map('n', '<leader>az', ':tabnew $ZSHRC_LOCATION<CR>', opts)
-map('n', '<leader>aa', ':tabnew $ALIASES_LOCATION<CR>', opts)
-map('n', '<leader>rv', ':source $VIMRC_LOCATION<CR>', opts)
-
 -- Tab navigation
 map('n', ']t', ':tabnext<CR>', opts)
 map('n', '[t', ':tabprev<CR>', opts)
