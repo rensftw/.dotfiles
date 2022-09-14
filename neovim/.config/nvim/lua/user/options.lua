@@ -20,6 +20,12 @@ vim.o.splitbelow = true -- vertical split should split below
 vim.o.completeopt = 'menuone,noinsert,noselect' -- do not auto-complete
 vim.o.laststatus = 3 -- show one global statusline
 vim.o.scroll = 10 -- <ctrl-d> and <ctrl-u> should scroll by 10 lines
+vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor
+vim.opt.errorbells = false -- do not ring the bell for error messages (beep or screen flash)
+vim.opt.smartindent = true -- smart indent when starting a new line
+vim.opt.swapfile = false -- do not create swapfiles
+vim.opt.updatetime = 50 -- blazingly fast (default is 4000ms)
+vim.opt.colorcolumn = "80"
 
 -- Folds
 -- source: https://essais.co/better-folding-in-neovim/
