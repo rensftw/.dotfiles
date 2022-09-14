@@ -36,4 +36,3 @@ require 'plugin.fidget-rc'
 
 require 'Comment'.setup()
 require 'colorizer'.setup()
-require 'neoscroll'.setup()
