@@ -67,9 +67,6 @@ return require('packer').startup(function(use)
     -- Add indent guides
     use 'lukas-reineke/indent-blankline.nvim'
 
-    -- Smooth scrolling
-    use 'karb94/neoscroll.nvim'
-
     -- JSON schemas
     use 'b0o/schemastore.nvim'
 
