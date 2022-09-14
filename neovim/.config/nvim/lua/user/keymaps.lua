@@ -96,7 +96,7 @@ map('t', '<C-l>', '<C-\\><C-n><C-w>l', opts)
 
 -- Telescope
 map('n', '<leader>o', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', opts)
--- map('n', '<leader>oa', '<cmd>lua require("telescope.builtin").find_files({hidden = true, no_ignore = true, previewer = false})<CR>', opts)
+map('n', '<leader>i', '<cmd>lua require("telescope.builtin").resume()<CR>', opts)
 map('n', '<leader>.', '<cmd>lua require("telescope.builtin").find_files({cwd = "$HOME/.dotfiles", hidden = true})<CR>',
     opts)
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', opts)
