@@ -116,8 +116,8 @@ map('n', '<leader>c', '<cmd>lua require("telescope.builtin").commands()<CR>', op
 -- Copy relative file path to clipboard
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
 -- Next/previous hunk
-map('n', ']h', '<cmd>Gitsigns next_hunk<CR>', opts)
-map('n', '[h', '<cmd>Gitsigns prev_hunk<CR>', opts)
+map('n', ']h', '<cmd>Gitsigns next_hunk<CR>zz', opts)
+map('n', '[h', '<cmd>Gitsigns prev_hunk<CR>zz', opts)
 -- Preview hunk
 map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>', opts)
 -- Reset hunk
