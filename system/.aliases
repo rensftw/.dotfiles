@@ -86,8 +86,14 @@ acc() {
 # Update to the latest macOS and fetch the full installer
 alias fetch-macos-installer="softwareupdate --fetch-full-installer"
 
-# What's my external IP?
-alias external-ip="curl ifconfig.me"
+# Shows the external IP address and whois information. Useful over VPNs.
+external-ip() {
+    GREEN='\033[1;32m'
+    IP=$(curl -s ifconfig.me)
+
+    whois "$IP"
+    echo "Your external IP is: ${GREEN}${IP}${NC}"
+}
 
 # Internet connection speed test shortcuts
 sto-servers() {
