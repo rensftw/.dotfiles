@@ -1,3 +1,6 @@
 [submodule "tmux/.tmux/tpm"]
 	path = tmux/.tmux/tpm
 	url = https://github.com/tmux-plugins/tpm.git
+[submodule "nnn/.config/nnn/nnn-repo"]
+	path = nnn/.config/nnn/nnn-repo
+	url = https://github.com/jarun/nnn.git
