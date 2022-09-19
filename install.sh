@@ -9,6 +9,9 @@ source _scripts/install-homebrew.sh
 # Install all packages defined in Brewfile (taps, formulae, casks, and MAS apps)
 source _scripts/install-from-brewfile.sh
 
+# Fetch dependencies (as git modules or manually)
+source _scripts/fetch-dependencies.sh
+
 # Install Node version manager (nvm)
 source _scripts/install-nvm.sh
 
