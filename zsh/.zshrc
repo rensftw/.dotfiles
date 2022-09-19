@@ -19,6 +19,7 @@ export OBSIDIAN_LOCATION="$HOME/Library/Mobile\ Documents/iCloud\~md\~obsidian/D
 export GPG_TTY=$(tty)
 
 source $HOME/.aliases
+source $HOME/.config/nnn/.nnnrc.zsh
 
 # (Optional) Fix brew warning about ""config" scripts exist outside your system or Homebrew directories"
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
