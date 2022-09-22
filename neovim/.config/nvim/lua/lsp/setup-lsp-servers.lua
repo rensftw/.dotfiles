@@ -6,28 +6,14 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
     vim.lsp.protocol.make_client_capabilities()
 )
 
--- Retrieve the global TS server library for the currently active node version
-local function get_global_typescript_server()
-    local command = 'which node'
-    local handle = io.popen(command)
-    local result = handle:read()
-    handle:close()
-
-    local globalNodePath = string.gsub(result, 'bin/node', '')
-    return globalNodePath .. 'lib/node_modules/typescript/lib/tsserverlibrary.js'
-end
-
 local servers = {
     'tsserver',
     'jsonls',
-    'volar',
     'eslint',
     'html',
     'emmet_ls',
     'cssls',
     'yamlls',
-    'bashls',
-    'vimls',
     'sumneko_lua',
     'dockerls',
     'efm',
@@ -41,13 +27,6 @@ local server_config = {
                 schemas = require('schemastore').json.schemas(),
                 validate = { enable = true },
             },
-        }
-    },
-    volar = {
-        init_options = {
-            typescript = {
-                serverPath = get_global_typescript_server()
-            }
         }
     },
     yamlls = {
