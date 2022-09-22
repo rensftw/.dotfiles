@@ -12,9 +12,6 @@ echo "🛠  ${PURPLE}Beginning tool configuration...${NC}"
 # Link dotfiles with stow
 source _scripts/stow.sh
 
-# Reload to start using ZSH
-source _scripts/setup-shell.sh
-
 # Build and setup nnn
 source _scripts/build-nnn.sh
 
