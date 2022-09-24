@@ -1,6 +1,7 @@
-PATH="$(brew --prefix)/share/zsh/site-functions:$PATH"
+# Load Brew binaries before native binaries
+PATH="$(brew --prefix)/bin:$PATH"
+# Keg-only formulae that I need to manually add to PATH:
 PATH="$(brew --prefix fzf)/bin:$PATH"
-# curl is keg-only, so we need to manually add  it to our PATH
 PATH="$(brew --prefix curl)/bin:$PATH"
 PATH="$(brew --prefix lua-language-server)/bin:$PATH"
 
@@ -43,6 +44,7 @@ bindkey -v
 
 # zsh-completions setup
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 # Rust/cargo completions
 FPATH=$HOME/.zfunc:$FPATH
 zstyle :compinstall filename "$HOME/.zshrc"
