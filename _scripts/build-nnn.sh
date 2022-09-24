@@ -8,8 +8,8 @@ else
     echo "🗃  ${CYAN}Build nnn${NC}"
     make O_NERD=1
 
-    echo "🔗  ${CYAN}Link newly compiled nnn in /usr/local/bin${NC}"
-    sudo ln $NNN_REPO/nnn /usr/local/bin/nnn
+    echo "🔗  ${CYAN}Install nnn and its manpage${NC}"
+    sudo make install
 
     echo "🧰  ${CYAN}Add plugins${NC}"
     curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
