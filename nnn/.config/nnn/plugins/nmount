@@ -19,7 +19,7 @@
 # Author: Arun Prakash Jana
 # NOTE: Modified for macOS
 
-prompt="device name [e.g. sdXn] ('l'ist, 'q'uit): "
+prompt="Device name ('l'ist, 'q'uit): "
 
 diskutil list
 
