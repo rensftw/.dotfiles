@@ -76,6 +76,7 @@ map('n', '<C-l>', '<C-w>l', opts)
 
 -- Explorer
 map('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', opts)
+map('n', '<leader>n', '<cmd>NnnPicker<CR>', opts)
 
 -- DAP / Debugging
 map('n', '<Tab>b', '<cmd>lua require("dap").toggle_breakpoint()<CR>', opts)

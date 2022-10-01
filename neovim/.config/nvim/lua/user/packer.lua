@@ -60,6 +60,7 @@ return require('packer').startup(function(use)
 
     -- File explorer
     use 'kyazdani42/nvim-tree.lua'
+    use 'luukvbaal/nnn.nvim'
 
     -- Haproon
     use 'ThePrimeagen/harpoon'
