@@ -111,6 +111,7 @@ map('n', '<leader>fw',
 map('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status({initial_mode = "normal"})<CR>', opts)
 map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers({initial_mode = "normal"})<CR>', opts)
 map('n', '<leader>?', '<cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
+map('n', '<leader>m', '<cmd>lua require("telescope.builtin").man_pages()<CR>', opts)
 map('n', '<leader>c', '<cmd>lua require("telescope.builtin").commands()<CR>', opts)
 
 -- Git
