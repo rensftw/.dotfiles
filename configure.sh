@@ -27,9 +27,6 @@ source _scripts/install-neovim-plugins.sh
 # # (Optional) Set up VSCode (packages, keybindings, settings, custom snippets)
 # source _scripts/setup-vscode.sh
 
-# Set up iTerm2 (theme + settings)
-source _scripts/setup-iterm2.sh
-
 # Set up Rectangle
 source _scripts/setup-rectangle.sh
 
