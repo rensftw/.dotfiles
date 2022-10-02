@@ -24,9 +24,6 @@ source _scripts/install-lts-node.sh
 # Install neovim plugins
 source _scripts/install-neovim-plugins.sh
 
-# # (Optional) Set up VSCode (packages, keybindings, settings, custom snippets)
-# source _scripts/setup-vscode.sh
-
 # Set up Rectangle
 source _scripts/setup-rectangle.sh
 

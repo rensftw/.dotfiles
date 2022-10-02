@@ -15,14 +15,6 @@ else
     echo "❌ ${RED}Failed to back up Homebrew packages. Cannot find brew.${NC}"
 fi
 
-# # (Optional) Backup Code extensions
-# if command -v code &> /dev/null; then
-#     echo "🧩 ${GREEN}Backing up Code extensions${NC}"
-#     code --list-extensions > _vscode/vscode-extensions
-# else
-#     echo "❌ ${RED}Failed to back up Code extensions. Cannot find code CLI.${NC}"
-# fi
-
 # Backup global npm packages
 if command -v npm &> /dev/null; then
     echo "🚀 ${GREEN}Backing up global npm packages${NC}"
