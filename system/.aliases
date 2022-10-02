@@ -27,6 +27,9 @@ alias vi="nvim"
 alias v="nvim"
 alias vs="nvim -S"      # open neovim with session
 
+# NNN
+alias n="nnn"
+
 # tmux
 alias ta="tmux attach"
 alias tk="tmux kill-server"
