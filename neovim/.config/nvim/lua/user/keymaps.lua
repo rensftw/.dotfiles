@@ -5,6 +5,11 @@ local opts = { silent = true }
 map('n', 'Q', ':wqall<CR>', opts)
 map('n', 'W', ':wall<CR>', opts)
 
+-- Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
+map('n', '<CR>', function()
+    return vim.v.hlsearch == 1 and ":nohl<CR>" or "<CR>"
+end, { expr = true, silent = true, nowait = true })
+
 -- Delete all other buffers
 map('n', 'B', ':BufOnly<CR>', opts)
 
