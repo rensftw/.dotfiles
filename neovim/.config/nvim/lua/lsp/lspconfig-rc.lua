@@ -13,7 +13,7 @@ Virtual_text.toggle = function()
 end
 
 local highlight_symbol_under_cursor = function(client)
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.document_highlight then
         vim.cmd [[
         hi LspReferenceRead cterm=bold ctermbg=red guibg=#414868
         hi LspReferenceText cterm=bold ctermbg=red guibg=#414868
@@ -28,10 +28,10 @@ local highlight_symbol_under_cursor = function(client)
 end
 
 local enable_formatting_for_eligible_clients = function(client)
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.document_formatting then
         vim.api.nvim_command [[augroup Format]]
         vim.api.nvim_command [[autocmd! * <buffer>]]
-        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
         vim.api.nvim_command [[augroup END]]
     end
 end
@@ -66,11 +66,11 @@ M.on_attach = function(client, bufnr)
 
     -- formatting
     if client.name == 'tsserver' or client.name == 'volar' then
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
     end
 
     if client.name == 'eslint' then
-        client.resolved_capabilities.document_formatting = true
+        client.server_capabilities.document_formatting = true
     end
 
     enable_formatting_for_eligible_clients(client);
