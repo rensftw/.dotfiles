@@ -105,6 +105,7 @@ return require('packer').startup(function(use)
 
     -- Lualine
     use 'nvim-lualine/lualine.nvim'
+    use 'feline-nvim/feline.nvim'
 
     -- Themes
     use 'folke/tokyonight.nvim'
