@@ -1,5 +1,12 @@
+local line_ok, feline = pcall(require, "feline")
+if not line_ok then
+	return
+end
+
+local get_mode_color = require("feline.providers.vi_mode").get_mode_color
+local git_info_exists = require('feline.providers.git').git_info_exists
+
 -- Feline + Tokyonight
--- https://github.com/dkarter/dotfiles/commit/9f182419392b3875608fd62d70234de92e7973f3
 local tokyonight_colors = require('tokyonight.colors').setup { style = 'night' }
 
 local colors = {
@@ -36,46 +43,44 @@ local vi_mode_colors = {
     NONE = colors.green,
   }
 
--- https://github.com/Hitesh-Aggarwal/feline_one_monokai.nvim/blob/2ff798d4d0435d2145593587dc93a70e72a6d279/plugin/feline_one_monokai.lua
-local line_ok, feline = pcall(require, "feline")
-if not line_ok then
-	return
-end
-
-local obsession_status = function()
-    return vim.fn.ObsessionStatus(' ⟳ ', ' ⏻︎ ')
-end
-
 local c = {
 	vim_mode = {
         icon = '',
-		provider = {
-            name = "vi_mode",
-			opts = {
-				show_mode_name = true,
-				-- padding = "center", -- Uncomment for extra padding.
-			},
-		},
+		provider = "vi_mode",
 		hl = function()
 			return {
 				fg = "bg",
-                bg = require("feline.providers.vi_mode").get_mode_color(),
+                bg = get_mode_color(),
 				style = "bold",
 				name = "NeovimModeHLColor",
 			}
 		end,
 		left_sep = "block",
-		right_sep = {
-            str =  "right_filled",
-            always_visible = true,
-            hl = function()
-                local background_color = require('feline.providers.git').git_info_exists() and 'darkblue' or 'bg'
+        right_sep = {
+            {
+                str = 'block',
+                always_visible = true,
+                hl = function()
+                    local background_color = git_info_exists() and 'darkblue' or 'bg'
 
-                return {
-                    fg = require("feline.providers.vi_mode").get_mode_color(),
-                    bg = background_color
-                }
-            end,
+                    return {
+                        fg = get_mode_color(),
+                        bg = background_color
+                    }
+                end,
+            },
+            {
+                str =  "right_filled",
+                always_visible = true,
+                hl = function()
+                    local background_color = git_info_exists() and 'darkblue' or 'bg'
+
+                    return {
+                        fg = get_mode_color(),
+                        bg = background_color
+                    }
+                end,
+            }
         },
 	},
 	gitBranch = {
@@ -84,7 +89,24 @@ local c = {
             bg = "darkblue"
         },
 		left_sep = "block",
-        right_sep = "block",
+        right_sep = {
+            "block",
+            {
+                str = "right_filled",
+                enabled = function()
+                    return git_info_exists()
+                end,
+                hl = {
+                    fg = "darkblue",
+                }
+            },
+            {
+                str = "block",
+                hl = {
+                    fg = "bg"
+                }
+            }
+        },
 	},
 	gitDiffAdded = {
 		provider = "git_diff_added",
@@ -107,34 +129,20 @@ local c = {
 		},
 		right_sep = "block",
 	},
-    right_separator = {
-        provider = "",
-        hl = {
-            fg = "fg",
-            bg ="darkblue"
-        }
-    },
     right_separator_filled = {
         provider = "",
-        hl = {
-            fg = "darkblue",
-        }
+		hl = function()
+			return {
+                fg = get_mode_color(),
+				style = "bold",
+			}
+		end,
     },
     left_separator = {
         provider = "",
         enabled = function()
             local diagnostics_exist = require('feline.providers.lsp').diagnostics_exist
-            local git_info_exists = require('feline.providers.git').git_info_exists()
-            return git_info_exists and diagnostics_exist
-        end,
-        hl = {
-            fg = "darkblue",
-        }
-    },
-    left_separator_filled = {
-        provider = " ",
-        enabled = function()
-            return require('feline.providers.git').git_info_exists()
+            return git_info_exists() and diagnostics_exist
         end,
         hl = {
             fg = "darkblue",
@@ -180,7 +188,7 @@ local c = {
 	lsp_client_names = {
 		provider = "lsp_client_names",
 		hl = {
-			fg = "purple",
+			fg = tokyonight_colors.green1,
 			bg = "darkblue",
 			style = "bold",
 		},
@@ -188,13 +196,43 @@ local c = {
 		right_sep = "right_filled",
 	},
 	obsession_status = {
-		provider = obsession_status,
+		provider = function()
+            return vim.fn.ObsessionStatus(' ⟳ ', ' ⏻︎ ')
+		end,
 		hl = {
 			fg = "violet",
 			style = "bold",
 		},
+		right_sep = {
+            str =  "left",
+            hl = {
+                fg = "darkblue"
+            }
+        },
+	},
+	harpoon = {
+		provider = function()
+            local harpoon_number = require("harpoon.mark").get_index_of(vim.fn.bufname())
+            if harpoon_number then
+                return "ﯠ " .. harpoon_number
+            else
+                return ''
+            end
+		end,
+		hl = {
+			fg = "green",
+			style = "bold",
+		},
         left_sep = "block",
-		right_sep = "block",
+		right_sep = {
+            'block',
+            {
+                str =  "left",
+                hl = {
+                    fg = "darkblue"
+                }
+            }
+        },
 	},
 	file_type = {
 		provider = {
@@ -204,53 +242,66 @@ local c = {
 				case = "titlecase",
 			},
 		},
-		hl = {
-			bg = "darkblue",
-		},
 		left_sep = "block",
-		right_sep = "block",
+		right_sep = {
+            'block',
+            {
+                str =  "left",
+                hl = {
+                    fg = "darkblue"
+                }
+            }
+        },
 	},
 	file_encoding = {
 		provider = "file_encoding",
-		hl = {
-			bg = "darkblue",
-		},
-		right_sep = "block",
+        right_sep = {
+            'block',
+            {
+                provider = "",
+                hl = {
+                    fg = "darkblue",
+                }
+            }
+        },
 		left_sep = "block",
 	},
 	position = {
 		provider = "position",
-		hl = {
-			fg = "green",
-			bg = "darkblue",
-			style = "bold",
-		},
+		hl = function()
+			return {
+				fg = "bg",
+                bg = get_mode_color(),
+				style = "bold",
+			}
+		end,
 		right_sep = "block",
 		left_sep = "block",
 	},
 	line_percentage = {
 		provider = "line_percentage",
-		hl = {
-			fg = "aqua",
-			bg = "darkblue",
-			style = "bold",
-		},
+		hl = function()
+			return {
+				fg = "bg",
+                bg = require("feline.providers.vi_mode").get_mode_color(),
+				style = "bold",
+			}
+		end,
 		right_sep = "block",
 		left_sep = "block",
 	},
-	-- scroll_bar = {
-	-- 	provider = "scroll_bar",
-	-- 	hl = {
-	-- 		fg = "yellow",
-	-- 		style = "bold",
-	-- 	},
-	-- },
+	scroll_bar = {
+		provider = "scroll_bar",
+		hl = {
+			fg = "yellow",
+			style = "bold",
+		},
+	},
 }
 
 local left = {
 	c.vim_mode,
 	c.gitBranch,
-    c.left_separator_filled,
 	c.gitDiffAdded,
     c.gitDiffChanged,
     c.gitDiffRemoved,
@@ -271,14 +322,12 @@ local middle = {
 
 local right = {
 	-- c.lsp_client_names,
+    c.harpoon,
     c.obsession_status,
-    c.right_separator_filled,
 	c.file_type,
-    c.right_separator,
 	c.file_encoding,
-    c.right_separator,
+    c.right_separator_filled,
 	c.position,
-    c.right_separator,
 	c.line_percentage,
 	-- c.scroll_bar,
 }
@@ -301,7 +350,6 @@ feline.setup({
 	theme = colors,
 	vi_mode_colors = vi_mode_colors,
 })
--- feline.winbar.setup()
 
 local winbar = {
     active = {
@@ -319,6 +367,7 @@ local winbar = {
                     fg = "#0db9d7",
                     style = "bold",
                 },
+                left_sep = " "
             }
         },
         {},
@@ -335,6 +384,7 @@ local winbar = {
                         colored_icon = true,
                     },
                 },
+                left_sep = " "
             }
         },
         {},
@@ -343,10 +393,16 @@ local winbar = {
 }
 
 feline.winbar.setup({
-	components = winbar,
+    components = winbar,
 	disable = {
 		filetypes = {
-			"^NvimTree$",
+            "^NvimTree$",
+            "^packer$",
+            "^startify$",
+            "^fugitive$",
+            "^fugitiveblame$",
+            "^qf$",
+            "^help$",
 		},
 		buftypes = {
 			"^terminal$",
