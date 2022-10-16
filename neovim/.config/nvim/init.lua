@@ -20,7 +20,7 @@ require 'nvim-dap-virtual-text'.setup()
 
 -- Plugin configuration
 require 'plugin.nvim-web-devicons-rc'
-require 'plugin.lualine-rc'
+require 'plugin.feline-rc'
 require 'plugin.telescope-rc'
 require 'plugin.nvim-tree-rc'
 require 'plugin.lspsaga-rc'
