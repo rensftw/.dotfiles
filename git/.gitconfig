@@ -1,0 +1,43 @@
+[user]
+    name = Irena
+    email = 22574186+rensftw@users.noreply.github.com
+	signingKey = FBB982E0340190AE
+
+[color]
+    ui = true
+
+[core]
+    pager = delta
+
+[delta]
+    features = line-numbers decorations
+    plus-style = "syntax #012800"
+    minus-style = "syntax #340001"
+    syntax-theme = Monokai Extended
+    navigate = true
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow 
+    file-decoration-style = none
+    hunk-header-decoration-style = yellow box
+
+[interactive]
+    diffFilter = delta --color-only
+
+[alias]
+    compact-diff = !git --no-pager diff --compact-summary
+    branch = !git --no-pager branch
+
+[pull]
+    rebase = false
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	program = gpg2
+
+[init]
+	defaultBranch = main
+
