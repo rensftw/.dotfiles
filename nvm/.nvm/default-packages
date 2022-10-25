@@ -1,7 +1,5 @@
 code-complexity
 corepack
-dockerfile-language-server-nodejs
-emmet-ls
 eslint
 http-server
 jest
@@ -10,8 +8,4 @@ nodemon
 npkill
 npm
 prettier
-typescript-language-server
-typescript
-vscode-langservers-extracted
-yaml-language-server
 yarn

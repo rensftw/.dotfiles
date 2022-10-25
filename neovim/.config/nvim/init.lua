@@ -18,6 +18,9 @@ require 'lsp.lsp-signature-rc'
 require 'dap.dap-rc'
 require 'nvim-dap-virtual-text'.setup()
 
+-- Mason: LSP and DAP depedency manager
+require 'plugin.mason-rc'
+
 -- Plugin configuration
 require 'plugin.nvim-web-devicons-rc'
 require 'plugin.feline-rc'
