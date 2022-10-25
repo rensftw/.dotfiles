@@ -1,4 +1,8 @@
+local fn = vim.fn
+
 require('dap-vscode-js').setup({
+    -- Use microsoft/vscode-js-debug from Mason's installation path
+    debugger_path = fn.stdpath('data') .. '/mason/packages/js-debug-adapter',
     adapters = {
         'pwa-node',
         'pwa-chrome',

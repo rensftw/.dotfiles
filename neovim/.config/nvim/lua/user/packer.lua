@@ -49,10 +49,12 @@ return require('packer').startup(function(use)
     use 'rcarriga/nvim-dap-ui'
     use 'theHamsta/nvim-dap-virtual-text'
     use 'mxsdev/nvim-dap-vscode-js'
+
+    -- Manage LSP and DAP dependencies
     use {
-        'microsoft/vscode-js-debug',
-        opt = true,
-        run = 'npm install --legacy-peer-deps && npm run compile'
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'jayp0521/mason-nvim-dap.nvim',
     }
 
     -- Session management
