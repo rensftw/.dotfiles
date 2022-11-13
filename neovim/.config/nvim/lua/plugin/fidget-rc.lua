@@ -5,5 +5,10 @@ require('fidget').setup {
     timer = {
         fidget_decay = 6000, -- how long to keep around empty fidget, in ms
         task_decay = 3000, -- how long to keep around completed task, in ms
-    }
+    },
+    window = {
+        relative = 'win', -- where to anchor, either "win" or "editor"
+        blend = 0, -- &winblend for the window
+        border = 'rounded', -- style of border for the fidget window
+    },
 }
