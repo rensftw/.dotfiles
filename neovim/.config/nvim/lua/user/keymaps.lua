@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
-local opts = { silent = true }
+local opts = { noremap = true, silent = true }
 
 map('n', 'Q', ':wqall<CR>', opts)
 map('n', 'W', ':wall<CR>', opts)
@@ -82,6 +82,27 @@ map('n', '<C-l>', '<C-w>l', opts)
 -- Explorer
 map('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', opts)
 map('n', '<leader>n', '<cmd>NnnPicker<CR>', opts)
+
+-- LSP keymaps
+map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+map('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+map('n', 'H', '<cmd>Lspsaga hover_doc<CR>', opts)
+map('n', '<leader>r', '<cmd>Lspsaga rename<CR>', opts)
+map('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', opts)
+map('n', '<leader>d', '<cmd>Lspsaga toggle_virtual_text<CR>', opts)
+map('n', '[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>', opts)
+map('n', ']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', opts)
+map('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
+-- map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+-- map('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+-- map('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+-- map('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+-- map('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+map('n', '<S-up>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", opts)
+map('n', '<S-down>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", opts)
 
 -- DAP / Debugging
 map('n', '`b', '<cmd>lua require("dap").toggle_breakpoint()<CR>', opts)
