@@ -13,6 +13,7 @@ require 'treesitter-context'.setup()
 -- LSP setup
 require 'lsp.setup-lsp-servers'
 require 'lsp.lsp-signature-rc'
+require 'plugin.lspsaga-rc'
 
 -- DAP setup
 require 'dap.dap-rc'
@@ -26,7 +27,6 @@ require 'plugin.nvim-web-devicons-rc'
 require 'plugin.feline-rc'
 require 'plugin.telescope-rc'
 require 'plugin.nvim-tree-rc'
-require 'plugin.lspsaga-rc'
 require 'plugin.nvim-cmp-rc'
 require 'plugin.gitsigns-rc'
 require 'plugin.luasnip-rc'

@@ -16,7 +16,6 @@ local servers = {
     'yamlls',
     'sumneko_lua',
     'dockerls',
-    'efm',
     'rust_analyzer'
 }
 
@@ -52,27 +51,6 @@ local server_config = {
             }
         }
     },
-    efm = {
-        init_options = {
-            documentFormatting = false
-        },
-        settings = {
-            rootMarkers = { ".git/" },
-            languages = {
-                markdown = {
-                    {
-                        lintCommand = 'vale --output=$HOME/.config/vale/output.tmpl ${INPUT}',
-                        lintStdin = false,
-                        lintFormats = {
-                            '%f:%l:%c:%trror:%m',
-                            '%f:%l:%c:%tarning:%m',
-                            '%f:%l:%c:%tnfo:%m',
-                        }
-                    },
-                }
-            }
-        }
-    },
 }
 
 for _, lsp in ipairs(servers) do
@@ -89,3 +67,9 @@ for _, lsp in ipairs(servers) do
         init_options = init_options,
     }
 end
+
+require('null-ls').setup({
+    sources = {
+        require('null-ls').builtins.diagnostics.vale,
+    },
+})
