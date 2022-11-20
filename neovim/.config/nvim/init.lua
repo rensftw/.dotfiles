@@ -6,21 +6,21 @@ require 'user.keymaps'
 require 'user.autocommands'
 require 'user.commands'
 
--- Treesitter
-require 'plugin.nvim-treesitter-rc'
-require 'treesitter-context'.setup()
+-- Mason: LSP and DAP depedency manager
+require 'plugin.mason-rc'
 
 -- LSP setup
 require 'lsp.setup-lsp-servers'
 require 'lsp.lsp-signature-rc'
-require 'plugin.lspsaga-rc'
+require 'lsp.lspsaga-rc'
 
 -- DAP setup
 require 'dap.dap-rc'
 require 'nvim-dap-virtual-text'.setup()
 
--- Mason: LSP and DAP depedency manager
-require 'plugin.mason-rc'
+-- Treesitter
+require 'plugin.nvim-treesitter-rc'
+require 'treesitter-context'.setup()
 
 -- Plugin configuration
 require 'plugin.nvim-web-devicons-rc'
