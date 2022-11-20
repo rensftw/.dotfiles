@@ -10,6 +10,7 @@ require 'user.commands'
 require 'plugin.mason-rc'
 
 -- LSP setup
+require 'lsp.native-settings'
 require 'lsp.setup-lsp-servers'
 require 'lsp.lsp-signature-rc'
 require 'lsp.lspsaga-rc'
