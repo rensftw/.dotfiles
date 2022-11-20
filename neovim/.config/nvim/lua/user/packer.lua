@@ -29,7 +29,7 @@ return require('packer').startup(function(use)
 
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'tami5/lspsaga.nvim'
+    use 'glepnir/lspsaga.nvim'
     use 'hrsh7th/nvim-cmp'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'ray-x/lsp_signature.nvim'
