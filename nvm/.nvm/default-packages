@@ -8,4 +8,5 @@ nodemon
 npkill
 npm
 prettier
+typescript
 yarn
