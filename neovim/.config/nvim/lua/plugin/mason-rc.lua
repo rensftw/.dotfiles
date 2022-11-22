@@ -14,6 +14,7 @@ require('mason-lspconfig').setup({
         'tsserver',
         'jsonls',
         'eslint',
+        'prettier',
         'html',
         'emmet_ls',
         'cssls',
