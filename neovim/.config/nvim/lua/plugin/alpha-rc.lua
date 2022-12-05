@@ -60,9 +60,10 @@ section.subtitle.val = nvim_version_info .. plugins_info
 section.buttons = { type = 'group', opts = { spacing = 1 } }
 section.buttons.val = {
     button('n', '  New file', ':ene <BAR> startinsert <CR>', nil),
-    button('f', '  Find file', ':Telescope find_files previewer=false<CR>', nil),
-    button('r', '↺  Recent', ':Telescope oldfiles previewer=false<CR>', nil),
-    button('u', '  Update plugins', ':PackerSync<CR>', nil),
+    button('f', '  Find file', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', nil),
+    -- button('r', '↺  Recent', ':Telescope oldfiles previewer=false<CR>', nil),
+    button('r', '↺  Recent', '<cmd>lua require("telescope.builtin").oldfiles({initial_mode = "normal", previewer = false})<CR>', nil),
+    button('u', '  Update plugins', '<cmd>PackerSync<CR>', nil),
     button('s', '  Settings', ':e $VIMRC_LOCATION | :cd %:p:h | split . | wincmd k | pwd<CR>', nil),
     button('q', '✖  Quit NVIM', ':qa<CR>', nil),
 }
