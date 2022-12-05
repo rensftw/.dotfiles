@@ -106,8 +106,7 @@ return require('packer').startup(function(use)
     -- Respect .editorconfig
     use 'editorconfig/editorconfig-vim'
 
-    -- Lualine
-    use 'nvim-lualine/lualine.nvim'
+    -- Feline
     use 'feline-nvim/feline.nvim'
 
     -- Themes
