@@ -6,7 +6,6 @@ jest
 neovim
 nodemon
 npkill
-npm
 prettier
 typescript
 yarn
