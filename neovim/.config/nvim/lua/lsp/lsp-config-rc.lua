@@ -15,18 +15,23 @@ local highlight_symbol_under_cursor = function(client)
     end
 end
 
-local enable_formatting_for_eligible_clients = function(client)
-    if client.server_capabilities.document_formatting then
-        vim.api.nvim_command [[augroup Format]]
-        vim.api.nvim_command [[autocmd! * <buffer>]]
-        vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-        vim.api.nvim_command [[augroup END]]
+local enable_format_on_save = function(client, bufnr)
+    if client.supports_method('textDocument/formatting') and client.server_capabilities.document_formatting then
+        local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd('BufWritePre', {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr })
+            end,
+        })
     end
 end
 
-M.on_attach = function(client)
+M.on_attach = function(client, bufnr)
     -- formatting
-    if client.name == 'tsserver' or client.name == 'volar' then
+    if client.name == 'tsserver' then
         client.server_capabilities.document_formatting = false
     end
 
@@ -34,7 +39,11 @@ M.on_attach = function(client)
         client.server_capabilities.document_formatting = false
     end
 
-    enable_formatting_for_eligible_clients(client);
+    if client.name == 'null-ls' then
+        client.server_capabilities.document_formatting = false
+    end
+
+    enable_format_on_save(client, bufnr);
     highlight_symbol_under_cursor(client)
 end
 
