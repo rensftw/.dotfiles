@@ -1,5 +1,5 @@
 local nvim_lsp = require('lspconfig')
-local config = require('lsp.lspconfig-rc')
+local config = require('lsp.lsp-config-rc')
 
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').default_capabilities(
@@ -72,7 +72,6 @@ local null_ls = require('null-ls')
 null_ls.setup({
     sources = {
         null_ls.builtins.diagnostics.vale,
-        -- null_ls.builtins.code_actions.eslint,
         null_ls.builtins.formatting.prettier,
     },
 })
