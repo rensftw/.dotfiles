@@ -1,9 +1,9 @@
-local line_ok, feline = pcall(require, "feline")
+local line_ok, feline = pcall(require, 'feline')
 if not line_ok then
 	return
 end
 
-local get_mode_color = require("feline.providers.vi_mode").get_mode_color
+local get_mode_color = require('feline.providers.vi_mode').get_mode_color
 local git_info_exists = require('feline.providers.git').git_info_exists
 
 -- Feline + Tokyonight
@@ -46,16 +46,16 @@ local vi_mode_colors = {
 local c = {
 	vim_mode = {
         icon = '',
-		provider = "vi_mode",
+		provider = 'vi_mode',
 		hl = function()
 			return {
-				fg = "bg",
+				fg = 'bg',
                 bg = get_mode_color(),
-				style = "bold",
-				name = "NeovimModeHLColor",
+				style = 'bold',
+				name = 'NeovimModeHLColor',
 			}
 		end,
-		left_sep = "block",
+		left_sep = 'block',
         right_sep = {
             {
                 str = 'block',
@@ -70,7 +70,7 @@ local c = {
                 end,
             },
             {
-                str =  "right_filled",
+                str =  'right_filled',
                 always_visible = true,
                 hl = function()
                     local background_color = git_info_exists() and 'darkblue' or 'bg'
@@ -84,217 +84,217 @@ local c = {
         },
 	},
 	gitBranch = {
-		provider = "git_branch",
+		provider = 'git_branch',
         hl = {
-            bg = "darkblue"
+            bg = 'darkblue'
         },
-		left_sep = "block",
+		left_sep = 'block',
         right_sep = {
-            "block",
+            'block',
             {
-                str = "right_filled",
+                str = 'right_filled',
                 enabled = function()
                     return git_info_exists()
                 end,
                 hl = {
-                    fg = "darkblue",
+                    fg = 'darkblue',
                 }
             },
             {
-                str = "block",
+                str = 'block',
                 hl = {
-                    fg = "bg"
+                    fg = 'bg'
                 }
             }
         },
 	},
 	gitDiffAdded = {
-		provider = "git_diff_added",
+		provider = 'git_diff_added',
 		hl = {
-			fg = "green",
+			fg = 'green',
 		},
-		right_sep = "block",
+		right_sep = 'block',
 	},
 	gitDiffRemoved = {
-		provider = "git_diff_removed",
+		provider = 'git_diff_removed',
 		hl = {
-			fg = "red",
+			fg = 'red',
 		},
-		right_sep = "block",
+		right_sep = 'block',
 	},
 	gitDiffChanged = {
-		provider = "git_diff_changed",
+		provider = 'git_diff_changed',
 		hl = {
-            fg = "fg",
+            fg = 'fg',
 		},
-		right_sep = "block",
+		right_sep = 'block',
 	},
     right_separator_filled = {
-        provider = "",
+        provider = '',
 		hl = function()
 			return {
                 fg = get_mode_color(),
-				style = "bold",
+				style = 'bold',
 			}
 		end,
     },
     left_separator = {
-        provider = "",
+        provider = '',
         enabled = function()
             local diagnostics_exist = require('feline.providers.lsp').diagnostics_exist
             return git_info_exists() and diagnostics_exist
         end,
         hl = {
-            fg = "darkblue",
+            fg = 'darkblue',
         }
     },
 	fileinfo = {
 		provider = {
-			name = "file_info",
+			name = 'file_info',
 			opts = {
-				type = "unique",
+				type = 'unique',
 			},
 		},
 		hl = {
-			style = "bold",
+			style = 'bold',
 		},
-		left_sep = " ",
-		right_sep = " ",
+		left_sep = ' ',
+		right_sep = ' ',
 	},
 	diagnostic_errors = {
-		provider = "diagnostic_errors",
+		provider = 'diagnostic_errors',
 		hl = {
-			fg = "red",
+			fg = 'red',
 		},
 	},
 	diagnostic_warnings = {
-		provider = "diagnostic_warnings",
+		provider = 'diagnostic_warnings',
 		hl = {
-			fg = "yellow",
+			fg = 'yellow',
 		},
 	},
 	diagnostic_hints = {
-		provider = "diagnostic_hints",
+		provider = 'diagnostic_hints',
 		hl = {
-			fg = "aqua",
+			fg = 'aqua',
 		},
 	},
 	diagnostic_info = {
-		provider = "diagnostic_info",
+		provider = 'diagnostic_info',
 		hl = {
-			fg = "aqua",
+			fg = 'aqua',
 		},
 	},
 	lsp_client_names = {
-		provider = "lsp_client_names",
+		provider = 'lsp_client_names',
 		hl = {
 			fg = tokyonight_colors.green1,
-			bg = "darkblue",
-			style = "bold",
+			bg = 'darkblue',
+			style = 'bold',
 		},
-		left_sep = "left_filled",
-		right_sep = "right_filled",
+		left_sep = 'left_filled',
+		right_sep = 'right_filled',
 	},
 	obsession_status = {
 		provider = function()
             return vim.fn.ObsessionStatus(' ⟳ ', ' ⏻︎ ')
 		end,
 		hl = {
-			fg = "violet",
-			style = "bold",
+			fg = 'violet',
+			style = 'bold',
 		},
 		right_sep = {
-            str =  "left",
+            str =  'left',
             hl = {
-                fg = "darkblue"
+                fg = 'darkblue'
             }
         },
 	},
 	harpoon = {
 		provider = function()
-            local harpoon_number = require("harpoon.mark").get_index_of(vim.fn.bufname())
+            local harpoon_number = require('harpoon.mark').get_index_of(vim.fn.bufname())
             if harpoon_number then
-                return "ﯠ " .. harpoon_number
+                return 'ﯠ ' .. harpoon_number
             else
                 return ''
             end
 		end,
 		hl = {
-			fg = "green",
-			style = "bold",
+			fg = 'green',
+			style = 'bold',
 		},
-        left_sep = "block",
+        left_sep = 'block',
 		right_sep = {
             'block',
             {
-                str =  "left",
+                str =  'left',
                 hl = {
-                    fg = "darkblue"
+                    fg = 'darkblue'
                 }
             }
         },
 	},
 	file_type = {
 		provider = {
-			name = "file_type",
+			name = 'file_type',
 			opts = {
 				filetype_icon = true,
-				case = "titlecase",
+				case = 'titlecase',
 			},
 		},
-		left_sep = "block",
+		left_sep = 'block',
 		right_sep = {
             'block',
             {
-                str =  "left",
+                str =  'left',
                 hl = {
-                    fg = "darkblue"
+                    fg = 'darkblue'
                 }
             }
         },
 	},
 	file_encoding = {
-		provider = "file_encoding",
+		provider = 'file_encoding',
         right_sep = {
             'block',
             {
-                provider = "",
+                provider = '',
                 hl = {
-                    fg = "darkblue",
+                    fg = 'darkblue',
                 }
             }
         },
-		left_sep = "block",
+		left_sep = 'block',
 	},
 	position = {
-		provider = "position",
+		provider = 'position',
 		hl = function()
 			return {
-				fg = "bg",
+				fg = 'bg',
                 bg = get_mode_color(),
-				style = "bold",
+				style = 'bold',
 			}
 		end,
-		right_sep = "block",
-		left_sep = "block",
+		right_sep = 'block',
+		left_sep = 'block',
 	},
 	line_percentage = {
-		provider = "line_percentage",
+		provider = 'line_percentage',
 		hl = function()
 			return {
-				fg = "bg",
-                bg = require("feline.providers.vi_mode").get_mode_color(),
-				style = "bold",
+				fg = 'bg',
+                bg = require('feline.providers.vi_mode').get_mode_color(),
+				style = 'bold',
 			}
 		end,
-		right_sep = "block",
-		left_sep = "block",
+		right_sep = 'block',
+		left_sep = 'block',
 	},
 	scroll_bar = {
-		provider = "scroll_bar",
+		provider = 'scroll_bar',
 		hl = {
-			fg = "yellow",
-			style = "bold",
+			fg = 'yellow',
+			style = 'bold',
 		},
 	},
 }
@@ -356,18 +356,18 @@ local winbar = {
         {
             {
                 provider = {
-                    name = "file_info",
+                    name = 'file_info',
                     opts = {
-                        type = "relative-short",
-                        file_modified_icon = "[+]",
+                        type = 'relative',
+                        file_modified_icon = '[+]',
                         colored_icon = true,
                     },
                 },
                 hl = {
-                    fg = "#0db9d7",
-                    style = "bold",
+                    fg = '#0db9d7',
+                    style = 'bold',
                 },
-                left_sep = " "
+                left_sep = ' '
             }
         },
         {},
@@ -377,14 +377,18 @@ local winbar = {
         {
             {
                 provider = {
-                    name = "file_info",
+                    name = 'file_info',
                     opts = {
-                        type = "relative-short",
-                        file_modified_icon = "[+]",
+                        type = 'relative',
+                        file_modified_icon = '[+]',
                         colored_icon = true,
                     },
                 },
-                left_sep = " "
+                hl = {
+                    fg = '#a9b1d6',
+                    style = 'bold',
+                },
+                left_sep = ' '
             }
         },
         {},
@@ -396,16 +400,16 @@ feline.winbar.setup({
     components = winbar,
 	disable = {
 		filetypes = {
-            "^NvimTree$",
-            "^packer$",
-            "^startify$",
-            "^fugitive$",
-            "^fugitiveblame$",
-            "^qf$",
-            "^help$",
+            '^NvimTree$',
+            '^packer$',
+            '^startify$',
+            '^fugitive$',
+            '^fugitiveblame$',
+            '^qf$',
+            '^help$',
 		},
 		buftypes = {
-			"^terminal$",
+			'^terminal$',
 		},
 		bufnames = {},
 	},
