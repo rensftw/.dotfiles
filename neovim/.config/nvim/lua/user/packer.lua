@@ -17,6 +17,9 @@ return require('packer').startup(function(use)
     -- Dashboard
     use 'goolord/alpha-nvim'
 
+    -- Undotree
+    use 'mbbill/undotree'
+
     -- Treesitter (AST-based syntax highlighting)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'nvim-treesitter/nvim-treesitter-context'
