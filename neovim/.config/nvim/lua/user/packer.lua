@@ -21,7 +21,13 @@ return require('packer').startup(function(use)
     use 'mbbill/undotree'
 
     -- Treesitter (AST-based syntax highlighting)
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use { -- Highlight, edit, and navigate code
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+          pcall(require('nvim-treesitter.install').update { with_sync = true })
+        end,
+    }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/nvim-treesitter-context'
 
     -- Telescope
