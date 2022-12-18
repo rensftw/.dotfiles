@@ -6,7 +6,7 @@ map('n', 'W', ':wall<CR>', opts)
 
 -- Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
 map('n', '<CR>', function()
-    return vim.v.hlsearch == 1 and ":nohl<CR>" or "<CR>"
+    return vim.v.hlsearch == 1 and ':nohl<CR>' or '<CR>'
 end, { expr = true, silent = true, nowait = true })
 
 -- Undotree
@@ -86,15 +86,18 @@ map('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', opts)
 map('n', '<leader>n', '<cmd>NnnPicker<CR>', opts)
 
 -- DAP / Debugging
-map('n', '`b', '<cmd>lua require("dap").toggle_breakpoint()<CR>', opts)
-map('n', '`u', '<cmd>lua require("dapui").toggle()<CR>', opts)
-map('n', '`a', '<cmd>lua require("dap").attach()<CR>', opts)
-map('n', '`h', '<cmd>lua require("dap").continue()<CR>', opts)
-map('n', '`j', '<cmd>lua require("dap").step_over()<CR>', opts)
-map('n', '`i', '<cmd>lua require("dap").step_into()<CR>', opts)
-map('n', '`k', '<cmd>lua require("dap").step_out()<CR>', opts)
-map('n', '`q', '<cmd>lua require("dap").terminate({terminateDebugee = true})<CR>', opts)
-map('n', '`s', '<cmd>lua require("telescope").extensions.dap.frames({initial_mode = "normal"})<CR>', opts)
+local dap = require('dap')
+map('n', '`b', dap.toggle_breakpoint, opts)
+map('n', '`u', require('dapui').toggle, opts)
+map('n', '`a', dap.attach, opts)
+map('n', '`h', dap.continue, opts)
+map('n', '`j', dap.step_over, opts)
+map('n', '`i', dap.step_into, opts)
+map('n', '`k', dap.step_out, opts)
+map('n', '`q', function() dap.terminate({terminateDebugee = true}) end, opts)
+map('n', '`s', function()
+    require('telescope').extensions.dap.frames({initial_mode = 'normal'})
+end, opts)
 
 -- DAP terminal navigation
 map('t', '<C-h>', '<C-\\><C-n><C-w>h', opts)
@@ -103,23 +106,27 @@ map('t', '<C-k>', '<C-\\><C-n><C-w>k', opts)
 map('t', '<C-l>', '<C-\\><C-n><C-w>l', opts)
 
 -- Telescope
-map('n', '<leader>o', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', opts)
-map('n', '<leader>i', '<cmd>lua require("telescope.builtin").resume()<CR>', opts)
-map('n', '<leader>.', '<cmd>lua require("telescope.builtin").find_files({cwd = "$HOME/.dotfiles", hidden = true})<CR>',
-    opts)
-map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<CR>', opts)
-map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").live_grep()<CR>', opts)
-map('n', '<leader>fa',
-    '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.input("  filter grep ❯ "), initial_mode = "normal"})<CR>'
-    , opts)
-map('n', '<leader>fw',
-    '<cmd>lua require("telescope.builtin").grep_string({search = vim.fn.expand("<cword>"), initial_mode = "normal"})<CR>'
-    , opts)
-map('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status({initial_mode = "normal"})<CR>', opts)
-map('n', '<leader>b', '<cmd>lua require("telescope.builtin").buffers({initial_mode = "normal"})<CR>', opts)
-map('n', '<leader>?', '<cmd>lua require("telescope.builtin").help_tags()<CR>', opts)
-map('n', '<leader>m', '<cmd>lua require("telescope.builtin").man_pages()<CR>', opts)
-map('n', '<leader>c', '<cmd>lua require("telescope.builtin").commands()<CR>', opts)
+local telescope = require('telescope.builtin');
+map('n', '<leader>o', function() telescope.find_files({hidden = true, previewer = false}) end, opts)
+map('n', '<leader>i', telescope.resume, opts)
+map('n', '<leader>.',  function() telescope.find_files({cwd = '$HOME/.dotfiles', hidden = true}) end, opts)
+map('n', '<leader>fb', telescope.current_buffer_fuzzy_find, opts)
+map('n', '<leader>ff', telescope.live_grep, opts)
+map('n', '<leader>fa', function()
+    telescope.grep_string({
+        search = vim.fn.input('  filter grep ❯ '),
+        initial_mode = 'normal'
+    })
+end, opts)
+map('n', '<leader>fw', function()
+    telescope.grep_string({
+        search = vim.fn.expand('<cword>'), initial_mode = 'normal'})
+end, opts)
+map('n', '<leader>gs', function() telescope.git_status({initial_mode = 'normal'}) end, opts)
+map('n', '<leader>b', function() telescope.buffers({initial_mode = 'normal'}) end, opts)
+map('n', '<leader>?', telescope.help_tags, opts)
+map('n', '<leader>m', telescope.man_pages, opts)
+map('n', '<leader>c',  telescope.commands, opts)
 
 -- Git
 -- Copy relative file path to clipboard
@@ -163,9 +170,10 @@ map('n', 'r', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn", opts)
 map('x', 'r', '"sy:let @/=@s<CR>cgn', opts)
 
 -- Harpoons
-map('n', '<leader>ha', '<cmd>lua require("harpoon.mark").add_file()<CR>', opts)
-map('n', '<leader>hh', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>', opts)
-map('n', '<leader>1', '<cmd>lua require("harpoon.ui").nav_file(1)<CR>', opts)
-map('n', '<leader>2', '<cmd>lua require("harpoon.ui").nav_file(2)<CR>', opts)
-map('n', '<leader>3', '<cmd>lua require("harpoon.ui").nav_file(3)<CR>', opts)
-map('n', '<leader>4', '<cmd>lua require("harpoon.ui").nav_file(4)<CR>', opts)
+local harpoon_ui = require('harpoon.ui')
+map('n', '<leader>ha', require('harpoon.mark').add_file, opts)
+map('n', '<leader>hh', harpoon_ui.toggle_quick_menu, opts)
+map('n', '<leader>1', function() harpoon_ui.nav_file(1) end, opts)
+map('n', '<leader>2', function() harpoon_ui.nav_file(2) end, opts)
+map('n', '<leader>3', function() harpoon_ui.nav_file(3) end, opts)
+map('n', '<leader>4', function() harpoon_ui.nav_file(4) end, opts)
