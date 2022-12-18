@@ -1,10 +1,10 @@
 -- Globals
 require 'user.options'
-require 'user.packer'
-require 'user.theme'
 require 'user.keymaps'
 require 'user.autocommands'
 require 'user.commands'
+require 'user.packer'
+require 'user.theme'
 
 -- Mason: LSP and DAP depedency manager
 require 'plugin.mason-rc'
@@ -37,6 +37,7 @@ require 'plugin.alpha-rc'
 require 'plugin.indent-blankline-rc'
 require 'plugin.vim-tmux-navigator-rc'
 require 'plugin.fidget-rc'
+require 'plugin.undotree-rc'
 
 require 'Comment'.setup()
 require 'colorizer'.setup()

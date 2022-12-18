@@ -1,3 +1,4 @@
+--  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' ' -- use <space> as the leader key
 vim.o.mouse = '' -- disable mouse support
 vim.o.tabstop = 4 -- show existing tab with 4 spaces width
@@ -25,7 +26,9 @@ vim.opt.errorbells = false -- do not ring the bell for error messages (beep or s
 vim.opt.smartindent = true -- smart indent when starting a new line
 vim.opt.swapfile = false -- do not create swapfiles
 vim.opt.updatetime = 50 -- blazingly fast (default is 4000ms)
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = '80'
+vim.o.undofile = true -- save undo history
+vim.o.undodir = vim.fn.stdpath('state') .. 'undodir'
 
 -- Folds
 -- source: https://essais.co/better-folding-in-neovim/

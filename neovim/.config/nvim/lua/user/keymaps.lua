@@ -9,6 +9,9 @@ map('n', '<CR>', function()
     return vim.v.hlsearch == 1 and ":nohl<CR>" or "<CR>"
 end, { expr = true, silent = true, nowait = true })
 
+-- Undotree
+map('n', '<leader>u', '<cmd>UndotreeToggle<CR>', opts)
+
 -- Delete all other buffers
 map('n', 'B', ':BufOnly<CR>', opts)
 
