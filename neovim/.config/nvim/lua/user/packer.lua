@@ -1,16 +1,16 @@
 ---@diagnostic disable: different-requires
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local is_bootstrap = false
 
 -- Automatically install Packer
 if fn.empty(fn.glob(install_path)) > 0 then
-    Packer_bootstrap = fn.system({
-        'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-        install_path
-    })
+    is_bootstrap = true
+    vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+    vim.cmd [[packadd packer.nvim]]
 end
 
-return require('packer').startup(function(use)
+require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
@@ -132,7 +132,21 @@ return require('packer').startup(function(use)
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
-    if Packer_bootstrap then
+    if is_bootstrap then
         require('packer').sync()
     end
 end)
+
+-- When we are bootstrapping a configuration, it doesn't
+-- make sense to execute the rest of the init.lua.
+--
+-- You'll need to restart nvim, and then it will work.
+if is_bootstrap then
+  print '=================================='
+  print '    Plugins are being installed'
+  print '    Wait until Packer completes,'
+  print '       then restart nvim'
+  print '=================================='
+  return
+end
+
