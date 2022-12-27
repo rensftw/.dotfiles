@@ -19,8 +19,8 @@ export OBSIDIAN_LOCATION="$HOME/Library/Mobile\ Documents/iCloud\~md\~obsidian/D
 # GPG needs to know TTY to work properly: https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
 export GPG_TTY=$(tty)
 
-source $HOME/.aliases
 source $HOME/.config/nnn/.nnnrc.zsh
+source $HOME/.aliases
 
 # (Optional) Fix brew warning about ""config" scripts exist outside your system or Homebrew directories"
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'

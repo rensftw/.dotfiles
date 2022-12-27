@@ -15,6 +15,7 @@ tmux/.tmux/plugins/*
 
 # nnn
 nnn/.config/nnn/plugins/*
+nnn/.config/nnn/.lastd
 nnn/.config/nnn/**/*.tar.gz
 
 # work-related snippets
