@@ -38,10 +38,14 @@ require('packer').startup(function(use)
 
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'glepnir/lspsaga.nvim'
-    use 'hrsh7th/nvim-cmp'
     use 'jose-elias-alvarez/null-ls.nvim'
+    use 'glepnir/lspsaga.nvim'
     use 'ray-x/lsp_signature.nvim'
+    -- Show LSP status during startup
+    use 'j-hui/fidget.nvim'
+
+    -- Autocomplete
+    use 'hrsh7th/nvim-cmp'
     -- completion sources:
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-nvim-lua'
@@ -49,9 +53,6 @@ require('packer').startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'rcarriga/cmp-dap'
-
-    -- Show LSP status during startup
-    use 'j-hui/fidget.nvim'
 
     -- DAP / Debugging
     use 'mfussenegger/nvim-dap'
