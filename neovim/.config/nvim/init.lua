@@ -38,7 +38,7 @@ require 'plugin.indent-blankline-rc'
 require 'plugin.vim-tmux-navigator-rc'
 require 'plugin.fidget-rc'
 require 'plugin.undotree-rc'
+require 'plugin.nnn-rc'
 
 require 'Comment'.setup()
 require 'colorizer'.setup()
-require 'nnn'.setup()
