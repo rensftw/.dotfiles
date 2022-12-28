@@ -1,26 +1,19 @@
-local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
-
-
 local list = {
-    { key = { '<CR>', 'l', '<2-LeftMouse>' }, cb = tree_cb('edit') },
-    { key = { '<BS>', 'h' }, cb = tree_cb('close_node') },
-    { key = { '<2-RightMouse>', '<C-]>' }, cb = tree_cb('cd') },
-    { key = '<Tab>', cb = tree_cb('preview') },
-    { key = 'R', cb = tree_cb('refresh') },
-    { key = 'a', cb = tree_cb('create') },
-    { key = 'd', cb = tree_cb('remove') },
-    { key = 'D', cb = tree_cb('trash') },
-    { key = 'r', cb = tree_cb('rename') },
-    { key = 'x', cb = tree_cb('cut') },
-    { key = 'c', cb = tree_cb('copy') },
-    { key = 'p', cb = tree_cb('paste') },
-    { key = 'y', cb = tree_cb('copy_name') },
-    { key = 'Y', cb = tree_cb('copy_path') },
-    { key = 'gy', cb = tree_cb('copy_absolute_path') },
-    { key = '[h', cb = tree_cb('prev_git_item') },
-    { key = ']h', cb = tree_cb('next_git_item') },
-    { key = '?', cb = tree_cb('toggle_help') },
-    { key = '-', cb = tree_cb('') }, -- Overwrite default mapping for -, so it can be used for resizing the tree split
+    { key = { '<CR>', 'l' }, action = 'edit' },
+    { key = { '<BS>', 'h' }, action = 'close_node' },
+    { key = {'<C-]>' }, action = 'cd' },
+    { key = '<Tab>', action = 'preview' },
+    { key = 'R', action = 'refresh' },
+    { key = 'a', action = 'create' },
+    { key = 'dd', action = 'remove' },
+    { key = 'cw', action = 'rename' },
+    { key = 'x', action = 'cut' },
+    { key = 'yy', action = 'copy' },
+    { key = 'p', action = 'paste' },
+    { key = 'yp', action = 'copy_path' },
+    { key = 'gy', action = 'copy_absolute_path' },
+    { key = '?', action = 'toggle_help' },
+    { key = '-', action = '' }, -- Overwrite default mapping for -, so it can be used for resizing the tree split
 }
 
 require 'nvim-tree'.setup {
