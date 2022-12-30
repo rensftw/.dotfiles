@@ -72,7 +72,9 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
             Interactive git operations with <a href="https://github.com/junegunn/fzf">fzf</a>
         </p>
         <p>
-            🎥 <a target="_blank" href="https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4">video</a>
+           <a target="_blank" href="https://user-images.githubusercontent.com/22574186/147154782-5b862118-34de-46fc-8331-4dcb4d975e7b.mp4">
+           <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/interactive-git-fzf-full-size.gif"/>
+           </a>
         </p>
     </div>
     <br />
