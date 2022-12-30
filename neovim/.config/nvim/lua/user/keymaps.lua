@@ -131,6 +131,8 @@ map('n', '<leader>c',  telescope.commands, opts)
 -- Git
 -- Copy relative file path to clipboard
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
+-- Checkout a different branch
+map('n', '<leader>gcb', function() telescope.git_branches({initial_mode = 'normal'}) end, opts)
 -- Next/previous hunk
 map('n', ']h', '<cmd>Gitsigns next_hunk<CR>zz', opts)
 map('n', '[h', '<cmd>Gitsigns prev_hunk<CR>zz', opts)
