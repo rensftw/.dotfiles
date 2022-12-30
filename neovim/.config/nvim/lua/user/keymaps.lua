@@ -22,6 +22,7 @@ map('n', 'T', ':tabonly<CR>', opts)
 map('n', 'Y', 'yg$', opts)
 
 -- Yank to clipboard
+map('n', '<leader>Y', '\"+yg$', opts) --to the end of line
 map('n', '<leader>y', '\"+y', opts)
 map('v', '<leader>y', '\"+y', opts)
 
