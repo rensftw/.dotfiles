@@ -17,18 +17,26 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 
 
 ## Scripts
-|Script                         |Description                                                                                        |
-|:------------------------------|:--------------------------------------------------------------------------------------------------|
-| `macos.sh`                    | Applies sensible macOS defaults.                                                                  |
-| `install.sh`                  | Installs Homebrew and all formulae/casks defined in `Brewfile`.                                   |
-| `configure.sh`                | Configures tools and applies dotfiles.                                                            |
-| `backup.sh`                   | Backs up `Brewfile`, [`Code`](https://code.visualstudio.com/) extensions, and global npm packages.|
-| `uninstall.sh`                | Removes all packages, tools, and config files.                                                    |
-
+| Script                          | Description                                                                                         |
+| :------------------------------ | :-------------------------------------------------------------------------------------------------- |
+| `macos.sh`                      | Applies sensible macOS defaults.                                                                    |
+| `install.sh`                    | Installs Homebrew and all formulae/casks defined in `Brewfile`.                                     |
+| `configure.sh`                  | Configures tools and applies dotfiles.                                                              |
+| `backup.sh`                     | Backs up `Brewfile` and global npm packages.                                                        |
+| `uninstall.sh`                  | Removes all packages, tools, and config files.                                                      |
 
 ## Highlights
-* [`neovim`](https://neovim.io/) + [`packer`](https://github.com/wbthomason/packer.nvim) + [`telescope`](https://github.com/nvim-telescope/telescope.nvim)
-* [`ranger`](https://github.com/ranger/ranger) for terminal file navigation
+* [Alacritty](https://github.com/alacritty/alacritty) terminal emulator
+* [`tmux`](https://github.com/tmux/tmux) + [`tpm`](https://github.com/tmux-plugins/tpm)
+* [`neovim`](https://neovim.io/)
+  * [`packer`](https://github.com/wbthomason/packer.nvim)
+  * [`mason`](https://github.com/williamboman/mason.nvim)
+  * [`telescope`](https://github.com/nvim-telescope/telescope.nvim)
+  * [`treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
+  * [`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig) - native LSP
+  * [`nvim-dap`](https://github.com/mfussenegger/nvim-dap) - debugging protocol
+  * [`folke/tokyo-night` theme](https://github.com/folke/tokyonight.nvim)
+* [`nnn`](https://github.com/jarun/nnn) for terminal file navigation
 * [`fzf`](https://github.com/junegunn/fzf) for fuzzy finding and interactive git operations
 * [`rg`](https://github.com/BurntSushi/ripgrep) for searching file contents
 * [`fd`](https://github.com/sharkdp/fd) for listing filesystem entries
