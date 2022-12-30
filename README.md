@@ -54,17 +54,17 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
         <p>
             <a href="https://github.com/romkatv/powerlevel10k/">Powerlevel10k</a> Rainbow prompt with modified <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> on <a href="https://iterm2.com/">iTerm</a>
         </p>
-        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/iterm-with-modified-tokyonight-theme.png"/>
+        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/alacritty-tmux-powerlevel10k.png"/>
     </div>
     <br />
     <div>
         <p>Neovim with customized <a href="https://github.com/goolord/alpha-nvim">Alpha start screen</a> and dynamic quotes</p>
-        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-start-screen.png"/>
+        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/tmux-neovim-alpha.png"/>
     </div>
     <br />
     <div>
-        <p>Neovim with <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> theme:<p>
-        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-with-tokyonight-theme.png"/>
+        <p>Neovim with <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> theme showing LSP diagnostics and Git status:<p>
+        <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/neovim-null-ls-readme-demo.png"/>
     </div>
     <br />
     <div>
