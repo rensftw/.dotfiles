@@ -159,6 +159,10 @@ map('n', '<leader>gds', ':Gvdiffsplit!<CR>', opts)
 map('n', '<leader>gdm', ':Git difftool -y main<CR>', opts)
 -- Compare with any branch
 map('n', '<leader>gd', ':Git difftool -y', opts)
+-- Open file revision
+-- This also works with :Gvdiffsplit branch:%
+-- source: https://vi.stackexchange.com/questions/3746/how-do-i-open-a-file-from-another-git-branch
+map('n', '<leader>gfr', ':Gvsplit :%<Left><Left>', opts)
 
 -- Conflict resolution
 -- Choose which side to use for resolution
