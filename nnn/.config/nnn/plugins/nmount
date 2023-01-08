@@ -30,11 +30,11 @@ read -r dev
 while [ -n "$dev" ]
 do
     if [ "$dev" = "l" ]; then
-    diskutil list
+        diskutil list
     elif [ "$dev" = "q" ]; then
         exit
     else
-        if ls /Volumes | grep "$dev"; then
+        if fd --quiet "$dev" /Volumes; then
             sync
             if diskutil unmount "$dev"; then
                 echo "$dev" unmounted.
