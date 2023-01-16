@@ -6,7 +6,7 @@ local warn_icon = vim.fn.sign_getdefined('DiagnosticSignWarn')[1].text
 local info_icon = vim.fn.sign_getdefined('DiagnosticSignInfo')[1].text
 local hint_icon = vim.fn.sign_getdefined('DiagnosticSignHint')[1].text
 
-saga.init_lsp_saga {
+saga.setup {
     border_style = 'rounded',
     diagnostic_header = { error_icon, warn_icon, info_icon, hint_icon },
     code_action_icon = ' ',
