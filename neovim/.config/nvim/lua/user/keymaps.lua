@@ -124,6 +124,7 @@ map('n', '<leader>fw', function()
         search = vim.fn.expand('<cword>'), initial_mode = 'normal'})
 end, opts)
 map('n', '<leader>gs', function() telescope.git_status({initial_mode = 'normal'}) end, opts)
+map('n', '<leader>gB', function() telescope.git_branches({initial_mode = 'normal'}) end, opts)
 map('n', '<leader>b', function() telescope.buffers({initial_mode = 'normal'}) end, opts)
 map('n', '<leader>?', telescope.help_tags, opts)
 map('n', '<leader>m', telescope.man_pages, opts)
@@ -144,8 +145,6 @@ map('n', '<leader>hu', '<cmd>Gitsigns reset_hunk<CR>', opts)
 map('v', '<leader>hu', ':Gitsigns reset_hunk<CR>', opts)
 -- Reset changes in the entire buffer
 map('n', '<leader>hU', '<cmd>Gitsigns reset_buffer<CR>', opts)
--- Toggle git blame for the current line
-map('n', '<leader>gB', '<cmd>Gitsigns toggle_current_line_blame<CR>', opts)
 -- See blame history for the current file
 map('n', '<leader>gbf', ':Git blame<CR>', opts)
 -- Show git history for the current line
@@ -175,6 +174,10 @@ map('n', '[r', ':diffget //2<CR>', opts)
 -- for replacing a few instances of the term (comparable to multiple cursors).
 map('n', 'r', ":let @/='\\<'.expand('<cword>').'\\>'<CR>cgn", opts)
 map('x', 'r', '"sy:let @/=@s<CR>cgn', opts)
+
+-- Start interactive EasyAlign in normal (e.g. gaip) or visual mode (e.g. vipga)
+map('x', 'ga', '<Plug>(EasyAlign)', opts)
+map('n', 'ga', '<Plug>(EasyAlign)', opts)
 
 -- Harpoons
 local harpoon_ui = require('harpoon.ui')
