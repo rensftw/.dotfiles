@@ -82,6 +82,9 @@ require('packer').startup({
         -- Add indent guides
         use 'lukas-reineke/indent-blankline.nvim'
 
+        -- Markdown aligning
+        use 'junegunn/vim-easy-align'
+
         -- JSON schemas
         use 'b0o/schemastore.nvim'
 
