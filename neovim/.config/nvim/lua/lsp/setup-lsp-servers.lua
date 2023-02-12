@@ -16,7 +16,7 @@ local servers = {
     'emmet_ls',
     'cssls',
     'yamlls',
-    'sumneko_lua',
+    'lua_ls',
     'dockerls',
     'rust_analyzer'
 }
@@ -37,7 +37,7 @@ local server_config = {
             }
         }
     },
-    sumneko_lua = {
+    lua_ls = {
         settings = {
             Lua = {
                 runtime = {

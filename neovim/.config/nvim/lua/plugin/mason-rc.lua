@@ -19,7 +19,7 @@ require('mason-lspconfig').setup({
         'emmet_ls',
         'cssls',
         'yamlls',
-        'sumneko_lua',
+        'lua_ls',
         'dockerls',
         'rust_analyzer',
     },
