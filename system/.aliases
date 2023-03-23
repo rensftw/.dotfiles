@@ -4,7 +4,7 @@
 
 # Include work-related aliases, if the file exists
 if [[ -e $HOME/.aliases.work ]]; then
-    source $HOME/.aliases.work
+    source "$HOME/.aliases.work"
 fi
 
 # Navigation aliases
@@ -50,13 +50,13 @@ alias tree="tree -C"
 # Add syntax highlighting for man pages
 function man() {
   env \
-    LESS_TERMCAP_md=$(tput bold; tput setaf 4) \
-    LESS_TERMCAP_me=$(tput sgr0) \
-    LESS_TERMCAP_mb=$(tput blink) \
-    LESS_TERMCAP_us=$(tput setaf 2) \
-    LESS_TERMCAP_ue=$(tput sgr0) \
-    LESS_TERMCAP_so=$(tput smso) \
-    LESS_TERMCAP_se=$(tput rmso) \
+    LESS_TERMCAP_md="$(tput bold; tput setaf 4)" \
+    LESS_TERMCAP_me="$(tput sgr0)" \
+    LESS_TERMCAP_mb="$(tput blink)" \
+    LESS_TERMCAP_us="$(tput setaf 2)" \
+    LESS_TERMCAP_ue="$(tput sgr0)" \
+    LESS_TERMCAP_so="$(tput smso)" \
+    LESS_TERMCAP_se="$(tput rmso)" \
     PAGER="${commands[less]:-$PAGER}" \
     man "$@"
 }
@@ -71,7 +71,7 @@ fif() {
 
 # Preview files and open the chosen files in nvim
 vf() {
-  nvim -o $(fzf --preview 'bat --color=always {}')
+  nvim -o "$(fzf --preview 'bat --color=always {}')"
 }
 
 # Process monitoring
@@ -163,7 +163,7 @@ gstash() {
 # source: https://stackoverflow.com/questions/3973034/export-a-stash-to-another-computer
 share-stash() {
     STASH_ENTRY=$(gstash)
-    git stash show $STASH_ENTRY -p > changes.patch
+    git stash show "$STASH_ENTRY" -p > changes.patch
 }
 
 # Git branch with commit log preview
@@ -192,38 +192,37 @@ _mb() {
 
 # Mnemonic: git checkout branch
 gcb() {
-  git checkout $(_gb)
+  git checkout "$(_gb)"
 }
 
 # Mnemonic: git branch delete
 gbd() {
-  git branch -D $(_gb)
+  git branch -D "$(_gb)"
 }
 
 # Interactive FZF prompt to remove changes
 gc() {
-  git checkout $(gsp)
+  git checkout "$(gsp)"
 }
 
 # Interactive FZF prompt to stage files
 ga() {
-  git add $(gsp)
+  git add "$(gsp)"
 }
-
 
 # Interactive FZF prompt to stage chunks
 gap() {
-  git add -p $(gsp)
+  git add -p "$(gsp)"
 }
 
 # Interactive FZF prompt to unstage files
 gr() {
-  git reset $(gsp)
+  git reset "$(gsp)"
 }
 
 # Mnemonic: git stash apply
 gsa() {
-  git stash apply $(gstash)
+  git stash apply "$(gstash)"
 }
 
 # Mnemonic: current branch commits
@@ -231,7 +230,7 @@ cbcommits() {
   MAIN_BRANCH=$(_mb)
   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-  git log origin/$MAIN_BRANCH..$CURRENT_BRANCH --oneline
+  git log origin/"$MAIN_BRANCH".."$CURRENT_BRANCH" --oneline
 }
 
 # Mnemonic: Am I behind origin/main?
@@ -239,20 +238,20 @@ amibehind() {
   MAIN_BRANCH=$(_mb)
   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-  git log $CURRENT_BRANCH..origin/$MAIN_BRANCH --oneline
+  git log "$CURRENT_BRANCH"..origin/"$MAIN_BRANCH" --oneline
 }
 
 # What has happened to origin/main since I last pulled? (shows commits)
 glmomo() {
   MAIN_BRANCH=$(_mb)
 
-  git log $MAIN_BRANCH..origin/$MAIN_BRANCH --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%C(cyan)%C(bold)%an%C(auto))" --color=always
+  git log "$MAIN_BRANCH"..origin/"$MAIN_BRANCH" --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%C(cyan)%C(bold)%an%C(auto))" --color=always
 }
 
 # What has happened to origin/main since I last pulled? (shows file changes)
 gdmomo() {
   MAIN_BRANCH=$(_mb)
-  git diff $MAIN_BRANCH...origin/$MAIN_BRANCH --compact-summary
+  git diff "$MAIN_BRANCH"...origin/"$MAIN_BRANCH" --compact-summary
 }
 
 # Show git status
