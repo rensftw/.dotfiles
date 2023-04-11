@@ -40,9 +40,11 @@ map('v', 'y', 'ygv<Esc>', opts)
 map('v', '>', '>gv', opts)
 map('v', '<', '<gv', opts)
 
--- Center scrolling
+-- Center scrolling and navigation
 map('n', '<C-d>', '<C-d>zz', opts)
 map('n', '<C-u>', '<C-u>zz', opts)
+map('n', '<C-o>', '<C-o>zz', opts)
+map('n', '<C-i>', '<C-i>zz', opts)
 
 -- Center search results
 map('n', 'n', 'nzz', opts)
