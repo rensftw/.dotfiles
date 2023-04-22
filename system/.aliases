@@ -12,15 +12,15 @@ alias ls="ls -G"
 alias ll="ls -Ghal"
 alias grep="grep --color=auto --ignore-case"
 alias mkdir="mkdir -pv"
-alias path="echo -e ${PATH//:/\\n}"
+alias path='echo -e ${PATH//:/\\n}'
 alias c="clear"
 alias r=". ranger"      # ranger navigates to the last directory opened
 alias rr="ranger ."     # ranger is limited to the directory it was originally called from
-alias df="cd $DOTFILES_LOCATION"
-alias av="nvim $VIMRC_LOCATION"
-alias az="nvim $ZSHRC_LOCATION"
-alias aa="nvim $ALIASES_LOCATION"
-alias obsidian="cd $OBSIDIAN_LOCATION && nvim ."
+alias df='cd $DOTFILES_LOCATION'
+alias av='nvim $VIMRC_LOCATION'
+alias az='nvim $ZSHRC_LOCATION'
+alias aa='nvim $ALIASES_LOCATION'
+alias obsidian='cd $OBSIDIAN_LOCATION && nvim .'
 
 # Use neovim by default
 alias vi="nvim"
@@ -106,7 +106,7 @@ alias sto-sof="speedtest -vo sp1.neterra.net"
 alias sto-ath="speedtest -vo speedtest2.cosmote.net"
 
 # Cool miscellaneous shortcuts
-alias plinkplonk="cat $HOME/develop/plink-plonk-cute.js | pbcopy"
+alias plinkplonk='cat $HOME/develop/plink-plonk-cute.js | pbcopy'
 weather() {
     combinedurl="v2.wttr.in/$1?m"
     echo "$combinedurl"
