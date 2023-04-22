@@ -792,7 +792,13 @@ cursor:
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
+  # Make Alacritty discern <C-Enter> and <S-Enter> from <Enter>
+  # https://stackoverflow.com/a/42461580
+  - { key: Return, mods: Shift,   chars: "\x1b[13;2u" }
+  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
+  - { key: Space,  mods: Shift,   chars: "\x1b[32;2u" }
+  - { key: Space,  mods: Control, chars: "\x1b[32;5u" } # NOTE: This is an edge case and might not work.
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
