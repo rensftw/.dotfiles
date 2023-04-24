@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
@@ -10,7 +12,7 @@ if [[ -n $HOMEBREW_BUNDLE_FILE ]] && command -v brew &> /dev/null; then
 
     # Backup Brewfile
     echo "📦 ${GREEN}Backing up Homebrew packages${NC}"
-    brew bundle dump --force --file $HOMEBREW_BUNDLE_FILE
+    brew bundle dump --force --file "$HOMEBREW_BUNDLE_FILE"
 else
     echo "❌ ${RED}Failed to back up Homebrew packages. Cannot find brew.${NC}"
 fi
