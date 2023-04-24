@@ -5,6 +5,8 @@ local function on_attach(bufnr)
         return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
     end
 
+    vim.keymap.set('n', '<C-v>', api.node.open.vertical,         opts('Open: Vertical Split'))
+    vim.keymap.set('n', '<C-x>', api.node.open.horizontal,       opts('Open: Horizontal Split'))
     vim.keymap.set('n', '<CR>',  api.node.open.edit,             opts('Open'))
     vim.keymap.set('n', 'l',     api.node.open.edit,             opts('Open'))
     vim.keymap.set('n', '<BS>',  api.node.navigate.parent_close, opts('Close Directory'))
