@@ -41,32 +41,26 @@ M.on_attach = function(client, bufnr)
       end
 
     -- LSP keymaps
-    nmap('gD', vim.lsp.buf.declaration, '[Go]to [D]eclaration')
-    nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-    nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype definition')
-    nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-    nmap('gr', function() telescope.lsp_references({initial_mode = 'normal'}) end, '[G]oto [R]eferences')
-    nmap('H', '<cmd>Lspsaga hover_doc<CR>', '[H]over')
-    nmap('<leader>r', '<cmd>Lspsaga rename<CR>', '[R]ename')
-    nmap('<leader>ca', '<cmd>Lspsaga code_action<CR>', '[C]ode [A]ction')
-    nmap('<leader>d', require("user.helpers").Virtual_text.toggle, '[D]iagnostics')
-    nmap('[d', '<cmd>Lspsaga diagnostic_jump_prev<CR>', 'Previous diagnostic message')
-    nmap(']d', '<cmd>Lspsaga diagnostic_jump_next<CR>', 'Next diagnostic message')
-    nmap('<leader>af', function() vim.lsp.buf.format({ async = true }) end, '[A]uto [F]ormat')
-    nmap('<S-up>', function() require('lspsaga.action').smart_scroll_with_saga(-1) end, 'Scroll up in code action')
-    nmap('<S-down>', function() require('lspsaga.action').smart_scroll_with_saga(1) end,  'Scroll down in code action')
+    nmap('gD',         vim.lsp.buf.declaration,                                             '[Go]to [D]eclaration')
+    nmap('gd',         vim.lsp.buf.definition,                                              '[G]oto [D]efinition')
+    nmap('gt',         vim.lsp.buf.type_definition,                                         '[G]oto [T]ype definition')
+    nmap('gi',         vim.lsp.buf.implementation,                                          '[G]oto [I]mplementation')
+    nmap('gr',         function() telescope.lsp_references({initial_mode = 'normal'}) end,  '[G]oto [R]eferences')
+    nmap('H',          '<cmd>Lspsaga hover_doc<CR>',                                        '[H]over')
+    nmap('<leader>r',  '<cmd>Lspsaga rename<CR>',                                           '[R]ename')
+    nmap('<leader>ca', '<cmd>Lspsaga code_action<CR>',                                      '[C]ode [A]ction')
+    nmap('<leader>d',  require("user.helpers").Virtual_text.toggle,                         '[D]iagnostics')
+    nmap('[d',         '<cmd>Lspsaga diagnostic_jump_prev<CR>',                             'Previous diagnostic message')
+    nmap(']d',         '<cmd>Lspsaga diagnostic_jump_next<CR>',                             'Next diagnostic message')
+    nmap('<leader>af', function() vim.lsp.buf.format({ async = true }) end,                 '[A]uto [F]ormat')
+    nmap('<S-up>',     function() require('lspsaga.action').smart_scroll_with_saga(-1) end, 'Scroll up in code action')
+    nmap('<S-down>',   function() require('lspsaga.action').smart_scroll_with_saga(1) end,  'Scroll down in code action')
 
     -- formatting
-    if client.name == 'tsserver' then
-        client.server_capabilities.document_formatting = false
-    end
-
-    if client.name == 'eslint' then
-        client.server_capabilities.document_formatting = false
-    end
-
-    if client.name == 'null-ls' then
-        client.server_capabilities.document_formatting = false
+    for _, value in ipairs({ 'tsserver', 'tsserver', 'null-ls' }) do
+        if client.name == value then
+            client.server_capabilities.document_formatting = false
+        end
     end
 
     enable_format_on_save(client, bufnr);
