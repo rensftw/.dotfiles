@@ -18,7 +18,9 @@ local servers = {
     'yamlls',
     'lua_ls',
     'dockerls',
-    'rust_analyzer'
+    'rust_analyzer',
+    'cmake',
+    'clangd'
 }
 
 local server_config = {

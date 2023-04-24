@@ -11,7 +11,7 @@ require('nnn').setup({
         { '<C-x>', builtin.open_in_split },
         { '<C-v>', builtin.open_in_vsplit },
         { '<C-p>', builtin.open_in_preview },
-        { 'y', builtin.copy_to_clipboard },
+        { 'y',     builtin.copy_to_clipboard },
         { '<C-w>', builtin.cd_to_path },
         { '<C-e>', builtin.populate_cmdline },
     }
