@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ARCH=$(arch)
 
 if command -v brew &> /dev/null; then

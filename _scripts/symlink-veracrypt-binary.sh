@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if command -v veracrypt &> /dev/null; then
     echo "☑️  ${GREEN}Found veracrypt binary${NC}"
 else

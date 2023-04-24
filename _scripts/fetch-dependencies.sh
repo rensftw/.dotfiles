@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # If .dotfiles is a git repo itself, add dependencies as git submodules
 if [[ -e .git ]]; then
     echo "🛢  ${CYAN}Unpacking git submodules${NC}"
@@ -11,6 +13,6 @@ else
     DOTFILES=$(PWD)
 
     echo "🧲 tmux package manager"
-    mkdir -p $DOTFILES/tmux/.tmux/tpm
-    git clone https://github.com/tmux-plugins/tpm.git $DOTFILES/tmux/.tmux/tpm
+    mkdir -p "$DOTFILES"/tmux/.tmux/tpm
+    git clone https://github.com/tmux-plugins/tpm.git "$DOTFILES"/tmux/.tmux/tpm
 fi

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Get Homebrew/bundle before trying to use it
 echo "🚰 ${CYAN}Tapping homebrew/bundle${NC}"
 brew tap homebrew/bundle

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Make sure the brew command is available for both ARM and Intel machines
  ARCH=$(arch)
  if [[ $ARCH =~ 'arm' ]]; then

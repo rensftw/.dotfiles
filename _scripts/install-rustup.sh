@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if command -v rustup &> /dev/null; then
     echo "☑️  ${GREEN}rustup has already been installed${NC}"
 else
