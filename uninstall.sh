@@ -1,9 +1,11 @@
+#!/usr/bin/env bash
+
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
 echo "${RED}This action is irreversible. Are you sure you want to proceed? (y/n)${NC}"
 
-read ANSWER
+read -r ANSWER
 
 if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Remove pyenv artifacts
@@ -18,5 +20,5 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Remove all casks/taps/formulae and then uninstall Homebrew itself
     source _scripts/uninstall-homebrew.sh
 else
-    echo "${CYAN}No changes made. Quitting.."${NC}
+    echo "${CYAN}No changes made. Quitting..${NC}"
 fi

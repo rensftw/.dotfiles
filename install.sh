@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
