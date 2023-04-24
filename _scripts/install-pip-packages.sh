@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo "🐍 ${CYAN}Installing python packages${NC}"
 
 # Add python binary to the global PATH variable before trying to use pip
@@ -8,6 +10,6 @@ PACKAGES=('black' 'autopep8' 'flake8' 'pynvim')
 
 for package in "${PACKAGES[@]}"; do
     _scripts/revolver start "$package"
-    pip install $package > /dev/null
+    pip install "$package" > /dev/null
     _scripts/revolver stop
 done

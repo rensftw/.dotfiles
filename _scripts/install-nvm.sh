@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if command -v nvm &> /dev/null; then
     echo "☑️  ${GREEN}NVM has already been installed${NC}"
 else

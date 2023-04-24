@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Display a welcome message; change to your name :)
 NAME="Irena"
 

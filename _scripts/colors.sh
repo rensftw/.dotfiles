@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Export ANSI escape codes for colors
 export RED='\033[1;31m'
 export PURPLE='\033[1;35m'

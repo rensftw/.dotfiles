@@ -8,7 +8,7 @@ PATH="$(brew --prefix lua-language-server)/bin:$PATH"
 export PATH="$HOME:$PATH"
 
 export LC_ALL=en_US.UTF-8
-export VISUAL=nvim
+export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export VIMRC_LOCATION="$HOME/.config/nvim/init.lua"
 export ZSHRC_LOCATION="$HOME/.zshrc"
