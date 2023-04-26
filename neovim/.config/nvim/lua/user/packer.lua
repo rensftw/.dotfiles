@@ -63,6 +63,7 @@ require('packer').startup({
         use 'mxsdev/nvim-dap-vscode-js'
 
         -- Manage LSP and DAP dependencies
+        use 'folke/neodev.nvim'
         use {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
