@@ -57,6 +57,9 @@ local server_config = {
     },
 }
 
+-- IMPORTANT: make sure to setup neodev BEFORE nvim_lsp/lspconfig
+require('neodev').setup()
+
 for _, lsp in ipairs(servers) do
     local settings = server_config[lsp] and server_config[lsp].settings or {}
     local init_options = server_config[lsp] and server_config[lsp].init_options or {}
