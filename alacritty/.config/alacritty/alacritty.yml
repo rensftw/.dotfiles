@@ -186,6 +186,7 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 # TokyoNight Alacritty Colors
+# source: https://github.com/folke/tokyonight.nvim/blob/main/extras/alacritty/tokyonight_night.yml
 colors:
   # Default colors
   primary:
@@ -201,7 +202,7 @@ colors:
     blue:    '0x7aa2f7'
     magenta: '0xbb9af7'
     cyan:    '0x7dcfff'
-    white:   '0x000000'
+    white:   '0xa9b1d6'
 
   # Bright colors
   bright:
