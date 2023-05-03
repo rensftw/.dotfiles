@@ -37,7 +37,7 @@ telescope.setup {
             'node_modules/',
             'tags'
         },
-        prompt_prefix = '  ',
+        prompt_prefix = '   ',
         selection_caret = '❯ ',
         selection_strategy = 'reset',
         sorting_strategy = 'ascending',
