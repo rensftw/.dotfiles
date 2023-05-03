@@ -5,6 +5,15 @@ end
 
 local get_mode_color = require('feline.providers.vi_mode').get_mode_color
 local git_info_exists = require('feline.providers.git').git_info_exists
+local function git_diff(type)
+    local gsd = vim.b.gitsigns_status_dict
+
+    if gsd and gsd[type] and gsd[type] > 0 then
+        return tostring(gsd[type])
+    end
+
+    return ''
+end
 
 -- Feline + Tokyonight
 local tokyonight_colors = require('tokyonight.colors').setup { style = 'night' }
@@ -109,21 +118,27 @@ local c = {
         },
 	},
 	gitDiffAdded = {
-		provider = 'git_diff_added',
+		provider = function ()
+		  return git_diff('added'), '  '
+		end,
 		hl = {
 			fg = 'green',
 		},
 		right_sep = 'block',
 	},
 	gitDiffRemoved = {
-		provider = 'git_diff_removed',
+		provider = function ()
+            return git_diff('removed'), '  '
+		end,
 		hl = {
 			fg = 'red',
 		},
 		right_sep = 'block',
 	},
 	gitDiffChanged = {
-		provider = 'git_diff_changed',
+		provider = function ()
+            return git_diff('changed'), '  '
+		end,
 		hl = {
             fg = 'fg',
 		},
