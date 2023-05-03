@@ -4,7 +4,7 @@ local if_nil = vim.F.if_nil
 
 local section = {}
 local plugins_count = vim.fn.len(vim.fn.globpath('~/.local/share/nvim/site/pack/packer/start', '*', 0, 1))
-local plugins_info = '   ' .. plugins_count .. ' plugins loaded'
+local plugins_info = '   ' .. plugins_count .. ' plugins loaded'
 local version = vim.version()
 local nvim_version_info = '   ' .. version.major .. '.' .. version.minor .. '.' .. version.patch
 --- @param sc string
@@ -59,13 +59,12 @@ section.subtitle.val = nvim_version_info .. plugins_info
 -- Set menu
 section.buttons = { type = 'group', opts = { spacing = 1 } }
 section.buttons.val = {
-    button('n', '  New file', ':ene <BAR> startinsert <CR>', nil),
-    button('f', '  Find file', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', nil),
-    -- button('r', '↺  Recent', ':Telescope oldfiles previewer=false<CR>', nil),
-    button('r', '↺  Recent', '<cmd>lua require("telescope.builtin").oldfiles({initial_mode = "normal", previewer = false})<CR>', nil),
-    button('u', '  Update plugins', '<cmd>PackerSync<CR>', nil),
-    button('s', '  Settings', ':e $VIMRC_LOCATION | :cd %:p:h | split . | wincmd k | pwd<CR>', nil),
-    button('q', '✖  Quit NVIM', ':qa<CR>', nil),
+    button('n', '  New file', ':ene <BAR> startinsert <CR>', {}),
+    button('f', '  Find file', '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', {}),
+    button('r', '  Recent', '<cmd>lua require("telescope.builtin").oldfiles({initial_mode = "normal", previewer = false})<CR>', {}),
+    button('u', '  Update plugins', '<cmd>PackerSync<CR>', {}),
+    button('m', '󰨀  Mason - update LSPs', '<cmd>Mason<CR>', {}),
+    button('q', '✖  Quit NVIM', ':qa<CR>', {}),
 }
 
 section.footer = { type = 'text', opts = { position = 'center', hl = 'Number' } }
