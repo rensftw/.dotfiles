@@ -212,7 +212,7 @@ local c = {
 	},
 	obsession_status = {
 		provider = function()
-            return vim.fn.ObsessionStatus(' ⟳ ', ' ⏻︎ ')
+            return vim.fn.ObsessionStatus('   ', ' ⏻︎  ')
 		end,
 		hl = {
 			fg = 'violet',
