@@ -117,7 +117,7 @@ map('n', '<leader>fb', telescope.current_buffer_fuzzy_find, opts)
 map('n', '<leader>ff', telescope.live_grep, opts)
 map('n', '<leader>fa', function()
     telescope.grep_string({
-        search = vim.fn.input('  filter grep ❯ '),
+        search = vim.fn.input('   filter grep ❯ '),
         initial_mode = 'normal'
     })
 end, opts)
