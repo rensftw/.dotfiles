@@ -75,7 +75,7 @@ vf() {
 }
 
 # Process monitoring
-alias bt="bpytop"
+alias bt="btop"
 
 # Show active IP ports
 alias ap="sudo lsof -i -P -n | grep LISTEN"
