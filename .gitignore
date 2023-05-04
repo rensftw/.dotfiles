@@ -1,5 +1,5 @@
 .DS_STORE
-bpytop/.config/bpytop/error.log
+btop/.config/btop/btop.log
 __pycache__
 
 # neovim/packer artifacts
