@@ -1,30 +1,26 @@
 local fn = vim.fn
+local dap = require('dap')
 
-require('dap-vscode-js').setup({
-    -- Use microsoft/vscode-js-debug from Mason's installation path
-    debugger_path = fn.stdpath('data') .. '/mason/packages/js-debug-adapter',
-    adapters = {
-        'pwa-node',
-        'pwa-chrome',
-        -- 'pwa-msedge',       --untested
-        -- 'node-terminal',    -- untested
-        -- 'pwa-extensionHost',--untested
-    },
-})
+dap.adapters['pwa-node'] = {
+    type = 'server',
+    host = 'localhost',
+    port = '${port}',
+    executable = {
+         -- As I'm using mason, I can use this command
+        command = 'js-debug-adapter',
+        args = { '${port}' },
+    }
+}
 
 for _, language in ipairs({ 'typescript', 'javascript' }) do
     -- Example custom DAP configurations for JS:
     -- https://github.com/microsoft/vscode-js-debug/blob/main/OPTIONS.md
-    require('dap').configurations[language] = {
+    dap.configurations[language] = {
         {
             type = 'pwa-node',
             request = 'launch',
             name = 'Launch file',
             program = '${file}',
-            env = {
-                NODE_OPTIONS = '--inspect',
-            },
-            profileStartup = false, --if true, will start profiling as soon as the process launches
             cwd = '${workspaceFolder}',
         },
         {
