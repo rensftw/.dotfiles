@@ -189,3 +189,7 @@ map('n', '<leader>1', function() harpoon_ui.nav_file(1) end, opts)
 map('n', '<leader>2', function() harpoon_ui.nav_file(2) end, opts)
 map('n', '<leader>3', function() harpoon_ui.nav_file(3) end, opts)
 map('n', '<leader>4', function() harpoon_ui.nav_file(4) end, opts)
+
+-- ChatGPT
+map('n', '<leader>cg', ':ChatGPT<CR>', opts)
+map('n', '<leader>cp', ':ChatGPTActAs<CR>', opts)

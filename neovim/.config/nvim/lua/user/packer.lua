@@ -70,6 +70,14 @@ require('packer').startup({
             'jayp0521/mason-nvim-dap.nvim',
         }
 
+        -- ChatGPT
+        use({
+            'jackMort/ChatGPT.nvim',
+            requires = {
+                'MunifTanjim/nui.nvim',
+            }
+        })
+
         -- Session management
         use 'tpope/vim-obsession'
 
