@@ -24,6 +24,7 @@ require 'plugin.nvim-treesitter-rc'
 require 'treesitter-context'.setup()
 
 -- Plugin configuration
+require('plugin.chatgpt-rc')
 require 'plugin.nvim-web-devicons-rc'
 require 'plugin.feline-rc'
 require 'plugin.telescope-rc'
