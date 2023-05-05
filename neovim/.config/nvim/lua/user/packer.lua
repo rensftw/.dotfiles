@@ -40,7 +40,7 @@ require('packer').startup({
         -- LSP
         use 'neovim/nvim-lspconfig'
         use 'jose-elias-alvarez/null-ls.nvim'
-        use 'glepnir/lspsaga.nvim'
+        use 'nvimdev/lspsaga.nvim'
         use 'ray-x/lsp_signature.nvim'
         -- Show LSP status during startup
         use 'j-hui/fidget.nvim'
