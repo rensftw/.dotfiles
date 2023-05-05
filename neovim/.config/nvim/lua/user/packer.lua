@@ -60,7 +60,6 @@ require('packer').startup({
         use 'nvim-telescope/telescope-dap.nvim'
         use 'rcarriga/nvim-dap-ui'
         use 'theHamsta/nvim-dap-virtual-text'
-        use 'mxsdev/nvim-dap-vscode-js'
 
         -- Manage LSP and DAP dependencies
         use 'folke/neodev.nvim'
