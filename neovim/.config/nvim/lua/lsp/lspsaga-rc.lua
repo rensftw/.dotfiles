@@ -13,6 +13,7 @@ saga.setup {
         enable = false
     },
     ui = {
+        kind = require('catppuccin.groups.integrations.lsp_saga').custom_kind(),
         -- currently only round theme
         theme = 'round',
         -- this option only work in neovim 0.9
