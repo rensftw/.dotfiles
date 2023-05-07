@@ -133,6 +133,7 @@ require('packer').startup({
 
         -- Themes
         use 'folke/tokyonight.nvim'
+        use { 'catppuccin/nvim', as = 'catppuccin' }
 
         -- Colorizer for CSS files
         use 'norcalli/nvim-colorizer.lua'
