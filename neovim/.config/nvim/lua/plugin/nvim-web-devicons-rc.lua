@@ -1,13 +1,13 @@
 require 'nvim-web-devicons'.setup {
     override = {
         ["js"] = {
-            icon = "",
+            icon = "",
             color = "#f7dd4a",
             cterm_color = "185",
             name = "Js"
         },
         ["ts"] = {
-            icon = "ﯤ",
+            icon = "",
             color = "#4477c0",
             cterm_color = "67",
             name = "Ts",
@@ -25,38 +25,38 @@ require 'nvim-web-devicons'.setup {
             name = "Css",
         },
         ["git"] = {
-            icon = "",
+            icon = "󰊢",
             color = "#e45a38",
             cterm_color = "59",
             name = "GitIgnore",
         },
         [".gitattributes"] = {
-            icon = "",
+            icon = "󰊢",
             color = "#e45a38",
             cterm_color = "59",
             name = "GitIgnore",
         },
         [".gitignore"] = {
-            icon = "",
+            icon = "󰊢",
             color = "#e45a38",
             cterm_color = "59",
             name = "GitIgnore",
         },
         [".gitmodules"] = {
-            icon = "",
+            icon = "󰊢",
             color = "#e45a38",
             cterm_color = "59",
             name = "GitIgnore",
         },
         ["COMMIT_EDITMSG"] = {
-            icon = "",
+            icon = "󰵅",
             color = "#e45a38",
             cterm_color = "59",
             name = "GitIgnore",
         },
         ["sh"] = {
-            icon = "",
-            color = "#4daab7",
+            icon = "",
+            color = "#00ff00",
             cterm_color = "59",
             name = "Sh",
         },
