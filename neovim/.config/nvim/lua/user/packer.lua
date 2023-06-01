@@ -153,6 +153,11 @@ require('packer').startup({
     config = {
         display = {
             prompt_border = 'rounded', -- Border style of prompt popups.
+            working_sym = '',         -- The symbol for a plugin being installed/updated
+            error_sym = '',           -- The symbol for a plugin with an error in installation/updating
+            done_sym = '',            -- The symbol for a plugin which has completed installation/updating
+            removed_sym = '',         -- The symbol for an unused plugin which was removed
+            moved_sym = '',           -- The symbol for a plugin which was moved (e.g. from opt to start)
         }
     }
 })
