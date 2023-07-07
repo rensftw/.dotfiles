@@ -6,7 +6,7 @@
 # -r: show cp, mv progress
 export NNN_OPTS='AcdHJr'
 export NNN_OPENER="$HOME/.dotfiles/nnn/.config/nnn/plugins/nuke"
-export NNN_PLUG='p:preview-tui;o:fzopen;d:diffs;m:nmount;v:vmount;u:getplugs;y:.cbcp'
+export NNN_PLUG='p:preview-tui;o:fzopen;f:fzcd;d:diffs;m:nmount;v:vmount;u:getplugs;y:.cbcp'
 export NNN_BMS="v:/Volumes;b:/Volumes/Backup;d:$HOME/.dotfiles"
 export NNN_FIFO='/tmp/nnn.fifo'
 
