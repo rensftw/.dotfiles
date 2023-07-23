@@ -56,6 +56,9 @@ vim.api.nvim_exec([[
     endfunction
 ]], true)
 
+-- Enable folding for :Man pages
+vim.g.ft_man_folding_enable = true
+
 -- Show invisible characters
 vim.o.list = true
 -- vim.opt.listchars:append('space:·')
