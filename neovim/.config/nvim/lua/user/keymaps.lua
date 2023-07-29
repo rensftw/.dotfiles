@@ -132,10 +132,9 @@ map('n', '<leader>m', telescope.man_pages, opts)
 map('n', '<leader>c',  telescope.commands, opts)
 
 -- Git
+map('n', '<leader>gg', ':Git<CR>', opts)
 -- Copy relative file path to clipboard
 map('n', '<leader>p', ':let @+ = expand("%")<CR>', opts)
--- Checkout a different branch
-map('n', '<leader>gcb', function() telescope.git_branches({initial_mode = 'normal'}) end, opts)
 -- Next/previous hunk
 map('n', ']h', '<cmd>Gitsigns next_hunk<CR>zz', opts)
 map('n', '[h', '<cmd>Gitsigns prev_hunk<CR>zz', opts)
@@ -150,8 +149,8 @@ map('n', '<leader>hU', '<cmd>Gitsigns reset_buffer<CR>', opts)
 map('n', '<leader>gbf', ':Git blame<CR>', opts)
 -- Show git history for the current line
 map('n', '<leader>gbl', ':GitBlameLine<CR>', opts)
--- Show git commit log
-map('n', '<leader>gl', ':Gclog<CR>', opts)
+-- Show git commit log (better performance than :Gclog)
+map('n', '<leader>gl', ':Git log --oneline<CR>', opts)
 -- Open current file changes in a vertical split.
 -- This opens a 3-way diff if there are git conflict markers in the buffer.
 map('n', '<leader>gds', ':Gvdiffsplit!<CR>', opts)
@@ -163,6 +162,12 @@ map('n', '<leader>gd', ':Git difftool -y', opts)
 -- This also works with :Gvdiffsplit branch:%
 -- source: https://vi.stackexchange.com/questions/3746/how-do-i-open-a-file-from-another-git-branch
 map('n', '<leader>gfr', ':Gvsplit :%<Left><Left>', opts)
+-- Mnemonic: git checkout branch
+map('n', '<leader>gcbb', function() telescope.git_branches({initial_mode = 'normal'}) end, opts)
+-- Mnemonic: current branch commits
+map('n', '<leader>gcbc', ':GitCurrentBranchCommits<CR>', opts)
+-- Mnemonic: am I behind origin main?
+map('n', '<leader>ga', ':GitAmIBehind<CR>', opts)
 
 -- Conflict resolution
 -- Choose which side to use for resolution

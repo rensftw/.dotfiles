@@ -1,10 +1,32 @@
+local helpers = require('user.helpers')
+
 -- Write all changes to modified buffers,
 -- close all buffers except the active one,
 -- and return focus to the same spot it was initially
 vim.api.nvim_create_user_command('BufOnly', 'wa | %bdelete | edit # | bdelete # | normal `"', {})
 
 -- Git show a commit using difftool
-vim.api.nvim_create_user_command('GitShow', 'Git difftool -y <args>~ <args>', {})
+vim.api.nvim_create_user_command('GitShowCommit', 'Git difftool -y <args>~ <args>', {})
+
+-- Mnemonic: current branch commits
+vim.api.nvim_create_user_command('GitCurrentBranchCommits', function ()
+    local currentBranch = helpers.getCurrentGitBranch()
+    local baseBranch = helpers.getBaseGitBranch()
+
+    -- 'git log origin/main..HEAD --oneline'
+    local gitFugitiveCommand = 'Git log origin/' .. baseBranch .. '..' .. currentBranch .. ' --oneline'
+    vim.api.nvim_command(gitFugitiveCommand)
+end, {})
+
+-- Mnemonic: am I behind origin main?
+vim.api.nvim_create_user_command('GitAmIBehind', function ()
+    local currentBranch = helpers.getCurrentGitBranch()
+    local baseBranch = helpers.getBaseGitBranch()
+
+    --  'git log HEAD..origin/main --oneline'
+    local gitFugitiveCommand = 'Git log ' .. currentBranch .. '..' .. 'origin/' .. baseBranch .. ' --oneline'
+    vim.api.nvim_command(gitFugitiveCommand)
+end, {})
 
 -- Show git commit history for the current line
 vim.api.nvim_create_user_command('GitBlameLine', function()
@@ -17,3 +39,4 @@ vim.api.nvim_create_user_command('GitBlameLine', function()
     local gitFugitiveCommand = ":G log -L" .. lineNumber .. ",+1:" .. "'" .. filePath .. "'"
     vim.api.nvim_command(gitFugitiveCommand)
 end, {})
+
