@@ -163,7 +163,7 @@ map('n', '<leader>gd', ':Git difftool -y', opts)
 -- source: https://vi.stackexchange.com/questions/3746/how-do-i-open-a-file-from-another-git-branch
 map('n', '<leader>gfr', ':Gvsplit :%<Left><Left>', opts)
 -- Mnemonic: git checkout branch
-map('n', '<leader>gcbb', function() telescope.git_branches({initial_mode = 'normal'}) end, opts)
+map('n', '<leader>gcbb', function() telescope.git_branches({initial_mode = 'normal', show_remote_tracking_branches = false}) end, opts)
 -- Mnemonic: current branch commits
 map('n', '<leader>gcbc', ':GitCurrentBranchCommits<CR>', opts)
 -- Mnemonic: am I behind origin main?
