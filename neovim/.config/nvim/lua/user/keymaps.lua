@@ -155,7 +155,11 @@ map('n', '<leader>gl', ':Git log --oneline<CR>', opts)
 -- This opens a 3-way diff if there are git conflict markers in the buffer.
 map('n', '<leader>gds', ':Gvdiffsplit!<CR>', opts)
 -- Compare current branch changes with main (populates quickfix list)
-map('n', '<leader>gdm', ':Git difftool -y main<CR>', opts)
+-- Equivalent of `git diff origin/main...HEAD`
+-- Note the 3 dot notation - this means we are checking against the last common
+-- ancestor, so if main is ahead of the feature branch we don't include those
+-- new/unrelated changes in the comparison
+map('n', '<leader>gdm', ':Git difftool -y origin/main...<CR>', opts)
 -- Compare with any branch
 map('n', '<leader>gd', ':Git difftool -y', opts)
 -- Open file revision
