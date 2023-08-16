@@ -8,7 +8,13 @@ else
 
     cd "$NNN_REPO" || exit
     echo "🗃  ${CYAN}Build nnn${NC}"
-    make O_NERD=1
+    # Remove existing nnn binary (if we have previously compiled it)
+    rm ./nnn
+    # Build nnn with Nerd font support, remove mouse support
+    # Use newer ncurses because the system default ncurses is too old and causes issues 
+    # https://github.com/jarun/nnn/wiki/Developer-guides#compile-for-macos
+    LDLIBS="-L/opt/homebrew/opt/ncurses/lib/" make O_NERD=1 O_NOMOUSE=1
+
 
     echo "🔗  ${CYAN}Install nnn and its manpage${NC}"
     sudo make install
