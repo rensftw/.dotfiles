@@ -803,6 +803,8 @@ key_bindings:
   - { key: Return, mods: Control, chars: "\x1b[13;5u" }
   - { key: Space,  mods: Shift,   chars: "\x1b[32;2u" }
   - { key: Space,  mods: Control, chars: "\x1b[32;5u" } # NOTE: This is an edge case and might not work.
+  # Make <Alt-C> work, instead of printing ç
+  - { key: C,      mods: Alt,     chars: "\x1bc"      }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
