@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "🧹 ${CYAN}Clean default zsh artifacts${NC}"
+printf "$CYAN$BOLD%s$NORMAL\n"  "🧹 Clean default zsh artifacts"
 rm -rf "$HOME"/.zshrc "$HOME"/.zshenv "$HOME"/.zsh "$HOME"/.zsh_plugins &> /dev/null
 
 # Helper directories begin with an underscore (e.g. _scripts)
@@ -26,7 +26,7 @@ done < <(find . -maxdepth 1 -type d -not -path '*/\.*' -not -name '.' -print0)
 for dir in "${DIRECTORIES[@]}"; do
     # Ignore helper directories when stowing
     if ! [[ "$dir" =~ ^$HELPER_DIR_PREFIX ]]; then
-        echo "🔗 Linking ${PURPLE}${dir%/}${NC}"
+        printf "$MAGENTA%s$NORMAL\n" "🔗 Linking ${dir%/}"
         stow -vt ~ "$dir"
     fi
 done

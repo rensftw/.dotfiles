@@ -3,7 +3,7 @@
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
-echo "🏁 ${PURPLE}Beginning installation...${NC}"
+printf "$MAGENTA$BOLD%s$NC\n\n" "🏁 Beginning installation..."
 
 # Install Homebrew
 source _scripts/install-homebrew.sh
@@ -26,6 +26,6 @@ source _scripts/install-pip-packages.sh
 # Install Rust
 source _scripts/install-rustup.sh
 
-echo "🎉 ${GREEN}Installation complete!${NC}"
+printf "$GREEN%s$NC\n" "✔ Installation complete!"
 source _scripts/goodbye.sh
 

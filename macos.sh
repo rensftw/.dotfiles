@@ -3,14 +3,15 @@
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
-echo "This script will apply macOS preferences and then restart the computer.
-${YELLOW_BLINK}Proceed? (y/n)${NC}"
-read ANSWER
+printf "$BOLD%s$NORMAL\n" "This script will apply macOS preferences and then restart the computer."
+printf "$YELLOW_BACKGROUND$BOLD%s$NORMAL\n]\n" "Proceed? [y/n]"
+read -r ANSWER
 
-if [ $ANSWER != "y" ]; then
+if [ "$ANSWER" != "y" ]; then
     exit
 fi
 
+printf "$MAGENTA_BACKGROUND$BOLD%s$NORMAL\n" "Applying macOS preferences"
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -322,8 +323,8 @@ for app in "Activity Monitor" \
 	killall "${app}" &> /dev/null
 done
 
-echo "${GREEN}Preferences have been applied.${NC}"
-echo "${YELLOW_BLINK}Restarting computer in 1 minute.${NC}"
+printf "$GREEN$BOLD%s$NC\n" "✔ Preferences have been applied."
+printf "$YELLOW_BACKGROUND$BOLD%s$NC\n" "Restarting computer in 1 minute."
 
 # Restart computer in 1 minute
 sudo shutdown -r +1

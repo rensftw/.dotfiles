@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "🐍 ${CYAN}Installing python packages${NC}"
+printf "$CYAN$BOLD%s$NORMAL\n"  "🐍 Installing python packages"
 
 # Add python binary to the global PATH variable before trying to use pip
 eval "$(pyenv init --path)"

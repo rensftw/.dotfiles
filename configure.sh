@@ -9,7 +9,7 @@ source _scripts/export-brew-variables.sh
 # Welcome message
 source _scripts/welcome.sh
 
-echo "🛠  ${PURPLE}Beginning tool configuration...${NC}"
+printf "$MAGENTA$BOLD%s$NORMAL\n" "🛠  Beginning tool configuration..."
 
 # Link dotfiles with stow
 source _scripts/stow.sh
@@ -32,6 +32,6 @@ source _scripts/setup-rectangle.sh
 # Set up Dash
 source _scripts/setup-dash.sh
 
-echo "🧰 ${GREEN}Configuration complete.${NC}"
+printf "$GREEN$BOLD%s$NORMAL\n"  "🧰 Configuration complete."
 source _scripts/tools-ready.sh
 

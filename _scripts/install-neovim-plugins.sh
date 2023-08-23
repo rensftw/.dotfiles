@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "🔌 ${CYAN}Installing vim plugins${NC}"
+printf "$CYAN$BOLD%s$NORMAL\n"  "🔌 Installing vim plugins"
 PACKER_CONFIG="$HOME/.dotfiles/neovim/.config/nvim/lua/user/packer.lua"
 
 # Load a bare minimum config (just the Packer portion) in order

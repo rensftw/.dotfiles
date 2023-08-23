@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 if command -v rustup &> /dev/null; then
-    echo "☑️  ${GREEN}rustup has already been installed${NC}"
+    printf "$GREEN$BOLD%s$NORMAL\n"  "✔  rustup has already been installed"
 else
-    echo "🦀 ${CYAN}Installing rustup${NC}"
+    printf "$CYAN$BOLD%s$NORMAL\n"  "🦀 Installing rustup"
     # Install rustup bypassing the confirmation prompt
     # and not modifying the path, since this is already commited in our .zshenv
     curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
