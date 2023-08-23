@@ -3,7 +3,7 @@
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
 
-echo "${RED}This action is irreversible. Are you sure you want to proceed? (y/n)${NC}"
+printf "$RED_BACKGROUND%s$NORMAL " "This action is irreversible. Proceed? [y/n]"
 
 read -r ANSWER
 
@@ -20,5 +20,5 @@ if [[ "$ANSWER" == "y" || "$ANSWER" == "yes" ]]; then
     # Remove all casks/taps/formulae and then uninstall Homebrew itself
     source _scripts/uninstall-homebrew.sh
 else
-    echo "${CYAN}No changes made. Quitting..${NC}"
+    printf "$CYAN%s$NORMAL\n" "No changes made. Quitting.."
 fi

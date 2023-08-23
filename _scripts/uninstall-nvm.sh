@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "🚀 ${GREEN}Removing NVM${NC}"
+printf "$GREEN$BOLD%s$NORMAL\n"  "🚀 Removing NVM"
 
 rm -rf "$HOME"/.nvm
 rm -rf "$HOME"/.npm

@@ -4,22 +4,22 @@ if command -v brew >/dev/null 2>&1; then
     BREW_PREFIX=$(brew --prefix)
 
     # Uninstall all formulas
-    echo "📊 ${GREEN}Removing all formulae${NC}"
+    printf "$GREEN$BOLD%s$NORMAL\n"  "📊 Removing all formulae"
     brew uninstall --force --zap "$(brew list --formula)"
 
     # Uninstall all casks
-    echo "📟 ${GREEN}Removing all casks${NC}"
+    printf "$GREEN$BOLD%s$NORMAL\n"  "📟 Removing all casks"
     brew uninstall --force --zap "$(brew list --cask)"
 
     # Remove all taps
-    echo "🚰 ${GREEN}Removing all taps${NC}"
+    printf "$GREEN$BOLD%s$NORMAL\n"  "🚰 Removing all taps"
     brew untap "$(brew tap)"
 
     # Uninstall Homebrew itself
-    echo "🍺 ${GREEN}Removing Homebrew itself${NC}"
+    printf "$GREEN$BOLD%s$NORMAL\n"  "🍺 Removing Homebrew itself"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
-    echo "🧹 ${GREEN}Removing leftover artifacts${NC}"
+    printf "$GREEN$BOLD%s$NORMAL\n"  "🧹 Removing leftover artifacts"
     sudo rm -rf "$BREW_PREFIX"/Frameworks
     sudo rm -rf "$BREW_PREFIX"/Homebrew
     sudo rm -rf "$BREW_PREFIX"/bin
@@ -37,5 +37,5 @@ if command -v brew >/dev/null 2>&1; then
     sudo rm -rf "$HOME"/.zsh_history
     sudo rm -rf "$HOME"/.zsh_sessions
 else
-    echo "❌ ${RED}Failed to uninstall Homebrew artifacts. Cannot find brew CLI.${NC}"
+    printf "$RED_BACKGROUND$BOLD%s$NORMAL\n"  "❌ Failed to uninstall Homebrew artifacts. Cannot find brew CLI."
 fi

@@ -20,12 +20,12 @@ while IFS= read -r -d '' dir; do
     DIRECTORIES+=("$STRIPPED_DIRECTORY_NAME")
 done < <(find . -maxdepth 1 -type d -not -path '*/\.*' -not -name '.' -print0)
 
-echo "🐐 ${GREEN}Removing stow symlinks${NC}"
+printf "$GREEN$BOLD%s$NORMAL\n"  "🐐 Removing stow symlinks"
 
 for dir in "${DIRECTORIES[@]}"; do
     # Ignore helper directories when unstowing
     if ! [[ "$dir" =~ ^$HELPER_DIR_PREFIX ]]; then
-        echo "🔗 Unlinking ${PURPLE}${dir%/}${NC}"
+        printf "%s $MAGENTA$BOLD%s$NORMAL" "🔗 Unlinking" "${dir%/}"
         stow -Dt ~ "$dir"
     fi
 done

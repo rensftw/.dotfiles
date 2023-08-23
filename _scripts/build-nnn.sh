@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 if command -v nnn &> /dev/null; then
-    echo "☑️  ${GREEN}nnn has already been installed${NC}"
+    printf "$GREEN$BOLD%s$NORMAL\n" "✔ nnn has already been installed"
 else
     DOTFILES=$(PWD)
     NNN_REPO=$DOTFILES/nnn/.config/nnn/nnn-repo
 
     cd "$NNN_REPO" || exit
-    echo "🗃  ${CYAN}Build nnn${NC}"
+    printf "$CYAN%s$NORMAL\n" "🗃  Build nnn"
     # Remove existing nnn binary (if we have previously compiled it)
     rm ./nnn
     # Build nnn with Nerd font support, remove mouse support
@@ -16,10 +16,10 @@ else
     LDLIBS="-L/opt/homebrew/opt/ncurses/lib/" make O_NERD=1 O_NOMOUSE=1
 
 
-    echo "🔗  ${CYAN}Install nnn and its manpage${NC}"
+    printf "$CYAN%s$NORMAL\n" "🔗  Install nnn and its manpage"
     sudo make install
 
-    echo "🧰  ${CYAN}Add plugins${NC}"
+    printf "$CYAN%s$NORMAL\n" "🧰  Add plugins"
     curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
 
     cd "$DOTFILES" || exit
