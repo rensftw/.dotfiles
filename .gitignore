@@ -17,6 +17,11 @@ tmux/.tmux/plugins/*
 nnn/.config/nnn/plugins/*
 nnn/.config/nnn/.lastd
 nnn/.config/nnn/**/*.tar.gz
+nnn/.config/nnn/sessions/*
+nnn/.config/nnn/nnn-*
+
+# Lua rc for neovim setup
+neovim/.config/nvim/lua/.luarc.json
 
 # work-related snippets
 neovim/.config/nvim/lua/snippets/work.lua
