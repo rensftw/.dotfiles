@@ -99,9 +99,6 @@ require('packer').startup({
         use 'L3MON4D3/LuaSnip'
         use 'saadparwaiz1/cmp_luasnip'
 
-        -- Documentation comments
-        use { 'kkoomen/vim-doge', run = ':call doge#install()' }
-
         -- Git utilities
         use 'tpope/vim-fugitive'
         use 'lewis6991/gitsigns.nvim'
