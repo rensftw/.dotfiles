@@ -35,7 +35,12 @@ local server_config = {
     yamlls = {
         settings = {
             yaml = {
-                schemaStore = { enable = true }
+                schemaStore = {
+                    enable = true,
+                    -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                    url = "",
+                },
+                schemas = require('schemastore').yaml.schemas(),
             }
         }
     },
@@ -83,4 +88,3 @@ null_ls.setup({
         null_ls.builtins.formatting.prettier,
     },
 })
-
