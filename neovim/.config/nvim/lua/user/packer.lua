@@ -118,9 +118,6 @@ require('packer').startup({
         -- Allow vim-surround and vim-unimpaired commands to be repeated with .
         use 'tpope/vim-repeat'
 
-        -- Add indentation that closely matches PEP 8
-        use 'vim-scripts/indentpython'
-
         -- Respect .editorconfig
         use 'editorconfig/editorconfig-vim'
 
