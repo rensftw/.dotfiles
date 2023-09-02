@@ -201,3 +201,5 @@ map('n', '<leader>4', function() harpoon_ui.nav_file(4) end, opts)
 -- ChatGPT
 map('n', '<leader>cg', ':ChatGPT<CR>', opts)
 map('n', '<leader>cp', ':ChatGPTActAs<CR>', opts)
+map('v', '<leader>ce', ":'<,'>ChatGPTEditWithInstructions<CR>", opts)
+map('v', '<leader>cx', ":'<,'>ChatGPTRun explain_code<CR>", opts)
