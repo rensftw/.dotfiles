@@ -23,6 +23,18 @@ require('chatgpt').setup({
             draft_message = '<C-m>',
             toggle_message_role = '<C-r>',
             toggle_system_role_open = '<C-s>',
+            stop_generating = '<C-x>',
+        },
+    },
+    edit_with_instructions = {
+        diff = false,
+        keymaps = {
+            close = '<C-c>',
+            accept = '<C-y>',
+            toggle_diff = '<C-d>',
+            toggle_settings = '<C-o>',
+            cycle_windows = '<Tab>',
+            use_output_as_input = '<C-u>',
         },
     },
     system_window = {
