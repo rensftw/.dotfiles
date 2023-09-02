@@ -799,12 +799,18 @@ cursor:
 key_bindings:
   # Make Alacritty discern <C-Enter> and <S-Enter> from <Enter>
   # https://stackoverflow.com/a/42461580
-  - { key: Return, mods: Shift,   chars: "\x1b[13;2u" }
-  - { key: Return, mods: Control, chars: "\x1b[13;5u" }
-  - { key: Space,  mods: Shift,   chars: "\x1b[32;2u" }
-  - { key: Space,  mods: Control, chars: "\x1b[32;5u" } # NOTE: This is an edge case and might not work.
+  - { key: Return,    mods: Shift,   chars: "\x1b[13;2u"  }
+  - { key: Return,    mods: Control, chars: "\x1b[13;5u"  }
+  - { key: Space,     mods: Shift,   chars: "\x1b[32;2u"  }
+  - { key: Space,     mods: Control, chars: "\x1b[32;5u"  } # NOTE: This is an edge case and might not work.
   # Make <Alt-C> work, instead of printing ç
-  - { key: C,      mods: Alt,     chars: "\x1bc"      }
+  - { key: C,         mods: Alt,     chars: "\x1bc"       }
+  # Discern <C-i> from <Tab>
+  - { key: I,         mods: Control, chars: "\x1b[105;5u" }
+  # Discern <C-.>, <C-,>, <C-;>
+  - { key: Period,    mods: Control, chars: "\x1b[46;5u"  }
+  - { key: Comma,     mods: Control, chars: "\x1b[44;5u"  }
+  - { key: Semicolon, mods: Control, chars: "\x1b[59;5u"  }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
