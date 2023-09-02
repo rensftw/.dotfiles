@@ -9,7 +9,7 @@ require 'nvim-treesitter.configs'.setup {
         'dockerfile',
         'go',
         'graphql',
-        'help',
+        'vimdoc',
         'html',
         'http',
         'javascript',
