@@ -97,7 +97,7 @@ local c = {
     },
     gitDiffChanged = {
         provider = function()
-            return git_diff('changed'), '  '
+            return git_diff('changed'), '  '
         end,
         hl = {
             fg = 'git_diff_changed',
