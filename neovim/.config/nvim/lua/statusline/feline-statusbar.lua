@@ -116,7 +116,7 @@ local c = {
     left_separator = {
         provider = '',
         enabled = function()
-            local diagnostics_exist = require('feline.providers.lsp').diagnostics_exist
+            local diagnostics_exist = pcall(require, 'feline.providers.lsp.diagnostics_exist')
             return git_info_exists() and diagnostics_exist
         end,
         hl = {
@@ -189,7 +189,8 @@ local c = {
     },
     harpoon = {
         provider = function()
-            local harpoon_number = require('harpoon.mark').get_index_of(vim.fn.bufname())
+            local success, harpoon_mark = pcall(require, 'harpoon.mark')
+            local harpoon_number = success and harpoon_mark.get_index_of(vim.fn.bufname()) or nil
             if harpoon_number then
                 return '󰛢 ' .. harpoon_number
             else
