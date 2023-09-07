@@ -35,7 +35,7 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
   * [`treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
   * [`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig) - native LSP
   * [`nvim-dap`](https://github.com/mfussenegger/nvim-dap) - debugging protocol
-  * [`folke/tokyo-night` theme](https://github.com/folke/tokyonight.nvim)
+  * [`folke/tokyonight.nvim` theme](https://github.com/folke/tokyonight.nvim)
 * [`nnn`](https://github.com/jarun/nnn) for terminal file navigation
 * [`fzf`](https://github.com/junegunn/fzf) for fuzzy finding and interactive git operations
 * [`rg`](https://github.com/BurntSushi/ripgrep) for searching file contents

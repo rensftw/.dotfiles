@@ -217,15 +217,25 @@ local c = {
             style = 'bold',
         },
         left_sep = 'block',
-        right_sep = {
-            'block',
-            {
-                str = 'left',
-                hl = {
-                    fg = 'git_branch_background',
-                }
-            }
+        right_sep = 'block',
+    },
+    lazy = {
+        provider = function()
+            local success, lazy_status = pcall(require, "lazy.status")
+            local has_updates = success and lazy_status.has_updates()
+
+            if has_updates then
+                return lazy_status.updates()
+            else
+                return ''
+            end
+        end,
+        hl = {
+            fg = 'lazy',
+            style = 'bold',
         },
+        left_sep = 'block',
+        right_sep = 'block',
     },
     file_type = {
         provider = {
@@ -322,6 +332,7 @@ local statusbar_middle = {
 
 local statusbar_right = {
     -- c.lsp_client_names,
+    c.lazy,
     c.harpoon,
     c.obsession_status,
     c.file_type,

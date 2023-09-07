@@ -2,9 +2,9 @@
 btop/.config/btop/btop.log
 __pycache__
 
-# neovim/packer artifacts
-neovim/.config/nvim/plugin/packer_compiled.lua
+# neovim/package manager artifacts
 neovim/.config/nvim/.netrwhist
+neovim/.config/nvim/lazy-lock.json
 
 # neovim/Obsession artifacts
 Session.vim
