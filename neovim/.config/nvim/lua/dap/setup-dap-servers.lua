@@ -1,4 +1,3 @@
-local fn = vim.fn
 local dap = require('dap')
 
 dap.adapters['pwa-node'] = {

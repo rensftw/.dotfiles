@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 printf "$CYAN$BOLD%s$NORMAL\n"  "🔌 Installing vim plugins"
-PACKER_CONFIG="$HOME/.dotfiles/neovim/.config/nvim/lua/user/packer.lua"
+LAZY_CONFIG="$HOME/.dotfiles/neovim/.config/nvim/lua/core/lazy.lua"
 
-# Load a bare minimum config (just the Packer portion) in order
+# Load a bare minimum config (just the Lazy portion) in order
 # to avoid errors from configs that depend on external plugins
 # (which are not installed yet, at this point)
-nvim -u "$PACKER_CONFIG" --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim -u "$LAZY_CONFIG" --headless "+Lazy! sync" +qa

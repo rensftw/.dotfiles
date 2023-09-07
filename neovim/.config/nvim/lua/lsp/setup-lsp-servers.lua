@@ -1,5 +1,5 @@
 local nvim_lsp = require('lspconfig')
-local config = require('lsp.lsp-config-rc')
+local config = require('lsp.on_attach')
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
 -- Set up completion using nvim_cmp with LSP source
