@@ -118,9 +118,6 @@ require('packer').startup({
         -- Allow vim-surround and vim-unimpaired commands to be repeated with .
         use 'tpope/vim-repeat'
 
-        -- Respect .editorconfig
-        use 'editorconfig/editorconfig-vim'
-
         -- Feline
         use 'feline-nvim/feline.nvim'
 
