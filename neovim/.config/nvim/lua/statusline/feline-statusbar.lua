@@ -1,6 +1,8 @@
 local M = {}
 local get_mode_color = require('feline.providers.vi_mode').get_mode_color
 local git_info_exists = require('feline.providers.git').git_info_exists
+local diagnostics_exist = require('feline.providers.lsp').diagnostics_exist
+
 local function git_diff(type)
     local gsd = vim.b.gitsigns_status_dict
 
@@ -116,8 +118,7 @@ local c = {
     left_separator = {
         provider = '',
         enabled = function()
-            local diagnostics_exist = pcall(require, 'feline.providers.lsp.diagnostics_exist')
-            return git_info_exists() and diagnostics_exist
+            return git_info_exists() and diagnostics_exist()
         end,
         hl = {
             fg = 'git_branch_background',
@@ -139,30 +140,45 @@ local c = {
     },
     diagnostic_errors = {
         provider = 'diagnostic_errors',
+        enabled = function()
+            return diagnostics_exist(vim.diagnostic.severity.ERROR)
+        end,
         hl = {
             fg = 'diagnostic_errors',
         },
     },
     diagnostic_warnings = {
         provider = 'diagnostic_warnings',
+        enabled = function()
+            return diagnostics_exist(vim.diagnostic.severity.WARN)
+        end,
         hl = {
             fg = 'diagnostic_warnings',
         },
     },
     diagnostic_hints = {
         provider = 'diagnostic_hints',
+        enabled = function()
+            return diagnostics_exist(vim.diagnostic.severity.HINT)
+        end,
         hl = {
             fg = 'diagnostic_hints',
         },
     },
     diagnostic_info = {
         provider = 'diagnostic_info',
+        enabled = function()
+            return diagnostics_exist(vim.diagnostic.severity.INFO)
+        end,
         hl = {
             fg = 'diagnostic_info',
         },
     },
     lsp_client_names = {
         provider = 'lsp_client_names',
+        enabled = function()
+            return diagnostics_exist()
+        end,
         hl = {
             fg = 'lsp_text',
             bg = 'lsp_background',
@@ -179,7 +195,6 @@ local c = {
             fg = 'obsession',
             style = 'bold',
         },
-        left_sep = ' ',
         right_sep = {
             str = 'left',
             hl = {
