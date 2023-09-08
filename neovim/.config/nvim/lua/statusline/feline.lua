@@ -2,8 +2,6 @@ return {
     'feline-nvim/feline.nvim',
     event = 'UiEnter',
     dependencies = {
-        'kyazdani42/nvim-web-devicons',
-        'lewis6991/gitsigns.nvim',
         'tpope/vim-obsession',
     },
     config = function()

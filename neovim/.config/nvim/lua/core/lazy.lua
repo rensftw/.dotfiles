@@ -63,10 +63,7 @@ local plugins = {
     { { require('plugins.undotree') } },
 
     -- Session management
-    {
-        'tpope/vim-obsession',
-        cmd = 'Obsession',
-    },
+    { { require('plugins.vim-obsession') } },
 
     -- File explorer
     { { require('plugins.nvim-tree') } },
@@ -92,13 +89,13 @@ local plugins = {
     { { require('plugins.autopairs') } },
 
     -- Change, delete, add surroundings (parentheses, brackets, quotes, tags)
-    { 'tpope/vim-surround' },
+    { { require('plugins.vim-surround') } },
 
     -- Mappings for complementary commands like ]q, [q, etc
-    { 'tpope/vim-unimpaired' },
+    { { require('plugins.vim-unimpaired') } },
 
     -- Allow vim-surround and vim-unimpaired commands to be repeated with .
-    { 'tpope/vim-repeat' },
+    { { require('plugins.vim-repeat') } },
 
     -- Colorizer for CSS files
     { { require('plugins.nvim-colorizer') } },
