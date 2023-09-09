@@ -8,14 +8,11 @@ return {
         'folke/neodev.nvim',
         'jose-elias-alvarez/null-ls.nvim',
         'nvimdev/lspsaga.nvim',
-        -- Show LSP status during startup
-        'folke/noice.nvim',
-        'j-hui/fidget.nvim',
         -- JSON schemas
         'b0o/schemastore.nvim',
     },
     config = function()
-        require 'lsp.native-settings'
-        require 'lsp.setup-lsp-servers'
+        require('lsp.native-settings')
+        require('lsp.setup-lsp-servers')
     end
 }
