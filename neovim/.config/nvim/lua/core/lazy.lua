@@ -105,6 +105,9 @@ local plugins = {
 }
 
 local options = {
+    install = {
+        colorscheme = { 'tokyonight' },
+    },
     ui = {
         border = 'rounded',
         title = 'lazy.nvim',
