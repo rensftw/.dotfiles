@@ -10,7 +10,6 @@ return {
     keys = {
         { mode = { 'n' }, '<leader>db', function() require('dap').toggle_breakpoint() end },
         { mode = { 'n' }, '<leader>du', function() require('dapui').toggle() end },
-        { mode = { 'n' }, '<leader>da', function() require('dap').attach() end },
         { mode = { 'n' }, '<leader>dc', function() require('dap').continue() end },
         { mode = { 'n' }, '<leader>do', function() require('dap').step_over() end },
         { mode = { 'n' }, '<leader>di', function() require('dap').step_into() end },
