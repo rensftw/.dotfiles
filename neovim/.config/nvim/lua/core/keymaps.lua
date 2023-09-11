@@ -61,11 +61,11 @@ map('n', 'J', ':m .+1<CR>==', opts)
 map('v', 'K', ":m '<-2<CR>gv=gv", opts)
 map('v', 'J', ":m '>+1<CR>gv=gv", opts)
 
--- Resize splits
-map('n', '+', ':resize +2<CR>', opts)
-map('n', '_', ':resize -3<CR>', opts)
-map('n', '=', ':vertical resize +2<CR>', opts)
-map('n', '-', ':vertical resize -2<CR>', opts)
+-- Resize window using <ctrl> arrow keys
+map('n', '<A-Up>', '<cmd>resize +2<cr>', { desc = 'Increase window height' })
+map('n', '<A-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease window height' })
+map('n', '<A-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease window width' })
+map('n', '<A-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase window width' })
 
 -- Tab navigation
 map('n', ']t', ':tabnext<CR>', opts)
