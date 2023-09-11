@@ -1,5 +1,6 @@
 return {
     'tpope/vim-fugitive',
+    event = 'VeryLazy',
     keys = {
         { mode = { 'n' }, '<leader>gg',   ':Git<CR>', },
         -- See blame history for the current file
@@ -28,7 +29,12 @@ return {
         -- Mnemonic: am I behind origin main?
         { mode = { 'n' }, '<leader>ga',   ':GitAmIBehind<CR>', },
     },
-    cmd = 'G',
+    cmd ={
+        'G',
+        'Gdiffsplit',
+        'Gvdiffsplit',
+        'Gclog',
+    },
     config = function()
         local helpers = require('core.helpers')
 
