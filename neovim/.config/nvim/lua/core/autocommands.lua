@@ -1,33 +1,50 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- Auto-resize splits when Vim gets resized.
-vim.api.nvim_command [[autocmd VimResized * wincmd =]]
-
--- Update a buffer's contents on focus if it changed outside of Vim.
-vim.api.nvim_command [[autocmd FocusGained,BufEnter * :checktime]]
-
--- Unset paste on InsertLeave.
-vim.api.nvim_command [[autocmd InsertLeave * silent! set nopaste]]
-
--- Make sure all types of requirements.txt files get syntax highlighting.
-vim.api.nvim_command [[autocmd BufNewFile,BufRead requirements*.txt set ft=python]]
-
--- Make sure .aliases, .bash_aliases and similar files get syntax highlighting.
-vim.api.nvim_command [[autocmd BufNewFile,BufRead .*aliases* set ft=sh]]
-
--- Ensure tabs don't get converted to spaces in Makefiles.
-vim.api.nvim_command [[autocmd FileType make setlocal noexpandtab]]
-
 -- Briefly highlighting yank selection
-local yank_group = augroup('HighlightYank', {})
 autocmd('TextYankPost', {
-    group = yank_group,
+    group = augroup('HighlightYank', {}),
     pattern = '*',
     callback = function()
         vim.highlight.on_yank({
             higroup = 'IncSearch',
             timeout = 100,
         })
+    end,
+})
+
+-- Close some filetypes with <q>
+vim.api.nvim_create_autocmd('FileType', {
+    group = augroup('close_with_q', {}),
+    pattern = {
+        'PlenaryTestPopup',
+        'help',
+        'lspinfo',
+        'man',
+        'notify',
+        'qf',
+        'spectre_panel',
+        'startuptime',
+        'tsplayground',
+        'neotest-output',
+        'checkhealth',
+        'neotest-summary',
+        'neotest-output-panel',
+    },
+    callback = function(event)
+        vim.bo[event.buf].buflisted = false
+        vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
+    end,
+})
+
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    group = augroup('auto_create_dir', {}),
+    callback = function(event)
+        if event.match:match('^%w%w+://') then
+            return
+        end
+        local file = vim.loop.fs_realpath(event.match) or event.match
+        vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
     end,
 })
