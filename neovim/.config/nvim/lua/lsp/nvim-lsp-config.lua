@@ -12,7 +12,8 @@ return {
         'b0o/schemastore.nvim',
     },
     config = function()
-        require('lsp.native-settings')
-        require('lsp.setup-lsp-servers')
+        -- IMPORTANT: make sure to setup neodev BEFORE nvim_lsp/lspconfig
+        require('neodev').setup()
+        require('lsp.utils.setup-lsp-servers')
     end
 }

@@ -1,5 +1,5 @@
 local nvim_lsp = require('lspconfig')
-local config = require('lsp.on_attach')
+local config = require('lsp.utils.on_attach')
 require('lspconfig.ui.windows').default_options.border = 'rounded'
 
 -- Set up completion using nvim_cmp with LSP source
@@ -13,14 +13,14 @@ local servers = {
     'jsonls',
     'eslint',
     'html',
-    'emmet_ls',
-    'cssls',
+    -- 'emmet_ls',
+    -- 'cssls',
     'yamlls',
     'lua_ls',
-    'dockerls',
+    -- 'dockerls',
     'rust_analyzer',
     'cmake',
-    'clangd'
+    -- 'clangd'
 }
 
 local server_config = {
@@ -62,9 +62,6 @@ local server_config = {
     },
 }
 
--- IMPORTANT: make sure to setup neodev BEFORE nvim_lsp/lspconfig
-require('neodev').setup()
-
 for _, lsp in ipairs(servers) do
     local settings = server_config[lsp] and server_config[lsp].settings or {}
     local init_options = server_config[lsp] and server_config[lsp].init_options or {}
@@ -79,12 +76,3 @@ for _, lsp in ipairs(servers) do
         init_options = init_options,
     }
 end
-
-local null_ls = require('null-ls')
-null_ls.setup({
-    on_attach = config.on_attach,
-    sources = {
-        null_ls.builtins.diagnostics.vale,
-        null_ls.builtins.formatting.prettier,
-    },
-})

@@ -50,7 +50,7 @@ return {
             dapui.close()
         end
 
-        require('dap.setup-dap-servers')
+        require('dap.utils.setup-dap-servers')
         require('telescope').load_extension('dap')
     end
 }
