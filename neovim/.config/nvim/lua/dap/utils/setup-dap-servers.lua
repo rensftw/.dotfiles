@@ -5,7 +5,23 @@ dap.adapters['pwa-node'] = {
     host = 'localhost',
     port = '${port}',
     executable = {
-         -- As I'm using mason, I can use this command
+        -- Because of mason we can use this command
+        command = 'js-debug-adapter',
+        args = { '${port}' },
+    }
+}
+
+-- dap.adapters['node-terminal'] = {
+--     type = 'executable',
+--     command = 'js-debug-adapter',
+-- }
+
+dap.adapters['node-terminal'] = {
+    type = 'server',
+    host = 'localhost',
+    port = '${port}',
+    executable = {
+        -- Because of mason we can use this command
         command = 'js-debug-adapter',
         args = { '${port}' },
     }
@@ -26,7 +42,13 @@ for _, language in ipairs({ 'typescript', 'javascript' }) do
             type = 'pwa-node',
             request = 'attach',
             name = 'Attach to process',
-            processId = require 'dap.utils'.pick_process,
+            processId = require('dap.utils').pick_process,
+            cwd = '${workspaceFolder}',
+        },
+        {
+            type = 'node-terminal',
+            request = 'launch',
+            name = 'Launch debug terminal',
             cwd = '${workspaceFolder}',
         },
         {
