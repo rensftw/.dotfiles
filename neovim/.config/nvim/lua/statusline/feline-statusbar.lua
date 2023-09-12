@@ -202,23 +202,6 @@ local c = {
             }
         },
     },
-    harpoon = {
-        provider = function()
-            local success, harpoon_mark = pcall(require, 'harpoon.mark')
-            local harpoon_number = success and harpoon_mark.get_index_of(vim.fn.bufname()) or nil
-            if harpoon_number then
-                return '󰛢 ' .. harpoon_number
-            else
-                return ''
-            end
-        end,
-        hl = {
-            fg = 'harpoon',
-            style = 'bold',
-        },
-        left_sep = 'block',
-        right_sep = 'block',
-    },
     lazy = {
         provider = function()
             local success, lazy_status = pcall(require, "lazy.status")
@@ -333,7 +316,6 @@ local statusbar_middle = {
 local statusbar_right = {
     -- c.lsp_client_names,
     c.lazy,
-    c.harpoon,
     c.obsession_status,
     c.file_type,
     c.file_encoding,
