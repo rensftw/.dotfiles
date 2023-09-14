@@ -37,6 +37,7 @@ return {
         ls.add_snippets('all', comment_snippets)
         ls.add_snippets('javascript', javascript_snippets)
         ls.add_snippets('typescript', javascript_snippets)
+        ls.add_snippets('typescriptreact', javascript_snippets)
         ls.add_snippets('vue', javascript_snippets)
         ls.add_snippets('html', html_snippets)
         -- ls.add_snippets('markdown', work_snippets)
