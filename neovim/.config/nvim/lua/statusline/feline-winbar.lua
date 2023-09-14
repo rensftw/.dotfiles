@@ -6,7 +6,7 @@ local winbar_active_left = {
             local success, harpoon_mark = pcall(require, 'harpoon.mark')
             local harpoon_number = success and harpoon_mark.get_index_of(vim.fn.bufname()) or nil
             if harpoon_number then
-                return '󰛢 ' .. harpoon_number
+                return '󰛢 ' .. harpoon_number .. ' '
             else
                 return ''
             end
@@ -16,7 +16,7 @@ local winbar_active_left = {
             bg = 'harpoon',
             style = 'bold',
         },
-        left_sep = 'slant_left',
+        left_sep = 'block',
         right_sep = 'slant_right_2',
     },
     {
@@ -42,7 +42,7 @@ local winbar_inactive_left = {
             local success, harpoon_mark = pcall(require, 'harpoon.mark')
             local harpoon_number = success and harpoon_mark.get_index_of(vim.fn.bufname()) or nil
             if harpoon_number then
-                return '󰛢 ' .. harpoon_number
+                return '󰛢 ' .. harpoon_number .. ' '
             else
                 return ''
             end
@@ -52,7 +52,7 @@ local winbar_inactive_left = {
             bg = '#a9b1d6',
             style = 'bold',
         },
-        left_sep = 'slant_left',
+        left_sep = 'block',
         right_sep = 'slant_right_2',
     },
     {
