@@ -27,8 +27,9 @@ local options = {
         title = 'lazy.nvim',
     },
     checker = {
-        enabled = true, -- enable statusline plugin
-        notify = false, -- do not notify when there are updates
+        enabled = true,          -- enable statusline plugin
+        notify = false,          -- do not notify when there are updates
+        frequency = 3 * 60 * 60, -- check for updates every 3 hours (provided in seconds)
     },
     change_detection = {
         enabled = true,
