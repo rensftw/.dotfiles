@@ -120,6 +120,12 @@ defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
+# Use list view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `glyv`
+# Command to find and remove .DS_Store files (which keep track of previously used views)
+# sudo find / -name ".DS_Store" -exec rm {} \;
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
 # Finder: show hidden files by default
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
