@@ -104,6 +104,27 @@ return {
                 -- },
             }
         })
+
         require 'treesitter-context'.setup()
+
+        -- Folds: Prefer to use foldmethod treesitter.foldexpr when availabe
+        -- Fallback to foldmethod indent (see neovim/.config/nvim/lua/core/options.lua)
+
+        -- Fix 'No fold found error' with Telescope + Treesitter
+        -- https://github.com/nvim-telescope/telescope.nvim/issues/699#issuecomment-1159637962
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNew', 'BufWinEnter' }, {
+            group = vim.api.nvim_create_augroup('fix_foldexpr_treesitter_issue', {}),
+            pattern = { '*' },
+            callback = function()
+                vim.cmd.normal('zx')
+            end,
+        })
+
+        vim.opt.foldmethod = 'expr'
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        -- source: https://github.com/abzcoding/lvim/blob/a4e400f0ffaba68377cca432566e54617dfeb2ca/lua/user/neovim.lua#L52
+        vim.opt.foldtext =
+        [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'  '.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+        vim.opt.foldenable = false
     end
 }
