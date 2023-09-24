@@ -30,19 +30,16 @@ vim.opt.colorcolumn = '80'
 vim.o.undofile = true -- save undo history
 vim.o.undodir = vim.fn.stdpath('state') .. 'undodir'
 
--- Folds
+-- Folds: Use foldmethod indent by default (fallback to treesitter)
 -- source: https://essais.co/better-folding-in-neovim/
 -- za: toggle fold (based on indentation)
 -- zM: close all folds in the buffer
 -- zR: open all folds in the buffer
-vim.api.nvim_exec([[
-    set foldexpr=nvim_treesitter#foldexpr()
-]], true)
 vim.opt.foldmethod = 'indent'
 vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 vim.opt.fillchars = 'fold: '
-vim.api.nvim_exec([[
+vim.api.nvim_exec2([[
     set foldtext=CustomFoldText()
 
     function! CustomFoldText()
@@ -54,7 +51,7 @@ vim.api.nvim_exec([[
 
       return expansionString . foldLevelStr . foldSizeStr
     endfunction
-]], true)
+]], { output = false })
 
 -- Enable folding for :Man pages
 vim.g.ft_man_folding_enable = true

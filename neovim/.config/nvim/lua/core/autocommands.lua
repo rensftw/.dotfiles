@@ -14,7 +14,7 @@ autocmd('TextYankPost', {
 })
 
 -- Close some filetypes with <q>
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
     group = augroup('close_with_q', {}),
     pattern = {
         'PlenaryTestPopup',
@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Make fugitive toggle-able with <leader>gg
-vim.api.nvim_create_autocmd('FileType', {
+autocmd('FileType', {
     group = augroup('make_fugitive_toggleable', {}),
     pattern = { 'fugitive' },
     callback = function(event)
@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
-vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+autocmd({ 'BufWritePre' }, {
     group = augroup('auto_create_dir', {}),
     callback = function(event)
         if event.match:match('^%w%w+://') then
