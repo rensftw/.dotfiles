@@ -26,6 +26,8 @@ vim.api.nvim_create_autocmd('FileType', {
         'man',
         'notify',
         'qf',
+        'nvimtree',
+        'git',
         'spectre_panel',
         'startuptime',
         'tsplayground',
