@@ -25,6 +25,18 @@ return {
         -- DAP + Telescope integration
         { mode = { 'n' }, '<leader>ds', function() require('telescope').extensions.dap.frames({initial_mode = 'normal' }) end }
     },
+    cmd = {
+        'DapShowLog',
+        'DapSetLogLevel',
+        'DapLoadLaunchJSON',
+        'DapToggleBreakpoint',
+        'DapContinue',
+        'DapStepInto',
+        'DapStepOut',
+        'DapStepOver',
+        'DapTerminate',
+        'DapToggleRepl',
+    },
     config = function()
         local dap = require('dap')
         local dapui = require('dapui')
