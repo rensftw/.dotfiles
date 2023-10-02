@@ -35,23 +35,12 @@ vim.o.undodir = vim.fn.stdpath('state') .. 'undodir'
 -- za: toggle fold (based on indentation)
 -- zM: close all folds in the buffer
 -- zR: open all folds in the buffer
-vim.opt.foldmethod = 'indent'
+vim.opt.foldmethod = 'expr'
 vim.opt.foldenable = false
-vim.opt.foldlevel = 99
-vim.opt.fillchars = 'fold: '
-vim.api.nvim_exec2([[
-    set foldtext=CustomFoldText()
-
-    function! CustomFoldText()
-      let indentation = indent(v:foldstart - 1)
-      let foldSize = 1 + v:foldend - v:foldstart
-      let foldSizeStr = " " . foldSize . " lines "
-      let foldLevelStr = repeat("+--", v:foldlevel)
-      let expansionString = repeat(" ", indentation)
-
-      return expansionString . foldLevelStr . foldSizeStr
-    endfunction
-]], { output = false })
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- source: https://github.com/abzcoding/lvim/blob/a4e400f0ffaba68377cca432566e54617dfeb2ca/lua/user/neovim.lua#L52
+vim.wo.foldtext =
+[[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 
 -- Enable folding for :Man pages
 vim.g.ft_man_folding_enable = true
