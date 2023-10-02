@@ -60,6 +60,9 @@ return {
                     },
                 },
             },
+            openai_params = {
+                model = 'gpt-4',
+            },
         })
     end
 }
