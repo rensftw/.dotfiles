@@ -3,25 +3,63 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
         require('ibl').setup {
-            indent_blankline_buftype_exclude = {
-                'terminal',
-                'nofile',
-                'quickfix',
-                'prompt',
+            indent = {
+                char = '▏',
             },
-            indent_blankline_filetype_exclude = {
-                'checkhealth',
-                'lspinfo',
-                'help',
-                'man',
-                'packer',
-                'mason',
-                'alpha',
+            exclude = {
+                buftypes = {
+                    'terminal',
+                    'nofile',
+                    'quickfix',
+                    'prompt',
+                },
+                filetypes = {
+                    'checkhealth',
+                    'lspinfo',
+                    'help',
+                    'man',
+                    'packer',
+                    'mason',
+                    'alpha',
+                },
             },
-            space_char_blankline = ' ',
-            show_current_context = true,
-            show_current_context_start = true,
-            use_treesitter = true,
+            scope = {
+                include = {
+                    -- source: https://github.com/lukas-reineke/indent-blankline.nvim/issues/632#issuecomment-1732366788
+                    node_type = {
+                        lua = {
+                            'chunk',
+                            'do_statement',
+                            'while_statement',
+                            'repeat_statement',
+                            'if_statement',
+                            'for_statement',
+                            'function_declaration',
+                            'function_definition',
+                            'table_constructor',
+                            'assignment_statement',
+                        },
+                        typescript = {
+                            'statement_block',
+                            'function',
+                            'arrow_function',
+                            'function_declaration',
+                            'method_definition',
+                            'for_statement',
+                            'for_in_statement',
+                            'catch_clause',
+                            'object_pattern',
+                            'arguments',
+                            'switch_case',
+                            'switch_statement',
+                            'switch_default',
+                            'object',
+                            'object_type',
+                            'ternary_expression',
+                        },
+                    },
+                }
+            },
         }
     end
 }
