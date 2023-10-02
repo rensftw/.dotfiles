@@ -22,7 +22,7 @@ return {
             },
             chat = {
                 question_sign = '',
-                answer_sign = '❯',
+                answer_sign = '󱙺',
                 keymaps = {
                     close = { '<C-c>', },
                     yank_last = '<C-y>',
@@ -56,7 +56,7 @@ return {
             system_window = {
                 border = {
                     text = {
-                        top = ' 󱓥 ',
+                        top = ' 󱓥 SYSTEM ',
                     },
                 },
             },
