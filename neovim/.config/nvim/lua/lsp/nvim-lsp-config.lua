@@ -13,7 +13,7 @@ return {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'folke/neodev.nvim',
-        'jose-elias-alvarez/null-ls.nvim',
+        'nvimtools/none-ls.nvim',
         'nvimdev/lspsaga.nvim',
         -- JSON schemas
         'b0o/schemastore.nvim',
