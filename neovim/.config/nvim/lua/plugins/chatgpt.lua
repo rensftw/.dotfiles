@@ -23,6 +23,11 @@ return {
             chat = {
                 question_sign = '',
                 answer_sign = '󱙺',
+                sessions_window = {
+                    active_sign = " ",
+                    inactive_sign = " ",
+                    current_line_sign = "",
+                },
                 keymaps = {
                     close = { '<C-c>', },
                     yank_last = '<C-y>',
