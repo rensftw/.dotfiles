@@ -52,16 +52,24 @@ M.on_attach = function(client, bufnr)
     nmap('<leader>d',  require('core.helpers').Virtual_text.toggle,                         '[D]iagnostics')
     nmap('[d',         '<cmd>Lspsaga diagnostic_jump_prev<CR>',                             'Previous diagnostic message')
     nmap(']d',         '<cmd>Lspsaga diagnostic_jump_next<CR>',                             'Next diagnostic message')
-    nmap('<leader>af', function() vim.lsp.buf.format({ async = true }) end,                 '[A]uto [F]ormat')
     nmap('<S-up>',     function() require('lspsaga.action').smart_scroll_with_saga(-1) end, 'Scroll up in code action')
     nmap('<S-down>',   function() require('lspsaga.action').smart_scroll_with_saga(1) end,  'Scroll down in code action')
-
-    -- formatting
-    for _, value in ipairs({ 'tsserver', 'tsserver', 'null-ls' }) do
-        if client.name == value then
-            client.server_capabilities.document_formatting = false
-        end
-    end
+    nmap('<leader>af', function()
+        vim.lsp.buf.format({
+            async = true,
+            filter = function(client)
+                -- Never request typescript-language-server for formatting
+                local clientsWithDisabledFormatting = {'tsserver', 'eslint'}
+                for _, name in ipairs(clientsWithDisabledFormatting) do
+                    if client.name == name then
+                        return false
+                    end
+                end
+                return client.name ~= "tsserver"
+            end
+        })
+    end,
+    '[A]uto [F]ormat')
 
     enable_format_on_save(client, bufnr);
     highlight_symbol_under_cursor(client)
