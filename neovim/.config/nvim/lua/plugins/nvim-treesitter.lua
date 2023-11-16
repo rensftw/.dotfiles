@@ -14,6 +14,7 @@ return {
     config = function()
         require 'nvim-treesitter.configs'.setup({
             ensure_installed = {
+                'query', -- needed for treesitter playground
                 'bash',
                 'c',
                 'cmake',
