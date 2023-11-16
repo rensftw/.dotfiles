@@ -10,6 +10,7 @@ return {
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
         'nvim-treesitter/nvim-treesitter-context',
+        'JoosepAlviste/nvim-ts-context-commentstring',
     },
     config = function()
         require 'nvim-treesitter.configs'.setup({
@@ -103,6 +104,9 @@ return {
                 --         ['<leader>S'] = '@parameter.inner',
                 --     },
                 -- },
+                context_commentstring = {
+                    enable = true,
+                },
             }
         })
 
