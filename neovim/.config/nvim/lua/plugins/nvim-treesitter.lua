@@ -104,12 +104,12 @@ return {
                 --         ['<leader>S'] = '@parameter.inner',
                 --     },
                 -- },
-                context_commentstring = {
-                    enable = true,
-                },
             }
         })
 
         require 'treesitter-context'.setup()
+
+        -- Skip backwards compatibility routines and speed up loading
+        vim.g.skip_ts_context_commentstring_module = true
     end
 }
