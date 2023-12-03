@@ -9,7 +9,23 @@ fi
 
 # Navigation aliases
 alias ls="ls -G"
-alias ll="ls -Ghal"
+if command -v eza &> /dev/null
+then
+    alias ll="eza \
+        --all \
+        --long \
+        --icons=always \
+        --header \
+        --modified \
+        --time-style=relative \
+        --context \
+        --mounts \
+        --no-user \
+        --no-git \
+        "
+else
+    alias ll='ls -Ghal'
+fi
 alias grep="grep --color=auto --ignore-case"
 alias mkdir="mkdir -pv"
 alias path='echo -e ${PATH//:/\\n}'
