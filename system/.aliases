@@ -32,9 +32,14 @@ alias vs="nvim -S"      # open neovim with session
 alias n="nnn"
 
 # tmux
-alias ta="tmux attach"
-alias tk="tmux kill-server"
 alias tl="tmux ls"
+alias ta="tmux attach"
+alias tK="tmux kill-server"
+function tk() {
+    for s in $(tmux list-sessions | awk '{print $1}' | rg ':' -r '' | fzf); do 
+        tmux kill-session -t "$s"
+    done
+}
 
 # Kill background processes (like suspended jobs)
 alias kill-bg='kill -KILL ${${(v)jobstates##*:*:}%=*}'
