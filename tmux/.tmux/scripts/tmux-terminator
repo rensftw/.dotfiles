@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+for s in $(tmux list-sessions -F \#S | fzf); do
+    tmux kill-session -t "$s"
+done
