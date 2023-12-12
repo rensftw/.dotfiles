@@ -1,7 +1,15 @@
 return {
     'luukvbaal/nnn.nvim',
     keys = {
-        { '<leader>n', ':NnnPicker<CR>', mode = { 'n' }, desc = 'Open NNN' },
+        {
+            '<leader>n',
+            function()
+                local activeFilePath = vim.api.nvim_buf_get_name(0)
+                vim.api.nvim_command(string.format('NnnPicker %s', activeFilePath))
+            end,
+            mode = { 'n' },
+            desc = 'Open NNN'
+        },
     },
     config = function()
         local builtin = require('nnn').builtin
