@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+export FZF_DEFAULT_OPTS="--layout=reverse --border=top --border-label=\"Kill session\" --border-label-pos=1 --no-info --no-scrollbar"
 for s in $(tmux list-sessions -F \#S | fzf); do
     tmux kill-session -t "$s"
 done

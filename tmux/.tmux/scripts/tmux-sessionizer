@@ -4,7 +4,13 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$( (tmux list-sessions -F \#S && echo "$HOME/.dotfiles" && find ~/develop ~/foss ~/work -mindepth 1 -maxdepth 1 -type d 2> /dev/null) | fzf)
+    export FZF_DEFAULT_OPTS="--layout=reverse --border=top --border-label=\"Go to session\" --border-label-pos=1 --no-info --no-scrollbar"
+    existing_tmux_sessions=$(tmux list-sessions -F \#S)
+    dotfiles="$HOME/.dotfiles"
+    repos=$(find ~/develop ~/foss ~/work -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
+
+    # We need to preserve linebreaks between command outputs
+    selected=$(printf '%s\n%s\n%s\n' "$existing_tmux_sessions" "$dotfiles" "$repos" | fzf)
 fi
 
 if [[ -z $selected ]]; then
