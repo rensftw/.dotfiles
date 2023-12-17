@@ -29,7 +29,7 @@ return {
                     current_line_sign = "",
                 },
                 keymaps = {
-                    close = { '<C-c>', },
+                    close = '<C-c>',
                     yank_last = '<C-y>',
                     yank_last_code = '<C-k>',
                     scroll_up = '<C-u>',
@@ -38,8 +38,8 @@ return {
                     new_session = '<C-n>',
                     cycle_windows = '<Tab>',
                     cycle_modes = '<C-v>', -- opens ChatGPT to the right
-                    select_session = { '<CR>', '<Space>' },
-                    rename_session = { 'cw', 'r' },
+                    select_session = '<CR>',
+                    rename_session = 'cw',
                     delete_session = 'dd',
                     draft_message = '<C-m>',
                     toggle_message_role = '<C-r>',
