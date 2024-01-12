@@ -3,6 +3,8 @@ return {
     event = 'VeryLazy',
     keys = {
         { mode = { 'n' }, '<leader>gg',   ':Git<CR>', },
+        { mode = { 'n' }, '<leader>gbb',  ':GBrowse!<CR>', },
+        { mode = { 'v' }, '<leader>gbb',  ":'<,'>GBrowse<CR>", },
         -- See blame history for the current file
         { mode = { 'n' }, '<leader>gbf',  ':Git blame<CR>', },
         -- Show git history for the current line
@@ -34,6 +36,10 @@ return {
         'Gdiffsplit',
         'Gvdiffsplit',
         'Gclog',
+        'GBrowse',
+    },
+    dependencies = {
+        'tpope/vim-rhubarb'
     },
     config = function()
         local helpers = require('core.helpers')
