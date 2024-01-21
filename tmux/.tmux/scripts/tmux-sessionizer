@@ -4,7 +4,14 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    export FZF_DEFAULT_OPTS="--layout=reverse --border=top --border-label=\"Go to session\" --border-label-pos=1 --no-info --no-scrollbar"
+    FZF_DEFAULT_OPTS="--layout=reverse --border=top --border-label=\"Go to session\" --border-label-pos=1 --no-info --no-scrollbar"
+    # Tokyonight theme
+    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+    --color=fg:#c0caf5,bg:#1a1b26,hl:#ff9e64 \
+    --color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+    --color=info:#7aa2f7,prompt:#7dcfff,pointer:#f7768e \
+    --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
+
     existing_tmux_sessions=$(tmux list-sessions -F \#S)
     dotfiles="$HOME/.dotfiles"
     repos=$(find ~/develop ~/foss ~/work -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
