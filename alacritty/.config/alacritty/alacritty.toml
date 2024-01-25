@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/tokyonight.toml"]
+import = ["~/.config/alacritty/flexoki.toml"]
 
 [bell]
 command = "None"

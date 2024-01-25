@@ -85,12 +85,14 @@ FZF_PREFIX=$(brew --prefix fzf)
 source "$FZF_PREFIX/shell/key-bindings.zsh"
 # Default flags
 FZF_DEFAULT_OPTS='--multi --inline-info --height 50% --layout=reverse --border'
-# Tokyonight theme
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
---color=fg:#c0caf5,bg:#1a1b26,hl:#ff9e64 \
---color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
---color=info:#7aa2f7,prompt:#7dcfff,pointer:#f7768e \
---color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
+
+# Flexoki theme
+ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+    --color=fg:#878580,bg:#100F0F,hl:#CE5D97
+    --color=fg+:#878580,bg+:#1C1B1A,hl+:#CE5D97
+    --color=border:#403E3C,header:#FFFCF0,gutter:#100F0F
+    --color=spinner:#24837B,info:#24837B,separator:#1C1B1A
+    --color=pointer:#AD8301,marker:#A02F6F,prompt:#AD8301"
 export FZF_COMPLETION_TRIGGER='~~'
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --no-ignore"
 

@@ -16,8 +16,8 @@ return {
 
         feline.setup({
             components = statusbar.components,
-            theme = themes.tokyonight_colors,
-            vi_mode_colors = themes.tokyonight_vi_mode_colors,
+            theme = themes.flexoki_colors,
+            vi_mode_colors = themes.flexoki_vi_mode_colors,
         })
 
         feline.winbar.setup({

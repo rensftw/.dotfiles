@@ -2,6 +2,7 @@ return {
     'folke/tokyonight.nvim',
     -- Load main theme before all other plugins
     lazy = false,
+    enabled = false,
     priority = 1000,
     config = function()
         require('tokyonight').setup({
