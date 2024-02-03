@@ -62,3 +62,22 @@ autocmd({ 'BufWritePre' }, {
         vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
     end,
 })
+
+-- Improve writing experience
+-- Enable line wrapping for text filetypes
+autocmd('FileType', {
+    group = augroup('allow_line_wrapping', {}),
+    pattern = {
+        'Markdown',
+        'Text',
+        'Asciidoc',
+        'Tex',
+        'Rtf'
+    },
+    callback = function()
+        vim.o.wrap = true -- Enable line wrapping for long lines
+        vim.o.linebreak = true -- Do not split words for linebreak
+        vim.o.breakindent = true -- Prevent word splitting
+        vim.o.showbreak = '⋮ ' -- Symbol to indicate wrapped line
+    end,
+})
