@@ -37,6 +37,9 @@ vim.o.undodir = vim.fn.stdpath('state') .. 'undodir'
 -- zR: open all folds in the buffer
 vim.opt.foldmethod = 'expr'
 vim.opt.foldenable = false
+-- TODO: Remove this hotfix once issue is resolved in Neovim repo
+-- https://github.com/neovim/neovim/issues/25608
+-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- source: https://github.com/abzcoding/lvim/blob/a4e400f0ffaba68377cca432566e54617dfeb2ca/lua/user/neovim.lua#L52
 vim.wo.foldtext =
