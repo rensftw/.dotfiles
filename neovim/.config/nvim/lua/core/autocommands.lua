@@ -63,6 +63,20 @@ autocmd({ 'BufWritePre' }, {
     end,
 })
 
+-- NOTE: Order is important!!!
+-- reset_line_wrapping must be defined before allow_line_wrapping
+-- We need this to ensure filetypes that contain code do not have wrap enabled
+autocmd('FileType', {
+    group = augroup('reset_line_wrapping', {}),
+    pattern = '*',
+    callback = function()
+        vim.wo.wrap = false
+        vim.wo.linebreak = false
+        vim.wo.breakindent = false
+        vim.wo.showbreak = ''
+    end,
+})
+
 -- Improve writing experience
 -- Enable line wrapping for text filetypes
 autocmd('FileType', {
@@ -71,13 +85,21 @@ autocmd('FileType', {
         'Markdown',
         'Text',
         'Asciidoc',
+        'Pandoc',
         'Tex',
-        'Rtf'
+        'Rtf',
+        'Gitcommit'
     },
     callback = function()
-        vim.o.wrap = true -- Enable line wrapping for long lines
-        vim.o.linebreak = true -- Do not split words for linebreak
-        vim.o.breakindent = true -- Prevent word splitting
-        vim.o.showbreak = '⋮ ' -- Symbol to indicate wrapped line
+        vim.wo.wrap = true -- Enable line wrapping for long lines
+        vim.wo.linebreak = true -- Do not split words for linebreak
+        vim.wo.breakindent = true -- Prevent word splitting
+        vim.wo.showbreak = '⋮ ' -- Symbol to indicate wrapped line
+
+        -- NOTE: Uncomment to automatically insert a new line at col 80 as you type
+        -- vim.o.textwidth = 80
+
+        -- Fun fact:
+        -- `Gitcommit` filetypes default to 72 lines of textwidth (and not 80 which is the default)
     end,
 })
