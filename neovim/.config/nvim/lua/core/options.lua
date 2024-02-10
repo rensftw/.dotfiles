@@ -18,7 +18,7 @@ vim.o.signcolumn = 'yes' -- always show the sign column
 vim.o.cursorline = true -- highlight the line where the cursor is
 vim.o.splitright = true -- horizontal split should split to the right
 vim.o.splitbelow = true -- vertical split should split below
-vim.o.completeopt = 'menuone,noinsert,noselect' -- do not auto-complete
+vim.opt.completeopt = { 'menuone' , 'noinsert', 'noselect' } -- do not auto-complete
 vim.o.laststatus = 3 -- show one global statusline
 vim.o.scroll = 10 -- <ctrl-d> and <ctrl-u> should scroll by 10 lines
 vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor
@@ -46,23 +46,26 @@ vim.wo.foldtext =
 vim.g.ft_man_folding_enable = true
 
 -- Show invisible characters
-vim.o.list = true
--- vim.opt.listchars:append('space:·')
--- vim.opt.listchars:append('eol:↴')
-vim.opt.listchars:append('trail:·')
-vim.opt.listchars:append('tab:→ ')
-vim.opt.listchars:append('nbsp:×')
+vim.opt.list = true
+vim.opt.listchars = {
+    -- space = '·',
+    -- eol = '↴',
+    trail = '·',
+    tab = '→ ',
+    nbsp = '×',
+}
 
 -- Diff options
-vim.o.diffopt = ''
-vim.o.diffopt = vim.o.diffopt .. 'vertical,' -- show diff in vertical mode
-vim.o.diffopt = vim.o.diffopt .. 'filler' -- show filler for deleted lines
+vim.opt.diffopt ={
+    'vertical', -- show diff in vertical mode
+    'filler', -- show filler for deleted lines
+}
 
 -- Enable true colors, if possible
 vim.o.termguicolors = true
 
 -- Search settings
-vim.o.path = vim.o.path .. '**' -- search upwards and downwards the directory
+vim.opt.path:append({'**' }) -- search upwards and downwards the directory
 vim.o.ignorecase = true -- case-insensitive searching
 vim.o.smartcase = true -- case-sensitive if expresson contains a capital letters
 
@@ -73,9 +76,10 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.grepformat = '%f:%l:%c:%m'
 
 -- Ignore folders
-vim.o.wildignore = '**/dist/*'
-vim.o.wildignore = vim.o.wildignore .. '**/coverage/*'
-vim.o.wildignore = vim.o.wildignore .. '**/node_modules/*'
-vim.o.wildignore = vim.o.wildignore .. '**/.git/*'
-vim.o.wildignore = vim.o.wildignore .. '*.pyc'
-vim.o.wildignore = vim.o.wildignore .. '*build/*'
+vim.opt.wildignore ={  '**/dist/*',
+    '**/coverage/*',
+    '**/node_modules/*',
+    '**/.git/*',
+    '*.pyc',
+    '*build/*'
+}
