@@ -29,47 +29,68 @@ local enable_format_on_save = function(client, bufnr)
     end
 end
 
+local block_typescript_formatting = function(client)
+    -- Never request typescript-language-server for formatting
+    local clientsWithDisabledFormatting = { 'tsserver', 'eslint' }
+    for _, name in ipairs(clientsWithDisabledFormatting) do
+        if client.name == name then
+            return false
+        end
+    end
+    return true
+end
+
 M.on_attach = function(client, bufnr)
     local telescope = require('telescope.builtin')
-    local nmap = function(keys, func, desc)
+    local keymap = function(mode, keys, func, desc)
         if desc then
           desc = 'LSP: ' .. desc
         end
 
         local opts = { buffer = bufnr, desc = desc, noremap = true, silent = true }
-        vim.keymap.set('n', keys, func, opts)
+        vim.keymap.set(mode, keys, func, opts)
       end
 
     -- LSP keymaps
-    nmap('gD',         vim.lsp.buf.declaration,                                             '[Go]to [D]eclaration')
-    nmap('gd',         vim.lsp.buf.definition,                                              '[G]oto [D]efinition')
-    nmap('gt',         vim.lsp.buf.type_definition,                                         '[G]oto [T]ype definition')
-    nmap('gi',         vim.lsp.buf.implementation,                                          '[G]oto [I]mplementation')
-    nmap('gr',         function() telescope.lsp_references({initial_mode = 'normal'}) end,  '[G]oto [R]eferences')
-    nmap('H',          '<cmd>Lspsaga hover_doc<CR>',                                        '[H]over')
-    nmap('<leader>r',  '<cmd>Lspsaga rename<CR>',                                           '[R]ename')
-    nmap('<leader>ca', '<cmd>Lspsaga code_action<CR>',                                      '[C]ode [A]ction')
-    nmap('<leader>d',  require('core.helpers').Virtual_text.toggle,                         '[D]iagnostics')
-    nmap('[d',         '<cmd>Lspsaga diagnostic_jump_prev<CR>',                             'Previous diagnostic message')
-    nmap(']d',         '<cmd>Lspsaga diagnostic_jump_next<CR>',                             'Next diagnostic message')
-    nmap('<S-up>',     function() require('lspsaga.action').smart_scroll_with_saga(-1) end, 'Scroll up in code action')
-    nmap('<S-down>',   function() require('lspsaga.action').smart_scroll_with_saga(1) end,  'Scroll down in code action')
-    nmap('<leader>af', function()
-        vim.lsp.buf.format({
-            async = true,
-            filter = function(client)
-                -- Never request typescript-language-server for formatting
-                local clientsWithDisabledFormatting = {'tsserver', 'eslint'}
-                for _, name in ipairs(clientsWithDisabledFormatting) do
-                    if client.name == name then
-                        return false
-                    end
-                end
-                return client.name ~= "tsserver"
-            end
-        })
-    end,
-    '[A]uto [F]ormat')
+    keymap('n', 'gD',         vim.lsp.buf.declaration,                                             '[Go]to [D]eclaration')
+    keymap('n', 'gd',         vim.lsp.buf.definition,                                              '[G]oto [D]efinition')
+    keymap('n', 'gt',         vim.lsp.buf.type_definition,                                         '[G]oto [T]ype definition')
+    keymap('n', 'gi',         vim.lsp.buf.implementation,                                          '[G]oto [I]mplementation')
+    keymap('n', 'gr',         function() telescope.lsp_references({initial_mode = 'normal'}) end,  '[G]oto [R]eferences')
+    keymap('n', 'H',          '<cmd>Lspsaga hover_doc<CR>',                                        '[H]over')
+    keymap('n', '<leader>r',  '<cmd>Lspsaga rename<CR>',                                           '[R]ename')
+    keymap('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>',                                      '[C]ode [A]ction')
+    keymap('n', '<leader>d',  require('core.helpers').Virtual_text.toggle,                         '[D]iagnostics')
+    keymap('n', '[d',         '<cmd>Lspsaga diagnostic_jump_prev<CR>',                             'Previous diagnostic message')
+    keymap('n', ']d',         '<cmd>Lspsaga diagnostic_jump_next<CR>',                             'Next diagnostic message')
+    keymap('n', '<S-up>',     function() require('lspsaga.action').smart_scroll_with_saga(-1) end, 'Scroll up in code action')
+    keymap('n', '<S-down>',   function() require('lspsaga.action').smart_scroll_with_saga(1) end,  'Scroll down in code action')
+    keymap('n', '<leader>af', function()
+            vim.lsp.buf.format({
+                async = true,
+                filter = block_typescript_formatting
+            })
+        end,
+        '[A]uto [F]ormat')
+
+    keymap('v', '<leader>af', function()
+            -- NOTE: `table.unpack` is available in Lua 5.2+
+            -- Neovim uses LuaJIT with v5.1 so we need to use the global `unpack` method
+            -- which will be deprecated in Lua 5.3+
+            local unpack = table.unpack or unpack
+            local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '<'))
+            local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '>'))
+
+            vim.lsp.buf.format({
+                async = true,
+                range = {
+                    ['start'] = { start_row, 0 },
+                    ['end'] = { end_row, 0 },
+                },
+                filter = block_typescript_formatting
+            })
+        end,
+        '[A]uto [F]ormat visual selection')
 
     enable_format_on_save(client, bufnr);
     highlight_symbol_under_cursor(client)
