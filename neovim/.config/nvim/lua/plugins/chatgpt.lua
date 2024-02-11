@@ -1,5 +1,7 @@
 return {
     'jackMort/ChatGPT.nvim',
+    lazy = true,
+    event = 'VeryLazy',
     cmd = {
         'ChatGPT',
         'ChatGPTActAs',

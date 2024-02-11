@@ -1,5 +1,7 @@
 return {
     'luukvbaal/nnn.nvim',
+    lazy = true,
+    event = 'VeryLazy',
     keys = {
         {
             '<leader>n',
