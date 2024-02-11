@@ -1,6 +1,7 @@
 -- Improve writing experience
 vim.opt_local.spell = true
-vim.opt_local.spelllang = 'en'
+vim.opt_local.spelllang = 'en,bg,el'
+vim.opt_local.spellfile = vim.fn.stdpath('config') .. '/spell/tech.utf-8.add'
 vim.opt_local.wrap = true -- Enable line wrapping for long lines
 vim.opt_local.linebreak = true -- Do not split words for linebreak
 vim.opt_local.breakindent = true -- Indent wrapped lines
