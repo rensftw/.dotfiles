@@ -1,5 +1,6 @@
 return {
     'windwp/nvim-autopairs',
+    lazy = true,
     event = 'InsertEnter',
     config = function()
         -- If you want insert `(` after select function or method item

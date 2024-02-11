@@ -1,5 +1,6 @@
 return {
     'goolord/alpha-nvim',
+    lazy = true,
     event = 'VimEnter',
     dependencies = {
         'williamboman/mason.nvim',

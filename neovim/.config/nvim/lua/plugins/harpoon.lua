@@ -1,5 +1,7 @@
 return {
     'ThePrimeagen/harpoon',
+    lazy = true,
+    event = 'VeryLazy',
     keys = function()
         local harpoon_ui = require('harpoon.ui')
 
