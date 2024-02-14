@@ -1,10 +1,11 @@
-
 0-day
 0day
 2FA
 2fa
 AES
+AI
 API
+AR
 ARP
 AWS
 Alacritty
@@ -26,6 +27,7 @@ C++
 CD
 CI
 CLI
+CPU
 CSRF
 CSS
 Changelog
@@ -67,6 +69,7 @@ FreeBSD
 Fstab
 GCP
 GPG
+GPU
 GUI
 GitHub
 GitLab
@@ -76,6 +79,7 @@ Grep
 Groupadd
 Groupdel
 Groupmod
+HMR
 HTML
 HTTP
 HTTPS
@@ -94,6 +98,7 @@ IPv4
 IPv6
 Init
 Intranet
+IoT
 Iptables
 JSON
 JWT
@@ -107,6 +112,7 @@ Kubeconfig
 Kubernetes
 LLM
 LLMs
+LLaMa
 LSP
 LXDE
 LXQT
@@ -123,11 +129,13 @@ MacOS
 Malware
 Manjaro
 Mkdir
+Monorepo
 Mount
 Mv
 MySQL
 NAT
 NFS
+NVM
 Nano
 Neovim
 NetBIOS
@@ -192,6 +200,7 @@ SNS
 SQLInjection
 SQLite
 SQS
+SSD
 SSH
 SSHd
 SSID
@@ -227,7 +236,10 @@ Terraform
 Tr
 TypeScript
 UDP
+UI
 UPnP
+URL
+UX
 Ubuntu
 Ufw
 Umount
@@ -242,6 +254,7 @@ VLC
 VNC
 VPC
 VPN
+VR
 Vagrant
 Vim
 VimL
@@ -276,6 +289,8 @@ arp
 async
 awk
 aws
+back-end
+backend
 bandwidth
 bash
 bdd
@@ -291,6 +306,7 @@ cd
 changelog
 chgrp
 chmod
+chore
 chown
 ci
 cli
@@ -337,6 +353,8 @@ fp
 frame
 free
 freebsd
+front-end
+frontend
 fstab
 ftp
 fzf
@@ -353,6 +371,7 @@ groupdel
 groupmod
 gui
 helm
+hotfix
 html
 htop
 http
@@ -379,6 +398,7 @@ jenkins
 jest
 json
 jwt
+kickstart
 kill
 ksh
 kubeconfig
@@ -404,7 +424,9 @@ man
 manjaro
 md5
 mfa
+middleware
 mkdir
+monorepo
 mount
 mv
 mysql
@@ -419,7 +441,9 @@ nginx
 nmap
 nodejs
 npm
+npmjs
 nvidia
+nvm
 oauth
 ollama
 oop
@@ -555,4 +579,3 @@ yaml
 yarn
 zero-day
 zsh
-chore
