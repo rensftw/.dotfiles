@@ -106,6 +106,7 @@ Java
 JavaScript
 Jenkins
 Jest
+Keymap
 Kill
 Ksh
 Kubeconfig
@@ -223,12 +224,13 @@ Sshd
 Su
 Subnet
 Sudo
-Superintelligence/!
+Superintelligence
 Switch
 Systemd
 TCP
 TDD
 TLS
+TPUs
 Tailwind
 Tcsh
 Telnet
@@ -349,6 +351,7 @@ firewall
 fish
 fix!
 fixup
+float32
 fp
 frame
 free
@@ -386,6 +389,7 @@ ids
 iis
 imap
 init
+int8
 intranet
 ip
 ips
@@ -398,6 +402,7 @@ jenkins
 jest
 json
 jwt
+keymap
 kickstart
 kill
 ksh
@@ -522,7 +527,7 @@ ssl
 su
 subnet
 sudo
-superintelligence/!
+superintelligence
 suse
 switch
 sync

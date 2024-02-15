@@ -2,10 +2,19 @@ return {
     'David-Kunz/gen.nvim',
     lazy = true,
     cmd = { 'Gen' },
+    dependencies = {
+        'nvim-telescope/telescope-ui-select.nvim'
+    },
+    keys = {
+        { mode = { 'n', 'v' }, '<leader>ll', ':Gen<CR>', desc = 'Select interaction' },
+        { mode = { 'n', 'v' }, '<leader>lc', ':Gen Chat<CR>', desc = 'Chat with local LLM' },
+        { mode = { 'n', 'v' }, '<leader>lm', function() require('gen').select_model() end, desc = 'Select local LLM to interact with' },
+    },
     config = function()
-        require('gen').setup({
+        local gen = require('gen')
+        gen.setup({
             model = 'mistral',      -- The default model to use.
-            display_mode = 'float', -- The display mode. Can be 'float' or 'split'.
+            display_mode = 'split', -- The display mode. Can be 'float' or 'split'.
             show_prompt = true,     -- Shows the Prompt submitted to Ollama.
             show_model = true,      -- Displays which model you are using at the beginning of your chat session.
             no_auto_close = false,  -- Never closes the window automatically.
