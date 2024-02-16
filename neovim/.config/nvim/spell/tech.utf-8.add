@@ -9,6 +9,7 @@ AR
 ARP
 AWS
 Alacritty
+Allowlist
 Ansible
 Apache
 Arch
@@ -18,10 +19,12 @@ Bandwidth
 Bash
 Bit
 Bitbucket
+Blocklist
 Bluetooth
 Bootstrap
 Botnet
 BpyTOP
+Brew
 Brewfile
 C++
 CD
@@ -68,6 +71,8 @@ Free
 FreeBSD
 Fstab
 GCP
+GNU
+GNUpg
 GPG
 GPU
 GUI
@@ -107,6 +112,9 @@ JavaScript
 Jenkins
 Jest
 Keymap
+Keypair
+Keyring
+Keyserver
 Kill
 Ksh
 Kubeconfig
@@ -156,6 +164,10 @@ PGP
 PHP
 POP3
 Packet
+Pandoc
+Passkey
+Passlist
+Passphrase
 Passwd
 Perl
 Phishing
@@ -222,6 +234,7 @@ Sort
 Ssh
 Sshd
 Su
+Subkey
 Subnet
 Sudo
 Superintelligence
@@ -236,6 +249,7 @@ Tcsh
 Telnet
 Terraform
 Tr
+Treesitter
 TypeScript
 UDP
 UI
@@ -270,6 +284,7 @@ WPA3
 WTF
 Wayland
 Webpack
+Whitelist
 Wi-Fi
 Wireshark
 X11
@@ -279,10 +294,12 @@ XSS
 Xargs
 YAML
 Yarn
+Yubikey
 Zero-Day
 Zsh
 aes
 alacritty
+allowlist
 ansible
 apache
 api
@@ -298,10 +315,12 @@ bash
 bdd
 bit
 bitbucket
+blocklist
 bluetooth
 bootstrap
 botnet
 bpytop
+brew
 brewfile
 c++
 cd
@@ -347,6 +366,7 @@ feat!
 filesystem
 filetype
 find
+fingerprint
 firewall
 fish
 fix!
@@ -365,6 +385,7 @@ gcp
 gitcommit
 github
 gitlab
+gnupg
 gpg
 grafana
 graphql
@@ -403,6 +424,9 @@ jest
 json
 jwt
 keymap
+keypair
+keyring
+keyserver
 kickstart
 kill
 ksh
@@ -456,7 +480,11 @@ openai
 openbsd
 packet
 pan
+pandoc
 param
+passkey
+passlist
+passphrase
 passwd
 perl
 pgp
@@ -525,6 +553,8 @@ sshd
 ssid
 ssl
 su
+subkey
+subkeys
 subnet
 sudo
 superintelligence
@@ -532,6 +562,7 @@ suse
 switch
 sync
 systemd
+tags
 tailwind
 tcp
 tcsh
@@ -542,6 +573,7 @@ textwidth
 tls
 tmux
 tr
+treesitter
 typescript
 ubuntu
 udp
@@ -569,6 +601,7 @@ vue
 wan
 wayland
 webpack
+whitelist
 wi-fi
 wireshark
 wpa
@@ -582,5 +615,6 @@ xml
 xss
 yaml
 yarn
+yubikey
 zero-day
 zsh
