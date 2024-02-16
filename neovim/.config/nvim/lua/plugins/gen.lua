@@ -6,9 +6,9 @@ return {
         'nvim-telescope/telescope-ui-select.nvim'
     },
     keys = {
-        { mode = { 'n', 'v' }, '<leader>ll', ':Gen<CR>', desc = 'Select interaction' },
-        { mode = { 'n', 'v' }, '<leader>lc', ':Gen Chat<CR>', desc = 'Chat with local LLM' },
-        { mode = { 'n', 'v' }, '<leader>lm', function() require('gen').select_model() end, desc = 'Select local LLM to interact with' },
+        { mode = { 'n', 'v' }, '<leader>aa', ':Gen<CR>', desc = 'Select interaction mode with a local LLM' },
+        { mode = { 'n', 'v' }, '<leader>ac', ':Gen Chat<CR>', desc = 'Chat with local LLM' },
+        { mode = { 'n', 'v' }, '<leader>am', function() require('gen').select_model() end, desc = 'Select local LLM to interact with' },
     },
     config = function()
         local gen = require('gen')
