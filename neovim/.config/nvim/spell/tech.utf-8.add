@@ -30,6 +30,7 @@ C++
 CD
 CI
 CLI
+CLIs
 CPU
 CSRF
 CSS
@@ -127,6 +128,7 @@ LXDE
 LXQT
 Lambda
 Latency
+Lifecycle
 Logitech
 Logstash
 Ls
@@ -137,6 +139,7 @@ MFA
 MacOS
 Malware
 Manjaro
+Mixtral
 Mkdir
 Monorepo
 Mount
@@ -189,6 +192,7 @@ RDS
 RESTful
 RGB
 RGBA
+RIR
 RSA
 Reboot
 Reddit
@@ -230,6 +234,8 @@ Shadow
 Shell
 Shutdown
 Sinon
+Smartcard
+Smartcards
 Sort
 Ssh
 Sshd
@@ -253,6 +259,7 @@ Treesitter
 TypeScript
 UDP
 UI
+UID
 UPnP
 URL
 UX
@@ -330,6 +337,7 @@ chmod
 chore
 chown
 ci
+cleartext
 cli
 cloudfront
 config
@@ -341,6 +349,7 @@ cut
 cypress
 datagram
 ddos
+deadlift
 debian
 df
 dhcp
@@ -378,6 +387,7 @@ free
 freebsd
 front-end
 frontend
+frontmatter
 fstab
 ftp
 fzf
@@ -387,6 +397,9 @@ github
 gitlab
 gnupg
 gpg
+gpgcheck
+gpgconf
+gpgsm
 grafana
 graphql
 grep
@@ -426,6 +439,7 @@ jwt
 keymap
 keypair
 keyring
+keyrings
 keyserver
 kickstart
 kill
@@ -436,6 +450,7 @@ lambda
 lang
 latency
 leetcode
+lifecycle
 llm
 llms
 localhost
@@ -454,6 +469,7 @@ manjaro
 md5
 mfa
 middleware
+mixtral
 mkdir
 monorepo
 mount
@@ -538,7 +554,10 @@ sha
 shadow
 shell
 shutdown
+sig
 sinon
+smartcard
+smartcards
 smb
 smtp
 snmp
@@ -582,6 +601,7 @@ umount
 uninstall
 uniq
 unity
+untampered
 upnp
 upstart
 useradd
