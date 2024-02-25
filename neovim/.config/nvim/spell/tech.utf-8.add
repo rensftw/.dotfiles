@@ -43,6 +43,7 @@ Cp
 Cron
 Cut
 Cypress
+DAP
 DDoS
 DHCP
 DNS
@@ -64,6 +65,7 @@ Extranet
 FP
 FTP
 Filetype
+Filetypes
 Find
 Firewall
 Fish
@@ -147,6 +149,7 @@ Mv
 MySQL
 NAT
 NFS
+NNN
 NVM
 Nano
 Neovim
@@ -378,6 +381,7 @@ feat
 feat!
 filesystem
 filetype
+filetypes
 find
 fingerprint
 firewall
@@ -488,6 +492,7 @@ netstat
 nfs
 nginx
 nmap
+nnn
 nodejs
 npm
 npmjs
