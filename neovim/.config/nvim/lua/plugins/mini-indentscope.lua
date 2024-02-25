@@ -25,7 +25,7 @@ return {
                 'alpha',
             },
             callback = function(event)
-                vim.b.miniindentscope_disable = false
+                vim.b.miniindentscope_disable = true
             end,
         })
     end,
