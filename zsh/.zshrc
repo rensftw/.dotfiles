@@ -5,6 +5,8 @@ PATH="$(brew --prefix fzf)/bin:$PATH"
 PATH="$(brew --prefix curl)/bin:$PATH"
 PATH="$(brew --prefix lua-language-server)/bin:$PATH"
 
+# Add custom binaries
+PATH="$HOME/.bin:$PATH"
 export PATH="$HOME:$PATH"
 
 export LC_ALL=en_US.UTF-8
