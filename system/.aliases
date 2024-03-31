@@ -212,37 +212,37 @@ _mb() {
 
 # Mnemonic: git checkout branch
 gcb() {
-  git checkout "$(_gb)"
+  git checkout $(_gb)
 }
 
 # Mnemonic: git branch delete
 gbd() {
-  git branch -D "$(_gb)"
+  git branch -D $(_gb)
 }
 
 # Interactive FZF prompt to remove changes
 gc() {
-  git checkout "$(gsp)"
+  git checkout $(gsp)
 }
 
 # Interactive FZF prompt to stage files
 ga() {
-  git add "$(gsp)"
+  git add $(gsp)
 }
 
 # Interactive FZF prompt to stage chunks
 gap() {
-  git add -p "$(gsp)"
+  git add -p $(gsp)
 }
 
 # Interactive FZF prompt to unstage files
 gr() {
-  git reset "$(gsp)"
+  git reset $(gsp)
 }
 
 # Mnemonic: git stash apply
 gsa() {
-  git stash apply "$(gstash)"
+  git stash apply $(gstash)
 }
 
 # Mnemonic: current branch commits
