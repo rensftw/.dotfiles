@@ -12,7 +12,7 @@ shape = "Block"
 TERM = "alacritty"
 
 [font]
-size = 14.0
+size = 16.0
 
 [font.bold]
 family = "Hack Nerd Font"
