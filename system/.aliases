@@ -62,7 +62,7 @@ alias kill-bg='kill -KILL ${${(v)jobstates##*:*:}%=*}'
 alias si="neofetch --uptime_shorthand tiny --memory_percent on --refresh_rate on"
 
 # Restart gpg agent
-alias restart-gpg="gpgconf --kill gpg-agent"
+alias restart-gpg="gpg-connect-agent killagent /bye; gpg-connect-agent updatestartuptty /bye; gpg-connect-agent /bye; gpgconf --kill gpg-agent"
 
 # Colorize the output of tree
 alias tree="tree -C"

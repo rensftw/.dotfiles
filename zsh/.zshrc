@@ -18,8 +18,16 @@ export ALIASES_LOCATION="$HOME/.aliases"
 export DOTFILES_LOCATION="$HOME/.dotfiles"
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
 export OBSIDIAN_LOCATION="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian"
-# GPG needs to know TTY to work properly: https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
-export GPG_TTY=$(tty)
+
+# GPG and SSH
+# GPG needs to know TTY to work properly:
+# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+export GPG_TTY="$(tty)"
+# Launch `gpg-agent` for use by SSH
+gpgconf --launch gpg-agent
+gpg-connect-agent updatestartuptty /bye > /dev/null 2>&1
+# Enable SSH to work with GPG
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
 source $HOME/.config/nnn/.nnnrc.zsh
 source $HOME/.aliases
