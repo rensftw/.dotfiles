@@ -6,6 +6,7 @@ return {
         'theHamsta/nvim-dap-virtual-text',
         'nvim-telescope/telescope.nvim',
         'nvim-telescope/telescope-dap.nvim',
+        'nvim-neotest/nvim-nio',
     },
     keys = {
         { mode = { 'n' }, '<leader>db', function() require('dap').toggle_breakpoint() end },
@@ -15,6 +16,7 @@ return {
         { mode = { 'n' }, '<leader>di', function() require('dap').step_into() end },
         { mode = { 'n' }, '<leader>dO', function() require('dap').step_out() end },
         { mode = { 'n' }, '<leader>dq', function() require('dap').terminate({ terminateDebugee = true }) end },
+        { mode = { 'n' }, '<leader>de', function() require('dapui').eval(nil, { enter = true }) end },
 
         -- DAP terminal navigation
         { mode = { 't' }, '<C-h>', '<C-\\><C-n><C-w>h' },
