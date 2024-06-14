@@ -21,6 +21,6 @@ vim.api.nvim_create_user_command('AsciiBoxart', function(opts)
   -- Get the design option from the argument, default to "headline" if not provided
   local design = opts.args ~= "" and opts.args or "headline"
 
-  local cmd = string.format(":%d,%d!boxes -d %s", line1, line2, design)
+  local cmd = string.format(":%d,%d!boxes --no-color --size=80 --align=c --design %s", line1, line2, design)
   vim.cmd(cmd)
 end, { range = true, nargs = '?' })
