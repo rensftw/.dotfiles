@@ -12,7 +12,7 @@ return {
         -- Manage LSP dependencies
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
-        'folke/neodev.nvim',
+        'folke/lazydev.nvim',
         'nvimtools/none-ls.nvim',
         'nvimdev/lspsaga.nvim',
         -- JSON schemas
@@ -20,7 +20,7 @@ return {
     },
     config = function()
         -- IMPORTANT: make sure to setup neodev BEFORE nvim_lsp/lspconfig
-        require('neodev').setup()
+        require('lazydev').setup()
         require('lsp.utils.setup-lsp-servers')
     end
 }
