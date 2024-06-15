@@ -7,8 +7,9 @@ return {
         null_ls.setup({
             on_attach = config.on_attach,
             sources = {
-                null_ls.builtins.diagnostics.vale,
+                -- null_ls.builtins.diagnostics.vale,
                 null_ls.builtins.formatting.prettier,
+                null_ls.builtins.diagnostics.actionlint,
             },
         })
     end
