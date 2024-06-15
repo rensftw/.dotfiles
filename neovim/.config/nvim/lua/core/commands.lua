@@ -14,7 +14,7 @@ vim.api.nvim_create_user_command('ApplyMacroToQuickfix', 'cdo execute "norm! @a"
 -- /*****************************/
 --
 -- Run `boxes --list` to view all available styles
-vim.api.nvim_create_user_command('AsciiBoxart', function(opts)
+vim.api.nvim_create_user_command('Boxart', function(opts)
   -- Get the range of visually selected lines
   local line1 = opts.line1
   local line2 = opts.line2
