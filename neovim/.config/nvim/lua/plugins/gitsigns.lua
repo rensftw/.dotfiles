@@ -15,12 +15,12 @@ return {
     config = function()
         require('gitsigns').setup {
             signs = {
-                add          = { hl = 'GitSignsAdd',    text = '▌', numhl = 'GitSignsAddNr',    linehl = 'GitSignsAddLn'    },
-                untracked    = { hl = 'GitSignsAdd',    text = '▌', numhl = 'GitSignsAddNr',    linehl = 'GitSignsAddLn'    },
-                change       = { hl = 'GitSignsChange', text = '▌', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-                delete       = { hl = 'GitSignsDelete', text = '▌', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-                topdelete    = { hl = 'GitSignsDelete', text = '▔', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-                changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+                add          = { text = '▌' },
+                untracked    = { text = '▌' },
+                change       = { text = '▌' },
+                delete       = { text = '▌' },
+                topdelete    = { text = '▔' },
+                changedelete = { text = '~' },
             },
             current_line_blame = false,     -- Toggle with `:Gitsigns toggle_current_line_blame`
         }
