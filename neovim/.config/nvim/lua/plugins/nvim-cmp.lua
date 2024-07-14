@@ -28,32 +28,31 @@ return {
                 end,
             },
             mapping = {
-                ['<Tab>'] = cmp.mapping(function(fallback)
+                ['<C-j>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
-                        cmp.select_next_item()
-                    elseif luasnip.expand_or_jumpable() then
-                        luasnip.expand_or_jump()
-                    elseif has_words_before() then
-                        cmp.complete()
+                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
                     else
                         fallback()
                     end
                 end, { 'i', 's' }),
-
-                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                ['<C-k>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
+                        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
                     else
                         fallback()
                     end
                 end, { 'i', 's' }),
-                ['<C-c>'] = cmp.mapping.close(),
-                ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                ['<C-k>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-                ['<C-j>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+                ['<C-y>'] = cmp.mapping(
+                    cmp.mapping.confirm({
+                        behavior = cmp.ConfirmBehavior.Insert,
+                        select = true,
+                    }),
+                    { 'i', 'c'}
+                ),
+                ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+                ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
                 ['<C-a>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+                ['<C-c>'] = cmp.mapping(cmp.mapping.close(), { 'i', 'c' }),
             },
             window = {
                 completion = cmp.config.window.bordered(),
@@ -116,8 +115,8 @@ return {
             sources = cmp.config.sources({
                 { name = 'path' }
             }, {
-                { name = 'cmdline' }
-            })
+                    { name = 'cmdline' }
+                })
         })
 
 
