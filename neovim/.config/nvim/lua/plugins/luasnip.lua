@@ -7,6 +7,7 @@ return {
         local javascript_snippets = require('snippets.javascript');
         local html_snippets = require('snippets.html')
         local comment_snippets = require('snippets.comments')
+        local box_comment = require('snippets.box-comment')
         -- local work_snippets = require('snippets.work')
 
         ls.config.set_config({
@@ -29,12 +30,10 @@ return {
             -- minimal increase in priority.
             ext_prio_increase = 1,
             enable_autosnippets = true,
-            -- mapping for cutting selected text so it's usable as SELECT_DEDENT,
-            -- SELECT_RAW or TM_SELECTED_TEXT (mapped via xmap).
-            store_selection_keys = '<Tab>',
         })
 
         ls.add_snippets('all', comment_snippets)
+        ls.add_snippets('all', box_comment)
         ls.add_snippets('javascript', javascript_snippets)
         ls.add_snippets('typescript', javascript_snippets)
         ls.add_snippets('typescriptreact', javascript_snippets)
@@ -42,7 +41,10 @@ return {
         ls.add_snippets('html', html_snippets)
         -- ls.add_snippets('markdown', work_snippets)
 
-        vim.api.nvim_set_keymap('i', '<C-s>', '<Plug>luasnip-next-choice', {})
-        vim.api.nvim_set_keymap('s', '<C-s>', '<Plug>luasnip-next-choice', {})
+        vim.keymap.set({'i', 's'}, '<C-s>', function()
+            if ls.choice_active() then
+                ls.change_choice(1)
+            end
+        end, {silent = true, noremap = true})
     end
 }
