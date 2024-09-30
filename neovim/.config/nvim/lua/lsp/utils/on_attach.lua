@@ -31,7 +31,7 @@ end
 
 local block_typescript_formatting = function(client)
     -- Never request typescript-language-server for formatting
-    local clientsWithDisabledFormatting = { 'tsserver', 'eslint' }
+    local clientsWithDisabledFormatting = { 'ts_ls', 'eslint' }
     for _, name in ipairs(clientsWithDisabledFormatting) do
         if client.name == name then
             return false

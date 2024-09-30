@@ -9,7 +9,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
 
 local servers = {
     'bashls',
-    'tsserver',
+    'ts_ls',
     'jsonls',
     'eslint',
     'html',
