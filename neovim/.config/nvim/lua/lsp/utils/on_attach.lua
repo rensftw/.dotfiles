@@ -57,15 +57,13 @@ M.on_attach = function(client, bufnr)
     keymap('n', 'gt',         vim.lsp.buf.type_definition,                                         '[G]oto [T]ype definition')
     keymap('n', 'gi',         vim.lsp.buf.implementation,                                          '[G]oto [I]mplementation')
     keymap('n', 'gr',         function() telescope.lsp_references({initial_mode = 'normal'}) end,  '[G]oto [R]eferences')
-    keymap('n', 'H',          '<cmd>Lspsaga hover_doc<CR>',                                        '[H]over')
-    keymap('n', '<leader>r',  '<cmd>Lspsaga rename<CR>',                                           '[R]ename')
-    keymap('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>',                                      '[C]ode [A]ction')
+    keymap('n', 'H',          vim.lsp.buf.hover,                                                   '[H]over')
+    keymap('n', '<leader>r',  vim.lsp.buf.rename,                                                  '[R]ename')
+    keymap({'n', 'v'}, '<leader>ca',  vim.lsp.buf.code_action,                                     '[C]ode [A]ction')
     keymap('n', '<leader>d',  require('core.helpers').Virtual_text.toggle,                         '[D]iagnostics')
-    keymap('n', '[d',         '<cmd>Lspsaga diagnostic_jump_prev<CR>',                             'Previous diagnostic message')
-    keymap('n', ']d',         '<cmd>Lspsaga diagnostic_jump_next<CR>',                             'Next diagnostic message')
-    keymap('n', '<S-up>',     function() require('lspsaga.action').smart_scroll_with_saga(-1) end, 'Scroll up in code action')
-    keymap('n', '<S-down>',   function() require('lspsaga.action').smart_scroll_with_saga(1) end,  'Scroll down in code action')
-    keymap('n', '<leader>af', function()
+    keymap('n', '[d',         vim.diagnostic.goto_next,                                            'Previous diagnostic message')
+    keymap('n', ']d',         vim.diagnostic.goto_prev,                                            'Next diagnostic message')
+    keymap({'n', 'v'}, '<leader>af', function()
             vim.lsp.buf.format({
                 async = true,
                 filter = block_typescript_formatting
@@ -73,27 +71,8 @@ M.on_attach = function(client, bufnr)
         end,
         '[A]uto [F]ormat')
 
-    keymap('v', '<leader>af', function()
-            -- NOTE: `table.unpack` is available in Lua 5.2+
-            -- Neovim uses LuaJIT with v5.1 so we need to use the global `unpack` method
-            -- which will be deprecated in Lua 5.3+
-            local unpack = table.unpack or unpack
-            local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '<'))
-            local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '>'))
-
-            vim.lsp.buf.format({
-                async = true,
-                range = {
-                    ['start'] = { start_row, 0 },
-                    ['end'] = { end_row, 0 },
-                },
-                filter = block_typescript_formatting
-            })
-        end,
-        '[A]uto [F]ormat visual selection')
-
     enable_format_on_save(client, bufnr);
-    highlight_symbol_under_cursor(client)
+    highlight_symbol_under_cursor(client);
 end
 
 return M

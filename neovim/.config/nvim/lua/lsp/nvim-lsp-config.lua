@@ -14,7 +14,6 @@ return {
         'williamboman/mason-lspconfig.nvim',
         'folke/lazydev.nvim',
         'nvimtools/none-ls.nvim',
-        'nvimdev/lspsaga.nvim',
         -- JSON schemas
         'b0o/schemastore.nvim',
     },
