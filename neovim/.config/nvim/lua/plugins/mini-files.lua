@@ -1,3 +1,4 @@
+-- (mini.files) `get_target_window()` is soft deprecated . Use `get_explorer_state().target_window` instead. Sorry for the inconvenience.
 return {
     'echasnovski/mini.files',
     lazy = true,
@@ -16,7 +17,7 @@ return {
             local rhs = function()
                 -- Make new window and set it as target
                 local new_target_window
-                vim.api.nvim_win_call(MiniFiles.get_target_window(), function()
+                vim.api.nvim_win_call(MiniFiles.get_explorer_state().target_window, function()
                     vim.cmd(direction .. ' split')
                     new_target_window = vim.api.nvim_get_current_win()
                 end)
