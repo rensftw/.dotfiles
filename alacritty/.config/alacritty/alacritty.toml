@@ -1,4 +1,3 @@
-import = ["~/.config/alacritty/tokyonight.toml"]
 
 [bell]
 command = "None"
@@ -81,3 +80,6 @@ history = 10000
 [window]
 decorations = "none"
 opacity = 1
+
+[general]
+import = ["~/.config/alacritty/tokyonight.toml"]
