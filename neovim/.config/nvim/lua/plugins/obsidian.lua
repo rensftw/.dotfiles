@@ -26,7 +26,7 @@ return {
         'nvim-telescope/telescope.nvim',
     },
     config = function()
-        -- Set conceallevel to 1 so checkboxes can be pretty printed
+       -- Set conceallevel to 1 so checkboxes can be pretty printed
         vim.wo.conceallevel = 1
 
         require('obsidian').setup({
@@ -66,7 +66,7 @@ return {
             -- Either 'wiki' or 'markdown'.
             preferred_link_style = 'markdown',
             templates = {
-                subdir = 'config/templates',
+                subdir = '_config/templates',
                 date_format = '%Y-%m-%d',
                 time_format = '%H:%M',
                 -- A map for custom variables, the key should be the variable and the value a function
