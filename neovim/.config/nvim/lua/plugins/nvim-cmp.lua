@@ -58,7 +58,6 @@ return {
                 end, { 'i', 's' }),
                 ['<C-y>'] = cmp.mapping(confirm),
                 ['<C-CR>'] = cmp.mapping(confirm),
-                ['<CR>'] = cmp.mapping(confirm),
                 ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
                 ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
                 ['<C-a>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
