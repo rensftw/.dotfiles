@@ -10,7 +10,7 @@ after-login-command = []
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
 ]
 
 # Start AeroSpace at login
@@ -23,7 +23,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 300
+accordion-padding = 150
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -44,6 +44,14 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
+
+# Pin workspaces to specific monitors
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'secondary'
+3 = 'secondary'
+4 = 'secondary'
 
 # Apps to keep out of tiling manager by default
 [[on-window-detected]]
@@ -66,19 +74,29 @@ run = 'layout floating'
 if.app-id = 'org.keepassxc.keepassxc'
 run = 'layout floating'
 
-## Single monitor setup for laser focus?
+## Single monitor setup for laser focus
 ## Detects app ID and throws that app in workspace with a mnemonic key mapping
 ## Tip: List the IDs of all running apps with `aerospace list-apps`
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = "move-node-to-workspace 1"
+run = 'move-node-to-workspace 1'
 
-## Example for setup where each workspace has a single app (e.g. terminal, browser, etc)
-# [[on-window-detected]]
-# if.app-id = 'org.mozilla.firefox'
-# run = "move-node-to-workspace B"
+[[on-window-detected]]
+if.app-id = 'org.zotero.zotero'
+run = "move-node-to-workspace 4"
 
-# Possible values: (qwerty|dvorak)
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = "move-node-to-workspace 4"
+
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
 preset = 'qwerty'
@@ -118,6 +136,10 @@ outer.right =      10
 # All possible modifiers: cmd, alt, ctrl, shift
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
+
+# Disable native macOS "hide app" functionality
+cmd-h = [] # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
 
 # App launcher
 alt-shift-t = 'exec-and-forget open -a /Applications/Alacritty.app'
@@ -184,7 +206,3 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
-
-down = 'volume down'
-up = 'volume up'
-shift-down = ['volume set 0', 'mode main']
