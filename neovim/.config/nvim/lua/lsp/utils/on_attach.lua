@@ -61,8 +61,8 @@ M.on_attach = function(client, bufnr)
     keymap('n', '<leader>r',  vim.lsp.buf.rename,                                                  '[R]ename')
     keymap({'n', 'v'}, '<leader>ca',  vim.lsp.buf.code_action,                                     '[C]ode [A]ction')
     keymap('n', '<leader>d',  require('core.helpers').Virtual_text.toggle,                         '[D]iagnostics')
-    keymap('n', '[d',         vim.diagnostic.goto_next,                                            'Previous diagnostic message')
-    keymap('n', ']d',         vim.diagnostic.goto_prev,                                            'Next diagnostic message')
+    keymap('n', '[d',         vim.diagnostic.goto_prev,                                            'Previous diagnostic message')
+    keymap('n', ']d',         vim.diagnostic.goto_next,                                            'Next diagnostic message')
     keymap({'n', 'v'}, '<leader>af', function()
             vim.lsp.buf.format({
                 async = true,
