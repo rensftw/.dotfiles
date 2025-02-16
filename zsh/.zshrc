@@ -94,7 +94,7 @@ FZF_PREFIX=$(brew --prefix fzf)
 # Key bindings
 source "$FZF_PREFIX/shell/key-bindings.zsh"
 # Default flags
-FZF_DEFAULT_OPTS='--multi --inline-info --height 50% --layout=reverse --border'
+FZF_DEFAULT_OPTS='--multi --inline-info --height 25% --layout=reverse --border'
 # Tokyonight theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 --color=fg:#c0caf5,bg:#1a1b26,hl:#ff9e64 \
