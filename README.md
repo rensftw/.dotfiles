@@ -1,4 +1,4 @@
-_Note: This setup is built for and tested on macOS._
+_Note: This setup has been tested only on macOS._
 
 
 ## Download
@@ -29,13 +29,13 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 * [Alacritty](https://github.com/alacritty/alacritty) terminal emulator
 * [`tmux`](https://github.com/tmux/tmux) + [`tpm`](https://github.com/tmux-plugins/tpm)
 * [`neovim`](https://neovim.io/)
-  * [`packer`](https://github.com/wbthomason/packer.nvim)
-  * [`mason`](https://github.com/williamboman/mason.nvim)
-  * [`telescope`](https://github.com/nvim-telescope/telescope.nvim)
-  * [`treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
-  * [`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig) - native LSP
-  * [`nvim-dap`](https://github.com/mfussenegger/nvim-dap) - debugging protocol
-  * [`folke/tokyonight.nvim` theme](https://github.com/folke/tokyonight.nvim)
+  * [`Lazy.nvim`](https://github.com/folke/lazy.nvim): Plugin manager
+  * [`mason`](https://github.com/williamboman/mason.nvim): Package manager
+  * [`telescope`](https://github.com/nvim-telescope/telescope.nvim): Fuzzy finder
+  * [`treesitter`](https://github.com/nvim-treesitter/nvim-treesitter): AST goodies (syntax highlighting, AST playground with `:InspectTree`, incremental selection in normal mode, etc)
+  * [`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig): Native LSP
+  * [`nvim-dap`](https://github.com/mfussenegger/nvim-dap): Debugging protocol
+  * [`folke/tokyonight.nvim` theme](https://github.com/folke/tokyonight.nvim): Theme
 * [`nnn`](https://github.com/jarun/nnn) for terminal file navigation
 * [`fzf`](https://github.com/junegunn/fzf) for fuzzy finding and interactive git operations
 * [`rg`](https://github.com/BurntSushi/ripgrep) for searching file contents
@@ -43,8 +43,8 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 * [`stow`](https://www.gnu.org/software/stow/) for dotfile management with symlinks
 * [`brew`](https://brew.sh/) for macOS package management
 * [`nvm`](https://github.com/nvm-sh/nvm) for Node version management
-* [`BpyTOP`](https://github.com/aristocratos/bpytop) for process monitoring
-* [`Rectangle`](https://github.com/rxhanson/Rectangle) for window management
+* [`BTOP++`](https://github.com/aristocratos/btop) for process monitoring
+* [`AeroSpace`](https://github.com/nikitabobko/AeroSpace) as tiling window manager
 
 
 ### Screenshots
@@ -52,7 +52,7 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
     <summary>Expand to see screenshots 📸</summary>
     <div>
         <p>
-            <a href="https://github.com/romkatv/powerlevel10k/">Powerlevel10k</a> Rainbow prompt with modified <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> on <a href="https://iterm2.com/">iTerm</a>
+            <a href="https://github.com/romkatv/powerlevel10k/">Powerlevel10k</a> Rainbow prompt with modified <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a> on <a href="https://github.com/alacritty/alacritty">Alacritty</a>
         </p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/alacritty-tmux-powerlevel10k.png"/>
     </div>
@@ -79,7 +79,7 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
     </div>
     <br />
     <div>
-        <p>BpyTOP for process monitoring:<p>
+        <p>BTOP++ for process monitoring:<p>
         <img src="https://raw.githubusercontent.com/rensftw/.dotfiles-media/main/bpytop-process-manager.png" />
     </div>
 </details>
