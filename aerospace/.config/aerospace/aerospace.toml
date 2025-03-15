@@ -59,6 +59,14 @@ if.app-id = 'com.apple.finder'
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-id = 'com.apple.clock'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iBooksX'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id = 'com.apple.keychainaccess'
 run = 'layout floating'
 
