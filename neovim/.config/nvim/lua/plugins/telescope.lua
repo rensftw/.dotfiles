@@ -56,19 +56,9 @@ return {
 
         local custom_actions = {}
 
-        function custom_actions.quick_fix_list_multiselect(prompt_bufnr)
-            local picker = action_state.get_current_picker(prompt_bufnr)
-            local num_selections = #picker:get_multi_selection()
-
-            if num_selections > 1 then
-                -- If there are selected items, push only the selected items to the QF list
-                actions.send_selected_to_qflist(prompt_bufnr)
-                actions.open_qflist(prompt_bufnr)
-            else
-                -- Otherwise push all results to the QF list
-                actions.send_to_qflist(prompt_bufnr)
-                actions.open_qflist(prompt_bufnr)
-            end
+        function custom_actions.quickfix_list_mutliselect_and_auto_open(prompt_bufnr)
+            actions.smart_send_to_qflist(prompt_bufnr)
+            actions.open_qflist(prompt_bufnr)
         end
 
         telescope.setup {
@@ -76,7 +66,7 @@ return {
                 mappings = {
                     n = {
                         ['dd'] = actions.delete_buffer,
-                        ['<c-q>'] = custom_actions.quick_fix_list_multiselect,
+                        ['<c-q>'] = custom_actions.quickfix_list_mutliselect_and_auto_open,
                         -- center results
                         ['<CR>'] = actions.select_default + actions.center,
                         ['<c-t>'] = actions.file_tab + actions.center,
@@ -85,7 +75,7 @@ return {
                     },
                     i = {
                         ['<c-d>'] = actions.delete_buffer,
-                        ['<c-q>'] = custom_actions.quick_fix_list_multiselect,
+                        ['<c-q>'] = custom_actions.quickfix_list_mutliselect_and_auto_open,
                         -- center results
                         ['<CR>'] = actions.select_default + actions.center,
                         ['<c-t>'] = actions.file_tab + actions.center,
