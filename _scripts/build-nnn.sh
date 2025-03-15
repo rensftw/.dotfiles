@@ -13,7 +13,7 @@ else
     # Build nnn with Nerd font support, remove mouse support
     # Use newer ncurses because the system default ncurses is too old and causes issues 
     # https://github.com/jarun/nnn/wiki/Developer-guides#compile-for-macos
-    LDLIBS="-L/opt/homebrew/opt/ncurses/lib/" make O_NERD=1 O_NOMOUSE=1
+    LDLIBS="-L/opt/homebrew/opt/ncurses/lib/" CPPFLAGS="-I/opt/homebrew/opt/ncurses/include" make O_NERD=1 O_NOMOUSE=1
 
 
     printf "$CYAN%s$NORMAL\n" "🔗  Install nnn and its manpage"
