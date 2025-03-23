@@ -10,6 +10,3 @@ else
     PATH=$PATH:/usr/local/bin
     eval "$(brew shellenv)"
 fi
-
-# Rustup artifact
-. "$HOME/.cargo/env"

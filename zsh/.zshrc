@@ -70,8 +70,6 @@ bindkey -v
 # zsh-completions setup
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-# Rust/cargo completions
-FPATH=$HOME/.zfunc:$FPATH
 zstyle :compinstall filename "$HOME/.zshrc"
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
