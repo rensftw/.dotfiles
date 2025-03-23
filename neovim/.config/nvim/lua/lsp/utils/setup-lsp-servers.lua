@@ -32,6 +32,22 @@ local servers = {
 }
 
 local server_config = {
+    ts_ls = {
+        commands = {
+            -- Full list of TypeScript LSP commands
+            -- https://github.com/microsoft/TypeScript/tree/main/src/services
+            OrganizeImports = {
+                function ()
+                    local params = {
+                        command = "_typescript.organizeImports",
+                        arguments = {vim.api.nvim_buf_get_name(0)},
+                    }
+                    vim.lsp.buf.execute_command(params)
+                end,
+                description = "Organize Imports"
+            }
+        }
+    },
     jsonls = {
         settings = {
             json = {
@@ -78,8 +94,9 @@ local server_config = {
 }
 
 for _, lsp in ipairs(servers) do
-    local settings = server_config[lsp] and server_config[lsp].settings or {}
     local init_options = server_config[lsp] and server_config[lsp].init_options or {}
+    local settings = server_config[lsp] and server_config[lsp].settings or {}
+    local commands = server_config[lsp] and server_config[lsp].commands or {}
 
     nvim_lsp[lsp].setup {
         on_attach = config.on_attach,
@@ -88,6 +105,7 @@ for _, lsp in ipairs(servers) do
             debounce_text_changes = 150,
         },
         settings = settings,
+        commands = commands,
         init_options = init_options,
     }
 end
