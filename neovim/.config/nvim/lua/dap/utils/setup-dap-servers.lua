@@ -1,34 +1,30 @@
 local dap = require('dap')
 
+local dapDebugServer = require('mason-registry').get_package('js-debug-adapter'):get_install_path() .. '/js-debug/src/dapDebugServer.js'
+
 dap.adapters['pwa-node'] = {
     type = 'server',
     host = 'localhost',
     port = '${port}',
     executable = {
-        -- Because of mason we can use this command
-        command = 'js-debug-adapter',
-        args = { '${port}' },
+        command = 'node',
+        args = { dapDebugServer, '${port}' },
     }
 }
-
--- dap.adapters['node-terminal'] = {
---     type = 'executable',
---     command = 'js-debug-adapter',
--- }
 
 dap.adapters['node-terminal'] = {
     type = 'server',
     host = 'localhost',
     port = '${port}',
     executable = {
-        -- Because of mason we can use this command
-        command = 'js-debug-adapter',
-        args = { '${port}' },
+        command = 'node',
+        args = { dapDebugServer, '${port}' },
     }
 }
 
 for _, language in ipairs({ 'typescript', 'javascript' }) do
     -- Example custom DAP configurations for JS:
+    -- https://code.visualstudio.com/docs/nodejs/nodejs-debugging
     -- https://github.com/microsoft/vscode-js-debug/blob/main/OPTIONS.md
     dap.configurations[language] = {
         {
@@ -37,6 +33,7 @@ for _, language in ipairs({ 'typescript', 'javascript' }) do
             name = 'Launch file',
             program = '${file}',
             cwd = '${workspaceFolder}',
+            console = 'integratedTerminal',
         },
         {
             type = 'pwa-node',
@@ -44,12 +41,15 @@ for _, language in ipairs({ 'typescript', 'javascript' }) do
             name = 'Attach to process',
             processId = require('dap.utils').pick_process,
             cwd = '${workspaceFolder}',
+            console = 'integratedTerminal',
         },
         {
             type = 'node-terminal',
             request = 'launch',
             name = 'Launch debug terminal',
             cwd = '${workspaceFolder}',
+            console = 'integratedTerminal',
+            autoAttachChildProcesses = true,
         },
         {
             type = 'pwa-node',

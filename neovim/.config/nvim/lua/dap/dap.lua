@@ -10,11 +10,12 @@ return {
     },
     keys = {
         { mode = { 'n' }, '<leader>db', function() require('dap').toggle_breakpoint() end },
+        { mode = { 'n' }, '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end },
         { mode = { 'n' }, '<leader>du', function() require('dapui').toggle() end },
         { mode = { 'n' }, '<leader>dc', function() require('dap').continue() end },
-        { mode = { 'n' }, '<leader>do', function() require('dap').step_over() end },
-        { mode = { 'n' }, '<leader>di', function() require('dap').step_into() end },
-        { mode = { 'n' }, '<leader>dO', function() require('dap').step_out() end },
+        { mode = { 'n' }, '<leader>do', function() require('dap').step_over() end }, -- Step over the current line
+        { mode = { 'n' }, '<leader>di', function() require('dap').step_into() end }, -- Step into the current expression
+        { mode = { 'n' }, '<leader>dO', function() require('dap').step_out() end },  -- Step out of the current scope
         { mode = { 'n' }, '<leader>dq', function() require('dap').terminate({ terminateDebugee = true }) end },
         { mode = { 'n' }, '<leader>de', function() require('dapui').eval(nil, { enter = true }) end },
 
@@ -30,7 +31,6 @@ return {
     cmd = {
         'DapShowLog',
         'DapSetLogLevel',
-        'DapLoadLaunchJSON',
         'DapToggleBreakpoint',
         'DapContinue',
         'DapStepInto',
@@ -47,10 +47,12 @@ return {
         vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = "Visual" })
 
         -- Customize breakpoint icons
-        vim.fn.sign_define('DapBreakpoint',          { text = '●', texthl = 'DapBreakpoint',          linehl = '', numhl = '' })
-        vim.fn.sign_define('DapBreakpointCondition', { text = '●', texthl = 'DapBreakpointCondition', linehl = '', numhl = '' })
-        vim.fn.sign_define('DapStopped',             { text = '󰝤', texthl = 'DapStopped',             linehl = '', numhl = '' })
-        vim.fn.sign_define('DapLogPoint',            { text = '◆', texthl = 'DapLogPoint',            linehl = '', numhl = '' })
+        vim.api.nvim_set_hl(0, 'DapStoppedDebuggerLine', {bg = '#1c3c72', bold = 50})
+        vim.api.nvim_set_hl(0, 'DapStoppedSymbol', {fg = '#3072e0', bold = 50})
+        vim.fn.sign_define('DapBreakpoint',          { text = '●', texthl = 'ErrorMsg',          linehl = '', numhl = '' })
+        vim.fn.sign_define('DapBreakpointCondition', { text = '⁇', texthl = 'Conditional',       linehl = '', numhl = '' })
+        vim.fn.sign_define('DapStopped',             { text = '󰝤', texthl = 'DapStoppedSymbol',    linehl = 'DapStoppedDebuggerLine', numhl = '' })
+        vim.fn.sign_define('DapLogPoint',            { text = '◆', texthl = 'DapLogPoint',       linehl = '', numhl = '' })
 
         -- Automatically open DAP UI
         dap.listeners.after.event_initialized['dapui_config'] = function()
