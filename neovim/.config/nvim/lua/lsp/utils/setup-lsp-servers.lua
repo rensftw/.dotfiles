@@ -16,19 +16,19 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 local servers = {
+    -- JavaScript/Typescript language support
+    'ts_ls',    -- LSP
+    'eslint',   -- Linting
+    -- Python language support
+    'pyright',  -- LSP
+    'ruff',     -- Linting, formatting, import organization
+    -- Random other language servers
     'bashls',
-    'ts_ls',
     'jsonls',
-    'eslint',
     'html',
-    -- 'emmet_ls',
-    -- 'cssls',
     'yamlls',
     'lua_ls',
-    -- 'dockerls',
-    'rust_analyzer',
-    'cmake',
-    -- 'clangd'
+    'dockerls',
 }
 
 local server_config = {

@@ -19,6 +19,11 @@ return {
                         annotation_convention = 'jsdoc',
                     },
                 },
+                python = {
+                    template = {
+                        annotation_convention = 'numpydoc',
+                    },
+                },
             },
         })
     end

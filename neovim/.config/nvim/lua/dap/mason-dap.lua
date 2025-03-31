@@ -10,7 +10,10 @@ return {
             -- Makes a best effort to setup the various debuggers with
             -- reasonable debug configurations
             automatic_installation = true,
-            ensure_installed = { 'js' },
+            ensure_installed = {
+                'js',       -- js-debug-adapter
+                'python',   -- debugpy
+            },
         });
     end
 }
