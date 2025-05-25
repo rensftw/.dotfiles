@@ -16,6 +16,7 @@ local plugins = {
     { import = 'statusline.feline' },
     { import = 'lsp' },
     { import = 'dap' },
+    { import = 'ai' },
 }
 
 local options = {
