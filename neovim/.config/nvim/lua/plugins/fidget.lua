@@ -11,7 +11,7 @@ return {
                 display = {
                     render_limit = 16, -- How many LSP messages to show at once
                     done_ttl = 5, -- How long a message should persist after completion
-                    done_icon = '✔', -- Icon shown when all LSP progress tasks are complete
+                    done_icon = ' ', -- Icon shown when all LSP progress tasks are complete
                     progress_icon = { pattern = 'dots', period = 1 }, -- Icon shown when LSP progress tasks are in progress
                 },
             },

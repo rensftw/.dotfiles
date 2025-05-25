@@ -30,6 +30,9 @@ return {
         vim.wo.conceallevel = 1
 
         require('obsidian').setup({
+            ui = {
+                enable = false,
+            },
             workspaces = {
                 {
                     name = 'personal',
