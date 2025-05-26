@@ -10,7 +10,7 @@ return {
     },
     keys = {
         { mode = { 'n', 'v' }, '<leader>aa', ':CodeCompanionActions<CR>', desc = 'Choose an LLM action' },
-        { mode = { 'n', 'v' }, '<leader>ac', ':CodeCompanionChat<CR>', desc = 'Chat with LLMs' },
+        { mode = { 'n', 'v' }, '<leader>ac', ':CodeCompanionChat Toggle<CR>', desc = 'Chat with LLMs' },
     },
     dependencies = {
         'nvim-lua/plenary.nvim',
