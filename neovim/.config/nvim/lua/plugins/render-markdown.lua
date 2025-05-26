@@ -5,7 +5,7 @@ return {
         'nvim-treesitter/nvim-treesitter',
         'nvim-tree/nvim-web-devicons',
     },
-    ft = { 'codecompanion' },
+    ft = { 'markdown', 'codecompanion' },
     config = function ()
         require('render-markdown').setup({
             heading = {
@@ -14,20 +14,14 @@ return {
                 icons = { '', '', '', '', '', '' },
             },
             code = {
-                enabled = false,
+                enabled = true,
                 sign = true,
                 border = 'thick',
                 style = 'language',
                 language_icon = true,
                 language_name = true,
+                disable_background = false,
             },
-            overrides = {
-                filetype = {
-                    codecompanion = {
-                        render_modes = { 'n', 'c', 'v' },
-                    },
-                },
-            }
         })
     end,
 }
