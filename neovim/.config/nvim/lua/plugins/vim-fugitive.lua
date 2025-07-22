@@ -21,6 +21,24 @@ return {
         -- ancestor, so if main is ahead of the feature branch we don't include those
         -- new/unrelated changes in the comparison
         { mode = { 'n' }, '<leader>gdm',  ':Git difftool -y origin/main...<CR>', },
+
+        -- Find out which commit renamed a file
+        -- git log --follow --name-status path/to/file.js
+        -- The `--name-status` flag shows:
+        -- A for added files
+        -- D for deleted files
+        -- M for modified files
+        -- R for renamed files (e.g. R080 for 80% similarity)
+
+        -- Compare a file that was renamed (e.g. changed extensions between versions)
+        -- git diff SOME_BRANCH:PATH_TO_OLD_FILENAME HEAD:PATH_TO_NEW_FILENAME
+        -- Vanilla: git diff develop:path/to/component.js HEAD:path/to/components.tsx
+        -- Use case with Fugitive:
+        -- 1. Open the file we want to diff
+        -- 2. Press <LEADER>p to copy the filepath
+        -- 3. Run the Fugitive command with the base branch and make sure to update the extension in the pasted filepath, e.g.:
+        -- :Gvdiffsplit develop:path/to/component.js
+
         -- Compare with any branch
         { mode = { 'n' }, '<leader>gd',   ':Git difftool -y', },
         -- Open file revision
