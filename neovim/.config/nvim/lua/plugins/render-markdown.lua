@@ -31,7 +31,7 @@ return {
                     url         = { icon = '󰖟 ',  highlight = 'CodeCompanionChatVariable' },
                     var         = { icon = ' ',  highlight = 'CodeCompanionChatVariable' },
                     tool        = { icon = ' ',  highlight = 'CodeCompanionChatTool' },
-                    user_prompt = { icon = ' ',  highlight = 'CodeCompanionChatTool' },
+                    prompt      = { icon = ' ',  highlight = 'CodeCompanionChatTool' },
                     group       = { icon = ' ',  highlight = 'CodeCompanionChatToolGroup' },
                 },
             },
