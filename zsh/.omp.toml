@@ -1,0 +1,126 @@
+# Inspiration: https://www.youtube.com/watch?v=9U8LCjuQzdcStaging.String
+# https://github.com/dreamsofautonomy/zen-omp/blob/main/zen.toml
+'$schema' = 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json'
+version = 3
+final_space = true
+
+[palette]
+pure-blue = '#75c5fa'
+pure-grey = '#9b9b9b'
+pure-magenta = '#ed73be'
+pure-red = '#ec675e'
+
+[secondary_prompt]
+template = '❯❯ '
+foreground = '76'
+background = 'transparent'
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+template = '{{ if .SSHSession }}<#ffffff,#c386f1> 󰢹 {{ .UserName }}@{{ .HostName }} </> {{end}}'
+foreground = 'cyan'
+background = 'transparent'
+type = 'session'
+style = 'plain'
+
+[[blocks.segments]]
+template = '{{ if .Root }}<#111111,p:pure-red>  <b>{{ .UserName }}</b>@{{ .HostName }} </> {{end}}'
+foreground = 'red'
+background = 'transparent'
+type = 'root'
+style = 'plain'
+
+[[blocks.segments]]
+template = '<b>{{ .Path }}</b> '
+foreground = '39'
+background = 'transparent'
+type = 'path'
+style = 'plain'
+
+    [blocks.segments.properties]
+cache_duration = 'none'
+style = 'full'
+
+[[blocks.segments]]
+templates = [
+    '{{ if .IsBare}}<white> 󰂹  </>{{ end }}',
+    '{{ if .IsWorkTree }}<green>   </>{{ end }}',
+    '{{ .HEAD }}',
+    '{{ if or .Working.Changed .Staging.Changed }}*{{ end }}',
+    '{{ $stagingSum := add .Staging.Added .Staging.Deleted .Staging.Modified .Staging.Unmerged .Staging.Untracked }}{{ if gt $stagingSum 0 }} <lightGreen> {{ $stagingSum }}{{ end }}</>',
+    '{{ $workingSum := add .Working.Added .Working.Deleted .Working.Modified .Working.Unmerged }}{{ if gt $workingSum 0 }} <lightYellow> {{ $workingSum }}{{ end }}',
+    '{{ if gt .Working.Untracked 0 }}<lightBlue>  {{.Working.Untracked}}</>{{ end }}',
+    '<cyan> {{ if gt .Behind 0 }}⇣{{ .Behind }}{{ end }}{{ if gt .Ahead 0 }}⇡{{ .Ahead }}{{ end }}</>',
+    '<darkGray> {{ if gt .StashCount 0 }}≡{{ .StashCount }}{{ end }}</>'
+]
+templates_logic = 'join'
+foreground = '244'
+background = 'transparent'
+type = 'git'
+style = 'plain'
+
+    [blocks.segments.properties]
+branch_icon = ''
+cache_duration = 'none'
+commit_icon = '@'
+fetch_bare_info = true
+fetch_status = true
+
+[[blocks]]
+type = 'rprompt'
+overflow = 'hidden'
+
+[[blocks.segments]]
+template = ' 󰎙 {{ .Full }} '
+foreground = '#6CA35E'
+background = 'transparent'
+type = 'node'
+style = 'plain'
+
+[[blocks.segments]]
+template = '  {{ .Full }} '
+foreground = '#906cff'
+background = 'transparent'
+type = 'python'
+style = 'plain'
+
+[[blocks.segments]]
+template = '{{ .FormattedMs }}'
+foreground = '248'
+background = 'transparent'
+type = 'executiontime'
+style = 'plain'
+
+    [blocks.segments.properties]
+cache_duration = 'none'
+style = 'austin'
+threshold = 500
+
+[[blocks.segments]]
+template = '{{ if gt .Jobs 0 }} 󰊠 {{.Jobs}} {{ end }}'
+foreground = 'white'
+background = 'transparent'
+type = 'text'
+style = 'plain'
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+template = '</>{{ if eq .Env.POSH_VI_MODE "command" }}❮{{ else }}❯{{ end }}' # </> is required for the conditional styling of the prompt
+background = 'transparent'
+type = 'text'
+style = 'plain'
+foreground_templates = [
+    '{{if gt .Code 0}}160{{end}}', # red
+    '{{if eq .Code 0}}76{{end}}' # green
+]
+
+    [blocks.segments.properties]
+cache_duration = 'none'

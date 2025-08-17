@@ -36,14 +36,18 @@ source $HOME/.aliases
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
 # Prompt setup
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Oh My Posh prompt
+eval "$(oh-my-posh init zsh --config $DOTFILES_LOCATION/zsh/.omp.toml)"
+
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+# source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # History settings
 # Docs: man zshoptions
@@ -104,6 +108,9 @@ export FZF_DEFAULT_COMMAND="fd --type file --hidden --no-ignore"
 
 # Integration between ZSH+TMUX (needed for dynamic pane titles)
 source $DOTFILES_LOCATION/zsh/zsh-titles.plugin.zsh
+
+# Allow Oh My Posh to detect ZSH vi-mode changes
+source $DOTFILES_LOCATION/zsh/zsh-omp-vi-mode.plugin.zsh
 
 # zsh-syntax-highlighting.zsh must be sourced at the end of .zshrc
 # (https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file)
