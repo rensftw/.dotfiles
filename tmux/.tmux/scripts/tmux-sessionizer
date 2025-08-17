@@ -14,10 +14,11 @@ else
 
     existing_tmux_sessions=$(tmux list-sessions -F \#S)
     dotfiles="$HOME/.dotfiles"
+    github_profile="$HOME/rensftw"
     repos=$(find ~/develop ~/foss ~/work -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
 
     # We need to preserve linebreaks between command outputs
-    selected=$(printf '%s\n%s\n%s\n' "$existing_tmux_sessions" "$dotfiles" "$repos" | fzf)
+    selected=$(printf '%s\n%s\n%s\n' "$existing_tmux_sessions" "$dotfiles" "$repos" "$github_profile" | fzf)
 fi
 
 if [[ -z $selected ]]; then
