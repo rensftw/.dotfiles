@@ -142,7 +142,121 @@ bl() {
 }
 
 ################################################################################
-# Git aliases
+# Git aliases for worktrees workflow
+################################################################################
+# Clone repository as bare repo for worktree workflow
+clone-bare() {
+    if [ $# -ne 2 ]; then
+        echo "Usage: clone-bare <repository-url> <local-repo-path>"
+        return 1
+    fi
+
+    local repo_url="$1"
+    local local_repo_path="$2"
+
+    # Check if target directory exists and has .git
+    if [ -e "$local_repo_path/.git" ]; then
+        echo "Aborting, nested repos are not advisable"
+        return 1
+    fi
+
+    # Create directory if it doesn't exist and it's not the current working directory
+    if [ "$local_repo_path" != "." ] && [ ! -d "$local_repo_path" ]; then
+        mkdir -p "$local_repo_path"
+    fi
+
+    cd "$local_repo_path" || return 1
+
+    echo "Cloning $repo_url as bare repository in $(pwd)"
+
+    # Clone as bare repository
+    git clone --bare "$repo_url" .bare
+
+    # Create .git file pointing to bare repo
+    echo "gitdir: ./.bare" > .git
+
+    # Configure remote to fetch all branches
+    git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
+    # Fetch all branches
+    git fetch origin
+
+    echo "Bare repository setup complete in $local_repo_path"
+    echo "Use 'wta <branch-name>' to create worktrees"
+}
+
+# Git worktree management
+alias gwl="git worktree list"
+alias gwp="git worktree prune"
+
+# Create new worktree with branch
+gwa() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: wta <branch_name> <local_worktree_path>"
+    return 1
+  fi
+
+  local branch_name="$1"
+  local local_worktree_path="$2"
+
+  # Sanitize branch name for directory creation (if no path provided)
+  if [ -z "$local_worktree_path" ]; then
+    local_worktree_path=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9._-]/_/g')
+  fi
+
+  echo "Branch name: $branch_name"
+  echo "Worktree path: $local_worktree_path"
+
+  # Check if we're in the right directory for creating worktrees
+  if [ -f "$(pwd)/.git" ]; then
+      # Check if this is a worktree directory (not the parent)
+      if grep -q "gitdir: .*/\.bare/worktrees/" "$(pwd)/.git" 2>/dev/null; then
+          echo "Aborting, nested worktrees are not advisable"
+          return 1
+      fi
+  fi
+
+  # Check if branch exists remotely
+  if git show-ref --verify --quiet "refs/remotes/origin/$branch_name"; then
+    echo "Creating worktree for existing remote branch: $branch_name"
+    git worktree add "$local_worktree_path" "$branch_name"
+    git branch --set-upstream-to=origin/"$branch_name"
+  else
+    echo "Creating worktree with new branch: $branch_name"
+    git worktree add -b "$branch_name" "$local_worktree_path"
+
+    # Also create and track the respective remote branch
+    echo "Creating remote upstream branch: origin/$branch_name"
+    cd "$local_worktree_path" || return 1
+    git push -u origin "$branch_name"
+    cd - || return 1
+  fi
+
+}
+
+# Remove worktree
+gwr() {
+  if [ $# -eq 0 ]; then
+    # Interactive selection with fzf
+    local worktree_path=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | grep -v "$(pwd)" | fzf --prompt="Select worktree to remove: ")
+    if [ -n "$worktree_path" ]; then
+      git worktree remove "$worktree_path"
+    fi
+  else
+    git worktree remove "$1"
+  fi
+}
+
+# Switch to worktree directory using fzf
+gws() {
+  local worktree_path=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | fzf --prompt="Switch to worktree: " --preview "ls -la {}")
+  if [ -n "$worktree_path" ]; then
+    cd "$worktree_path" || return 1
+  fi
+}
+
+################################################################################
+# Git aliases for regular workflow
 ################################################################################
 # For more fzf + git inspiration checkout: https://junegunn.kr/2016/07/fzf-git/, https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
 is_in_git_repo() {
