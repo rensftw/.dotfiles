@@ -66,7 +66,7 @@ return {
             },
             strategies = {
                 chat = {
-                    adapter = 'ollama',
+                    adapter = 'anthropic',
                     roles = {
                         ---The header name for the LLM's messages
                         llm = function(adapter)
