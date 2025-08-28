@@ -28,48 +28,15 @@ return {
                         show_defaults = false, -- Hide default adapters
                         show_model_choices = true,
                     },
-                    ollama = function()
-                        return require('codecompanion.adapters').extend('ollama', {
-                            name = 'ollama',
-                            schema = {
-                                model = {
-                                    default = 'qwen2.5-coder:7b',
-                                },
-                            },
-                        })
-                    end,
-                    openai = function()
-                        return require('codecompanion.adapters').extend('openai', {
-                            name = 'openai',
-                            env = {
-                                api_key = 'cmd:pass show OPENAI_API_KEY',
-                            },
-                            schema = {
-                                model = {
-                                    default = 'gpt-4o',
-                                },
-                            },
-                        })
-                    end,
-                    anthropic = function()
-                        return require('codecompanion.adapters').extend('anthropic', {
-                            name = 'anthropic',
-                            env = {
-                                api_key = 'cmd:pass show ANTHROPIC_API_KEY',
-                            },
-                            schema = {
-                                model = {
-                                    default = 'claude-sonnet-4-20250514',
-                                },
-                            },
-                        })
-                    end,
+                    ollama = require('ai.adapters.ollama'),
+                    openai = require('ai.adapters.openai'),
+                    anthropic = require('ai.adapters.anthropic'),
                 }
             },
             strategies = {
                 chat = {
                     opts = {
-                        goto_file_action = 'edit'
+                        goto_file_action = require('ai.helpers.goto_previously_focused_win'),
                     },
                     keymaps = {
                         fold_code = {
@@ -132,8 +99,8 @@ return {
                 }
             },
             prompt_library = {
-                ['  Study buddy: computer networking'] = require('ai.utils.prompt_computer-networking'),
-                ['  General purpose assistant'] = require('ai.utils.prompt_general-purpose-assistant'),
+                ['  Study buddy: computer networking'] = require('ai.prompts.computer-networking'),
+                ['  General purpose assistant'] = require('ai.prompts.general-purpose-assistant'),
             },
             display = {
                 chat = {
@@ -147,6 +114,6 @@ return {
         })
     end,
     init = function()
-        require('ai.utils.spinner'):init()
+        require('ai.helpers.spinner'):init()
     end,
 }
