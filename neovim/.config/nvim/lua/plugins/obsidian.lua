@@ -30,6 +30,8 @@ return {
         vim.wo.conceallevel = 1
 
         require('obsidian').setup({
+            disable_frontmatter = true,
+            open_app_foreground = true,
             ui = {
                 enable = false,
             },
@@ -47,13 +49,13 @@ return {
                     end,
                     opts = { noremap = false, expr = true, buffer = true },
                 },
-                -- Toggle check-boxes.
-                ['<leader>x'] = {
+                -- Smart action depending on context, either follow link or toggle checkbox.
+                ['<cr>'] = {
                     action = function()
-                        return require('obsidian').util.toggle_checkbox()
+                        return require('obsidian').util.smart_action()
                     end,
-                    opts = { buffer = true },
-                },
+                    opts = { buffer = true, expr = true },
+                }
             },
             -- Where to put new notes created from completion. Valid options are
             --  * 'current_dir' - put new notes in same directory as the current buffer.
