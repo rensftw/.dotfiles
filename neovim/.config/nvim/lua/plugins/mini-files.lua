@@ -1,6 +1,6 @@
 -- (mini.files) `get_target_window()` is soft deprecated . Use `get_explorer_state().target_window` instead. Sorry for the inconvenience.
 return {
-    'echasnovski/mini.files',
+    'nvim-mini/mini.files',
     lazy = true,
     event = 'VeryLazy',
     keys = {
