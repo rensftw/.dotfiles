@@ -10,9 +10,9 @@ return {
         'CodeCompanionHistory',
     },
     keys = {
-        { mode = { 'n', 'v' }, '<leader>aa', ':CodeCompanionActions<CR>', desc = 'Choose an LLM action' },
+        { mode = { 'n', 'v' }, '<leader>aa', ':CodeCompanionActions<CR>',     desc = 'Choose an LLM action' },
         { mode = { 'n', 'v' }, '<leader>ac', ':CodeCompanionChat Toggle<CR>', desc = 'Chat with LLMs' },
-        { mode = { 'n', 'v' }, '<leader>ah', ':CodeCompanionHistory<CR>', desc = 'Open LLM chat history' },
+        { mode = { 'n', 'v' }, '<leader>ah', ':CodeCompanionHistory<CR>',     desc = 'Open LLM chat history' },
     },
     dependencies = {
         'nvim-lua/plenary.nvim',
@@ -23,49 +23,62 @@ return {
     config = function()
         require('codecompanion').setup({
             adapters = {
-                opts = {
-                    show_defaults = false,  -- Hide default adapters
-                    show_model_choices = true,
-                },
-                ollama = function()
-                    return require('codecompanion.adapters').extend('ollama', {
-                        name = 'ollama',
-                        schema = {
-                            model = {
-                                default = 'qwen2.5-coder:7b',
+                http = {
+                    opts = {
+                        show_defaults = false, -- Hide default adapters
+                        show_model_choices = true,
+                    },
+                    ollama = function()
+                        return require('codecompanion.adapters').extend('ollama', {
+                            name = 'ollama',
+                            schema = {
+                                model = {
+                                    default = 'qwen2.5-coder:7b',
+                                },
                             },
-                        },
-                    })
-                end,
-                openai = function()
-                    return require('codecompanion.adapters').extend('openai', {
-                        name = 'openai',
-                        env = {
-                            api_key = 'cmd:pass show OPENAI_API_KEY',
-                        },
-                        schema = {
-                            model = {
-                                default = 'gpt-4o',
+                        })
+                    end,
+                    openai = function()
+                        return require('codecompanion.adapters').extend('openai', {
+                            name = 'openai',
+                            env = {
+                                api_key = 'cmd:pass show OPENAI_API_KEY',
                             },
-                        },
-                    })
-                end,
-                anthropic = function()
-                    return require('codecompanion.adapters').extend('anthropic', {
-                        name = 'anthropic',
-                        env = {
-                            api_key = 'cmd:pass show ANTHROPIC_API_KEY',
-                        },
-                        schema = {
-                            model = {
-                                default = 'claude-sonnet-4-20250514',
+                            schema = {
+                                model = {
+                                    default = 'gpt-4o',
+                                },
                             },
-                        },
-                    })
-                end,
+                        })
+                    end,
+                    anthropic = function()
+                        return require('codecompanion.adapters').extend('anthropic', {
+                            name = 'anthropic',
+                            env = {
+                                api_key = 'cmd:pass show ANTHROPIC_API_KEY',
+                            },
+                            schema = {
+                                model = {
+                                    default = 'claude-sonnet-4-20250514',
+                                },
+                            },
+                        })
+                    end,
+                }
             },
             strategies = {
                 chat = {
+                    opts = {
+                        goto_file_action = 'edit'
+                    },
+                    keymaps = {
+                        fold_code = {
+                            modes = { n = "gF", },
+                        },
+                        goto_file_under_cursor = {
+                            modes = { n = "gf", },
+                        },
+                    },
                     adapter = 'anthropic',
                     roles = {
                         ---The header name for the LLM's messages
@@ -77,6 +90,11 @@ return {
                         ---@type string
                         user = '  Me',
                     },
+                    tools = {
+                        opts = {
+                            default_tools = { 'files', }
+                        }
+                    }
                 },
                 inline = {
                     adapter = 'ollama',
@@ -114,14 +132,15 @@ return {
                 }
             },
             prompt_library = {
-                ['Study buddy: computer networking'] = require('ai.utils.prompt_computer-networking'),
+                ['  Study buddy: computer networking'] = require('ai.utils.prompt_computer-networking'),
+                ['  General purpose assistant'] = require('ai.utils.prompt_general-purpose-assistant'),
             },
             display = {
                 chat = {
                     show_header_separator = false,
                 },
                 action_palette = {
-                    show_default_actions = true, -- Show the default actions in the action palette?
+                    show_default_actions = true,        -- Show the default actions in the action palette?
                     show_default_prompt_library = true, -- Show the default prompt library in the action palette?
                 },
             }

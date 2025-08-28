@@ -2,9 +2,9 @@ return {
     strategy = 'chat',
     description = 'Learning assistant',
     opts = {
+        ignore_system_prompt = true,
         adapter = {
-            name = 'ollama',
-            model = 'llama3:latest',
+            name = 'anthropic',
         },
     },
     prompts = {
