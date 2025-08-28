@@ -12,11 +12,12 @@ return {
                 'ruff',     -- Linting, formatting, import organization
                 -- Random other language servers
                 'bashls',
-                'jsonls',
-                'html',
-                'yamlls',
-                'lua_ls',
                 'dockerls',
+                'html',
+                'jsonls',
+                'lua_ls',
+                'taplo', -- TOML LSP
+                'yamlls',
             },
         })
     end

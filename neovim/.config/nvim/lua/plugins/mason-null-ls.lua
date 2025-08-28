@@ -9,10 +9,10 @@ return {
         require('mason-null-ls').setup({
             automatic_installation = true,
             ensure_installed = {
-                'vale',
+                'actionlint', -- Github Actions linter
                 'prettier',
                 'shellcheck',
-                'actionlint'
+                'vale',
             }
         })
     end,
