@@ -56,7 +56,9 @@ function tk() {
 }
 
 # Kill background processes (like suspended jobs)
-alias kill-bg='kill -KILL ${${(v)jobstates##*:*:}%=*}'
+kill-bg() {
+    jobs -p | awk '{print $3}' | xargs kill -KILL
+}
 
 # System information (neofetch)
 alias si="neofetch --uptime_shorthand tiny --memory_percent on --refresh_rate on"
