@@ -7,6 +7,9 @@ if [[ -e $HOME/.aliases.work ]]; then
     source "$HOME/.aliases.work"
 fi
 
+# Import ANSI escape codes for colors
+source "$DOTFILES_LOCATION/_scripts/colors.sh"
+
 # Navigation aliases
 alias ls="ls -G"
 if command -v eza &> /dev/null
@@ -149,7 +152,7 @@ bl() {
 # Clone repository as bare repo for worktree workflow
 clone-bare() {
     if [ $# -ne 2 ]; then
-        echo "Usage: clone-bare <repository-url> <local-repo-path>"
+        printf "$CYAN%s$NC\n" "Usage: clone-bare <repository-url> <local-repo-path>"
         return 1
     fi
 
@@ -158,7 +161,7 @@ clone-bare() {
 
     # Check if target directory exists and has .git
     if [ -e "$local_repo_path/.git" ]; then
-        echo "Aborting, nested repos are not advisable"
+        printf "$RED$BOLD%s$NC\n\n" "Aborting: nested repos are not advisable."
         return 1
     fi
 
@@ -169,22 +172,40 @@ clone-bare() {
 
     cd "$local_repo_path" || return 1
 
-    echo "Cloning $repo_url as bare repository in $(pwd)"
+    printf "$MAGENTA$BOLD%s$NC\n" "Cloning $repo_url as bare repository in $(pwd)"
 
     # Clone as bare repository
-    git clone --bare "$repo_url" .bare
+    git clone --bare --filter=blob:none --single-branch "$repo_url" .bare
 
     # Create .git file pointing to bare repo
     echo "gitdir: ./.bare" > .git
 
-    # Configure remote to fetch all branches
+    # Configure remote to fetch all branches (dangerous for massive repos)
+    # This is needed for fetching individual branches in the future
+    # Do NOT: `git fetch` everything blindly
+    # Do: `git fetch origin HEAD`
     git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
-    # Fetch all branches
-    git fetch origin
+    # # Fetch all branches
+    # git fetch --filter=blob:none origin
 
-    echo "Bare repository setup complete in $local_repo_path"
-    echo "Use 'wta <branch-name>' to create worktrees"
+    # TIP 1: Discover remote branches
+    # Do: git ls-remote --heads
+    # Don't: git branch -r
+
+    # TIP 2: Fetch changes
+    # Do: git fetch origin HEAD
+    # Don't: git fetch
+
+    # Remove reference for default branch (we cannot make a worktree for an existing branch ref)
+    git branch -D "$(git rev-parse --abbrev-ref HEAD)"
+
+    printf "$GREEN%s$NC%s$BOLD%s$NC\n" " "  " Bare repository has been partially cloned in: " "$local_repo_path"
+    printf "$GREEN$BOLD%s$NC\n\n" '  Ready to use worktrees!'
+    printf "$YELLOW_BACKGROUND%s$NC\n $YELLOW%s$NC\n\n" " Discover remote branches:" "git ls-remote --heads"
+    printf "$CYAN_BACKGROUND%s$NC\n" "  Available commands:"
+    printf "$CYAN%s$NC\n" "  gwa <branch-name> - to create a worktree"
+    printf "$CYAN%s$NC\n" "  gwl, gws, gwr, gwp "
 }
 
 # Git worktree management
@@ -194,7 +215,7 @@ alias gwp="git worktree prune"
 # Create new worktree with branch
 gwa() {
   if [ $# -eq 0 ]; then
-    echo "Usage: wta <branch_name> <local_worktree_path>"
+    printf "$CYAN%s$NC\n\n" "  Usage: gwa <branch_name> [local_worktree_path]"
     return 1
   fi
 
@@ -203,35 +224,41 @@ gwa() {
 
   # Sanitize branch name for directory creation (if no path provided)
   if [ -z "$local_worktree_path" ]; then
-    local_worktree_path=$(echo "$branch_name" | sed 's/[^a-zA-Z0-9._-]/_/g')
+      local_worktree_path=${branch_name//[^a-zA-Z0-9._-]/_}
   fi
 
-  echo "Branch name: $branch_name"
-  echo "Worktree path: $local_worktree_path"
+  # Must be in the repo that hosts the bare .bare
+  if ! git rev-parse --git-dir >/dev/null 2>&1; then
+    printf "$RED$BOLD%s$NC\n\n" "Aborting: not in a bare git repository."
+    return 1
+  fi
 
   # Check if we're in the right directory for creating worktrees
   if [ -f "$(pwd)/.git" ]; then
       # Check if this is a worktree directory (not the parent)
       if grep -q "gitdir: .*/\.bare/worktrees/" "$(pwd)/.git" 2>/dev/null; then
-          echo "Aborting, nested worktrees are not advisable"
+          printf "$RED$BOLD%s$NC\n\n" "Aborting: nested worktrees are not advisable."
           return 1
       fi
   fi
 
+  printf "%s$CYAN$BOLD%s$NC\n" "Branch name: " "$branch_name"
+  printf "%s$CYAN$BOLD%s$NC\n" "Worktree path: " "$local_worktree_path"
+
   # Check if branch exists remotely
-  if git show-ref --verify --quiet "refs/remotes/origin/$branch_name"; then
-    echo "Creating worktree for existing remote branch: $branch_name"
-    git worktree add "$local_worktree_path" "$branch_name"
-    git branch --set-upstream-to=origin/"$branch_name"
+  if git ls-remote --heads --quiet origin "$branch_name" | grep -q "refs/heads/$branch_name"; then
+    printf "$MAGENTA_BACKGROUND%s$BOLD%s$NC$MAGENTA$BOLD%s$NC\n" "Creating worktree for " "existing remote branch:" " $branch_name"
+    # Fetch the canary branch from the remote AND also create the remote tracking branch reference
+    git fetch origin "${branch_name}:refs/remotes/origin/${branch_name}"
+    git worktree add --track -b "$branch_name" "$local_worktree_path" "origin/$branch_name"
   else
-    echo "Creating worktree with new branch: $branch_name"
+    printf "$MAGENTA_BACKGROUND%s$BOLD%s$NC$MAGENTA$BOLD%s$NC\n" "Creating worktree for " "new branch:" " $branch_name"
     git worktree add -b "$branch_name" "$local_worktree_path"
 
     # Also create and track the respective remote branch
-    echo "Creating remote upstream branch: origin/$branch_name"
-    cd "$local_worktree_path" || return 1
-    git push -u origin "$branch_name"
-    cd - || return 1
+    printf "$MAGENTA_BACKGROUND%s$BOLD%s$NC$MAGENTA$BOLD%s$NC\n" "Creating and tracking " "remote upstream branch:" " origin/$branch_name"
+    git push origin "$branch_name"
+    git branch --set-upstream-to="origin/$branch_name" "$branch_name"
   fi
 
 }
@@ -240,18 +267,24 @@ gwa() {
 gwr() {
   if [ $# -eq 0 ]; then
     # Interactive selection with fzf
-    local worktree_path=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | grep -v "$(pwd)" | fzf --prompt="Select worktree to remove: ")
+    local worktree_path
+    worktree_path=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | grep -v ".bare" | fzf --prompt="Select worktree to remove: ")
+
     if [ -n "$worktree_path" ]; then
       git worktree remove "$worktree_path"
+      printf "%s$CYAN$BOLD%s$NC\n" "Removed worktree: " "$worktree_path"
     fi
   else
     git worktree remove "$1"
+    printf "%s$CYAN$BOLD%s$NC\n" "Removed worktree: " "$1"
   fi
+    printf "$CYAN%s$NC\n" "  Reminder: the local and remote git branches were NOT deleted"
 }
 
 # Switch to worktree directory using fzf
 gws() {
-  local worktree_path=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | fzf --prompt="Switch to worktree: " --preview "ls -la {}")
+  local worktree_path
+  worktree_path=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | fzf --prompt="Switch to worktree: " --preview "ls -la {}")
   if [ -n "$worktree_path" ]; then
     cd "$worktree_path" || return 1
   fi
@@ -403,7 +436,7 @@ alias gdc="git diff --compact-summary"
 alias gdab='git branch | egrep -v "(master|main|develop|\*)" | xargs git branch -D'
 
 # Fetch
-alias gf="git fetch"
+alias gf="git fetch origin HEAD"
 
 # Fetch and show status
 alias gfs="git fetch && git status"
