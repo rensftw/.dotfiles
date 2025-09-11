@@ -436,7 +436,9 @@ alias gdc="git diff --compact-summary"
 alias gdab='git branch | egrep -v "(master|main|develop|\*)" | xargs git branch -D'
 
 # Fetch
-alias gf="git fetch origin HEAD"
+gf() {
+    git fetch origin "$(git branch --show-current)"
+}
 
 # Fetch and show status
 alias gfs="git fetch && git status"
