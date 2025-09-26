@@ -55,6 +55,10 @@ map('n', 'g#', 'g#zz', opts)
 map('n', ']q', '<cmd>cnext<CR>zz', opts)
 map('n', '[q', '<cmd>cprev<CR>zz', opts)
 
+-- Center fold navigation
+map('n', 'zj', 'zjzz', opts)
+map('n', 'zk', 'zkzz', opts)
+
 -- Move 1 or more lines up or down in normal and visual selection modes.
 map('n', 'K', ':m .-2<CR>==', opts)
 map('n', 'J', ':m .+1<CR>==', opts)
