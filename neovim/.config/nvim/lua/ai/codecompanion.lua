@@ -31,6 +31,14 @@ return {
                     ollama = require('ai.adapters.ollama'),
                     openai = require('ai.adapters.openai'),
                     anthropic = require('ai.adapters.anthropic'),
+                },
+                acp = {
+                    opts = {
+                        show_defaults = false, -- Hide default adapters
+                        show_model_choices = true,
+                    },
+                    gemini_cli = require('ai.adapters.gemini_cli'),
+                    claude_code = require('ai.adapters.claude_code'),
                 }
             },
             strategies = {
@@ -105,12 +113,21 @@ return {
             display = {
                 chat = {
                     show_header_separator = false,
+                    fold_context = false,
+                    fold_reasoning = true,
                 },
                 action_palette = {
                     show_default_actions = true,        -- Show the default actions in the action palette?
                     show_default_prompt_library = true, -- Show the default prompt library in the action palette?
                 },
-            }
+            },
+            memory = {
+                opts = {
+                    chat = {
+                        enabled = true
+                    }
+                }
+            },
         })
     end,
     init = function()

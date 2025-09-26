@@ -33,6 +33,7 @@ return {
                     tool        = { icon = ' ',  highlight = 'CodeCompanionChatTool' },
                     prompt      = { icon = ' ',  highlight = 'CodeCompanionChatTool' },
                     group       = { icon = ' ',  highlight = 'CodeCompanionChatToolGroup' },
+                    memory      = { icon = '󰧑 ',  highlight = 'CodeCompanionChatMemory' },
                 },
             },
         })
