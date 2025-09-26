@@ -50,7 +50,7 @@ templates = [
     '{{ if .IsBare}}<white> 󰂹  </>{{ end }}',
     '{{ if .IsWorkTree }}<green>   </>{{ end }}',
     '{{ .HEAD }}',
-    '{{ if or .Working.Changed .Staging.Changed }}*{{ end }}',
+    '{{ $workingSum := add .Working.Added .Working.Deleted .Working.Modified .Working.Unmerged }}{{ if or .Staging.Changed (gt $workingSum 0) }}*{{ end }}',
     '{{ $stagingSum := add .Staging.Added .Staging.Deleted .Staging.Modified .Staging.Unmerged .Staging.Untracked }}{{ if gt $stagingSum 0 }} <lightGreen> {{ $stagingSum }}{{ end }}</>',
     '{{ $workingSum := add .Working.Added .Working.Deleted .Working.Modified .Working.Unmerged }}{{ if gt $workingSum 0 }} <lightYellow> {{ $workingSum }}{{ end }}',
     '{{ if gt .Working.Untracked 0 }}<lightBlue>  {{.Working.Untracked}}</>{{ end }}',
