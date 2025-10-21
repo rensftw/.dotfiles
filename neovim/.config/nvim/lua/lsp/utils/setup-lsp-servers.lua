@@ -1,6 +1,4 @@
-local nvim_lsp = require('lspconfig')
 local config = require('lsp.utils.on_attach')
-require('lspconfig.ui.windows').default_options.border = 'rounded'
 
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').default_capabilities(
@@ -42,7 +40,10 @@ local server_config = {
                         command = "_typescript.organizeImports",
                         arguments = {vim.api.nvim_buf_get_name(0)},
                     }
-                    vim.lsp.buf.execute_command(params)
+                    local clients = vim.lsp.get_clients({ name = 'ts_ls' })
+                    if clients[1] then
+                        clients[1]:exec_cmd(params)
+                    end
                 end,
                 description = "Organize Imports"
             }
@@ -98,7 +99,7 @@ for _, lsp in ipairs(servers) do
     local settings = server_config[lsp] and server_config[lsp].settings or {}
     local commands = server_config[lsp] and server_config[lsp].commands or {}
 
-    nvim_lsp[lsp].setup {
+    vim.lsp.config(lsp, {
         on_attach = config.on_attach,
         capabilities = capabilities,
         flags = {
@@ -107,5 +108,7 @@ for _, lsp in ipairs(servers) do
         settings = settings,
         commands = commands,
         init_options = init_options,
-    }
+    })
+
+    vim.lsp.enable(lsp)
 end
