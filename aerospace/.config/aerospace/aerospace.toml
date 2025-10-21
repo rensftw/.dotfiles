@@ -48,10 +48,10 @@ automatically-unhide-macos-hidden-apps = false
 # Pin workspaces to specific monitors
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-1 = 'main'
+1 = 'secondary'
 2 = 'secondary'
 3 = 'secondary'
-4 = 'secondary'
+4 = 'main'
 o = 'secondary'
 
 # Apps to keep out of tiling manager by default
@@ -83,20 +83,20 @@ run = 'layout floating'
 ## Detects app ID and throws that app in workspace with a mnemonic key mapping
 ## Tip: List the IDs of all running apps with `aerospace list-apps`
 [[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
+if.app-id = 'org.alacritty'
 run = 'move-node-to-workspace 1'
-
-[[on-window-detected]]
-if.app-id = 'org.zotero.zotero'
-run = "move-node-to-workspace 4"
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
 run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
-if.app-id = 'org.alacritty'
-run = 'move-node-to-workspace 3'
+if.app-id = 'org.zotero.zotero'
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
