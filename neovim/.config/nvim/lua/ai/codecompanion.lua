@@ -25,7 +25,7 @@ return {
             adapters = {
                 http = {
                     opts = {
-                        show_defaults = false, -- Hide default adapters
+                        show_presets = false, -- Hide preset adapters
                         show_model_choices = true,
                     },
                     ollama = require('ai.adapters.ollama'),
@@ -34,7 +34,7 @@ return {
                 },
                 acp = {
                     opts = {
-                        show_defaults = false, -- Hide default adapters
+                        show_presets = false, -- Hide preset adapters
                         show_model_choices = true,
                     },
                     gemini_cli = require('ai.adapters.gemini_cli'),
@@ -117,16 +117,11 @@ return {
                     fold_reasoning = true,
                 },
                 action_palette = {
-                    show_default_actions = true,        -- Show the default actions in the action palette?
-                    show_default_prompt_library = true, -- Show the default prompt library in the action palette?
-                },
-            },
-            memory = {
-                opts = {
-                    chat = {
-                        enabled = true
+                    opts = {
+                        show_preset_actions = true,        -- Show the preset actions in the action palette?
+                        show_preset_prompt_library = true, -- Show the preset prompt library in the action palette?
                     }
-                }
+                },
             },
         })
     end,

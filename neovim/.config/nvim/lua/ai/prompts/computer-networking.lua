@@ -1,5 +1,5 @@
 return {
-    strategy = 'chat',
+    interaction = 'chat',
     description = 'Learning assistant',
     opts = {
         ignore_system_prompt = true,
