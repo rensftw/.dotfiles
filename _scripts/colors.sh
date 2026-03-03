@@ -6,6 +6,7 @@ CYAN_BACKGROUND=$(tput setab 6; tput setaf 0)
 MAGENTA_BACKGROUND=$(tput setab 5; tput setaf 0)
 YELLOW_BACKGROUND=$(tput setab 3; tput setaf 0)
 RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 CYAN=$(tput setaf 6)
 MAGENTA=$(tput setaf 5)
@@ -18,6 +19,7 @@ export CYAN_BACKGROUND
 export MAGENTA_BACKGROUND
 export YELLOW_BACKGROUND
 export RED
+export YELLOW
 export GREEN
 export CYAN
 export MAGENTA
