@@ -6,6 +6,7 @@ PATH="$(brew --prefix curl)/bin:$PATH"
 PATH="$(brew --prefix lua-language-server)/bin:$PATH"
 
 # Add custom binaries
+PATH="$HOME/.local/bin:$PATH" # For Claude Code binary
 PATH="$HOME/.bin:$PATH"
 export PATH="$HOME:$PATH"
 
