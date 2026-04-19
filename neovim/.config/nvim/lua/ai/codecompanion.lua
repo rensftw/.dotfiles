@@ -16,7 +16,6 @@ return {
     },
     dependencies = {
         'nvim-lua/plenary.nvim',
-        'nvim-treesitter/nvim-treesitter',
         'ravitemer/codecompanion-history.nvim',
         'ravitemer/mcphub.nvim',
     },
@@ -100,7 +99,9 @@ return {
                 mcphub = {
                     callback = 'mcphub.extensions.codecompanion',
                     opts = {
-                        make_vars = true,
+                        -- TODO: re-enable once ravitemer/mcphub.nvim#275 is fixed
+                        -- (reads removed config.interactions.chat.variables on codecompanion v19)
+                        make_vars = false,
                         make_slash_commands = true,
                         show_result_in_chat = true
                     }

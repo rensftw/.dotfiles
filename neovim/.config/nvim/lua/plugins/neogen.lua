@@ -3,7 +3,6 @@ return {
     lazy = true,
     event = 'VeryLazy',
     dependencies = {
-        'nvim-treesitter/nvim-treesitter',
         'L3MON4D3/LuaSnip',
     },
     cmd = { 'Neogen' },
