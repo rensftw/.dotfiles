@@ -18,6 +18,7 @@ vim.o.signcolumn = 'yes' -- always show the sign column
 vim.o.cursorline = true -- highlight the line where the cursor is
 vim.o.splitright = true -- horizontal split should split to the right
 vim.o.splitbelow = true -- vertical split should split below
+vim.o.winborder = 'rounded' -- default border for floating windows (hover, signature help, diagnostics, etc.)
 vim.opt.completeopt = { 'menuone' , 'noinsert', 'noselect' } -- do not auto-complete
 vim.o.laststatus = 3 -- show one global statusline
 vim.o.scroll = 10 -- <ctrl-d> and <ctrl-u> should scroll by 10 lines

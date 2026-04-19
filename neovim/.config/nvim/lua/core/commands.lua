@@ -76,6 +76,36 @@ vim.api.nvim_create_user_command('QuickfixListFilter', function(opts)
     vim.fn.setqflist(filtered_qflist)
 end, { nargs = 1 })
 
+-- LSP info via native checkhealth
+vim.api.nvim_create_user_command('LspInfo', function()
+    vim.cmd('checkhealth vim.lsp')
+end, { desc = 'LSP info (checkhealth vim.lsp)' })
+
+-- Open the LSP log file in a new tab
+vim.api.nvim_create_user_command('LspLog', function()
+    vim.cmd('tabnew ' .. vim.lsp.log.get_filename())
+end, { desc = 'Open LSP log file' })
+
+-- Re-trigger FileType autocmds so vim.lsp.enable() attaches servers to the current buffer
+vim.api.nvim_create_user_command('LspStart', function()
+    vim.cmd('edit')
+end, { desc = 'LSP start (retrigger FileType)' })
+
+-- Stop all LSP clients attached to the current buffer
+vim.api.nvim_create_user_command('LspStop', function()
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        client:stop()
+    end
+end, { desc = 'LSP stop (current buffer)' })
+
+-- Stop all LSP clients on the current buffer, then reattach
+vim.api.nvim_create_user_command('LspRestart', function()
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        client:stop()
+    end
+    vim.cmd('edit')
+end, { desc = 'LSP restart (current buffer)' })
+
 -- Deduplicate entries in quickfix list so that there is one entry per filepath
 vim.api.nvim_create_user_command('QuickfixListDeduplicate', function()
     local qflist = vim.fn.getqflist({ items = {} })

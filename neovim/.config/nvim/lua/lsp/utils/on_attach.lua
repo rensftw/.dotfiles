@@ -1,18 +1,25 @@
 local M = {}
 
-local highlight_symbol_under_cursor = function(client)
-    if client.server_capabilities.document_highlight then
-        vim.cmd [[
-        hi LspReferenceRead cterm=bold ctermbg=red guibg=#414868
-        hi LspReferenceText cterm=bold ctermbg=red guibg=#414868
-        hi LspReferenceWrite cterm=bold ctermbg=red guibg=#414868
-        augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-        ]]
+local highlight_symbol_under_cursor = function(client, bufnr)
+    if not client:supports_method('textDocument/documentHighlight') then
+        return
     end
+
+    vim.api.nvim_set_hl(0, 'LspReferenceRead',  { bold = true, bg = '#414868' })
+    vim.api.nvim_set_hl(0, 'LspReferenceText',  { bold = true, bg = '#414868' })
+    vim.api.nvim_set_hl(0, 'LspReferenceWrite', { bold = true, bg = '#414868' })
+
+    local group = vim.api.nvim_create_augroup('lsp_document_highlight_' .. bufnr, { clear = true })
+    vim.api.nvim_create_autocmd('CursorHold', {
+        group = group,
+        buffer = bufnr,
+        callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd('CursorMoved', {
+        group = group,
+        buffer = bufnr,
+        callback = vim.lsp.buf.clear_references,
+    })
 end
 
 local enable_format_on_save = function(client, bufnr)
@@ -71,8 +78,8 @@ M.on_attach = function(client, bufnr)
         end,
         '[A]uto [F]ormat')
 
-    enable_format_on_save(client, bufnr);
-    highlight_symbol_under_cursor(client);
+    enable_format_on_save(client, bufnr)
+    highlight_symbol_under_cursor(client, bufnr)
 end
 
 return M
