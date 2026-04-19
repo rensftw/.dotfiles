@@ -52,7 +52,7 @@ tk() {
 
 # Kill background processes (like suspended jobs)
 kill-bg() {
-    jobs -p | xargs kill -KILL
+    jobs -p | awk '{print $3}' | xargs kill -KILL
 }
 
 # System information
