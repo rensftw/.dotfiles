@@ -1,10 +1,13 @@
 local config = require('lsp.utils.on_attach')
 
--- Set up completion using nvim_cmp with LSP source
-local capabilities = require('cmp_nvim_lsp').default_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-)
+-- Capabilities must be set *before* the server starts so the LSP handshake
+-- negotiates the correct feature set. That means they go through
+-- vim.lsp.config('*', …), not through an LspAttach autocmd.
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+vim.lsp.config('*', {
+    capabilities = capabilities,
+})
 local servers = {
     -- JavaScript/Typescript language support
     'ts_ls',    -- LSP
