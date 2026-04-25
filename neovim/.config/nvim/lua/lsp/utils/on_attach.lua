@@ -22,30 +22,8 @@ local highlight_symbol_under_cursor = function(client, bufnr)
     })
 end
 
-local enable_format_on_save = function(client, bufnr)
-    if client:supports_method('textDocument/formatting') and client.server_capabilities.document_formatting then
-        local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd('BufWritePre', {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.format({ bufnr = bufnr })
-            end,
-        })
-    end
-end
-
-local block_typescript_formatting = function(client)
-    -- Never request typescript-language-server for formatting
-    local clientsWithDisabledFormatting = { 'ts_ls', 'eslint' }
-    for _, name in ipairs(clientsWithDisabledFormatting) do
-        if client.name == name then
-            return false
-        end
-    end
-    return true
-end
+-- Format-on-save and the <leader>af keymap are owned by conform.nvim.
+-- See lua/plugins/conform.lua.
 
 M.on_attach = function(client, bufnr)
     local telescope = require('telescope.builtin')
@@ -70,15 +48,7 @@ M.on_attach = function(client, bufnr)
     keymap('n', '<leader>D',  require('core.helpers').Virtual_text.toggle,                         '[D]iagnostics')
     keymap('n', '[d',         function() vim.diagnostic.jump({count=-1, float={source=true} }) end,'Previous diagnostic message')
     keymap('n', ']d',         function() vim.diagnostic.jump({count=1, float={source=true} }) end, 'Next diagnostic message')
-    keymap({'n', 'v'}, '<leader>af', function()
-            vim.lsp.buf.format({
-                async = true,
-                filter = block_typescript_formatting
-            })
-        end,
-        '[A]uto [F]ormat')
 
-    enable_format_on_save(client, bufnr)
     highlight_symbol_under_cursor(client, bufnr)
 end
 
