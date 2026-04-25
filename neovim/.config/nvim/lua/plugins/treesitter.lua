@@ -8,7 +8,6 @@ return {
         'JoosepAlviste/nvim-ts-context-commentstring',
     },
     config = function()
-
         require('tree-sitter-manager').setup({
             auto_install = true,
             border = 'rounded',
@@ -49,6 +48,11 @@ return {
             },
         })
 
+        -- Opt out of ts_context_commentstring's deprecated nvim-treesitter
+        -- module integration; Comment.nvim uses the plugin via pre_hook
+        -- (see plugins/comment.lua) which is the modern path.
+        vim.g.skip_ts_context_commentstring_module = true
+        require('ts_context_commentstring').setup({})
         require('treesitter-context').setup()
 
         require('nvim-treesitter-textobjects').setup({
