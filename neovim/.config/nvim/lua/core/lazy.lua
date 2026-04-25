@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
     { import = 'plugins' },
-    { import = 'statusline.feline' },
+    { import = 'statusline.plugin' },
     { import = 'lsp' },
     { import = 'dap' },
     { import = 'ai' },
