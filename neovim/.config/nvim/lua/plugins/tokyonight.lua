@@ -13,7 +13,7 @@ return {
                 floats = 'transparent',
                 sidebars = 'transparent'
             },
-            sidebars = { 'help', 'packer' },
+            sidebars = { 'help', 'lazy' },
         })
 
         vim.cmd [[colorscheme tokyonight]]
