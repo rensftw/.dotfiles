@@ -10,10 +10,9 @@ return {
     },
     dependencies = {
         -- Manage LSP dependencies
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
+        'mason-org/mason.nvim',
+        'mason-org/mason-lspconfig.nvim',
         'folke/lazydev.nvim',
-        'nvimtools/none-ls.nvim',
         -- JSON schemas
         'b0o/schemastore.nvim',
     },

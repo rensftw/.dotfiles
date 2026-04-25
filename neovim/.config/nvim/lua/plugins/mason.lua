@@ -1,5 +1,5 @@
 return {
-    'williamboman/mason.nvim',
+    'mason-org/mason.nvim',
     lazy = true,
     cmd = 'Mason',
     config = function()

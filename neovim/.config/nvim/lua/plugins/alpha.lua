@@ -3,7 +3,7 @@ return {
     lazy = true,
     event = 'VimEnter',
     dependencies = {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
     },
     config = function()
         local alpha = require('alpha')
@@ -100,7 +100,7 @@ return {
         -- Disable folding on alpha buffer
         vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
         vim.api.nvim_create_autocmd("User", {
-            pattern = "LazyVimStarted",
+            pattern = "VeryLazy",
             callback = function()
                 local stats = require("lazy").stats()
                 local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)

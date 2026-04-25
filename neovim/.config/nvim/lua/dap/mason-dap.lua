@@ -1,7 +1,7 @@
 return {
     'jay-babu/mason-nvim-dap.nvim',
     dependencies = {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
     },
     cmd = { 'DapInstall', 'DapUninstall' },
     lazy = true,
@@ -11,8 +11,7 @@ return {
             -- reasonable debug configurations
             automatic_installation = true,
             ensure_installed = {
-                'js',       -- js-debug-adapter
-                'python',   -- debugpy
+                'js', -- js-debug-adapter
             },
         });
     end
