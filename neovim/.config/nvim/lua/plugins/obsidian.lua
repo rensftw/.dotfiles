@@ -1,5 +1,5 @@
 return {
-    'epwalsh/obsidian.nvim',
+    'obsidian-nvim/obsidian.nvim',
     version = '*', -- recommended, use latest release instead of latest commit
     lazy = true,
     event = {
@@ -22,7 +22,6 @@ return {
     },
     dependencies = {
         'nvim-lua/plenary.nvim',
-        'hrsh7th/nvim-cmp',
         'nvim-telescope/telescope.nvim',
     },
     config = function()
@@ -62,8 +61,8 @@ return {
             --  * 'notes_subdir' - put new notes in the default notes subdirectory.
             new_notes_location = 'current_dir',
             completion = {
-                -- Set to false to disable completion.
-                nvim_cmp = true,
+                -- Completion engine: blink.cmp (see plugins/blink.lua).
+                blink = true,
 
                 -- Trigger completion at 2 chars.
                 min_chars = 2,
