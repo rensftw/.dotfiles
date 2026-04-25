@@ -169,6 +169,8 @@ _gwa_single() {
 
 # Create worktrees from a bare repository
 gwa() {
+    local orig_dir="$PWD"
+
     if [[ $# -eq 0 ]]; then
         cat <<EOF
 ${CYAN}Usage:${NC} gwa <branch_name> [local_worktree_path] [--count INT] [--start INT] [--base REF] [--no-tmux]
@@ -352,6 +354,8 @@ EOF
         [[ -z "$local_worktree_path" ]] && local_worktree_path=${branch_name//[^a-zA-Z0-9._-]/_}
         _gwa_single "$branch_name" "$local_worktree_path" "$no_tmux" "$base_ref"
     fi
+
+    cd "$orig_dir" 2>/dev/null || true
 }
 
 # Remove a single worktree (helper for gwr)
@@ -409,26 +413,36 @@ _gwr_cleanup_branches() {
         printf "\n"
     done
 
-    printf "\n$YELLOW_BACKGROUND%s$NC " " Delete these branches? Type 'yes' to confirm:"
+    printf "\n$YELLOW_BACKGROUND%s$NC " " Delete these branches? [yes/both, local, remote]:"
     local confirm
     read -r confirm </dev/tty
-    if [[ "$confirm" == "yes" ]]; then
-        for i in {1..${#_gwr_local_branches[@]}}; do
+
+    local delete_local=false delete_remote=false
+    case "$confirm" in
+        yes|both) delete_local=true; delete_remote=true ;;
+        local)    delete_local=true ;;
+        remote)   delete_remote=true ;;
+        *)        return 0 ;;
+    esac
+
+    for i in {1..${#_gwr_local_branches[@]}}; do
+        if [[ "$delete_local" == true ]]; then
             git branch -D "${_gwr_local_branches[$i]}" && \
                 printf "$GREEN%s$NC%s\n" " Deleted local branch: " "${_gwr_local_branches[$i]}"
-            if [[ -n "${_gwr_upstream_branches[$i]}" ]]; then
-                local remote_branch="${_gwr_upstream_branches[$i]#origin/}"
-                git push origin ":$remote_branch" 2>/dev/null && \
-                    printf "$GREEN%s$NC%s\n" " Deleted remote branch: " "${_gwr_upstream_branches[$i]}"
-            fi
-        done
-    fi
+        fi
+        if [[ "$delete_remote" == true ]] && [[ -n "${_gwr_upstream_branches[$i]}" ]]; then
+            local remote_branch="${_gwr_upstream_branches[$i]#origin/}"
+            git push origin ":$remote_branch" 2>/dev/null && \
+                printf "$GREEN%s$NC%s\n" " Deleted remote branch: " "${_gwr_upstream_branches[$i]}"
+        fi
+    done
 }
 
 # Remove worktree(s) — supports fzf multi-select
 gwr() {
   # Resolve path argument to absolute before _gwa_navigate_to_bare_root may cd
   local resolved_path
+  local orig_dir="$PWD"
   [[ $# -gt 0 ]] && resolved_path="$(cd "$1" 2>/dev/null && pwd || echo "$1")"
 
   _gwa_navigate_to_bare_root || return 1
@@ -453,6 +467,8 @@ gwr() {
   fi
 
   _gwr_cleanup_branches
+
+  cd "$orig_dir" 2>/dev/null || true
 }
 
 # Switch to worktree (tmux window if in tmux, cd otherwise)

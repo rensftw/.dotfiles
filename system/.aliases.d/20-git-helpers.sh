@@ -12,6 +12,15 @@ fzf-down() {
   fzf --height 50% "$@" --border
 }
 
+# Collect candidate files robustly (handles spaces, renames, etc.)
+gsp() {
+  is_in_git_repo || return
+  git status --porcelain |
+  fzf-down --ansi --multi --tac |
+  # clean up git status symbols for added, modified, renamed etc (A, M, D, ??)
+  sed 's/^.. //; s/.* -> //'
+}
+
 # Is the base branch main or master?
 _mb() {
     local branches
