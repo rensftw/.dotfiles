@@ -1,7 +1,7 @@
 local M = {}
 
 -- Virtual text helper logic
-Virtual_text = {}
+local Virtual_text = {}
 Virtual_text.show = false
 Virtual_text.toggle = function()
     Virtual_text.show = not Virtual_text.show

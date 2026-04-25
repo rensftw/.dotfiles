@@ -6,7 +6,7 @@ autocmd('TextYankPost', {
     group = augroup('HighlightYank', {}),
     pattern = '*',
     callback = function()
-        vim.highlight.on_yank({
+        vim.hl.on_yank({
             higroup = 'IncSearch',
             timeout = 100,
         })
@@ -20,7 +20,7 @@ autocmd({ 'BufWritePre' }, {
         if event.match:match('^%w%w+://') then
             return
         end
-        local file = vim.loop.fs_realpath(event.match) or event.match
+        local file = vim.uv.fs_realpath(event.match) or event.match
         vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
     end,
 })
@@ -39,7 +39,9 @@ autocmd({ 'FocusGained', 'BufEnter' }, {
     pattern = '*',
     group = augroup('update_buffer_contents_if_changed_outside_neovim', {}),
     callback = function()
-        vim.api.nvim_command('checktime')
+        -- :checktime is disallowed inside the command-line window (q:, q/, q?) — E11.
+        if vim.fn.getcmdwintype() ~= '' then return end
+        vim.cmd('checktime')
     end,
 })
 
@@ -86,20 +88,13 @@ autocmd('FileType', {
         'PlenaryTestPopup',
         'fugitive',
         'fugitiveblame',
+        'git',
         'help',
         'lspinfo',
         'man',
         'notify',
         'qf',
-        'nvimtree',
-        'git',
-        'spectre_panel',
-        'startuptime',
-        'tsplayground',
-        'neotest-output',
         'checkhealth',
-        'neotest-summary',
-        'neotest-output-panel',
     },
     callback = function(event)
         vim.bo[event.buf].buflisted = false
