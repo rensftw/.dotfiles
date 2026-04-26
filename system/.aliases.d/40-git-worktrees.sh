@@ -6,7 +6,7 @@
 # Clone repository as bare repo for worktree workflow
 clone-bare() {
     if [ $# -ne 2 ]; then
-        printf "$CYAN%s$NC\n" "Usage: clone-bare <repository-url> <local-repo-path>"
+        printf "$CYAN%s$NC\n" "  Usage: clone-bare <repository-url> <local-repo-path>"
         return 1
     fi
 
@@ -15,7 +15,7 @@ clone-bare() {
 
     # Check if target directory exists and has .git
     if [ -e "$local_repo_path/.git" ]; then
-        printf "$RED$BOLD%s$NC\n\n" "Aborting: nested repos are not advisable."
+        printf "$RED$BOLD%s$NC\n\n" "  Aborting: nested repos are not advisable."
         return 1
     fi
 
@@ -54,8 +54,8 @@ clone-bare() {
     # Remove reference for default branch (we cannot make a worktree for an existing branch ref)
     git branch -D "$(git rev-parse --abbrev-ref HEAD)"
 
-    printf "$GREEN%s$NC%s$BOLD%s$NC\n" " "  " Bare repository has been partially cloned in: " "$local_repo_path"
-    printf "$GREEN$BOLD%s$NC\n\n" '  Ready to use worktrees!'
+    printf "$GREEN%s$NC%s$BOLD%s$NC\n" " "  " Bare repository has been partially cloned in: " "$local_repo_path"
+    printf "$GREEN$BOLD%s$NC\n\n" '  Ready to use worktrees!'
     printf "$YELLOW_BACKGROUND%s$NC\n $YELLOW%s$NC\n\n" " Discover remote branches:" "git ls-remote --heads"
     printf "$CYAN_BACKGROUND%s$NC\n" "  Available commands:"
     printf "$CYAN%s$NC\n" "  gwa <branch-name> - to create a worktree"
@@ -130,7 +130,7 @@ _gwa_single() {
     local base_ref="$4"
 
     if ! git rev-parse --git-dir >/dev/null 2>&1; then
-        printf "$RED$BOLD%s$NC\n\n" "Aborting: not in a bare git repository."
+        printf "$RED$BOLD%s$NC\n\n" "  Aborting: not in a bare git repository."
         return 1
     fi
 
@@ -147,7 +147,7 @@ _gwa_single() {
 
     if [[ -n "$TMUX" ]]; then
         local open_window="n"
-        printf "$CYAN_BACKGROUND%s$NC " " Open new tmux window? [y/N]:"
+        printf "$CYAN_BACKGROUND%s$NC " " Open new tmux window? [y/N]:"
         read -r open_window
         if [[ "$open_window" != [yY] ]]; then
             return 0
@@ -161,7 +161,7 @@ _gwa_single() {
         else
             local full_worktree_path
             full_worktree_path="$(cd "$(dirname "$local_worktree_path")" 2>/dev/null && pwd)/$(basename "$local_worktree_path")"
-            tmux new-window -n "$window_name" -c "$full_worktree_path" "[[ -f package.json ]] && printf \"\n$CYAN%s$NC\n\n\" \"  Install NPM dependencies in fresh worktrees\"; exec $SHELL"
+            tmux new-window -n "$window_name" -c "$full_worktree_path" "[[ -f package.json ]] && printf \"\n$CYAN%s$NC\n\n\" \"󰞏  Install NPM dependencies in fresh worktrees\"; exec $SHELL"
             printf "$GREEN%s$BOLD$NC%s%s\n" " Opened tmux window: " "$window_name -> $local_worktree_path"
         fi
     fi
@@ -247,7 +247,7 @@ EOF
                 shift 2
                 ;;
             -*)
-                printf "$RED%s$NC\n" "Unknown option: $1"
+                printf "$RED%s$NC\n" "  Unknown option: $1"
                 return 1
                 ;;
             *)
@@ -261,7 +261,7 @@ EOF
     local_worktree_path="${positional[2]:-}"
 
     if [[ -z "$branch_name" ]]; then
-        printf "$RED$BOLD%s$NC%s\n" "Error:" " branch name is required"
+        printf "$RED$BOLD%s$NC%s\n" "  Error:" " branch name is required"
         return 1
     fi
 
@@ -273,7 +273,7 @@ EOF
         local main_branch
         main_branch=$(_mb)
         if [[ "$main_branch" == "not found" ]] || [[ -z "$main_branch" ]]; then
-            printf "$RED$BOLD%s$NC%s\n" "Error:" " Could not detect default branch"
+            printf "$RED$BOLD%s$NC%s\n" "  Error:" " Could not detect default branch"
             return 1
         fi
         base_ref="origin/$main_branch"
@@ -285,15 +285,15 @@ EOF
 
     if [[ -n "$count" ]]; then
         if ! [[ "$count" =~ ^[0-9]+$ ]] || [[ "$count" -lt 1 ]]; then
-            printf "$RED$BOLD%s$NC%s\n" "Error:" " --count must be a positive integer"
+            printf "$RED$BOLD%s$NC%s\n" "  Error:" " --count must be a positive integer"
             return 1
         fi
         if [[ -n "$start" ]] && ! [[ "$start" =~ ^[0-9]+$ ]]; then
-            printf "$RED$BOLD%s$NC%s\n" "Error:" " --start must be a non-negative integer"
+            printf "$RED$BOLD%s$NC%s\n" "  Error:" " --start must be a non-negative integer"
             return 1
         fi
         if [[ -n "$local_worktree_path" ]]; then
-            printf "$YELLOW%s$NC%s\n" " Warning:" " local_worktree_path is ignored with --count"
+            printf "$YELLOW%s$NC%s\n" "  Warning:" " local_worktree_path is ignored with --count"
         fi
         [[ -z "$start" ]] && start=1
 
@@ -315,7 +315,7 @@ EOF
                 window_names+=("$(_tmux_window_name "$(basename "$worktree_path")")")
                 printf "  $GREEN%s$NC %s$BOLD%s$NC\n\n" "" "Worktree created at: " "$worktree_path"
             else
-                printf "  $RED%s$NC\n\n" "Failed to create worktree for $full_branch"
+                printf "  $RED%s$NC\n\n" "  Failed to create worktree for $full_branch"
             fi
         done
 
@@ -340,7 +340,7 @@ EOF
 
             printf "\n$GREEN%s$NC%s\n" "" " Created ${#worktree_paths[@]} tmux windows"
         elif [[ "$no_tmux" != true ]] && [[ -z "$TMUX" ]]; then
-            printf "$YELLOW_BACKGROUND%s$NC%s\n" " Warning " " Not inside tmux session. Skipping tmux window creation."
+            printf "$YELLOW_BACKGROUND%s$NC%s\n" "  Warning " " Not inside tmux session. Skipping tmux window creation."
         fi
 
         printf "\n$CYAN_BACKGROUND%s$NC\n" " Done! "
@@ -517,17 +517,17 @@ EOF
     fi
 
     if ! git rev-parse --git-dir >/dev/null 2>&1; then
-        printf "$RED$BOLD%s$NC%s\n" "Error:" " Not in a git repository"
+        printf "$RED$BOLD%s$NC%s\n" "  Error:" " Not in a git repository"
         return 1
     fi
 
     if [[ -z "$TMUX" ]]; then
-        printf "$RED$BOLD%s$NC%s\n" "Error:" " Not inside a tmux session"
+        printf "$RED$BOLD%s$NC%s\n" "  Error:" " Not inside a tmux session"
         return 1
     fi
 
     if ! command -v fzf &> /dev/null; then
-        printf "$RED$BOLD%s$NC%s\n" "Error:" " fzf is not installed"
+        printf "$RED$BOLD%s$NC%s\n" "  Error:" " fzf is not installed"
         return 1
     fi
 
