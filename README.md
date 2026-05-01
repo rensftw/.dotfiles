@@ -31,11 +31,16 @@ mkdir .dotfiles && cd .dotfiles && curl -L https://api.github.com/repos/rensftw/
 * [`neovim`](https://neovim.io/)
   * [`Lazy.nvim`](https://github.com/folke/lazy.nvim): Plugin manager
   * [`mason`](https://github.com/williamboman/mason.nvim): Package manager
-  * [`telescope`](https://github.com/nvim-telescope/telescope.nvim): Fuzzy finder
-  * [`treesitter`](https://github.com/nvim-treesitter/nvim-treesitter): AST goodies (syntax highlighting, AST playground with `:InspectTree`, incremental selection in normal mode, etc)
+  * [`fzf-lua`](https://github.com/ibhagwan/fzf-lua): Fuzzy finder (files, buffers, grep, LSP, git, vim.ui.select)
+  * [`blink.cmp`](https://github.com/saghen/blink.cmp): Completion engine, with [`LuaSnip`](https://github.com/L3MON4D3/LuaSnip) for snippets
+  * [`tree-sitter-manager.nvim`](https://github.com/romus204/tree-sitter-manager.nvim): Tree-sitter parser/query installer (now that nvim-treesitter is archived)
   * [`nvim-lspconfig`](https://github.com/neovim/nvim-lspconfig): Native LSP
+  * [`conform.nvim`](https://github.com/stevearc/conform.nvim): Formatter (replaces null-ls)
+  * [`nvim-lint`](https://github.com/mfussenegger/nvim-lint): Linter (replaces null-ls)
   * [`nvim-dap`](https://github.com/mfussenegger/nvim-dap): Debugging protocol
-  * [`folke/tokyonight.nvim` theme](https://github.com/folke/tokyonight.nvim): Theme
+  * [`mini.nvim`](https://github.com/echasnovski/mini.nvim): Modular utilities — `mini.{ai,surround,bracketed,align,pairs,files,indentscope,icons}`
+  * [`codecompanion.nvim`](https://github.com/olimorris/codecompanion.nvim): AI assistant (Anthropic + Ollama adapters, ACP support)
+  * [`folke/tokyonight.nvim`](https://github.com/folke/tokyonight.nvim): Theme
 * [`nnn`](https://github.com/jarun/nnn) for terminal file navigation
 * [`fzf`](https://github.com/junegunn/fzf) for fuzzy finding and interactive git operations
 * [`rg`](https://github.com/BurntSushi/ripgrep) for searching file contents
