@@ -20,6 +20,27 @@ return {
         'ravitemer/mcphub.nvim',
     },
     config = function()
+        -- Workaround: CodeCompanion's slash-command FZF provider sets the
+        -- picker prompt to args.title (e.g. "Select a help tag" for /help),
+        -- bypassing our fzf-lua register_ui_select callback. Patch its
+        -- display() to move the title to the border and keep our custom
+        -- prompt symbol. Touches a soft (private-ish) API, so revisit if
+        -- codecompanion changes its provider shape.
+        do
+            local cc_fzf = require('codecompanion.providers.slash_commands.fzf_lua')
+            local original_display = cc_fzf.display
+            cc_fzf.display = function(self, transformer)
+                local opts = original_display(self, transformer)
+                local title = vim.trim((opts.prompt or 'Select'):gsub('%s*:%s*$', ''))
+                opts.prompt = '   '
+                opts.winopts = vim.tbl_deep_extend('force', opts.winopts or {}, {
+                    title     = ' ' .. title .. ' ',
+                    title_pos = 'center',
+                })
+                return opts
+            end
+        end
+
         require('codecompanion').setup({
             adapters = {
                 http = {
@@ -88,6 +109,18 @@ return {
                         expiration_days = 0,
                         ---Automatically generate titles for new chats
                         auto_generate_title = true,
+                        ---Title generation defaults to the current chat adapter,
+                        ---which fails when the chat is on an ACP adapter (e.g.
+                        ---claude_code). Pin to ollama (local, HTTP) — title
+                        ---generation is a cheap one-shot and runs offline.
+                        ---Model must be explicit too: when only `adapter` is
+                        ---overridden, the title generator otherwise reuses the
+                        ---chat's model name (e.g. claude-opus-4-7) which ollama
+                        ---doesn't have.
+                        title_generation_opts = {
+                            adapter = 'ollama',
+                            model   = 'qwen2.5:1.5b',
+                        },
                         ---On exiting and entering neovim, loads the last chat on opening chat
                         continue_last_chat = false,
                         ---When chat is cleared with `gx` delete the chat from history
