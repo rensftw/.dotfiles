@@ -80,6 +80,12 @@ history = 10000
 [window]
 decorations = "none"
 opacity = 1
+# Treat Option as Alt/Meta so terminal apps (fzf, zsh widgets, vim) receive
+# ESC+key sequences for Option-letter combinations instead of macOS-native
+# Unicode chars (∆, ∂, etc.). "Both" because this keyboard has only one
+# Option key (fn replaces the right Option), and macOS may report a single
+# Option as left or right depending on firmware — "Both" covers either case.
+option_as_alt = "Both"
 
 [general]
 import = ["~/.config/alacritty/tokyonight.toml"]
