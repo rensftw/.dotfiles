@@ -31,10 +31,15 @@ return {
 
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+                -- CodeCompanion's blink provider self-gates by filetype, but
+                -- scoping it via per_filetype is cleaner — blink.cmp doesn't
+                -- even try the source outside chat buffers.
+                per_filetype = {
+                    codecompanion = { 'codecompanion', 'lsp', 'path', 'snippets', 'buffer' },
+                },
                 providers = {
                     -- Source names become the small tag shown next to each
-                    -- completion item (matches the menu icons from the old
-                    -- nvim-cmp formatting.format callback).
+                    -- completion item in the menu.
                     lsp      = { name = '󱙺 ' },
                     path     = { name = ' ' },
                     snippets = { name = ' ' },
@@ -43,6 +48,10 @@ return {
                         name         = ' ',
                         module       = 'lazydev.integrations.blink',
                         score_offset = 100, -- outrank regular LSP for Nvim API completions
+                    },
+                    codecompanion = {
+                        name   = ' ',
+                        module = 'codecompanion.providers.completion.blink',
                     },
                 },
             },
@@ -64,21 +73,32 @@ return {
                 },
             },
 
-            -- ':' cmdline completion. autocomplete = false means completions only
-            -- appear after <C-a> (triggered via the mapping above), matching the
-            -- old nvim-cmp behavior (completion = { autocomplete = false }).
             cmdline = {
                 enabled    = true,
-                keymap     = { preset = 'cmdline' },
+                keymap     = {
+                    preset     = 'cmdline',
+                    ['<C-a>']  = { 'show', 'fallback' },
+                    ['<C-j>']  = { 'select_next', 'fallback' },
+                    ['<C-k>']  = { 'select_prev', 'fallback' },
+                    ['<C-y>']  = { 'accept', 'fallback' },
+                    ['<C-CR>'] = { 'accept', 'fallback' },
+                },
                 completion = {
-                    menu = { auto_show = false },
+                    menu = {
+                        auto_show = false,
+                        -- Strip the kind/source columns for cmdline only (to reduce noise)
+                        draw = {
+                            columns = {
+                                { 'label', 'label_description', gap = 1 },
+                            },
+                        },
+                    },
                 },
                 sources    = { 'path', 'cmdline' },
             },
 
             appearance = {
-                -- Nerd-font kind icons (ported verbatim from the old
-                -- nvim-cmp formatting.format kind map).
+                -- Nerd-font kind icons.
                 kind_icons = {
                     Text          = ' ',
                     Method        = ' ',
