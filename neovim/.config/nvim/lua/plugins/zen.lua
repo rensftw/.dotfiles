@@ -3,9 +3,6 @@ return {
     lazy = true,
     event = 'VeryLazy',
     cmd = { 'Zen', 'ZenMode' },
-    dependencies = {
-        'folke/twilight.nvim',
-    },
     config = function()
         require('zen-mode').setup({
             window = {
@@ -23,13 +20,13 @@ return {
             plugins = {
                 options = {
                     enabled = true,
-                    ruler = false,             -- disables the ruler text in the cmd line area
-                    showcmd = false,           -- disables the command in the last line of the screen
-                    laststatus = 0,            -- turn off the statusline in zen mode
+                    ruler = false,              -- disables the ruler text in the cmd line area
+                    showcmd = false,            -- disables the command in the last line of the screen
+                    laststatus = 0,             -- turn off the statusline in zen mode
                 },
-                twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-                gitsigns = { enabled = true }, -- disables git signs
-                tmux = { enabled = false },    -- disables the tmux statusline
+                twilight = { enabled = false }, -- twilight.nvim is not installed
+                gitsigns = { enabled = true },  -- disables git signs
+                tmux = { enabled = false },     -- disables the tmux statusline
                 -- this will change the font size on alacritty when in zen mode
                 -- requires  Alacritty Version 0.10.0 or higher
                 -- uses `alacritty msg` subcommand to change font size
