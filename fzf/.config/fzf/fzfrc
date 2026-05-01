@@ -1,0 +1,21 @@
+# fzf default options.
+# Loaded via FZF_DEFAULT_OPTS_FILE, which is exported from zsh/.zshrc.
+
+# Layout & UI
+--multi
+--inline-info
+--height=25%
+--layout=reverse
+--border
+--highlight-line
+
+# Preview scroll. Ctrl-D / Ctrl-U for half-page (vim parity). Ctrl-{H,J,K,L}
+# are deliberately not used here: Aerospace (window manager) owns those chords
+# on this machine for window focus, so they never reach the terminal.
+--bind=ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
+
+# Tokyonight color palette
+--color=fg:#c0caf5,bg:#1a1b26,hl:#ff9e64
+--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64
+--color=info:#7aa2f7,prompt:#7dcfff,pointer:#f7768e
+--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
