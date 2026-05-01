@@ -149,7 +149,7 @@ return {
                     ['ctrl-v']  = with_zz(actions.buf_vsplit),
                     ['ctrl-x']  = with_zz(actions.buf_split),
                     -- Passing the action as a callback like this, automatically adds the interactive header hint
-                    ['ctrl-c']  = { fn = actions.buf_del, reload = true  },
+                    ['ctrl-c']  = { fn = actions.buf_del, reload = true },
                     ['ctrl-q']  = ctrl_q_to_qf,
                 },
             },
