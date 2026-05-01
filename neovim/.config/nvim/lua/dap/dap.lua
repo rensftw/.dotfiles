@@ -4,8 +4,7 @@ return {
     dependencies = {
         'rcarriga/nvim-dap-ui',
         'theHamsta/nvim-dap-virtual-text',
-        'nvim-telescope/telescope.nvim',
-        'nvim-telescope/telescope-dap.nvim',
+        'ibhagwan/fzf-lua',
         'nvim-neotest/nvim-nio',
     },
     keys = {
@@ -25,8 +24,8 @@ return {
         { mode = { 't' }, '<C-k>', '<C-\\><C-n><C-w>k' },
         { mode = { 't' }, '<C-l>', '<C-\\><C-n><C-w>l' },
 
-        -- DAP + Telescope integration
-        { mode = { 'n' }, '<leader>ds', function() require('telescope').extensions.dap.frames({initial_mode = 'normal' }) end }
+        -- DAP frames picker (fzf-lua)
+        { mode = { 'n' }, '<leader>ds', function() require('fzf-lua').dap_frames() end }
     },
     cmd = {
         'DapShowLog',
@@ -66,6 +65,5 @@ return {
         end
 
         require('dap.utils.setup-dap-servers')
-        require('telescope').load_extension('dap')
     end
 }

@@ -1,7 +1,7 @@
 -- Write all changes to modified buffers,
 -- close all buffers except the active one,
 -- and return focus to the same spot it was initially
-vim.api.nvim_create_user_command('BufOnly', 'wa | %bdelete | edit # | bdelete # | normal `"', {})
+vim.api.nvim_create_user_command('BufOnly', 'wa | %bdelete! | edit # | bdelete # | normal `"', {})
 
 -- Create a ASCII box art over a visually selected range.
 -- By default it uses `headline` and will look like this:
