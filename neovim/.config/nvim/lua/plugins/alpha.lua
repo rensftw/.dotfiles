@@ -68,9 +68,9 @@ return {
         section.buttons.val = {
             button('n', '  New file', ':ene <BAR> startinsert <CR>', {}),
             button('f', '  Find file',
-                '<cmd>lua require("telescope.builtin").find_files({hidden = true, previewer = false})<CR>', {}),
+                '<cmd>lua require("fzf-lua").files({ previewer = false })<CR>', {}),
             button('r', '  Recent',
-                '<cmd>lua require("telescope.builtin").oldfiles({initial_mode = "normal", previewer = false})<CR>', {}),
+                '<cmd>lua require("fzf-lua").oldfiles()<CR>', {}),
             button('l', '  Lazy - update plugins', ':Lazy<CR>', {}),
             button('m', '󱌣  Mason - update LSPs', ':Mason<CR>', {}),
             button('q', '✖  Quit NVIM', ':qa<CR>', {}),

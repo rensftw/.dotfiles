@@ -22,7 +22,6 @@ return {
     },
     dependencies = {
         'nvim-lua/plenary.nvim',
-        'nvim-telescope/telescope.nvim',
     },
     config = function()
        -- Set conceallevel to 1 so checkboxes can be pretty printed

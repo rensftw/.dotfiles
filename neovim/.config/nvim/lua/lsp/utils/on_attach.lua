@@ -26,7 +26,6 @@ end
 -- See lua/plugins/conform.lua.
 
 M.on_attach = function(client, bufnr)
-    local telescope = require('telescope.builtin')
     local keymap = function(mode, keys, func, desc)
         if desc then
           desc = 'LSP: ' .. desc
@@ -41,7 +40,7 @@ M.on_attach = function(client, bufnr)
     keymap('n', 'gd',         vim.lsp.buf.definition,                                              '[G]oto [D]efinition')
     keymap('n', 'gt',         vim.lsp.buf.type_definition,                                         '[G]oto [T]ype definition')
     keymap('n', 'gi',         vim.lsp.buf.implementation,                                          '[G]oto [I]mplementation')
-    keymap('n', 'gr',         function() telescope.lsp_references({initial_mode = 'normal'}) end,  '[G]oto [R]eferences')
+    keymap('n', 'gr',         function() require('fzf-lua').lsp_references() end,                  '[G]oto [R]eferences')
     keymap('n', 'H',          vim.lsp.buf.hover,                                                   '[H]over')
     keymap('n', '<leader>r',  vim.lsp.buf.rename,                                                  '[R]ename')
     keymap({'n', 'v'}, '<leader>ca',  vim.lsp.buf.code_action,                                     '[C]ode [A]ction')
