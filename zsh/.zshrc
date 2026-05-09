@@ -1,9 +1,10 @@
 # Load Brew binaries before native binaries
-PATH="$(brew --prefix)/bin:$PATH"
+BREW_PREFIX="$(brew --prefix)"
+PATH="$BREW_PREFIX/bin:$PATH"
 # Keg-only formulae that I need to manually add to PATH:
-PATH="$(brew --prefix fzf)/bin:$PATH"
-PATH="$(brew --prefix curl)/bin:$PATH"
-PATH="$(brew --prefix lua-language-server)/bin:$PATH"
+PATH="$BREW_PREFIX/opt/fzf/bin:$PATH"
+PATH="$BREW_PREFIX/opt/curl/bin:$PATH"
+PATH="$BREW_PREFIX/opt/lua-language-server/bin:$PATH"
 
 # Add custom binaries
 PATH="$HOME/.local/bin:$PATH" # For Claude Code binary
@@ -20,21 +21,25 @@ export DOTFILES_LOCATION="$HOME/.dotfiles"
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
 export OBSIDIAN_LOCATION="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian"
 
-# GPG and SSH
-# GPG needs to know TTY to work properly:
-# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
-export GPG_TTY="$(tty)"
-# Launch `gpg-agent` for use by SSH
-gpgconf --launch gpg-agent
-gpg-connect-agent updatestartuptty /bye > /dev/null 2>&1
-# Enable SSH to work with GPG
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+# Only run in interactive shells attached to a real terminal (-t 1):
+# while avoiding startup overhead in non-interactive shells/scripts.
+if [[ $- == *i* ]] && [[ -t 1 ]]; then
+  # GPG and SSH
+  # GPG needs to know TTY to work properly:
+  # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+  export GPG_TTY="$(tty)"
+  # Launch `gpg-agent` for use by SSH
+  gpgconf --launch gpg-agent > /dev/null 2>&1
+  gpg-connect-agent updatestartuptty /bye > /dev/null 2>&1
+  # Enable SSH to work with GPG
+  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+fi
 
 source $HOME/.config/nnn/.nnnrc.zsh
 source $HOME/.aliases
 
 # (Optional) Fix brew warning about ""config" scripts exist outside your system or Homebrew directories"
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+alias brew='env PATH="${PATH//$PYENV_ROOT\/shims:/}" brew'
 
 # Prompt setup
 
@@ -73,25 +78,53 @@ unsetopt share_history        # don't share history between all sessions
 bindkey -v
 
 # zsh-completions setup
-FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+FPATH=$BREW_PREFIX/share/zsh-completions:$FPATH
+FPATH=$BREW_PREFIX/share/zsh/site-functions:$FPATH
 zstyle :compinstall filename "$HOME/.zshrc"
 zstyle ':completion:*' menu select
 zstyle ':completion::complete:git-checkout:argument-rest:remote-branch-refs-noprefix' command "echo"
 autoload -Uz compinit
-compinit
+# Rebuild completion dump only when it's older than 24 hours; otherwise use cached init.
+zcompdump_is_old=(~/.zcompdump(N.mh+24))
+if (( ${#zcompdump_is_old} )); then
+  compinit
+else
+  compinit -C
+fi
 
 # nvm setup
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Put the default node version's bin into PATH at startup.
+# This lets claude and other tools find `node` immediately,
+# without triggering the full NVM load.
+if [[ -s "$NVM_DIR/alias/default" ]]; then
+  export PATH="$NVM_DIR/versions/node/$(cat $NVM_DIR/alias/default)/bin:$PATH"
+fi
 
-# pyenv setup
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+_lazy_load_nvm() {
+  # remove wrappers so future calls go direct
+   unfunction nvm _lazy_load_nvm 2>/dev/null
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+}
+
+nvm()  { _lazy_load_nvm; nvm "$@"; }
+
+# pyenv setup (lazy load)
+# Keep pyenv shims on PATH immediately so python/pip resolve via pyenv,
+# while deferring the heavier `pyenv init` shell integration until first `pyenv` use.
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/shims:$PATH"
+
+_lazy_load_pyenv() {
+  # remove wrappers so future calls go direct
+  unfunction pyenv _lazy_load_pyenv 2>/dev/null
+  eval "$(pyenv init - --no-rehash)"
+}
+
+pyenv() { _lazy_load_pyenv; pyenv "$@"; }
 
 # FZF configuration
-FZF_PREFIX=$(brew --prefix fzf)
+FZF_PREFIX="$BREW_PREFIX/opt/fzf"
 [[ $- == *i* ]] && source "$FZF_PREFIX/shell/completion.zsh" 2> /dev/null
 # Key bindings (Ctrl-T, Ctrl-R, Alt-C)
 source "$FZF_PREFIX/shell/key-bindings.zsh"
@@ -108,5 +141,4 @@ source $DOTFILES_LOCATION/zsh/zsh-omp-vi-mode.plugin.zsh
 
 # zsh-syntax-highlighting.zsh must be sourced at the end of .zshrc
 # (https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file)
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
