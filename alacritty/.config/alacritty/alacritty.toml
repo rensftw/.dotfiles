@@ -60,16 +60,6 @@ key = "I"
 mods = "Control"
 
 [[keyboard.bindings]]
-chars = "\u001B[106;5u"
-key = "J"
-mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\u001B[107;5u"
-key = "K"
-mods = "Control"
-
-[[keyboard.bindings]]
 chars = "\u001B[46;5u"
 key = "Period"
 mods = "Control"
