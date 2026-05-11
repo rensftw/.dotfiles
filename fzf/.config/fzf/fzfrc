@@ -15,7 +15,27 @@
 --bind=ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up
 
 # Tokyonight color palette
---color=fg:#c0caf5,bg:#1a1b26,hl:#ff9e64
---color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64
---color=info:#7aa2f7,prompt:#7dcfff,pointer:#f7768e
---color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
+# Original: https://github.com/folke/tokyonight.nvim/blob/main/extras/fzf/tokyonight_night.sh
+  --highlight-line
+  --info=inline-right
+  --ansi
+  --layout=reverse
+  --border=none
+  # --color=bg+:#283457 # original
+  --color=bg+:#292e42
+  # --color=bg:#16161e # original
+  --color=bg:#1a1b26
+  --color=border:#27a1b9
+  --color=fg:#c0caf5
+  --color=gutter:#16161e
+  --color=header:#ff9e64
+  --color=hl+:#2ac3de
+  --color=hl:#2ac3de
+  --color=info:#545c7e
+  --color=marker:#ff007c
+  --color=pointer:#ff007c
+  --color=prompt:#2ac3de
+  --color=query:#c0caf5:regular
+  --color=scrollbar:#27a1b9
+  --color=separator:#ff9e64
+  --color=spinner:#ff007c
