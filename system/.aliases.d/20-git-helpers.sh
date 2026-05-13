@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ################################################################################
 # Git helper functions
 # Loaded before workflow and worktree modules that depend on these

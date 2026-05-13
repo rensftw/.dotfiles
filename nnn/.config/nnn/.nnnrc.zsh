@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # -A: disable directory auto-enter in type-to-nav mode
 # -c: cli-only using NNN_OPENER
 # -d: detail mode

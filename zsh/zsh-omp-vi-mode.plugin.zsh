@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 _omp_redraw-prompt() {
     local precmd
     for precmd in $precmd_functions; do

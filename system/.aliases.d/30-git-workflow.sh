@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ################################################################################
 # Git workflow aliases and functions
 # Depends on: 20-git-helpers.sh (is_in_git_repo, fzf-down, _mb, _gb)

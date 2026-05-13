@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # Customized plugin - original by Amethyst Reese
 # https://github.com/amyreese/zsh-titles/blob/master/titles.plugin.zsh
 

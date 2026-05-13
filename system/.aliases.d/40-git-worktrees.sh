@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ################################################################################
 # Git worktree management
 # Depends on: 20-git-helpers.sh (_mb)
