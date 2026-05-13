@@ -14,6 +14,7 @@ return {
     'html',
     'jsonls',
     'lua_ls',
+    'marksman', -- Markdown
     'taplo',    -- TOML
     'yamlls',
 }
