@@ -21,6 +21,7 @@ return {
             { mode = { 'n' }, '<leader>fw', function() fzf.grep({ search = vim.fn.expand('<cword>')}) end, desc = 'Grep word under cursor' },
             { mode = { 'v' }, '<leader>fv', fzf.grep_visual, desc = 'Grep visual selection' },
             { mode = { 'n' }, '<leader>b',  fzf.buffers,    desc = 'Buffers' },
+            { mode = { 'n' }, '<leader>t',  fzf.tabs,       desc = 'Tabs' },
             { mode = { 'n' }, '<leader>?',  fzf.helptags,   desc = 'Help tags' },
             { mode = { 'n' }, '<leader>m',  fzf.manpages,   desc = 'Man pages' },
             { mode = { 'n' }, '<leader>:',  fzf.commands,   desc = 'Commands' },
@@ -63,6 +64,30 @@ return {
                 vim.cmd('copen')
             end,
             header = 'send to QF',
+        }
+
+        -- Ctrl-A: diff two Tab-marked entries side-by-side. Only fires when
+        -- exactly 2 are selected; otherwise warns and bails. Uses fzf-lua's
+        -- own entry parser so this works uniformly across the files, buffers,
+        -- and git_status pickers (each embeds path info differently). Vim's
+        -- builtin :diffsplit reuses an already-loaded buffer when the path
+        -- matches, so picking 2 currently-open buffers Just Works.
+        local ctrl_a_to_diff = {
+            fn = function(selected, opts)
+                if #selected ~= 2 then
+                    vim.notify(
+                        ('ctrl-a diff: select exactly 2 entries (got %d)'):format(#selected),
+                        vim.log.levels.WARN
+                    )
+                    return
+                end
+                local path = require('fzf-lua.path')
+                local p1 = path.entry_to_file(selected[1], opts).path
+                local p2 = path.entry_to_file(selected[2], opts).path
+                vim.cmd('edit ' .. vim.fn.fnameescape(p1))
+                vim.cmd('vert diffsplit ' .. vim.fn.fnameescape(p2))
+            end,
+            header = 'diff selected pair',
         }
 
         fzf.setup({
@@ -126,6 +151,7 @@ return {
                     ['ctrl-v']  = with_zz(actions.file_vsplit),
                     ['ctrl-x']  = with_zz(actions.file_split),
                     ['ctrl-q']  = ctrl_q_to_qf,
+                    ['ctrl-a']  = ctrl_a_to_diff,
                 },
             },
 
@@ -151,6 +177,30 @@ return {
                     -- Passing the action as a callback like this, automatically adds the interactive header hint
                     ['ctrl-c']  = { fn = actions.buf_del, reload = true },
                     ['ctrl-q']  = ctrl_q_to_qf,
+                    ['ctrl-a']  = ctrl_a_to_diff,
+                },
+            },
+
+            -- The tabs picker entries embed `tabh` and `winid`; switch focus via
+            -- the API so existing split layouts (e.g. `:Git difftool -y`) stay
+            -- intact. A picker-local `default` is required because the global
+            -- `actions.files.default` above would otherwise win the merge in
+            -- fzf-lua/config.lua and replace `buf_switch` with `file_edit`.
+            tabs = {
+                actions = {
+                    ['default'] = function(selected)
+                        local tabh, winid = selected[1]:match('(%d+)\t(%d+)%)')
+                        tabh, winid = tonumber(tabh), tonumber(winid)
+                        if not tabh then return end
+                        vim.api.nvim_set_current_tabpage(tabh)
+                        -- winid is 0 for the tab-title row; only window rows
+                        -- carry a real winid worth restoring focus to.
+                        if winid and winid ~= 0 then
+                            vim.api.nvim_set_current_win(winid)
+                        end
+                        vim.cmd('wincmd =')
+                    end,
+                    ['ctrl-x'] = { fn = actions.buf_del, reload = true },
                 },
             },
 
@@ -167,6 +217,7 @@ return {
                         ['ctrl-s']  = { fn = actions.git_stage_unstage, reload = true },
                         ['ctrl-x']  = { fn = actions.git_reset, reload = true },
                         ['ctrl-q']  = ctrl_q_to_qf,
+                        ['ctrl-a']  = ctrl_a_to_diff,
                     },
                 },
             },

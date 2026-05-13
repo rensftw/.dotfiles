@@ -7,11 +7,13 @@ return {
         -- diagnostic, file, indent, jump, location, oldfile, quickfix,
         -- treesitter, undo, window, yank. Capital letters jump to first/last.
         --
-        -- Disable the `file` target — mini.ai owns ]f / [f for function
-        -- navigation (see lua/plugins/mini-ai.lua). Setting `suffix = ''`
-        -- skips the keymap registration for this target only.
+        -- Disable targets whose suffix is owned elsewhere:
+        --   `file`       → mini.ai owns ]f / [f (see lua/plugins/mini-ai.lua)
+        --   `treesitter` → core/keymaps.lua owns ]t / [t for tab navigation
+        -- Setting `suffix = ''` skips keymap registration for that target only.
         require('mini.bracketed').setup({
             file = { suffix = '' },
+            treesitter = { suffix = '' },
         })
     end,
 }

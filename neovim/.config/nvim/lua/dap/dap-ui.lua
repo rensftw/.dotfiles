@@ -14,7 +14,7 @@ return {
                 toggle = 't',
             },
             -- Expand lines larger than the window
-            expand_lines = vim.fn.has('nvim-0.7'),
+            expand_lines = true,
             -- Layouts define sections of the screen to place windows.
             -- The position can be 'left', 'right', 'top' or 'bottom'.
             -- The size specifies the height/width depending on position. It can be an Int
