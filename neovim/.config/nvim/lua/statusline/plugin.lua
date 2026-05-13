@@ -22,7 +22,7 @@ return {
     event = 'UiEnter',
     dependencies = {
         'folke/tokyonight.nvim',
-        'nvim-tree/nvim-web-devicons',
+        'nvim-mini/mini.icons',
         'tpope/vim-obsession',
     },
     config = function()

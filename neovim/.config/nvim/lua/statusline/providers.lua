@@ -224,14 +224,14 @@ end
 -- File info
 -- =====================================================================
 
--- devicons.get_icon_by_filetype returns (glyph, 'DevIcon<Name>' hl group)
--- so the icon keeps its per-filetype colour while the label uses the
--- neutral text colour.
+-- MiniIcons.get('filetype', ft) returns (glyph, 'MiniIcons<Color>' hl group,
+-- is_default) so the icon keeps its per-filetype colour while the label
+-- uses the neutral text colour.
 function M.filetype()
     local ft = vim.bo.filetype
     if ft == '' then return '' end
     local label = ft:sub(1, 1):upper() .. ft:sub(2)
-    local icon, icon_hl = require('nvim-web-devicons').get_icon_by_filetype(ft, { default = true })
+    local icon, icon_hl = MiniIcons.get('filetype', ft)
     if not icon then
         return ('%%#StlFileType# %s %%*'):format(label)
     end
@@ -244,14 +244,14 @@ function M.encoding()
     return ('%%#StlEncoding# %s %%*'):format(enc)
 end
 
--- Relative path with colored devicon, used by the winbar.
+-- Relative path with coloured mini.icons glyph, used by the winbar.
 -- `text_hl` lets the caller distinguish active vs inactive windows.
 function M.filepath(text_hl)
     local path = vim.fn.expand('%:.')
     if path == '' then return '[No Name]' end
     text_hl = text_hl or 'StlBase'
     local modified = vim.bo.modified and ' [+]' or ''
-    local icon, icon_hl = require('nvim-web-devicons').get_icon_by_filetype(vim.bo.filetype, { default = true })
+    local icon, icon_hl = MiniIcons.get('filetype', vim.bo.filetype)
     if not icon then
         return ('%%#%s#%s%s%%*'):format(text_hl, path, modified)
     end

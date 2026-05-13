@@ -2,7 +2,7 @@ return {
     'MeanderingProgrammer/render-markdown.nvim',
     enabled = true,
     dependencies = {
-        'nvim-tree/nvim-web-devicons',
+        'nvim-mini/mini.icons',
     },
     ft = { 'markdown', 'codecompanion' },
     config = function ()
