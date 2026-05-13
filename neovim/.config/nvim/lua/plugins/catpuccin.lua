@@ -42,6 +42,7 @@ return {
                 alpha              = true,
                 blink_cmp          = true,
                 dap                = { enabled = true, enable_ui = true },
+                diffview           = true,
                 fidget             = true,
                 gitsigns           = true,
                 harpoon            = true,

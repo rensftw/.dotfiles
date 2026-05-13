@@ -15,12 +15,8 @@ return {
         -- Open current file changes in a vertical split.
         -- This opens a 3-way diff if there are git conflict markers in the buffer.
         { mode = { 'n' }, '<leader>gds',  ':Gvdiffsplit!<cr>', },
-        -- Compare current branch changes with main (populates quickfix list)
-        -- Equivalent of `git diff origin/main...HEAD`
-        -- Note the 3 dot notation - this means we are checking against the last common
-        -- ancestor, so if main is ahead of the feature branch we don't include those
-        -- new/unrelated changes in the comparison
-        { mode = { 'n' }, '<leader>gdm',  ':Git difftool -y origin/main...<CR>', },
+        -- PR review keymaps (<leader>gd, <leader>gdm) live in
+        -- plugins/diffview.lua — fugitive remains the everyday git driver.
 
         -- Find out which commit renamed a file
         -- git log --follow --name-status path/to/file.js
@@ -39,8 +35,6 @@ return {
         -- 3. Run the Fugitive command with the base branch and make sure to update the extension in the pasted filepath, e.g.:
         -- :Gvdiffsplit develop:path/to/component.js
 
-        -- Compare with any branch
-        { mode = { 'n' }, '<leader>gd',   ':Git difftool -y', },
         -- Open file revision
         -- This also works with :Gvdiffsplit branch:%
         -- source: https://vi.stackexchange.com/questions/3746/how-do-i-open-a-file-from-another-git-branch
