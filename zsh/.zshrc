@@ -98,7 +98,14 @@ export NVM_DIR="$HOME/.nvm"
 # This lets claude and other tools find `node` immediately,
 # without triggering the full NVM load.
 if [[ -s "$NVM_DIR/alias/default" ]]; then
-  export PATH="$NVM_DIR/versions/node/$(cat $NVM_DIR/alias/default)/bin:$PATH"
+  _v="$(<"$NVM_DIR/alias/default")"
+  # Follow alias chain: e.g. lts/jod -> v22.22.1, lts/* -> lts/krypton -> v24.14.0
+  while [[ -f "$NVM_DIR/alias/$_v" ]]; do
+    _v="$(<"$NVM_DIR/alias/$_v")"
+  done
+  # NVM's version directories are always v-prefixed; alias values may not be.
+  export PATH="$NVM_DIR/versions/node/v${_v#v}/bin:$PATH"
+  unset _v
 fi
 
 _lazy_load_nvm() {
