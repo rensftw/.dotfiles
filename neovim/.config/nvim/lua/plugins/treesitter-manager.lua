@@ -1,7 +1,10 @@
 return {
     'romus204/tree-sitter-manager.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
-    cmd = 'TSManager',
+    cmd = {
+        'TSManager',
+        'TSManagerUpdateAll',
+    },
     dependencies = {
         'nvim-treesitter/nvim-treesitter-context',
         'JoosepAlviste/nvim-ts-context-commentstring',
