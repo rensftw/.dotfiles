@@ -77,6 +77,13 @@ setopt inc_append_history     # write to the history file immediately, not when 
 unsetopt share_history        # don't share history between all sessions
 bindkey -v
 
+# Open current command in Neovim buffer with Ctrl-G
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^G' edit-command-line          # emacs keymap
+bindkey -M viins '^G' edit-command-line # vi insert keymap
+bindkey -M vicmd '^G' edit-command-line # vi command keymap
+
 # zsh-completions setup
 FPATH=$BREW_PREFIX/share/zsh-completions:$FPATH
 FPATH=$BREW_PREFIX/share/zsh/site-functions:$FPATH
