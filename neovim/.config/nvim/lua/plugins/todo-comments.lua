@@ -1,5 +1,10 @@
 return {
     'folke/todo-comments.nvim',
+    event = 'VeryLazy',
+    keys = {
+        { ']c', mode = 'n', desc = 'Next semantic comment' },
+        { '[c', mode = 'n', desc = 'Previous semantic comment' },
+    },
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
         require('todo-comments').setup({

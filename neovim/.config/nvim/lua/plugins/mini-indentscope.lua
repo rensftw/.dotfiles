@@ -1,7 +1,7 @@
 return {
     'nvim-mini/mini.indentscope',
     version = false,
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = 'VeryLazy',
     config = function()
         require('mini.indentscope').setup({
             draw = {
@@ -28,5 +28,9 @@ return {
                 vim.b.miniindentscope_disable = true
             end,
         })
+
+        if vim.bo.buftype == 'nofile' then
+            vim.b.miniindentscope_disable = true
+        end
     end,
 }

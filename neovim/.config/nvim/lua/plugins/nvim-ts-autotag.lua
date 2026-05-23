@@ -1,7 +1,7 @@
 return {
     'windwp/nvim-ts-autotag',
     lazy = true,
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = 'InsertEnter',
     -- Auto-close and auto-rename HTML/JSX/TSX/Vue/Svelte/Astro tags using
     -- treesitter. When you type `>` to close an opening tag (e.g. `<div>`),
     -- it inserts the matching closing tag (`</div>`) and parks the cursor

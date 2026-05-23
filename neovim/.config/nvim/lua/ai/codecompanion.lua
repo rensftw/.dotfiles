@@ -1,7 +1,6 @@
 return {
     'olimorris/codecompanion.nvim',
     lazy = true,
-    event = 'VeryLazy',
     cmd = {
         'CodeCompanion',
         'CodeCompanionChat',
@@ -20,6 +19,8 @@ return {
         'ravitemer/mcphub.nvim',
     },
     config = function()
+        require('ai.helpers.spinner'):init()
+
         -- Workaround: CodeCompanion's slash-command FZF provider sets the
         -- picker prompt to args.title (e.g. "Select a help tag" for /help),
         -- bypassing our fzf-lua register_ui_select callback. Patch its
@@ -158,8 +159,5 @@ return {
                 },
             },
         })
-    end,
-    init = function()
-        require('ai.helpers.spinner'):init()
     end,
 }

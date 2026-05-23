@@ -1,7 +1,6 @@
 return {
     'danymat/neogen',
     lazy = true,
-    event = 'VeryLazy',
     dependencies = {
         'L3MON4D3/LuaSnip',
     },

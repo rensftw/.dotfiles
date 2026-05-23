@@ -1,6 +1,6 @@
 return {
     'lewis6991/gitsigns.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = 'VeryLazy',
     keys = {
         -- Next/previous hunk
         { mode = { 'n' },    ']h',         '<cmd>Gitsigns next_hunk<CR>zz' },

@@ -2,9 +2,6 @@ return {
     'goolord/alpha-nvim',
     lazy = true,
     event = 'VimEnter',
-    dependencies = {
-        'mason-org/mason.nvim',
-    },
     config = function()
         local alpha = require('alpha')
         local fortune = require('alpha.fortune')

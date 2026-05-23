@@ -1,3 +1,11 @@
+-- Disable netrw entirely; file browsing goes through mini-files (<leader>e)
+-- and nnn (<leader>n). With netrw enabled, its directory-detection autocmds
+-- briefly intercept fugitive's directory-shaped buffer names (e.g.
+-- fugitive:///.../.git//) before fugitive's own BufReadCmd registers — visible
+-- as a flash of netrw before :Git renders the status window.
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' ' -- use <space> as the leader key
 vim.o.mouse = '' -- disable mouse support

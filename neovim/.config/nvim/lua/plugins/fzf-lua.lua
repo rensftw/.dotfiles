@@ -2,38 +2,34 @@ return {
     'ibhagwan/fzf-lua',
     lazy = true,
     cmd = { 'FzfLua' },
-    keys = function()
-        local fzf = require('fzf-lua')
-
-        return {
-            { mode = { 'n' }, '<leader>o',  function() fzf.files({ previewer = false }) end,                                         desc = 'Find files' },
-            { mode = { 'n' }, '<leader>i',  fzf.resume,                                                                              desc = 'Resume last picker' },
-            { mode = { 'n' }, '<leader>.',  function() fzf.files({ cwd = vim.fn.expand('$HOME/.dotfiles'), cwd_prompt = true }) end, desc = 'Find dotfiles' },
-            { mode = { 'n' }, '<leader>fb', fzf.blines,                                                                              desc = 'Buffer fuzzy find' },
-            { mode = { 'n' }, '<leader>ff', fzf.live_grep,                                                                           desc = 'Live grep' },
-            {
-                mode = { 'n' },
-                '<leader>fa',
-                function() fzf.grep({ search = vim.fn.input('   filter grep ❯ ') }) end,
-                desc = 'Grep with input',
-            },
-            -- Prefer to expand <cword> because fzf.grep_cword inserts `\bhello\b`
-            { mode = { 'n' }, '<leader>fw', function() fzf.grep({ search = vim.fn.expand('<cword>')}) end, desc = 'Grep word under cursor' },
-            { mode = { 'v' }, '<leader>fv', fzf.grep_visual, desc = 'Grep visual selection' },
-            { mode = { 'n' }, '<leader>b',  fzf.buffers,    desc = 'Buffers' },
-            { mode = { 'n' }, '<leader>t',  fzf.tabs,       desc = 'Tabs' },
-            { mode = { 'n' }, '<leader>?',  fzf.helptags,   desc = 'Help tags' },
-            { mode = { 'n' }, '<leader>m',  fzf.manpages,   desc = 'Man pages' },
-            { mode = { 'n' }, '<leader>:',  fzf.commands,   desc = 'Commands' },
-            { mode = { 'n' }, '<leader>gs', fzf.git_status, desc = 'Git status' },
-            {
-                mode = { 'n' },
-                '<leader>gcbb',
-                function() fzf.git_branches({ cmd = 'git branch --color' }) end,
-                desc = 'Git branches (local only)',
-            },
-        }
-    end,
+    keys = {
+        { mode = { 'n' }, '<leader>o',  function() require('fzf-lua').files({ previewer = false }) end,                                         desc = 'Find files' },
+        { mode = { 'n' }, '<leader>i',  function() require('fzf-lua').resume() end,                                                              desc = 'Resume last picker' },
+        { mode = { 'n' }, '<leader>.',  function() require('fzf-lua').files({ cwd = vim.fn.expand('$HOME/.dotfiles'), cwd_prompt = true }) end, desc = 'Find dotfiles' },
+        { mode = { 'n' }, '<leader>fb', function() require('fzf-lua').blines() end,                                                              desc = 'Buffer fuzzy find' },
+        { mode = { 'n' }, '<leader>ff', function() require('fzf-lua').live_grep() end,                                                           desc = 'Live grep' },
+        {
+            mode = { 'n' },
+            '<leader>fa',
+            function() require('fzf-lua').grep({ search = vim.fn.input('   filter grep ❯ ') }) end,
+            desc = 'Grep with input',
+        },
+        -- Prefer to expand <cword> because fzf.grep_cword inserts `\bhello\b`
+        { mode = { 'n' }, '<leader>fw', function() require('fzf-lua').grep({ search = vim.fn.expand('<cword>')}) end, desc = 'Grep word under cursor' },
+        { mode = { 'v' }, '<leader>fv', function() require('fzf-lua').grep_visual() end, desc = 'Grep visual selection' },
+        { mode = { 'n' }, '<leader>b',  function() require('fzf-lua').buffers() end,    desc = 'Buffers' },
+        { mode = { 'n' }, '<leader>t',  function() require('fzf-lua').tabs() end,       desc = 'Tabs' },
+        { mode = { 'n' }, '<leader>?',  function() require('fzf-lua').helptags() end,   desc = 'Help tags' },
+        { mode = { 'n' }, '<leader>m',  function() require('fzf-lua').manpages() end,   desc = 'Man pages' },
+        { mode = { 'n' }, '<leader>:',  function() require('fzf-lua').commands() end,   desc = 'Commands' },
+        { mode = { 'n' }, '<leader>gs', function() require('fzf-lua').git_status() end, desc = 'Git status' },
+        {
+            mode = { 'n' },
+            '<leader>gcbb',
+            function() require('fzf-lua').git_branches({ cmd = 'git branch --color' }) end,
+            desc = 'Git branches (local only)',
+        },
+    },
     config = function()
         local fzf     = require('fzf-lua')
         local actions = fzf.actions
