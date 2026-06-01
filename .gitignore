@@ -25,3 +25,7 @@ neovim/.config/nvim/lua/.luarc.json
 
 # work-related snippets
 neovim/.config/nvim/lua/snippets/work.lua
+
+# pi auth/session state (never commit)
+pi/.pi/agent/auth.json
+pi/.pi/agent/sessions/

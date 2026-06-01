@@ -1,0 +1,30 @@
+{
+  "providers": {
+    "ollama": {
+      "baseUrl": "http://localhost:11434/v1",
+      "api": "openai-completions",
+      "apiKey": "ollama",
+      "compat": {
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": false
+      },
+      "models": [
+        { "id": "qwen2.5:1.5b" },
+        { "id": "qwen3.5:latest" },
+        { "id": "qwen3.6:latest" },
+        { "id": "medgemma1.5:latest" },
+        { "id": "medgemma:4b" },
+        { "id": "deepseek-r1:latest" },
+        { "id": "qwen3:latest" },
+        { "id": "devstral:latest" },
+        { "id": "qwen3:8b" },
+        { "id": "llama3.1:latest" },
+        { "id": "qwen2.5-coder:7b" },
+        { "id": "codegemma:latest" },
+        { "id": "gemma3:12b" },
+        { "id": "llama3:latest" },
+        { "id": "mistral:latest" }
+      ]
+    }
+  }
+}

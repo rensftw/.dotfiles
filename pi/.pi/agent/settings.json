@@ -1,0 +1,9 @@
+{
+  "defaultProvider": "ollama",
+  "defaultModel": "qwen3.6:latest",
+  "defaultThinkingLevel": "xhigh",
+  "packages": [
+    "npm:pi-web-access"
+  ],
+  "lastChangelogVersion": "0.76.0"
+}
