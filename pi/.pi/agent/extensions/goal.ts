@@ -4,7 +4,7 @@ import type {
   ExtensionContext,
 } from "@earendil-works/pi-coding-agent";
 import { completeSimple, type Api, type Model, type Usage } from "@earendil-works/pi-ai";
-import { truncateToWidth, type Component, type TUI } from "@earendil-works/pi-tui";
+import { truncateToWidth, type AutocompleteItem, type Component, type TUI } from "@earendil-works/pi-tui";
 
 const CUSTOM_TYPE = "goal-state-v1";
 
@@ -31,6 +31,12 @@ const STATUS_WORDS = new Set(["status", "show", "info", "inspect"]);
 
 const INTERRUPT_WORDS = new Set(["abort", "cancel", "end", "finish", "finished", "off", "reset", "stop"]);
 const SHORT_CONDITION_MAX_CHARS = 28;
+const DEFAULT_MAX_TURNS = 50;
+const DEFAULT_COST_BUDGET = 15;
+const GOAL_USAGE =
+  "Usage: /goal [--turns N] [--budget DOLLARS|--cost DOLLARS] <completion condition>";
+const TURN_VALUE_COMPLETIONS = [String(DEFAULT_MAX_TURNS), "25", "100"];
+const COST_VALUE_COMPLETIONS = [String(DEFAULT_COST_BUDGET), "5", "30"];
 
 type GoalPhase = "active" | "done";
 type GoalColor = "accent" | "success" | "warning" | "muted";
@@ -57,7 +63,12 @@ interface GoalUsage {
   cost: number;
 }
 
-interface GoalState {
+interface GoalLimits {
+  maxTurns: number;
+  costBudget: number;
+}
+
+interface GoalState extends GoalLimits {
   phase: GoalPhase;
   condition: string;
   startedAt: number;
@@ -70,7 +81,7 @@ interface GoalState {
   finalUsage?: GoalUsage;
 }
 
-interface PendingGoalStart {
+interface PendingGoalStart extends GoalLimits {
   id: number;
   condition: string;
 }
@@ -98,6 +109,26 @@ interface GoalDisplay {
   condition: string;
 }
 
+interface GoalLimitHit {
+  error: "turn-limit-reached" | "cost-budget-reached" | "goal-limit-reached";
+  summary: string;
+}
+
+interface ParsedGoalArgs {
+  condition: string;
+  limits: GoalLimits;
+  providedLimits: Partial<GoalLimits>;
+  hasLimitOptions: boolean;
+  error?: string;
+}
+
+type EmbeddedGoalInvocation =
+  | { kind: "start"; condition: string; agentText: string; limits: GoalLimits }
+  | { kind: "help" }
+  | { kind: "status" }
+  | { kind: "dismiss"; word: string }
+  | { kind: "error"; error: string };
+
 /** Return true when a value is a non-null object with string keys. */
 function isRecord(value: unknown): value is Record<string, unknown> {
   return !!value && typeof value === "object";
@@ -120,6 +151,31 @@ function normalizeUsage(value: unknown): GoalUsage {
 /** Normalize optional persisted usage, preserving undefined when no total was saved. */
 function normalizeOptionalUsage(value: unknown): GoalUsage | undefined {
   return isRecord(value) ? normalizeUsage(value) : undefined;
+}
+
+/** Return a fresh copy of the default autonomous-loop limits. */
+function defaultGoalLimits(): GoalLimits {
+  return { maxTurns: DEFAULT_MAX_TURNS, costBudget: DEFAULT_COST_BUDGET };
+}
+
+/** Normalize a persisted or user-provided turn ceiling into a positive integer. */
+function normalizeMaxTurns(value: unknown): number {
+  if (typeof value !== "number" || !Number.isFinite(value)) return DEFAULT_MAX_TURNS;
+  const turns = Math.floor(value);
+  return turns > 0 ? turns : DEFAULT_MAX_TURNS;
+}
+
+/** Normalize a persisted or user-provided dollar budget into a positive finite value. */
+function normalizeCostBudget(value: unknown): number {
+  return typeof value === "number" && Number.isFinite(value) && value > 0 ? value : DEFAULT_COST_BUDGET;
+}
+
+/** Normalize a pair of goal limits, applying sensible defaults to missing legacy state. */
+function normalizeGoalLimits(value: { maxTurns?: unknown; costBudget?: unknown }): GoalLimits {
+  return {
+    maxTurns: normalizeMaxTurns(value.maxTurns),
+    costBudget: normalizeCostBudget(value.costBudget),
+  };
 }
 
 /** Normalize a persisted verdict object, dropping invalid optional verdict data. */
@@ -153,9 +209,8 @@ function normalizeGoalState(value: unknown): GoalState | undefined {
   else if (value.active === false) phase = "done";
   if (!phase) return undefined;
 
-  const startEntryId = typeof value.startEntryId === "string" || value.startEntryId === null
-    ? value.startEntryId
-    : null;
+  const rawStartEntryId = value.startEntryId;
+  const startEntryId: string | null = typeof rawStartEntryId === "string" ? rawStartEntryId : null;
   const endedAt = typeof value.endedAt === "number"
     ? value.endedAt
     : typeof value.completedAt === "number"
@@ -163,6 +218,10 @@ function normalizeGoalState(value: unknown): GoalState | undefined {
       : undefined;
 
   const shortCondition = sanitizeShortCondition(value.shortCondition);
+  const limits = normalizeGoalLimits({
+    maxTurns: value.maxTurns,
+    costBudget: value.costBudget ?? value.budget ?? value.maxCost,
+  });
 
   return {
     phase,
@@ -171,6 +230,7 @@ function normalizeGoalState(value: unknown): GoalState | undefined {
     startEntryId,
     turnCount: typeof value.turnCount === "number" ? value.turnCount : 0,
     evaluationUsage: normalizeUsage(value.evaluationUsage ?? value.evaluatorUsage),
+    ...limits,
     shortCondition,
     latestVerdict: normalizeVerdict(value.latestVerdict),
     endedAt,
@@ -239,27 +299,6 @@ function addUsage(a: GoalUsage, b: GoalUsage): GoalUsage {
   };
 }
 
-/** Combine abort signals so either Pi cancellation or /goal stop cancels evaluator work. */
-function combinedAbortSignal(...signals: Array<AbortSignal | undefined>): AbortSignal | undefined {
-  const active = signals.filter((signal): signal is AbortSignal => !!signal);
-  if (active.length === 0) return undefined;
-  if (active.length === 1) return active[0];
-
-  const abortSignal = AbortSignal as typeof AbortSignal & { any?: (signals: AbortSignal[]) => AbortSignal };
-  if (abortSignal.any) return abortSignal.any(active);
-
-  const controller = new AbortController();
-  const abort = () => controller.abort();
-  for (const signal of active) {
-    if (signal.aborted) {
-      controller.abort();
-      break;
-    }
-    signal.addEventListener("abort", abort, { once: true });
-  }
-  return controller.signal;
-}
-
 /** Best-effort JSON stringify for tool-call arguments in evaluator transcripts. */
 function safeJson(value: unknown): string {
   try {
@@ -305,10 +344,10 @@ function truncateMiddle(text: string, maxChars: number): string {
 /** Return message entries on the active branch after the goal was created. */
 function branchSinceGoal(ctx: ExtensionContext | ExtensionCommandContext, state: GoalState): MessageEntry[] {
   const branch = ctx.sessionManager.getBranch() as SessionEntry[];
-  const startIndex = state.startEntryId
-    ? branch.findIndex((entry) => entry.id === state.startEntryId)
-    : -1;
-  const afterStart = startIndex >= 0 ? branch.slice(startIndex + 1) : branch;
+  if (state.startEntryId === null) return branch.filter(isMessageEntry);
+
+  const startIndex = branch.findIndex((entry) => entry.id === state.startEntryId);
+  const afterStart = startIndex >= 0 ? branch.slice(startIndex + 1) : [];
 
   return afterStart.filter(isMessageEntry);
 }
@@ -350,6 +389,25 @@ function totalSpend(ctx: ExtensionContext | ExtensionCommandContext, state: Goal
   return addUsage(agentUsageSinceGoal(ctx, state), state.evaluationUsage);
 }
 
+/** Return the autonomous-loop ceiling(s) reached by the current goal, if any. */
+function goalLimitHit(ctx: ExtensionContext | ExtensionCommandContext, state: GoalState): GoalLimitHit | undefined {
+  const spend = totalSpend(ctx, state);
+  const hits: string[] = [];
+  let error: GoalLimitHit["error"] | undefined;
+
+  if (state.turnCount >= state.maxTurns) {
+    hits.push(`turn limit ${state.turnCount}/${state.maxTurns}`);
+    error = "turn-limit-reached";
+  }
+
+  if (spend.cost >= state.costBudget) {
+    hits.push(`cost budget ${money(spend.cost)}/${money(state.costBudget)}`);
+    error = error ? "goal-limit-reached" : "cost-budget-reached";
+  }
+
+  return error ? { error, summary: hits.join(" and ") } : undefined;
+}
+
 /** Parse a JSON object from strict JSON, fenced JSON, or a loose object substring. */
 function parseJsonObject(text: string): Record<string, unknown> | undefined {
   const trimmed = text.trim();
@@ -384,6 +442,291 @@ function parseLooseVerdict(text: string): { met: boolean; reasoning: string } | 
     met: value === "true" || value === "yes",
     reasoning: reasoningMatch?.[1]?.trim() || trimmed,
   };
+}
+
+/** Tokenize command arguments, supporting simple single/double-quoted values. */
+function tokenizeArgs(input: string): string[] {
+  const tokens: string[] = [];
+  let current = "";
+  let quote: "'" | '"' | undefined;
+  let escaped = false;
+
+  for (const char of input) {
+    if (escaped) {
+      current += char;
+      escaped = false;
+      continue;
+    }
+
+    if (quote) {
+      if (char === "\\") {
+        escaped = true;
+      } else if (char === quote) {
+        quote = undefined;
+      } else {
+        current += char;
+      }
+      continue;
+    }
+
+    if (char === "'" || char === '"') {
+      quote = char;
+    } else if (/\s/.test(char)) {
+      if (current) {
+        tokens.push(current);
+        current = "";
+      }
+    } else {
+      current += char;
+    }
+  }
+
+  if (escaped) current += "\\";
+  if (current) tokens.push(current);
+  return tokens;
+}
+
+/** Parse a positive integer turn limit from /goal options. */
+function parseTurnLimit(value: string): number | undefined {
+  const turns = Number(value);
+  return Number.isInteger(turns) && turns > 0 ? turns : undefined;
+}
+
+/** Parse a positive dollar budget from /goal options. */
+function parseCostBudget(value: string): number | undefined {
+  const amount = Number(value.trim().replace(/^\$/, ""));
+  return Number.isFinite(amount) && amount > 0 ? amount : undefined;
+}
+
+/** Parse leading /goal limit options, leaving the rest as the completion condition. */
+function parseGoalArgs(text: string): ParsedGoalArgs {
+  const tokens = tokenizeArgs(text);
+  const limits = defaultGoalLimits();
+  const providedLimits: Partial<GoalLimits> = {};
+  let hasLimitOptions = false;
+  let index = 0;
+
+  const readOptionValue = (inlineValue?: string): string | undefined => {
+    if (inlineValue !== undefined) return inlineValue;
+    const next = tokens[index + 1];
+    if (!next || next.startsWith("--")) return undefined;
+    index += 1;
+    return next;
+  };
+  const fail = (error: string): ParsedGoalArgs => ({
+    condition: "",
+    limits,
+    providedLimits,
+    hasLimitOptions,
+    error,
+  });
+
+  while (index < tokens.length) {
+    const token = tokens[index];
+    if (token === "--") {
+      index += 1;
+      break;
+    }
+    if (!token.startsWith("--")) break;
+
+    const equals = token.indexOf("=");
+    const name = equals >= 0 ? token.slice(0, equals) : token;
+    const inlineValue = equals >= 0 ? token.slice(equals + 1) : undefined;
+
+    if (name === "--turns" || name === "--max-turns" || name === "--maxTurns") {
+      const value = readOptionValue(inlineValue);
+      const turns = value ? parseTurnLimit(value) : undefined;
+      if (!turns) return fail(`${name} requires a positive whole number. ${GOAL_USAGE}`);
+      limits.maxTurns = turns;
+      providedLimits.maxTurns = turns;
+      hasLimitOptions = true;
+      index += 1;
+      continue;
+    }
+
+    if (
+      name === "--budget" ||
+      name === "--cost" ||
+      name === "--budget/cost" ||
+      name === "--max-cost" ||
+      name === "--maxCost"
+    ) {
+      const value = readOptionValue(inlineValue);
+      const budget = value ? parseCostBudget(value) : undefined;
+      if (!budget) return fail(`${name} requires a positive dollar amount. ${GOAL_USAGE}`);
+      limits.costBudget = budget;
+      providedLimits.costBudget = budget;
+      hasLimitOptions = true;
+      index += 1;
+      continue;
+    }
+
+    return fail(`Unknown /goal option ${name}. ${GOAL_USAGE}`);
+  }
+
+  return {
+    condition: tokens.slice(index).join(" ").trim(),
+    limits,
+    providedLimits,
+    hasLimitOptions,
+  };
+}
+
+/** Parse a /goal directive when it appears at the start of any line in a larger prompt. */
+function parseEmbeddedGoalInvocation(text: string): EmbeddedGoalInvocation | undefined {
+  const lines = text.split(/\r?\n/);
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const match = lines[index].match(/^[ \t]*\/goal(?:[ \t]+(.*)|[ \t]*)$/);
+    if (!match) continue;
+
+    const argsText = (match[1] ?? "").trim();
+    const lowered = argsText.toLowerCase();
+    const surroundingText = [...lines.slice(0, index), ...lines.slice(index + 1)].join("\n").trim();
+
+    // Preserve command-style behavior for indented/buried control invocations that have no prompt body.
+    if (!surroundingText) {
+      if (lowered === "help" || lowered === "--help") return { kind: "help" };
+      if (!argsText || STATUS_WORDS.has(lowered)) return { kind: "status" };
+      if (DISMISS_WORDS.has(lowered)) return { kind: "dismiss", word: lowered };
+    }
+
+    const parsed = parseGoalArgs(argsText);
+    if (parsed.error) return { kind: "error", error: parsed.error };
+
+    const promptLines = [
+      ...lines.slice(0, index),
+      ...(parsed.condition ? [parsed.condition] : []),
+      ...lines.slice(index + 1),
+    ];
+    const agentText = promptLines.join("\n").trim();
+    const condition = agentText || parsed.condition;
+
+    if (!condition) return { kind: "error", error: `No goal condition provided. ${GOAL_USAGE}` };
+
+    return {
+      kind: "start",
+      condition,
+      agentText: agentText || condition,
+      limits: parsed.limits,
+    };
+  }
+
+  return undefined;
+}
+
+type GoalOptionKind = "turns" | "budget";
+
+/** Return the canonical goal option kind for an option token. */
+function goalOptionKind(token: string): GoalOptionKind | undefined {
+  const name = token.split("=", 1)[0];
+  if (name === "--turns" || name === "--max-turns" || name === "--maxTurns") return "turns";
+  if (
+    name === "--budget" ||
+    name === "--cost" ||
+    name === "--budget/cost" ||
+    name === "--max-cost" ||
+    name === "--maxCost"
+  ) {
+    return "budget";
+  }
+  return undefined;
+}
+
+/** Split the full command-argument prefix into text before and inside the token being completed. */
+function splitArgumentCompletion(argumentPrefix: string): { beforeToken: string; currentToken: string } {
+  const currentToken = argumentPrefix.match(/\S*$/)?.[0] ?? "";
+  return {
+    beforeToken: argumentPrefix.slice(0, argumentPrefix.length - currentToken.length),
+    currentToken,
+  };
+}
+
+/** Return tokens already completed before the token currently being edited. */
+function completedArgumentTokens(argumentPrefix: string, currentToken: string): string[] {
+  const tokens = tokenizeArgs(argumentPrefix);
+  return currentToken ? tokens.slice(0, -1) : tokens;
+}
+
+/** Autocomplete numeric values for an option that is waiting for its argument. */
+function goalValueCompletions(
+  kind: GoalOptionKind,
+  beforeToken: string,
+  currentToken: string,
+  optionPrefix = "",
+): AutocompleteItem[] | null {
+  const values = kind === "turns" ? TURN_VALUE_COMPLETIONS : COST_VALUE_COMPLETIONS;
+  const normalizedToken = kind === "budget" ? currentToken.replace(/^\$/, "") : currentToken;
+  const items = values
+    .filter((value) => value.startsWith(normalizedToken))
+    .map((value) => ({
+      value: `${beforeToken}${optionPrefix}${value} `,
+      label: value,
+      description: kind === "turns"
+        ? `${value} autonomous turns${value === String(DEFAULT_MAX_TURNS) ? " (default)" : ""}`
+        : `${money(Number(value))} spend budget${value === String(DEFAULT_COST_BUDGET) ? " (default)" : ""}`,
+    }));
+
+  return items.length > 0 ? items : null;
+}
+
+/** Suggest /goal options and control words as the user types command arguments. */
+function goalArgumentCompletions(argumentPrefix: string): AutocompleteItem[] | null {
+  const { beforeToken, currentToken } = splitArgumentCompletion(argumentPrefix);
+  const inlineOption = currentToken.match(/^(--(?:turns|max-turns|maxTurns|budget|cost|budget\/cost|max-cost|maxCost)=)(.*)$/);
+  if (inlineOption) {
+    const kind = goalOptionKind(inlineOption[1].slice(0, -1));
+    return kind ? goalValueCompletions(kind, beforeToken, inlineOption[2], inlineOption[1]) : null;
+  }
+
+  const completedTokens = completedArgumentTokens(argumentPrefix, currentToken);
+  const previousToken = completedTokens.at(-1) ?? "";
+  const previousOptionKind = goalOptionKind(previousToken);
+  if (previousOptionKind && !previousToken.includes("=") && !currentToken.startsWith("--")) {
+    return goalValueCompletions(previousOptionKind, beforeToken, currentToken);
+  }
+
+  const usedOptions = new Set(completedTokens.map(goalOptionKind).filter((kind): kind is GoalOptionKind => !!kind));
+  const items: AutocompleteItem[] = [];
+
+  if (currentToken === "" || currentToken.startsWith("--")) {
+    for (const option of [
+      {
+        value: "--turns ",
+        label: "--turns",
+        kind: "turns" as const,
+        description: `Max autonomous turns (default ${DEFAULT_MAX_TURNS})`,
+      },
+      {
+        value: "--budget ",
+        label: "--budget",
+        kind: "budget" as const,
+        description: `Max total spend in dollars (default ${money(DEFAULT_COST_BUDGET)})`,
+      },
+      {
+        value: "--cost ",
+        label: "--cost",
+        kind: "budget" as const,
+        description: "Alias for --budget",
+      },
+    ]) {
+      if (usedOptions.has(option.kind) || !option.label.startsWith(currentToken)) continue;
+      items.push({ value: `${beforeToken}${option.value}`, label: option.label, description: option.description });
+    }
+  }
+
+  if (completedTokens.length === 0 && !currentToken.startsWith("--")) {
+    for (const item of [
+      { value: "status", label: "status", description: "Show active goal status" },
+      { value: "stop", label: "stop", description: "Dismiss the active or pending goal" },
+      { value: "help", label: "help", description: "Show /goal usage and defaults" },
+    ]) {
+      if (currentToken && !item.label.startsWith(currentToken)) continue;
+      items.push({ ...item, value: `${beforeToken}${item.value}` });
+    }
+  }
+
+  return items.length > 0 ? items : null;
 }
 
 /** Render a model as provider/id for storage, display, and exact matching. */
@@ -483,7 +826,7 @@ async function evaluateGoal(
   }
 
   const auth = await ctx.modelRegistry.getApiKeyAndHeaders(model);
-  if (!auth.ok) {
+  if (auth.ok === false) {
     return {
       met: false,
       reasoning: `Evaluator model ${modelKey(model)} is not authenticated: ${auth.error}`,
@@ -525,7 +868,7 @@ async function evaluateGoal(
       maxTokens: 1200,
       // Some evaluator candidates reject non-default temperature.
       reasoning: "minimal",
-      signal: signal ?? ctx.signal,
+      signal,
     },
   );
 
@@ -666,9 +1009,19 @@ function widgetCondition(state: GoalState): string {
   return state.shortCondition ?? fallbackShortCondition(state.condition);
 }
 
-/** Format a turn count with correct singular/plural wording. */
-function turnLabel(turnCount: number): string {
-  return `${turnCount} ${turnCount === 1 ? "turn" : "turns"}`;
+/** Format turn progress against the configured autonomous-loop ceiling. */
+function turnLabel(state: GoalState): string {
+  return `${state.turnCount}/${state.maxTurns} turns`;
+}
+
+/** Format spend progress against the configured dollar budget. */
+function spendLabel(spend: GoalUsage, state: GoalState): string {
+  return `${compactMoney(spend.cost)}/${compactMoney(state.costBudget)}`;
+}
+
+/** Format the configured loop ceilings for notifications. */
+function limitsSummary(limits: GoalLimits): string {
+  return `${limits.maxTurns} turns, ${money(limits.costBudget)} budget`;
 }
 
 /** Return live elapsed time for active goals or frozen elapsed time for completed goals. */
@@ -712,8 +1065,8 @@ function goalDisplay(
     icon: goalIcon(state, isChecking),
     label: goalLabel(state, isChecking),
     color: goalColor(state, isChecking),
-    turns: turnLabel(state.turnCount),
-    spent: compactMoney(spend.cost),
+    turns: turnLabel(state),
+    spent: spendLabel(spend, state),
     elapsed: elapsedForGoal(state),
     condition: widgetCondition(state),
   };
@@ -775,7 +1128,7 @@ function createGoalWidget(
 }
 
 /** Show a notification with full goal details for bare /goal invocations. */
-function showGoalStatus(ctx: ExtensionCommandContext, state: GoalState): void {
+function showGoalStatus(ctx: ExtensionContext | ExtensionCommandContext, state: GoalState): void {
   const spend = totalSpend(ctx, state);
   const verdict = state.latestVerdict;
   const display = goalDisplay(ctx, state, false);
@@ -785,7 +1138,7 @@ function showGoalStatus(ctx: ExtensionCommandContext, state: GoalState): void {
     `Status: ${display.label}`,
     `Turns: ${display.turns}`,
     `Elapsed: ${display.elapsed}`,
-    `Spend: ${money(spend.cost)} (${spend.tokens.toLocaleString()} tokens, incl. evaluator)`,
+    `Spend: ${money(spend.cost)} / ${money(state.costBudget)} budget (${spend.tokens.toLocaleString()} tokens, incl. evaluator)`,
     `Evaluator: ${verdict?.evaluatorModel ?? "not run yet"}`,
     `Latest verdict: ${verdict ? (verdict.met ? "met" : "not met") : "not run yet"}`,
     `Reasoning: ${verdict?.reasoning ?? "No evaluator verdict yet."}`,
@@ -832,6 +1185,34 @@ export default function goalExtension(pi: ExtensionAPI) {
       );
       widgetInstalled = true;
     }
+  }
+
+  /** Activate a new goal from either /goal command arguments or an embedded prompt directive. */
+  function activateGoal(pending: PendingGoalStart, ctx: ExtensionContext | ExtensionCommandContext): GoalState {
+    pendingStart = undefined;
+    shortConditionAbort?.abort();
+    shortConditionAbort = undefined;
+    evaluationAbort?.abort();
+    evaluationAbort = undefined;
+    evaluating = false;
+
+    state = {
+      phase: "active",
+      condition: pending.condition,
+      shortCondition: fallbackShortCondition(pending.condition),
+      startedAt: Date.now(),
+      startEntryId: ctx.sessionManager.getLeafId(),
+      turnCount: 0,
+      evaluationUsage: { tokens: 0, cost: 0 },
+      maxTurns: pending.maxTurns,
+      costBudget: pending.costBudget,
+    };
+    persist();
+    applyStatus(ctx);
+    if (ctx.hasUI) ctx.ui.notify(`Goal set: ${pending.condition}\nLimits: ${limitsSummary(state)}`, "info");
+
+    void refreshShortCondition(ctx, state);
+    return state;
   }
 
   /** Restore the latest goal state visible on the current session branch. */
@@ -884,7 +1265,9 @@ export default function goalExtension(pi: ExtensionAPI) {
     applyStatus(ctx);
 
     try {
-      const verdict = await evaluateGoal(ctx, current, combinedAbortSignal(ctx.signal, abortController.signal));
+      // Do not combine in the just-finished turn's signal: after an interrupt it may
+      // already be aborted, which would make every post-interrupt evaluation fail.
+      const verdict = await evaluateGoal(ctx, current, abortController.signal);
       if (state !== current || current.phase !== "active") return;
 
       current.latestVerdict = verdict;
@@ -896,6 +1279,22 @@ export default function goalExtension(pi: ExtensionAPI) {
         persist();
         applyStatus(ctx);
         if (ctx.hasUI) ctx.ui.notify(`Goal satisfied. Dismiss with /goal end.\n${verdict.reasoning}`, "info");
+        return;
+      }
+
+      const limit = goalLimitHit(ctx, current);
+      if (limit) {
+        current.phase = "done";
+        current.endedAt = verdict.evaluatedAt;
+        current.latestVerdict = {
+          ...verdict,
+          reasoning: `${verdict.reasoning}\n\nStopped because the /goal ${limit.summary} was reached.`,
+          error: limit.error,
+        };
+        current.finalUsage = totalSpend(ctx, current);
+        persist();
+        applyStatus(ctx);
+        if (ctx.hasUI) ctx.ui.notify(`Goal stopped: ${limit.summary} reached.\n${verdict.reasoning}`, "warning");
         return;
       }
 
@@ -926,9 +1325,11 @@ export default function goalExtension(pi: ExtensionAPI) {
         ctx.ui.notify(`Goal evaluation failed: ${error instanceof Error ? error.message : String(error)}`, "error");
       }
     } finally {
-      if (evaluationAbort === abortController) evaluationAbort = undefined;
-      evaluating = false;
-      applyStatus(ctx);
+      if (evaluationAbort === abortController) {
+        evaluationAbort = undefined;
+        evaluating = false;
+        applyStatus(ctx);
+      }
     }
   }
 
@@ -955,7 +1356,13 @@ export default function goalExtension(pi: ExtensionAPI) {
   pi.on("before_agent_start", async (event) => {
     if (state?.phase !== "active") return;
     return {
-      systemPrompt: `${event.systemPrompt}\n\nActive /goal completion condition: ${state.condition}\nContinue working autonomously until this condition is demonstrably satisfied.`,
+      systemPrompt: [
+        event.systemPrompt,
+        "",
+        `Active /goal completion condition: ${state.condition}`,
+        `Active /goal limits: ${state.maxTurns} turns, ${money(state.costBudget)} total spend.`,
+        "Continue working autonomously until this condition is demonstrably satisfied.",
+      ].join("\n"),
     };
   });
 
@@ -970,11 +1377,87 @@ export default function goalExtension(pi: ExtensionAPI) {
     await evaluateAndMaybeContinue(ctx);
   });
 
+  pi.on("input", async (event, ctx) => {
+    if (event.source === "extension") return { action: "continue" };
+
+    const embeddedGoal = parseEmbeddedGoalInvocation(event.text);
+    if (!embeddedGoal) return { action: "continue" };
+
+    if (embeddedGoal.kind === "help") {
+      ctx.ui.notify(`${GOAL_USAGE}\nDefaults: ${limitsSummary(defaultGoalLimits())}`, "info");
+      return { action: "handled" };
+    }
+
+    if (embeddedGoal.kind === "status") {
+      if (state) {
+        showGoalStatus(ctx, state);
+      } else if (pendingStart) {
+        ctx.ui.notify(
+          `Goal pending until the agent is idle: ${pendingStart.condition}\nLimits: ${limitsSummary(pendingStart)}`,
+          "info",
+        );
+      } else {
+        ctx.ui.notify("No goal.", "info");
+      }
+      return { action: "handled" };
+    }
+
+    if (embeddedGoal.kind === "dismiss") {
+      const dismissedState = state;
+      const dismissedPendingStart = pendingStart;
+      const wasEvaluating = evaluating;
+      const shouldInterrupt =
+        wasEvaluating ||
+        (!!dismissedState && dismissedState.phase === "active" && INTERRUPT_WORDS.has(embeddedGoal.word)) ||
+        (!!dismissedPendingStart && INTERRUPT_WORDS.has(embeddedGoal.word));
+
+      if (!dismissedState && !dismissedPendingStart && !wasEvaluating) {
+        ctx.ui.notify("No goal to dismiss.", "info");
+        return { action: "handled" };
+      }
+
+      pendingStart = undefined;
+      state = undefined;
+      shortConditionAbort?.abort();
+      shortConditionAbort = undefined;
+      evaluationAbort?.abort();
+      evaluationAbort = undefined;
+      evaluating = false;
+      if (dismissedState) persist();
+      applyStatus(ctx);
+
+      if (shouldInterrupt && (!ctx.isIdle() || ctx.hasPendingMessages())) ctx.abort();
+
+      const cancelledPending = dismissedPendingStart && !dismissedState;
+      const message = cancelledPending ? "Pending goal cancelled." : "Goal dismissed.";
+      ctx.ui.notify(shouldInterrupt ? `${message} Interrupted active work.` : message, "info");
+      return { action: "handled" };
+    }
+
+    if (embeddedGoal.kind === "error") {
+      ctx.ui.notify(embeddedGoal.error, "error");
+      return { action: "handled" };
+    }
+
+    const pending = { id: ++nextPendingStartId, condition: embeddedGoal.condition, ...embeddedGoal.limits };
+    activateGoal(pending, ctx);
+
+    return event.images
+      ? { action: "transform", text: embeddedGoal.agentText, images: event.images }
+      : { action: "transform", text: embeddedGoal.agentText };
+  });
+
   pi.registerCommand("goal", {
-    description: "Set, inspect, or dismiss an autonomous completion goal",
+    description: "Set, inspect, or dismiss an autonomous completion goal (--turns, --budget/--cost)",
+    getArgumentCompletions: goalArgumentCompletions,
     handler: async (args, ctx) => {
       const text = args.trim();
       const lowered = text.toLowerCase();
+
+      if (lowered === "help" || lowered === "--help") {
+        ctx.ui.notify(`${GOAL_USAGE}\nDefaults: ${limitsSummary(defaultGoalLimits())}`, "info");
+        return;
+      }
 
       if (!text || STATUS_WORDS.has(lowered)) {
         if (state) {
@@ -982,7 +1465,10 @@ export default function goalExtension(pi: ExtensionAPI) {
           return;
         }
         if (pendingStart) {
-          ctx.ui.notify(`Goal pending until the agent is idle: ${pendingStart.condition}`, "info");
+          ctx.ui.notify(
+            `Goal pending until the agent is idle: ${pendingStart.condition}\nLimits: ${limitsSummary(pendingStart)}`,
+            "info",
+          );
           return;
         }
         ctx.ui.notify("No goal.", "info");
@@ -1009,6 +1495,7 @@ export default function goalExtension(pi: ExtensionAPI) {
         shortConditionAbort = undefined;
         evaluationAbort?.abort();
         evaluationAbort = undefined;
+        evaluating = false;
         if (dismissedState) persist();
         applyStatus(ctx);
 
@@ -1023,30 +1510,71 @@ export default function goalExtension(pi: ExtensionAPI) {
         return;
       }
 
-      const pending = { id: ++nextPendingStartId, condition: text };
+      const parsed = parseGoalArgs(text);
+      if (parsed.error) {
+        ctx.ui.notify(parsed.error, "error");
+        return;
+      }
+
+      if (!parsed.condition) {
+        if (!parsed.hasLimitOptions) {
+          ctx.ui.notify(GOAL_USAGE, "info");
+          return;
+        }
+
+        if (state?.phase === "active") {
+          state.maxTurns = parsed.providedLimits.maxTurns ?? state.maxTurns;
+          state.costBudget = parsed.providedLimits.costBudget ?? state.costBudget;
+
+          const limit = goalLimitHit(ctx, state);
+          if (limit) {
+            const endedAt = Date.now();
+            state.phase = "done";
+            state.endedAt = endedAt;
+            state.latestVerdict = {
+              met: false,
+              reasoning: `Stopped because the /goal ${limit.summary} was reached after updating limits.`,
+              evaluatedAt: endedAt,
+              error: limit.error,
+            };
+            state.finalUsage = totalSpend(ctx, state);
+            persist();
+            applyStatus(ctx);
+            ctx.ui.notify(`Goal stopped: ${limit.summary} reached after updating limits.`, "warning");
+            return;
+          }
+
+          persist();
+          applyStatus(ctx);
+          ctx.ui.notify(`Goal limits updated: ${limitsSummary(state)}`, "info");
+          return;
+        }
+
+        if (pendingStart) {
+          pendingStart.maxTurns = parsed.providedLimits.maxTurns ?? pendingStart.maxTurns;
+          pendingStart.costBudget = parsed.providedLimits.costBudget ?? pendingStart.costBudget;
+          ctx.ui.notify(`Pending goal limits updated: ${limitsSummary(pendingStart)}`, "info");
+          return;
+        }
+
+        ctx.ui.notify(`No goal condition provided. ${GOAL_USAGE}`, "error");
+        return;
+      }
+
+      const pending = { id: ++nextPendingStartId, condition: parsed.condition, ...parsed.limits };
       pendingStart = pending;
       if (!ctx.isIdle()) {
-        ctx.ui.notify(`Goal queued until the agent is idle: ${text}`, "info");
+        ctx.ui.notify(
+          `Goal queued until the agent is idle: ${parsed.condition}\nLimits: ${limitsSummary(pending)}`,
+          "info",
+        );
       }
 
       await ctx.waitForIdle();
       if (pendingStart !== pending) return;
       pendingStart = undefined;
 
-      state = {
-        phase: "active",
-        condition: text,
-        shortCondition: fallbackShortCondition(text),
-        startedAt: Date.now(),
-        startEntryId: ctx.sessionManager.getLeafId(),
-        turnCount: 0,
-        evaluationUsage: { tokens: 0, cost: 0 },
-      };
-      persist();
-      applyStatus(ctx);
-      ctx.ui.notify(`Goal set: ${text}`, "info");
-
-      void refreshShortCondition(ctx, state);
+      activateGoal(pending, ctx);
       await evaluateAndMaybeContinue(ctx);
     },
   });
