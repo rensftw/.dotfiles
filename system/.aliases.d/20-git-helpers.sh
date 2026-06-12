@@ -13,13 +13,29 @@ fzf-down() {
   fzf --height 50% "$@" --border
 }
 
-# Collect candidate files robustly (handles spaces, renames, etc.)
+# Collect candidate files robustly (handles spaces, non-ASCII, renames).
+# Parse NUL-delimited status (-z) so paths survive verbatim, then hand them to
+# the picker newline-delimited. Plain `git status --porcelain` wraps paths with
+# spaces/non-ASCII in quotes and octal-escapes them, which then fail as git
+# pathspecs in the gc/ga/gap/gr callers.
 gsp() {
   is_in_git_repo || return
-  git status --porcelain |
-  fzf-down --ansi --multi --tac |
-  # clean up git status symbols for added, modified, renamed etc (A, M, D, ??)
-  sed 's/^.. //; s/.* -> //'
+  local raw
+  raw=$(git status --porcelain -z)
+  local -a recs=("${(0)raw}")
+  local -a picked=()
+  local i=1 rec st
+  while (( i <= ${#recs} )); do
+    rec=$recs[i]; (( i++ ))
+    [[ -z $rec ]] && continue
+    st=${rec[1,2]}
+    picked+=("${rec[4,-1]}")                       # strip the leading "XY " status field
+    # Rename/copy records carry a second NUL field (the origin path) — skip it.
+    [[ $st[1] == [RC] || $st[2] == [RC] ]] && (( i++ ))
+  done
+  (( ${#picked} )) || return
+  printf '%s\n' "${picked[@]}" |
+  fzf-down --ansi --multi --tac
 }
 
 # Is the base branch main or master?

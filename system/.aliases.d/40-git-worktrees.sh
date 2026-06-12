@@ -395,8 +395,16 @@ _gwr_remove() {
         fi
     fi
 
-    [[ -n "$branch_name" ]] && _gwr_local_branches+=("$branch_name")
-    [[ -n "$upstream_branch" ]] && _gwr_upstream_branches+=("$upstream_branch")
+    # Record the branch and its upstream TOGETHER so the two parallel arrays
+    # stay index-aligned. A branch with no upstream still stores an (empty)
+    # placeholder — skipping it would desync the arrays and make
+    # _gwr_cleanup_branches pair a local branch with an UNRELATED upstream,
+    # then "git push origin :<wrong-branch>" deletes the wrong remote branch
+    # (irreversible). The empty placeholder is handled by the -n guards below.
+    if [[ -n "$branch_name" ]]; then
+        _gwr_local_branches+=("$branch_name")
+        _gwr_upstream_branches+=("$upstream_branch")
+    fi
 }
 
 # Prompt to delete all branches collected by _gwr_remove
@@ -454,7 +462,7 @@ gwr() {
   if [ $# -eq 0 ]; then
     # Interactive multi-selection with fzf
     local selected
-    selected=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | grep -v '/\.' | fzf --multi --prompt="Select worktree(s) to remove (TAB to multi-select): ")
+    selected=$(git worktree list | grep -v '(bare)' | awk '{print $1}' | fzf --multi --prompt="Select worktree(s) to remove (TAB to multi-select): ")
     if [ -z "$selected" ]; then
       return 0
     fi
@@ -475,7 +483,7 @@ gwr() {
 # Switch to worktree (tmux window if in tmux, cd otherwise)
 gws() {
     local worktree_path
-    worktree_path=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | fzf --prompt="Switch to worktree: " --preview "ls -la {}")
+    worktree_path=$(git worktree list | grep -v '(bare)' | awk '{print $1}' | fzf --no-multi --prompt="Switch to worktree: " --preview "ls -la {}")
     [[ -z "$worktree_path" ]] && return 0
 
     # Fall back to cd if not in tmux or --no-tmux passed

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 ################################################################################
 # Git workflow aliases and functions
 # Depends on: 20-git-helpers.sh (is_in_git_repo, fzf-down, _mb, _gb)
@@ -17,7 +17,7 @@ gl() {
 # Git stash with preview
 gstash() {
   is_in_git_repo || return
-  git stash list | fzf-down --reverse -d: --preview 'git show --color=always {1}' |
+  git stash list | fzf-down --no-multi --reverse -d: --preview 'git show --color=always {1}' |
   cut -d: -f1
 }
 
@@ -31,40 +31,60 @@ export-stash() {
 
 # Mnemonic: git checkout branch
 gcb() {
-  git checkout $(_gb)
+  local out
+  out=$(_gb)
+  [[ -z "$out" ]] && return 0
+  # Zsh does not word-split unquoted expansions like bash, so multi-select fzf
+  # output (newline-separated) must be explicitly split into an array.
+  # ${(@f)out} = (f) splits $out on newlines; (@) preserves elements as separate
+  # words when the expansion is double-quoted (analogous to "${arr[@]}").
+  local -a branches=("${(@f)out}")
+  git checkout "${branches[@]}"
 }
 
 # Mnemonic: git branch delete
 gbd() {
-  git branch -D $(_gb)
+  local out
+  out=$(_gb)
+  [[ -z "$out" ]] && return 0
+  local -a branches=("${(@f)out}")
+  git branch -D "${branches[@]}"
 }
 
 # Interactive FZF prompt to remove changes
 gc() {
-  local files=$(gsp)
-  [[ -z "$files" ]] && return 0
-  git checkout $files
+  local out
+  out=$(gsp)
+  [[ -z "$out" ]] && return 0
+  local -a files=("${(@f)out}")
+  git checkout -- "${files[@]}"
 }
 
 # Interactive FZF prompt to stage files
 ga() {
-  local files=$(gsp)
-  [[ -z "$files" ]] && return 0
-  git add $files
+  local out
+  out=$(gsp)
+  [[ -z "$out" ]] && return 0
+  local -a files=("${(@f)out}")
+  git add -- "${files[@]}"
 }
 
 # Interactive FZF prompt to stage chunks
 gap() {
-  local files=$(gsp)
-  [[ -z "$files" ]] && return 0
-  git add -p $files
+  local out
+  out=$(gsp)
+  [[ -z "$out" ]] && return 0
+  local -a files=("${(@f)out}")
+  git add -p -- "${files[@]}"
 }
 
 # Interactive FZF prompt to unstage files
 gr() {
-  local files=$(gsp)
-  [[ -z "$files" ]] && return 0
-  git reset $files
+  local out
+  out=$(gsp)
+  [[ -z "$out" ]] && return 0
+  local -a files=("${(@f)out}")
+  git reset -- "${files[@]}"
 }
 
 # Mnemonic: git stash apply
