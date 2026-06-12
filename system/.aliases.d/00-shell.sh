@@ -89,7 +89,7 @@ fif() {
 
 # Preview files and open the chosen files in nvim
 vf() {
-  nvim -o "$(fzf --preview 'bat --color=always {}')"
+  nvim -o "$(fzf --no-multi --preview 'bat --color=always {}')"
 }
 
 # Process monitoring
