@@ -19,6 +19,10 @@ return {
                 border = 'thick',
                 style = 'language',
             },
+            latex = {
+                enabled = true,
+                -- converter = 'latex2text',  -- default; requires the pylatexenc CLI on PATH
+            },
             html = {
                 enabled = true,
                 tag = {
