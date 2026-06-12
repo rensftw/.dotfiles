@@ -21,20 +21,23 @@ local function getCurrentGitBranch()
 end
 
 local function getBaseGitBranch()
+    -- Mirror the shell `_mb` helper (system/.aliases.d/20-git-helpers.sh):
+    -- EXACT-match the candidate names so a branch merely *containing* one of
+    -- them (e.g. `maintenance`, `domain`, `main-backup`) is never mistaken for
+    -- the base branch. Falls back to the symbolic HEAD for bare repos.
     local gitCommand = [=[
-        _mb() {
-            BRANCHES=$(git branch)
-            if [[ $BRANCHES =~ 'main' ]]; then
-                echo 'main'
-            elif [[ $BRANCHES =~ 'master' ]]; then
-                echo 'master'
-            elif [[ $BRANCHES =~ 'develop' ]]; then
-                echo 'develop'
-            else
-                echo 'not found'
+        branches=$(git branch --format='%(refname:short)' 2>/dev/null)
+        for name in main master develop; do
+            if printf '%s\n' "$branches" | grep -qx "$name"; then
+                printf '%s\n' "$name"
+                exit 0
             fi
-        }
-        _mb
+        done
+        head_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+        case "$head_branch" in
+            main|master|develop) printf '%s\n' "$head_branch"; exit 0 ;;
+        esac
+        printf '%s\n' "not found"
     ]=]
     local handle = io.popen(gitCommand)
     local result = handle:read('*a')
