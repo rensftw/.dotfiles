@@ -88,7 +88,9 @@ end, { desc = 'Open LSP log file' })
 
 -- Re-trigger FileType autocmds so vim.lsp.enable() attaches servers to the current buffer
 vim.api.nvim_create_user_command('LspStart', function()
-    vim.cmd('edit')
+    -- Re-fire FileType (not `:edit`) so vim.lsp.enable() re-attaches without
+    -- reloading the buffer; bare `:edit` aborts with E37 on a modified buffer.
+    vim.api.nvim_exec_autocmds('FileType', { pattern = vim.bo.filetype })
 end, { desc = 'LSP start (retrigger FileType)' })
 
 -- Stop all LSP clients attached to the current buffer
@@ -103,7 +105,9 @@ vim.api.nvim_create_user_command('LspRestart', function()
     for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
         client:stop()
     end
-    vim.cmd('edit')
+    -- Re-fire FileType (not `:edit`) so vim.lsp.enable() re-attaches without
+    -- reloading the buffer; bare `:edit` aborts with E37 on a modified buffer.
+    vim.api.nvim_exec_autocmds('FileType', { pattern = vim.bo.filetype })
 end, { desc = 'LSP restart (current buffer)' })
 
 -- Deduplicate entries in quickfix list so that there is one entry per filepath
