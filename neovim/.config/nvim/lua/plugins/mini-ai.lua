@@ -55,9 +55,8 @@ return {
         map(modes, '[f', move('left',  'a', 'f', 'prev'), { desc = 'prev function start' })
         map(modes, ']F', move('right', 'a', 'f', 'next'), { desc = 'next function end' })
         map(modes, '[F', move('right', 'a', 'f', 'prev'), { desc = 'prev function end' })
-        map(modes, ']c', move('left',  'a', 'c', 'next'), { desc = 'next class start' })
-        map(modes, '[c', move('left',  'a', 'c', 'prev'), { desc = 'prev class start' })
-        map(modes, ']C', move('right', 'a', 'c', 'next'), { desc = 'next class end' })
-        map(modes, '[C', move('right', 'a', 'c', 'prev'), { desc = 'prev class end' })
+        -- Class *motions* (]c/[c, ]C/[C) are intentionally not mapped: ]c/[c now
+        -- navigate git conflicts (mini.bracketed). The `ac`/`ic` class
+        -- textobjects (select/operate) remain available via custom_textobjects.
     end,
 }

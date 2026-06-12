@@ -85,10 +85,12 @@ return {
 
         require('treesitter-context').setup()
 
-        -- Textobjects (af/if, ac/ic, aa/ia) and motion keymaps (]f/[f/]F/[F,
-        -- ]c/[c/]C/[C) live in lua/plugins/mini-ai.lua now. mini.ai uses
+        -- Textobjects (af/if, ac/ic, aa/ia) and function motion keymaps
+        -- (]f/[f/]F/[F) live in lua/plugins/mini-ai.lua now. mini.ai uses
         -- gen_spec.treesitter() to drive function/class/parameter selection
         -- and MiniAi.move_cursor with search_method='next'/'prev' for jumps.
+        -- (]c/[c now navigate git conflicts via mini.bracketed; class *motions*
+        -- were dropped, but the ac/ic class textobjects remain.)
 
         -- Filetype-to-parser mappings and the FileType autocmd that calls
         -- vim.treesitter.start() live in lua/core/treesitter.lua, not here.
