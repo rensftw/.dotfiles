@@ -41,7 +41,7 @@ function M:create_progress_handle(request)
   local progress = require('fidget.progress')
 
   return progress.handle.create({
-    title = '  Processing request (' .. request.data.interaction .. ')',
+    title = '  Processing request (' .. (request.data.interaction or 'request') .. ')',
     message = ' ',
     lsp_client = {
       name = M:llm_role_title(request.data.adapter),
