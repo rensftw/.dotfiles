@@ -1,12 +1,12 @@
-ARCH=$(arch)
+# Homebrew environment for all zsh invocations.
+# Keep this file lightweight: .zshenv is sourced by every zsh, including scripts.
+# This dotfiles setup assumes Apple Silicon Homebrew.
+export HOMEBREW_PREFIX=/opt/homebrew
+export HOMEBREW_CELLAR=/opt/homebrew/Cellar
+export HOMEBREW_REPOSITORY=/opt/homebrew
 
-# Export global homebrew variables:
-if [[ $ARCH =~ 'arm' ]]; then
-    # For Apple Silicon mac
-    PATH=$PATH:/opt/homebrew/bin
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-    # For Intel mac
-    PATH=$PATH:/usr/local/bin
-    eval "$(brew shellenv)"
-fi
+typeset -U path
+path=("$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin" "${path[@]}")
+export PATH
+[[ -z ${MANPATH-} ]] || export MANPATH=":${MANPATH#:}"
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"

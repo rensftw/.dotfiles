@@ -113,7 +113,7 @@ alignment = 'left'
 newline = true
 
 [[blocks.segments]]
-template = '</>{{ if eq .Env.POSH_VI_MODE "command" }}❮{{ else }}❯{{ end }}' # </> is required for the conditional styling of the prompt
+template = '</>❯' # </> is required for conditional styling of the prompt
 background = 'transparent'
 type = 'text'
 style = 'plain'
