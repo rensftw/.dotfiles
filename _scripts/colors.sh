@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
-# Tput escape codes for colors
-RED_BACKGROUND=$(tput setab 1; tput setaf 0)
-CYAN_BACKGROUND=$(tput setab 6; tput setaf 0)
-MAGENTA_BACKGROUND=$(tput setab 5; tput setaf 0)
-YELLOW_BACKGROUND=$(tput setab 3; tput setaf 0)
-RED=$(tput setaf 1)
-YELLOW=$(tput setaf 3)
-GREEN=$(tput setaf 2)
-CYAN=$(tput setaf 6)
-MAGENTA=$(tput setaf 5)
-BOLD=$(tput bold)
-NORMAL=$(tput sgr0)
-NC=$(tput sgr0)
+# ANSI escape codes for colors.
+# Keep this file cheap to source; it is loaded during interactive zsh startup.
+RED_BACKGROUND=$'\033[41;30m'
+CYAN_BACKGROUND=$'\033[46;30m'
+MAGENTA_BACKGROUND=$'\033[45;30m'
+YELLOW_BACKGROUND=$'\033[43;30m'
+RED=$'\033[31m'
+YELLOW=$'\033[33m'
+GREEN=$'\033[32m'
+CYAN=$'\033[36m'
+MAGENTA=$'\033[35m'
+BOLD=$'\033[1m'
+NORMAL=$'\033[0m'
+NC=$'\033[0m'
 
 export RED_BACKGROUND
 export CYAN_BACKGROUND
