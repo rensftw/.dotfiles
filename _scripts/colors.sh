@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# ANSI escape codes for colors.
+# Plain ANSI escape codes for colors.
 # Keep this file cheap to source; it is loaded during interactive zsh startup.
 RED_BACKGROUND=$'\033[41;30m'
 CYAN_BACKGROUND=$'\033[46;30m'

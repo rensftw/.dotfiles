@@ -1,7 +1,18 @@
 #!/usr/bin/env bash
 
-printf "$CYAN$BOLD%s$NORMAL\n"  "🧹 Clean default zsh artifacts"
-rm -rf "$HOME"/.zshrc "$HOME"/.zshenv "$HOME"/.zsh "$HOME"/.zsh_plugins &> /dev/null
+# Shared dry-run/logging helpers (`run`, `is_dry_run`, etc.).
+source "$DOTFILES_LOCATION/_scripts/lib.sh"
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    parse_common_args "$@"
+fi
+
+printf "$CYAN$BOLD%s$NORMAL\n"  "🧹 Checking for existing zsh artifacts"
+for path in "$HOME/.zshrc" "$HOME/.zshenv" "$HOME/.zsh" "$HOME/.zsh_plugins"; do
+    if [[ -e "$path" && ! -L "$path" ]]; then
+        warn "Leaving existing $path in place; stow may report a conflict. Back it up manually if needed."
+    fi
+done
 
 # Helper directories begin with an underscore (e.g. _scripts)
 HELPER_DIR_PREFIX='_'
@@ -27,9 +38,22 @@ for dir in "${DIRECTORIES[@]}"; do
     # Ignore helper directories when stowing
     if ! [[ "$dir" =~ ^$HELPER_DIR_PREFIX ]]; then
         printf "$MAGENTA%s$NORMAL\n" "🔗 Linking ${dir%/}"
-        stow -vt ~ "$dir"
+        if is_dry_run && command -v stow &> /dev/null; then
+            if ! stow -nvt "$HOME" "$dir"; then
+                warn "stow preview found conflicts for $dir"
+            fi
+        else
+            run stow -vt "$HOME" "$dir"
+        fi
     fi
 done
 
-# Manually copy the global .gitignore as we should avoid linking SVC ignore files
-cp ./git/.gitignore ~
+# Manually copy the global .gitignore as we should avoid linking VCS ignore files.
+GITIGNORE_TARGET="$HOME/.gitignore"
+if [[ -e "$GITIGNORE_TARGET" ]] && ! cmp -s ./git/.gitignore "$GITIGNORE_TARGET"; then
+    warn "Leaving existing $GITIGNORE_TARGET in place; not overwriting it."
+elif [[ -e "$GITIGNORE_TARGET" ]]; then
+    printf "$GREEN$BOLD%s$NORMAL\n" "✔ $GITIGNORE_TARGET is already up to date"
+else
+    run cp ./git/.gitignore "$GITIGNORE_TARGET"
+fi

@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_LOCATION="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export DOTFILES_LOCATION
+cd "$DOTFILES_LOCATION" || exit 1
 
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
+source "$DOTFILES_LOCATION/_scripts/lib.sh"
+parse_common_args "$@"
 
 printf "$MAGENTA$BOLD%s$NC\n\n" "🏁 Beginning installation..."
 
@@ -24,5 +31,7 @@ source _scripts/install-python.sh
 source _scripts/install-pip-packages.sh
 
 printf "$GREEN%s$NC\n" "✔ Installation complete!"
-source _scripts/goodbye.sh
+if ! is_dry_run; then
+    source _scripts/goodbye.sh
+fi
 

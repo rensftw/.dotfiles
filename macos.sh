@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
+set -euo pipefail
 # Based on https://mths.be/macos
+
+DOTFILES_LOCATION="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export DOTFILES_LOCATION
+cd "$DOTFILES_LOCATION" || exit 1
+
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
+source "$DOTFILES_LOCATION/_scripts/lib.sh"
+parse_common_args "$@"
+enable_dry_run_command_shims
 
 printf "$BOLD%s$NORMAL\n" "This script will apply macOS preferences and then restart the computer."
-printf "$YELLOW_BACKGROUND$BOLD%s$NORMAL\n]\n" "Proceed? [y/n]"
-read -r ANSWER
+if is_dry_run; then
+    log "DRY RUN: skipping macOS preferences confirmation prompt."
+    ANSWER="y"
+else
+    printf "$YELLOW_BACKGROUND$BOLD%s$NORMAL\n" "Proceed? [y/n]"
+    read -r ANSWER
+fi
 
 if [ "$ANSWER" != "y" ]; then
     exit
@@ -20,7 +34,9 @@ osascript -e 'tell application "System Preferences" to quit'
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `apply-macos-preferences.sh` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+if ! is_dry_run; then
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+fi
 
 ###############################################################################
 # General UI/UX                                                               #
@@ -329,11 +345,19 @@ for app in "Activity Monitor" \
 	"Mail" \
 	"Safari" \
 	"SystemUIServer"; do
-	killall "${app}" &> /dev/null
+    if is_dry_run; then
+        run killall "${app}"
+    else
+	    killall "${app}" &> /dev/null || true
+    fi
 done
 
 printf "$GREEN$BOLD%s$NC\n" "✔ Preferences have been applied."
-printf "$YELLOW_BACKGROUND$BOLD%s$NC\n" "Restarting computer in 1 minute."
 
 # Restart computer in 1 minute
-sudo shutdown -r +1
+if is_dry_run; then
+    log "DRY RUN: would restart the computer in 1 minute."
+else
+    printf "$YELLOW_BACKGROUND$BOLD%s$NC\n" "Restarting computer in 1 minute."
+    sudo shutdown -r +1
+fi

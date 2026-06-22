@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# Shared dry-run/logging helpers (`run`, `is_dry_run`, etc.).
+source "$DOTFILES_LOCATION/_scripts/lib.sh"
+
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    parse_common_args "$@"
+fi
+
 # Helper directories begin with _ (e.g. _scripts)
 HELPER_DIR_PREFIX='_'
 
@@ -25,8 +32,14 @@ printf "$GREEN$BOLD%s$NORMAL\n"  "🐐 Removing stow symlinks"
 for dir in "${DIRECTORIES[@]}"; do
     # Ignore helper directories when unstowing
     if ! [[ "$dir" =~ ^$HELPER_DIR_PREFIX ]]; then
-        printf "%s $MAGENTA$BOLD%s$NORMAL" "🔗 Unlinking" "${dir%/}"
-        stow -Dt ~ "$dir"
+        printf "$MAGENTA$BOLD%s$NORMAL\n" "🔗 Unlinking ${dir%/}"
+        if is_dry_run && command -v stow &> /dev/null; then
+            if ! stow -nDt "$HOME" "$dir"; then
+                warn "unstow preview found conflicts for $dir"
+            fi
+        else
+            run stow -Dt "$HOME" "$dir"
+        fi
     fi
 done
 
