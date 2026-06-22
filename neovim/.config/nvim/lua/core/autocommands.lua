@@ -111,3 +111,44 @@ autocmd('FileType', {
         vim.keymap.set('n', '<leader>gg', '<cmd>close<cr>', { buffer = event.buf, silent = true })
     end,
 })
+
+-- Restore fugitive status windows after a session is loaded.
+-- vim-obsession records the :Git status buffer's fugitive:// name in Session.vim,
+-- but fugitive is lazy-loaded, so when `nvim -S` sources `edit fugitive://...`
+-- during startup its BufReadCmd handler isn't registered yet and the window comes
+-- up as an empty buffer. Once the session has fully loaded, force fugitive to load
+-- and re-read any windowed fugitive:// buffers so the status content regenerates.
+autocmd('SessionLoadPost', {
+    group = augroup('restore_fugitive_on_session_load', {}),
+    callback = function()
+        local fugitive_wins = {}
+        for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+            for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
+                local buf = vim.api.nvim_win_get_buf(win)
+                if vim.api.nvim_buf_get_name(buf):match('^fugitive://') then
+                    table.insert(fugitive_wins, win)
+                end
+            end
+        end
+
+        if #fugitive_wins == 0 then return end
+
+        -- Ensure fugitive's BufReadCmd handlers exist before reloading.
+        pcall(function() require('lazy').load({ plugins = { 'vim-fugitive' } }) end)
+
+        -- Defer the reload out of this autocmd's context. A :edit run *inside* the
+        -- SessionLoadPost callback does NOT trigger fugitive's BufReadCmd, because
+        -- autocommands don't nest by default — so the status would never render.
+        -- Scheduling runs it on the next loop tick (after the session source returns),
+        -- where BufReadCmd fires normally and regenerates the status.
+        vim.schedule(function()
+            for _, win in ipairs(fugitive_wins) do
+                if vim.api.nvim_win_is_valid(win) then
+                    vim.api.nvim_win_call(win, function()
+                        pcall(vim.cmd, 'edit!')
+                    end)
+                end
+            end
+        end)
+    end,
+})
