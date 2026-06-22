@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 
-# Get Homebrew/bundle before trying to use it
-printf "$CYAN$BOLD%s$NORMAL\n"  "🚰 Tapping homebrew/bundle"
-brew tap homebrew/bundle
+# Shared dry-run/logging helpers (`run`, `is_dry_run`, etc.).
+source "$DOTFILES_LOCATION/_scripts/lib.sh"
 
-# Install all taps, formulae, and casks from the Brewfile
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    parse_common_args "$@"
+fi
+
+BREWFILE="$DOTFILES_LOCATION/_homebrew/Brewfile"
+
+# Install all taps, formulae, and casks from the Brewfile.
+# Do not pass --cleanup here: installing should not remove packages by surprise.
 printf "$CYAN$BOLD%s$NORMAL\n"  "📦 Installing Homebrew packages"
-brew bundle install --all --cleanup --file _homebrew/Brewfile
+run brew bundle install --file "$BREWFILE"
 
+# Verify that the completed bundle matches the curated manifest. Homebrew
+# Bundle is built into modern Homebrew and does not need a separate tap.
+printf "$CYAN$BOLD%s$NORMAL\n"  "🔎 Verifying Homebrew packages"
+run brew bundle check --verbose --file "$BREWFILE"

@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
+
+DOTFILES_LOCATION="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export DOTFILES_LOCATION
+cd "$DOTFILES_LOCATION" || exit 1
 
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
+source "$DOTFILES_LOCATION/_scripts/lib.sh"
+parse_common_args "$@"
+enable_error_trap
+source "$DOTFILES_LOCATION/_scripts/preflight.sh"
+run_preflight install
+
+# Disable Homebrew telemetry before the first Homebrew command, including on a
+# machine where Homebrew is already installed.
+export HOMEBREW_NO_ANALYTICS=1
 
 printf "$MAGENTA$BOLD%s$NC\n\n" "🏁 Beginning installation..."
 
@@ -24,5 +38,6 @@ source _scripts/install-python.sh
 source _scripts/install-pip-packages.sh
 
 printf "$GREEN%s$NC\n" "✔ Installation complete!"
-source _scripts/goodbye.sh
-
+if ! is_dry_run; then
+    source _scripts/goodbye.sh
+fi

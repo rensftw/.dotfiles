@@ -1,9 +1,10 @@
 {
-  "defaultProvider": "ollama",
-  "defaultModel": "qwen3.6:latest",
-  "defaultThinkingLevel": "xhigh",
+  "defaultProvider": "openai",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "high",
   "packages": [
     "npm:pi-web-access"
   ],
-  "lastChangelogVersion": "0.76.0"
+  "lastChangelogVersion": "0.79.8",
+  "theme": "dark"
 }

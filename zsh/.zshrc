@@ -1,6 +1,7 @@
 # Load preferred toolchains before native binaries.
-# Apple Silicon Homebrew path; avoids invoking `brew` on every shell startup.
-BREW_PREFIX="/opt/homebrew"
+# Use the lightweight prefix selected in .zshenv; avoid invoking `brew` on
+# every shell startup.
+BREW_PREFIX="${HOMEBREW_PREFIX:-$([[ "$(uname -m)" == "arm64" ]] && printf /opt/homebrew || printf /usr/local)}"
 typeset -U path
 path=(
   "$BREW_PREFIX/bin"
@@ -69,7 +70,9 @@ alias brew='env PATH="${PATH//$PYENV_ROOT\/shims:/}" brew'
 # Prompt setup
 
 # Oh My Posh prompt
-eval "$(oh-my-posh init zsh --config $DOTFILES_LOCATION/zsh/.omp.toml)"
+if (( $+commands[oh-my-posh] )); then
+  eval "$(oh-my-posh init zsh --config "$DOTFILES_LOCATION/zsh/.omp.toml")"
+fi
 
 bindkey -v
 

@@ -1,26 +1,49 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
 # Based on https://mths.be/macos
+
+DOTFILES_LOCATION="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export DOTFILES_LOCATION
+cd "$DOTFILES_LOCATION" || exit 1
+
 # Import ANSI escape codes for colors
 source _scripts/colors.sh
+source "$DOTFILES_LOCATION/_scripts/lib.sh"
+parse_common_args "$@"
+enable_error_trap
+source "$DOTFILES_LOCATION/_scripts/preflight.sh"
+run_preflight macos
+enable_dry_run_command_shims
 
 printf "$BOLD%s$NORMAL\n" "This script will apply macOS preferences and then restart the computer."
-printf "$YELLOW_BACKGROUND$BOLD%s$NORMAL\n]\n" "Proceed? [y/n]"
-read -r ANSWER
+if is_dry_run; then
+    log "DRY RUN: skipping macOS preferences confirmation prompt."
+    ANSWER="y"
+else
+    printf "$YELLOW_BACKGROUND$BOLD%s$NORMAL\n" "Proceed? [y/n]"
+    read -r ANSWER
+fi
 
 if [ "$ANSWER" != "y" ]; then
     exit
 fi
 
 printf "$MAGENTA_BACKGROUND$BOLD%s$NORMAL\n" "Applying macOS preferences"
-# Close any open System Preferences panes, to prevent them from overriding
-# settings we’re about to change
-osascript -e 'tell application "System Preferences" to quit'
+# Close System Settings so it does not overwrite preferences while quitting.
+# System Preferences was renamed and removed from current macOS releases.
+if is_dry_run; then
+    run killall "System Settings"
+else
+    killall "System Settings" &> /dev/null || true
+fi
 
 # Ask for the administrator password upfront
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `apply-macos-preferences.sh` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+if ! is_dry_run; then
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+fi
 
 ###############################################################################
 # General UI/UX                                                               #
@@ -48,7 +71,7 @@ defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
-# Trackpad: enable tap to click for this user and for the login screen
+# Trackpad: enable tap to click for this user
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -56,24 +79,39 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Trackpad: map two-finger tap to right-click
 defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
-defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerDoubleTapGesture -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadTwoFingerDoubleTapGesture -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
 # Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
-sudo systemsetup -settimezone "Europe/Sofia" > /dev/null
+sudo systemsetup -settimezone "Europe/Sofia"
 
 ###############################################################################
 # Power management                                                            #
 ###############################################################################
 
-# Enable lid wakeup
-sudo pmset -a lidwake 1
+if is_dry_run; then
+    PMSET_CAPABILITIES="lidwake standbydelayhigh standbydelaylow highstandbythreshold"
+else
+    PMSET_CAPABILITIES="$(pmset -g cap 2>/dev/null || true)"
+fi
+
+set_pmset_if_supported() {
+    local scope="$1"
+    local setting="$2"
+    local value="$3"
+
+    if is_dry_run || printf '%s\n' "$PMSET_CAPABILITIES" | grep -Eq "(^|[[:space:]])${setting}([[:space:]]|$)"; then
+        sudo pmset "$scope" "$setting" "$value"
+    else
+        warn "Skipping unsupported pmset setting '$setting' on this Mac."
+    fi
+}
+
+# Enable lid wakeup when the Mac exposes that capability
+set_pmset_if_supported -a lidwake 1
 
 # Restart automatically on power loss
 sudo pmset -a autorestart 1
@@ -90,17 +128,32 @@ sudo pmset -c sleep 30
 # Set machine sleep to 30 minutes on battery
 sudo pmset -b sleep 30
 
-# Set standby delay to 24 hours (default is 1 hour)
-# computer will hibernate after this
-sudo pmset -a standbydelay 86400
+# On current macOS, standby delay has separate high- and low-battery keys.
+# Hibernate after 24 hours above 50% battery and after 3 hours below it.
+set_pmset_if_supported -a standbydelayhigh 86400
+set_pmset_if_supported -a standbydelaylow 10800
+set_pmset_if_supported -a highstandbythreshold 50
 
 ###############################################################################
 # Security & Privacy                                                          #
 ###############################################################################
 
-# Require password 5 min after sleep or screen saver begins
+# Report security state without making recovery-key or network-policy choices.
+if is_dry_run; then
+    run /usr/bin/fdesetup status
+    run /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
+else
+    FILEVAULT_STATUS="$(/usr/bin/fdesetup status 2>&1 || true)"
+    FIREWALL_STATUS="$(/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate 2>&1 || true)"
+    log "FileVault: $FILEVAULT_STATUS"
+    log "Firewall: $FIREWALL_STATUS"
+    [[ "$FILEVAULT_STATUS" == *"FileVault is On"* ]] || warn "FileVault is not on. Enable it in System Settings after saving the recovery key safely."
+    [[ "$FIREWALL_STATUS" == *"enabled"* ]] || warn "The application firewall is not enabled. Review System Settings > Network > Firewall."
+fi
+
+# Require a password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 300
+defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 ###############################################################################
 # Terminal.app                                                                #
@@ -161,7 +214,7 @@ defaults write com.apple.dock tilesize -int 36
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "genie"
 
-# Put the Dock on the left of the screen
+# Put the Dock at the bottom of the screen
 defaults write com.apple.dock orientation -string "bottom"
 
 # Minimize windows into their application’s icon
@@ -238,21 +291,6 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Hide Safari’s bookmarks bar by default
 defaults write com.apple.Safari ShowFavoritesBar -bool false
 
-# Hide Safari’s sidebar in Top Sites
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
-
-# Disable Safari’s thumbnail cache for History and Top Sites
-defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
-
-# Enable Safari’s debug menu
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-
-# Make Safari’s search banners default to Contains instead of Starts With
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
-
-# Remove useless icons from Safari’s bookmarks bar
-defaults write com.apple.Safari ProxiesInBookmarksBar "()"
-
 # Enable the Develop menu and the Web Inspector in Safari
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
@@ -275,24 +313,16 @@ defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
 # Warn about fraudulent websites
 defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
 
-# Disable plug-ins
-defaults write com.apple.Safari WebKitPluginsEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
-
-# Disable Java
-defaults write com.apple.Safari WebKitJavaEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
-
 # Block pop-up windows
 defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
 
-# Enable “Do Not Track”
-defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
-
 # Update extensions automatically
 defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
+
+# Safari's current privacy controls are managed in supported UI rather than by
+# stable public defaults keys. Do not pretend deprecated keys enforce them.
+warn "After restart, verify Safari > Settings > Privacy: Prevent cross-site tracking and Hide IP address."
 
 ###############################################################################
 # Mail                                                                        #
@@ -329,11 +359,19 @@ for app in "Activity Monitor" \
 	"Mail" \
 	"Safari" \
 	"SystemUIServer"; do
-	killall "${app}" &> /dev/null
+    if is_dry_run; then
+        run killall "${app}"
+    else
+	    killall "${app}" &> /dev/null || true
+    fi
 done
 
 printf "$GREEN$BOLD%s$NC\n" "✔ Preferences have been applied."
-printf "$YELLOW_BACKGROUND$BOLD%s$NC\n" "Restarting computer in 1 minute."
 
 # Restart computer in 1 minute
-sudo shutdown -r +1
+if is_dry_run; then
+    log "DRY RUN: would restart the computer in 1 minute."
+else
+    printf "$YELLOW_BACKGROUND$BOLD%s$NC\n" "Restarting computer in 1 minute."
+    sudo shutdown -r +1
+fi

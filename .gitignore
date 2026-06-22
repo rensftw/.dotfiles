@@ -1,10 +1,18 @@
-.DS_STORE
+.DS_Store
+_homebrew/Brewfile.snapshot
 btop/.config/btop/btop.log
 __pycache__
 
 # neovim/package manager artifacts
 neovim/.config/nvim/.netrwhist
-neovim/.config/nvim/lazy-lock.json
+nvim.log
+
+# GnuPG runtime/private material. Keep only the reviewed public configuration
+# files tracked even if ~/.gnupg is accidentally folded into the Stow package.
+gnupg/.gnupg/*
+!gnupg/.gnupg/gpg-agent.conf
+!gnupg/.gnupg/gpg.conf
+!gnupg/.gnupg/scdaemon.conf
 
 # neovim/Obsession artifacts
 Session.vim
