@@ -23,6 +23,9 @@ export ZSHRC_LOCATION="$HOME/.zshrc"
 export ALIASES_LOCATION="$HOME/.aliases"
 export DOTFILES_LOCATION="$HOME/.dotfiles"
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/_homebrew/Brewfile"
+# Leave auto_updates casks (Postman, Chrome, …) to their own updaters — brew
+# force-replacing a self-updating app is how upgrades wedge. Matches tend.
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
 export OBSIDIAN_LOCATION="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian"
 
 # History settings
