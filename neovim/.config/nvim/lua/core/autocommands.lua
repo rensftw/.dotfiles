@@ -112,6 +112,28 @@ autocmd('FileType', {
     end,
 })
 
+-- Restore syntax folding in fugitive's status / log / diff buffers.
+--
+-- These buffers are designed for foldmethod=syntax: fugitive's syntax file
+-- defines `fold` regions for the Staged/Unstaged/Untracked sections and the
+-- per-file hunks, and fugitive#Foldtext() only kicks in when foldmethod is
+-- 'syntax'. But our global default (core/options.lua) forces foldmethod=expr
+-- with the Treesitter foldexpr, split windows inherit it, and
+-- fugitive#BufReadStatus never resets foldmethod — so the status window ends
+-- up evaluating vim.treesitter.foldexpr() for the 'fugitive'/'git' filetypes,
+-- which have no parser. With 100+ changed files that expr runs per line on
+-- every status refresh, freezing the whole UI for seconds. (fugitive already
+-- guards its blame buffer with foldmethod=manual; the status buffer has no
+-- such guard.) Switching back to syntax is both correct — fugitive's section
+-- folds work — and fast: native regex folds, no per-line Lua calls.
+autocmd('FileType', {
+    group = augroup('fugitive_syntax_folding', {}),
+    pattern = { 'fugitive', 'git' },
+    callback = function()
+        vim.opt_local.foldmethod = 'syntax'
+    end,
+})
+
 -- Restore fugitive status windows after a session is loaded.
 -- vim-obsession records the :Git status buffer's fugitive:// name in Session.vim,
 -- but fugitive is lazy-loaded, so when `nvim -S` sources `edit fugitive://...`
