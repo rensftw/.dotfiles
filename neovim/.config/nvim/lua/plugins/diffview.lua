@@ -36,16 +36,27 @@ return {
             '<leader>gd',
             function()
                 require('fzf-lua').git_branches({
-                    cmd = 'git branch --all --color',
+                    -- Scope to local branches only (`refs/heads`). The monorepo
+                    -- uses a bare, blobless, single-branch worktree clone (see
+                    -- system/.aliases.d/40-git-worktrees.sh): `refs/remotes`
+                    -- accumulates thousands of *loose* remote-tracking refs from
+                    -- incremental fetches, and enumerating + date-sorting those
+                    -- (a stat() storm, no commit-graph) is what made this slow.
+                    -- PR review here targets worktree branches, which live in
+                    -- refs/heads — a handful, so this is instant. The base branch
+                    -- has its own mapping (<leader>gdm). `refname:short` yields
+                    -- clean refs (`main`), so the selection just needs a trim.
+                    cmd = 'git for-each-ref --sort=-committerdate '
+                        .. '--format="%(refname:short)" refs/heads',
+                    -- Cap the preview at 20 commits. The fzf-lua default is an
+                    -- unbounded `git log --graph` that re-walks full history on
+                    -- every cursor move — the picker's main source of lag.
+                    preview = 'git log --graph --pretty=oneline --abbrev-commit '
+                        .. '--color -n 20 {1}',
                     actions = {
                         ['default'] = function(selected)
-                            -- Selection format: `* main`, `  feature-x`,
-                            -- `  remotes/origin/main`, etc. Last whitespace-
-                            -- delimited token is the ref; strip the
-                            -- `remotes/` prefix that `git branch -a` adds.
-                            local branch = selected[1]:match('[^ ]+$')
-                            if not branch or branch == '' then return end
-                            branch = branch:gsub('^remotes/', '')
+                            local branch = vim.trim(selected[1])
+                            if branch == '' then return end
                             vim.cmd('DiffviewOpen ' .. branch .. '...HEAD --imply-local')
                         end,
                     },

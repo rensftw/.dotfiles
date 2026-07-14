@@ -37,6 +37,7 @@ return {
 
         -- Open file revision
         -- This also works with :Gvdiffsplit branch:%
+        -- For base-left/current-right layout, use :Gvdiffsplit! branch:%
         -- source: https://vi.stackexchange.com/questions/3746/how-do-i-open-a-file-from-another-git-branch
         { mode = { 'n' }, '<leader>gfr',  ':Gvsplit :%<Left><Left>', },
         -- Mnemonic: current branch commits
