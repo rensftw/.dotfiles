@@ -17,6 +17,16 @@ are re-applied on every :ColorScheme.
 
 local M = {}
 
+-- Values returned by providers are parsed a second time as statusline syntax.
+-- Dynamic text must therefore escape `%`; otherwise a branch or filename such
+-- as `%{system('...')}` is evaluated during redraw. Keep this boundary local
+-- to the providers so callers cannot accidentally concatenate unsafe text.
+local function escape_text(value)
+    if value == nil then return '' end
+    local escaped = tostring(value):gsub('%%', '%%%%')
+    return escaped
+end
+
 -- =====================================================================
 -- Mode
 -- =====================================================================
@@ -110,7 +120,9 @@ function M.git_branch()
     if not M.has_git_info() then return '' end
     -- '  head ' on git_branch_background, ending with a  slant
     -- back onto the transparent statusline.
-    return ('%%#StlGitBg#  %s %%#StlGitSep#%%*'):format(vim.b.gitsigns_status_dict.head)
+    return ('%%#StlGitBg#  %s %%#StlGitSep#%%*'):format(
+        escape_text(vim.b.gitsigns_status_dict.head)
+    )
 end
 
 function M.git_diff()
@@ -186,7 +198,11 @@ function M.diagnostics()
     for _, level in ipairs({ sev.ERROR, sev.WARN, sev.INFO, sev.HINT }) do
         local n = #vim.diagnostic.get(0, { severity = level })
         if n > 0 then
-            out[#out + 1] = ('%%#%s# %s %d %%*'):format(resolve_hl(level), icons[level] or '', n)
+            out[#out + 1] = ('%%#%s# %s %d %%*'):format(
+                resolve_hl(level),
+                escape_text(icons[level]),
+                n
+            )
         end
     end
     return table.concat(out)
@@ -203,13 +219,13 @@ function M.obsession()
     if vim.fn.exists('*ObsessionStatus') == 0 then return '' end
     local s = vim.fn.ObsessionStatus('   ', ' ⏻︎  ')
     if s == '' then return '' end
-    return '%#StlObsession#' .. s .. '%*'
+    return '%#StlObsession#' .. escape_text(s) .. '%*'
 end
 
 function M.lazy_updates()
     local ok, status = pcall(require, 'lazy.status')
     if not ok or not status.has_updates() then return '' end
-    return ('%%#StlLazy# %s %%*'):format(status.updates())
+    return ('%%#StlLazy# %s %%*'):format(escape_text(status.updates()))
 end
 
 -- Harpoon index for the current buffer (winbar only).
@@ -230,18 +246,22 @@ end
 function M.filetype()
     local ft = vim.bo.filetype
     if ft == '' then return '' end
-    local label = ft:sub(1, 1):upper() .. ft:sub(2)
+    local label = escape_text(ft:sub(1, 1):upper() .. ft:sub(2))
     local icon, icon_hl = MiniIcons.get('filetype', ft)
     if not icon then
         return ('%%#StlFileType# %s %%*'):format(label)
     end
-    return ('%%#%s# %s %%#StlFileType#%s %%*'):format(icon_hl or 'StlFileType', icon, label)
+    return ('%%#%s# %s %%#StlFileType#%s %%*'):format(
+        icon_hl or 'StlFileType',
+        escape_text(icon),
+        label
+    )
 end
 
 function M.encoding()
     local enc = vim.bo.fileencoding
     if enc == '' then return '' end
-    return ('%%#StlEncoding# %s %%*'):format(enc)
+    return ('%%#StlEncoding# %s %%*'):format(escape_text(enc))
 end
 
 -- Relative path with coloured mini.icons glyph, used by the winbar.
@@ -250,12 +270,19 @@ function M.filepath(text_hl)
     local path = vim.fn.expand('%:.')
     if path == '' then return '[No Name]' end
     text_hl = text_hl or 'StlBase'
+    local safe_path = escape_text(path)
     local modified = vim.bo.modified and ' [+]' or ''
     local icon, icon_hl = MiniIcons.get('filetype', vim.bo.filetype)
     if not icon then
-        return ('%%#%s#%s%s%%*'):format(text_hl, path, modified)
+        return ('%%#%s#%s%s%%*'):format(text_hl, safe_path, modified)
     end
-    return ('%%#%s#%s %%#%s#%s%s%%*'):format(icon_hl or text_hl, icon, text_hl, path, modified)
+    return ('%%#%s#%s %%#%s#%s%s%%*'):format(
+        icon_hl or text_hl,
+        escape_text(icon),
+        text_hl,
+        safe_path,
+        modified
+    )
 end
 
 -- =====================================================================
