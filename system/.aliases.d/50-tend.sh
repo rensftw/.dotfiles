@@ -169,7 +169,7 @@ _tend_update_neovim() {
 }
 
 _tend_update_tmux() {
-    local tpm_update="$HOME/.tmux/plugins/tpm/bin/update_plugins"
+    local tpm_update="$HOME/.tmux/tpm/bin/update_plugins"
     local output="" rc=0
 
     _tend_header "Tmux"
