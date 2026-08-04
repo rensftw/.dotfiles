@@ -1,44 +1,236 @@
 #!/usr/bin/env bash
 # Original: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
-else
-    # Inherits theme + base layout from $FZF_DEFAULT_OPTS_FILE (set in zsh/.zshrc).
-    # Overrides only the chrome specific to this picker.
-    export FZF_DEFAULT_OPTS="\
+CREATE_KEY='ctrl-n'
+MAX_NAME_LENGTH=60
+
+target_path=''
+session_name=''
+created_directory=0
+picker_query=''
+picker_key=''
+picker_selection=''
+
+error() {
+    printf 'tmux-sessionizer: %s\n' "$*" >&2
+}
+
+validate_home() {
+    if [[ -z ${HOME:-} || $HOME != /* ]]; then
+        error 'HOME must be an absolute path'
+        return 1
+    fi
+}
+
+session_exists() {
+    tmux has-session -t "=$1" 2> /dev/null
+}
+
+cleanup_created_directory() {
+    (( created_directory )) || return 0
+
+    # A failed tmux command may still have created the session. Never remove a
+    # directory that a live session could be using, even when it is empty.
+    session_exists "$session_name" && return 0
+
+    if rmdir "$target_path" 2> /dev/null; then
+        created_directory=0
+    else
+        error "left directory in place because it could not be removed safely: $target_path"
+    fi
+}
+
+create_detached_session() {
+    if tmux new-session -ds "$session_name" -c "$target_path"; then
+        return 0
+    fi
+
+    error "could not create session '$session_name'"
+    cleanup_created_directory
+    return 1
+}
+
+sanitize_name() {
+    local name
+
+    # Keep the name safe for both a directory and a tmux session. Invalid runs
+    # become a single underscore, and leading/trailing separators are removed.
+    name=$(printf '%s' "$1" | tr -cs '[:alnum:]_-' '_')
+    name=${name#"${name%%[!_-]*}"}
+    name=${name%"${name##*[!_-]}"}
+
+    # This leaves room under the 255-byte filename limit for a numeric suffix.
+    name=${name:0:$MAX_NAME_LENGTH}
+
+    printf '%s' "${name:-session}"
+}
+
+reserve_session_directory() {
+    local query="$1"
+    local work_root="$HOME/work"
+    local base_name candidate_name candidate_path suffix
+
+    base_name=$(sanitize_name "$query")
+
+    if ! mkdir -p "$work_root"; then
+        error "could not create $work_root"
+        return 1
+    fi
+
+    suffix=0
+    while true; do
+        candidate_name=$base_name
+        if (( suffix > 0 )); then
+            candidate_name="${base_name}_${suffix}"
+        fi
+        candidate_path="$work_root/$candidate_name"
+
+        if [[ -e $candidate_path || -L $candidate_path ]] || session_exists "$candidate_name"; then
+            suffix=$((suffix + 1))
+            continue
+        fi
+
+        # mkdir atomically claims the name. If another process wins the race,
+        # retry with the next suffix instead of reusing its directory.
+        if mkdir "$candidate_path"; then
+            target_path=$candidate_path
+            session_name=$candidate_name
+            created_directory=1
+            return 0
+        fi
+
+        if [[ -e $candidate_path || -L $candidate_path ]]; then
+            suffix=$((suffix + 1))
+            continue
+        fi
+
+        error "could not create $candidate_path"
+        return 1
+    done
+}
+
+list_candidates() {
+    tmux list-sessions -F '#S' 2> /dev/null || true
+    printf '%s\n' "$HOME/.dotfiles"
+    find "$HOME/develop" "$HOME/foss" "$HOME/work" \
+        -mindepth 1 -maxdepth 1 -type d 2> /dev/null
+    printf '%s\n' "$HOME/rensftw"
+}
+
+parse_picker_output() {
+    local output="$1"
+    local remainder
+
+    picker_query=''
+    picker_key=''
+    picker_selection=''
+
+    # --print-query and --expect produce query, key, then selection. Command
+    # substitution removes trailing newlines, so the selection may be absent.
+    if [[ $output != *$'\n'* ]]; then
+        picker_query=$output
+        return
+    fi
+
+    picker_query=${output%%$'\n'*}
+    remainder=${output#*$'\n'}
+    picker_key=${remainder%%$'\n'*}
+
+    if [[ $remainder == *$'\n'* ]]; then
+        picker_selection=${remainder#*$'\n'}
+    fi
+}
+
+set_selected_target() {
+    target_path=$1
+    session_name=$(basename "$target_path")
+    session_name=${session_name//./_}
+    created_directory=0
+}
+
+pick_target() {
+    local output picker_status
+
+    # Theme and base layout still come from $FZF_DEFAULT_OPTS_FILE. Command-line
+    # flags make this picker's behavior explicit and keep it locally scoped.
+    output=$(list_candidates | awk 'NF' | fzf \
         --no-multi \
         --layout=reverse \
         --border=top \
-        --border-label=\"Go to session\" \
+        --border-label='Go to session' \
         --border-label-pos=1 \
         --no-info \
         --no-scrollbar \
-        --prompt=\"   \""
+        --header='Ctrl-N: create session in ~/work' \
+        --header-border=line \
+        --print-query \
+        --expect="$CREATE_KEY" \
+        --prompt='   ')
+    picker_status=$?
 
-    existing_tmux_sessions=$(tmux list-sessions -F \#S)
-    dotfiles="$HOME/.dotfiles"
-    github_profile="$HOME/rensftw"
-    repos=$(find ~/develop ~/foss ~/work -mindepth 1 -maxdepth 1 -type d 2> /dev/null)
+    parse_picker_output "$output"
 
-    # We need to preserve linebreaks between command outputs
-    selected=$(printf '%s\n%s\n%s\n%s\n' "$existing_tmux_sessions" "$dotfiles" "$repos" "$github_profile" | awk 'NF' | fzf)
+    # fzf returns 1 when there is no matching selection, even when an expected
+    # key was pressed. Always handle Ctrl-N before interpreting the status.
+    if [[ $picker_key == "$CREATE_KEY" ]]; then
+        [[ -n $picker_query ]] || return 0
+        reserve_session_directory "$picker_query"
+        return $?
+    fi
+
+    case $picker_status in
+        0)
+            [[ -n $picker_selection ]] && set_selected_target "$picker_selection"
+            ;;
+        1|130)
+            # No selection or explicit cancellation.
+            ;;
+        *)
+            error "fzf exited with status $picker_status"
+            return 1
+            ;;
+    esac
+
+    return 0
+}
+
+open_target() {
+    if [[ -z ${TMUX:-} ]]; then
+        if (( ! created_directory )) && session_exists "$session_name"; then
+            tmux attach-session -t "=$session_name"
+            return $?
+        fi
+
+        create_detached_session || return 1
+        tmux attach-session -t "=$session_name"
+        return $?
+    fi
+
+    if (( created_directory )) || ! session_exists "$session_name"; then
+        create_detached_session || return 1
+    fi
+
+    tmux switch-client -t "=$session_name"
+}
+
+main() {
+    if (( $# > 1 )); then
+        error 'usage: tmux-sessionizer [target]'
+        return 2
+    fi
+
+    validate_home || return 1
+
+    if (( $# == 1 )); then
+        set_selected_target "$1"
+    else
+        pick_target || return 1
+    fi
+
+    [[ -n $target_path ]] || return 0
+    open_target
+}
+
+if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
+    main "$@"
 fi
-
-if [[ -z $selected ]]; then
-    exit 0
-fi
-
-selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
-
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
-    exit 0
-fi
-
-if ! tmux has-session -t="$selected_name" 2> /dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
-fi
-
-tmux switch-client -t "$selected_name"
