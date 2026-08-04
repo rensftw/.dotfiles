@@ -1,5 +1,7 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
+local center_after_scroll =
+    '<Cmd>lua require("mini.animate").execute_after("scroll", "normal! zz")<CR>'
 
 map('n', 'Q', ':wqall<CR>', opts)
 map('n', 'W', ':wall<CR>', opts)
@@ -38,26 +40,26 @@ map('v', '>', '>gv', opts)
 map('v', '<', '<gv', opts)
 
 -- Center scrolling and navigation
-map('n', '<C-d>', '<C-d>zz', opts)
-map('n', '<C-u>', '<C-u>zz', opts)
-map('n', '<C-o>', '<C-o>zz', opts)
-map('n', '<C-i>', '<C-i>zz', opts)
+map('n', '<C-d>', '<C-d>' .. center_after_scroll, opts)
+map('n', '<C-u>', '<C-u>' .. center_after_scroll, opts)
+map('n', '<C-o>', '<C-o>' .. center_after_scroll, opts)
+map('n', '<C-i>', '<C-i>' .. center_after_scroll, opts)
 
 -- Center search results
-map('n', 'n', 'nzz', opts)
-map('n', 'N', 'Nzz', opts)
-map('n', '*', '*zz', opts)
-map('n', '#', '#zz', opts)
-map('n', 'g*', 'g*zz', opts)
-map('n', 'g#', 'g#zz', opts)
+map('n', 'n', 'n' .. center_after_scroll, opts)
+map('n', 'N', 'N' .. center_after_scroll, opts)
+map('n', '*', '*' .. center_after_scroll, opts)
+map('n', '#', '#' .. center_after_scroll, opts)
+map('n', 'g*', 'g*' .. center_after_scroll, opts)
+map('n', 'g#', 'g#' .. center_after_scroll, opts)
 
 -- Center quickfix results when navigating
-map('n', ']q', '<cmd>cnext<CR>zz', opts)
-map('n', '[q', '<cmd>cprev<CR>zz', opts)
+map('n', ']q', '<cmd>cnext<CR>' .. center_after_scroll, opts)
+map('n', '[q', '<cmd>cprev<CR>' .. center_after_scroll, opts)
 
 -- Center fold navigation
-map('n', 'zj', 'zjzz', opts)
-map('n', 'zk', 'zkzz', opts)
+map('n', 'zj', 'zj' .. center_after_scroll, opts)
+map('n', 'zk', 'zk' .. center_after_scroll, opts)
 
 -- Move 1 or more lines up or down in normal and visual selection modes.
 map('n', 'K', ':m .-2<CR>==', opts)

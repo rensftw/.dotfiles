@@ -34,12 +34,12 @@ return {
         local fzf     = require('fzf-lua')
         local actions = fzf.actions
 
-        -- Center the cursor (zz) after a file-open action so the jumped-to
-        -- line lands in the middle of the viewport.
-        local function with_zz(action)
+        -- Center the cursor after a file-open action so the jumped-to line
+        -- lands in the middle of the viewport.
+        local function with_centered_view(action)
             return function(selected, opts)
                 action(selected, opts)
-                vim.cmd('normal! zz')
+                require('mini.animate').execute_after('scroll', 'normal! zz')
             end
         end
 
@@ -142,10 +142,10 @@ return {
 
             actions = {
                 files = {
-                    ['default'] = with_zz(actions.file_edit),
-                    ['ctrl-t']  = with_zz(actions.file_tabedit),
-                    ['ctrl-v']  = with_zz(actions.file_vsplit),
-                    ['ctrl-x']  = with_zz(actions.file_split),
+                    ['default'] = with_centered_view(actions.file_edit),
+                    ['ctrl-t']  = with_centered_view(actions.file_tabedit),
+                    ['ctrl-v']  = with_centered_view(actions.file_vsplit),
+                    ['ctrl-x']  = with_centered_view(actions.file_split),
                     ['ctrl-q']  = ctrl_q_to_qf,
                     ['ctrl-a']  = ctrl_a_to_diff,
                 },
@@ -166,10 +166,10 @@ return {
 
             buffers = {
                 actions = {
-                    ['default'] = with_zz(actions.buf_edit),
-                    ['ctrl-t']  = with_zz(actions.buf_tabedit),
-                    ['ctrl-v']  = with_zz(actions.buf_vsplit),
-                    ['ctrl-x']  = with_zz(actions.buf_split),
+                    ['default'] = with_centered_view(actions.buf_edit),
+                    ['ctrl-t']  = with_centered_view(actions.buf_tabedit),
+                    ['ctrl-v']  = with_centered_view(actions.buf_vsplit),
+                    ['ctrl-x']  = with_centered_view(actions.buf_split),
                     -- Passing the action as a callback like this, automatically adds the interactive header hint
                     ['ctrl-c']  = { fn = actions.buf_del, reload = true },
                     ['ctrl-q']  = ctrl_q_to_qf,
@@ -207,7 +207,7 @@ return {
                     -- buffer-local tmap shadows below carry these bytes through to
                     -- fzf even when vim-tmux-navigator owns the global mapping.
                     actions = {
-                        ['default'] = with_zz(actions.file_edit_or_qf),
+                        ['default'] = with_centered_view(actions.file_edit_or_qf),
                         ['ctrl-h']  = { fn = actions.git_unstage, reload = true },
                         ['ctrl-l']  = { fn = actions.git_stage, reload = true },
                         ['ctrl-s']  = { fn = actions.git_stage_unstage, reload = true },

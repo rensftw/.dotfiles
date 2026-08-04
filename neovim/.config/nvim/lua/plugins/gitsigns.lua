@@ -3,8 +3,18 @@ return {
     event = 'VeryLazy',
     keys = {
         -- Next/previous hunk
-        { mode = { 'n' },    ']h',         '<cmd>Gitsigns next_hunk<CR>zz' },
-        { mode = { 'n' },    '[h',         '<cmd>Gitsigns prev_hunk<CR>zz', },
+        {
+            mode = { 'n' },
+            ']h',
+            '<cmd>Gitsigns next_hunk<CR>'
+                .. '<cmd>lua require("mini.animate").execute_after("scroll", "normal! zz")<CR>',
+        },
+        {
+            mode = { 'n' },
+            '[h',
+            '<cmd>Gitsigns prev_hunk<CR>'
+                .. '<cmd>lua require("mini.animate").execute_after("scroll", "normal! zz")<CR>',
+        },
         -- Preview hunk
         { mode = { 'n' },    '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>', },
         -- Reset hunk
