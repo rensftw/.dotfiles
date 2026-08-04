@@ -4,6 +4,22 @@
 # Depends on: 20-git-helpers.sh (_mb)
 ################################################################################
 
+# Blobless partial clones omit historical file contents and fetch them lazily.
+# History-rewriting operations such as rebase may need blobs that are no longer
+# available locally, causing "upload-pack: not our ref" errors and leaving the
+# rebase index in a misleading state. Backfill the relevant range before retrying.
+_print_blobless_rebase_note() {
+    printf "\n$YELLOW_BACKGROUND%s$NC\n" " Blobless clone / rebase note "
+    printf "$YELLOW%s$NC\n" "This repository uses --filter=blob:none. Rebases may need historical blobs that are not available locally."
+    printf "$CYAN%s$NC\n" "Before rebasing a feature branch onto develop, backfill the required range:"
+    printf "  $BOLD%s$NC\n\n" "git backfill --include-edges"
+}
+
+# Print startup guidance inside worktree tmux windows before starting the shell.
+_gwa_tmux_startup_command() {
+    printf '%s' "[[ -f package.json ]] && printf \"\n$CYAN%s$NC\n\n\" \"  Install NPM dependencies in fresh worktrees\"; printf \"\n$YELLOW_BACKGROUND%s$NC\n\" \" Blobless clone / rebase note \"; printf \"$YELLOW%s$NC\n\" \"This repository uses --filter=blob:none. Rebases may need historical blobs that are not available locally.\"; printf \"$CYAN%s$NC\n\" \"Before rebasing a feature branch onto develop, backfill the required range:\"; printf \"  $BOLD%s$NC\n\n\" \"git backfill --include-edges 'develop...FEATURE_BRANCH'\"; exec $SHELL"
+}
+
 # Clone repository as bare repo for worktree workflow
 clone-bare() {
     if [ $# -ne 2 ]; then
@@ -29,7 +45,8 @@ clone-bare() {
 
     printf "$MAGENTA$BOLD%s$NC\n" "Cloning $repo_url as bare repository in $(pwd)"
 
-    # Clone as bare repository
+    # Clone as a blobless bare repository. This saves disk space, but rebases may
+    # require `git backfill` when historical blobs cannot be fetched on demand.
     git clone --bare --filter=blob:none --single-branch "$repo_url" .bare
 
     # Create .git file pointing to bare repo
@@ -61,6 +78,7 @@ clone-bare() {
     printf "$CYAN_BACKGROUND%s$NC\n" "  Available commands:"
     printf "$CYAN%s$NC\n" "  gwa <branch-name> - to create a worktree"
     printf "$CYAN%s$NC\n" "  gwl, gws, gwr, gwp "
+    _print_blobless_rebase_note
 }
 
 # Git worktree management
