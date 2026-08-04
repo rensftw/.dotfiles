@@ -85,6 +85,10 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryCli
 # Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
+# Free Control-Space for the tmux prefix by disabling “Select the previous input source”
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 \
+    '{ enabled = 0; value = { parameters = (32, 49, 262144); type = standard; }; }'
+
 # Set the timezone; see `sudo systemsetup -listtimezones` for other values
 sudo systemsetup -settimezone "Europe/Sofia"
 
