@@ -11,7 +11,9 @@ return {
     },
     config = function()
         require('tree-sitter-manager').setup({
-            auto_install = true,
+            -- Avoid spawning parser-install Git processes from inside a Git
+            -- editor session, where repository-specific variables are active.
+            auto_install = false,
             border = 'rounded',
             -- `highlight = true` is intentionally omitted — it's broken for
             -- filetypes whose name differs from their parser
@@ -26,6 +28,10 @@ return {
                 'cpp',
                 'css',
                 'dockerfile',
+                'gitattributes',
+                'gitcommit',
+                'gitignore',
+                'git_rebase',
                 'go',
                 'graphql',
                 'vimdoc',
