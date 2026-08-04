@@ -445,9 +445,10 @@ EOF
 
 # Remove a single worktree (helper for gwr)
 # Collects branch names into _gwr_local_branches / _gwr_upstream_branches
-# Usage: _gwr_remove <worktree_path>
+# Usage: _gwr_remove <worktree_path> [force_remove]
 _gwr_remove() {
     local worktree_path="$1"
+    local force_remove="${2:-false}"
 
     if [[ -n "$TMUX" ]]; then
         local dir_name window_name
@@ -463,20 +464,29 @@ _gwr_remove() {
     branch_name=$(git -C "$worktree_path" rev-parse --abbrev-ref HEAD 2>/dev/null)
     upstream_branch=$(git -C "$worktree_path" rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)
 
-    local output
-    if output=$(git worktree remove "$worktree_path" 2>&1); then
+    local output removal_label
+    if [[ "$force_remove" == true ]]; then
+        removal_label=" Removed worktree (forced): "
+        if ! output=$(git worktree remove --force "$worktree_path" 2>&1); then
+            printf "$RED%s$NC\n%s\n" "Failed to force-remove worktree" "$output"
+            return 1
+        fi
+        printf "$GREEN%s$NC%s\n" "$removal_label" "$worktree_path"
+    elif output=$(git worktree remove "$worktree_path" 2>&1); then
         printf "$GREEN%s$NC%s\n" " Removed worktree: " "$worktree_path"
     else
         printf "$RED%s$NC\n%s" "Failed to remove worktree" "$output"
         printf "\n\n$YELLOW_BACKGROUND%s$NC " " Force remove? Type 'yes' to confirm:"
-        local force_remove
-        read -r force_remove </dev/tty
-        if [[ "$force_remove" == "yes" ]]; then
-            git worktree remove --force "$worktree_path"
-            printf "$GREEN%s$NC%s\n" " Removed worktree (forced): " "$worktree_path"
-        else
+        local force_confirm
+        read -r force_confirm </dev/tty
+        if [[ "$force_confirm" != "yes" ]]; then
             return 1
         fi
+        if ! output=$(git worktree remove --force "$worktree_path" 2>&1); then
+            printf "$RED%s$NC\n%s\n" "Failed to force-remove worktree" "$output"
+            return 1
+        fi
+        printf "$GREEN%s$NC%s\n" " Removed worktree (forced): " "$worktree_path"
     fi
 
     # Record the branch and its upstream TOGETHER so the two parallel arrays
@@ -491,8 +501,11 @@ _gwr_remove() {
     fi
 }
 
-# Prompt to delete all branches collected by _gwr_remove
+# Delete branches collected by _gwr_remove, prompting when no mode is supplied
+# Usage: _gwr_cleanup_branches [both|local|remote]
 _gwr_cleanup_branches() {
+    local confirm="${1:-}"
+
     if [[ ${#_gwr_local_branches[@]} -eq 0 ]]; then
         return 0
     fi
@@ -506,13 +519,14 @@ _gwr_cleanup_branches() {
         printf "\n"
     done
 
-    printf "\n$YELLOW_BACKGROUND%s$NC " " Delete these branches? [yes/both, local, remote]:"
-    local confirm
-    read -r confirm </dev/tty
+    if [[ -z "$confirm" ]]; then
+        printf "\n$YELLOW_BACKGROUND%s$NC " " Delete these branches? [both, local, remote]:"
+        read -r confirm </dev/tty
+    fi
 
     local delete_local=false delete_remote=false
     case "$confirm" in
-        yes|both) delete_local=true; delete_remote=true ;;
+        both)      delete_local=true; delete_remote=true ;;
         local)    delete_local=true ;;
         remote)   delete_remote=true ;;
         *)        return 0 ;;
@@ -532,36 +546,85 @@ _gwr_cleanup_branches() {
 }
 
 # Remove worktree(s) — supports fzf multi-select
+# Usage: gwr [--force] [--both|--local|--remote] [worktree_path]
 gwr() {
-  # Resolve path argument to absolute before _gwa_navigate_to_bare_root may cd
-  local resolved_path
-  local orig_dir="$PWD"
-  [[ $# -gt 0 ]] && resolved_path="$(cd "$1" 2>/dev/null && pwd || echo "$1")"
+    local orig_dir="$PWD"
+    local force_remove=false
+    local cleanup_mode=""
+    local worktree_arg=""
 
-  _gwa_navigate_to_bare_root || return 1
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --force)
+                force_remove=true
+                ;;
+            --both|--local|--remote)
+                local requested_mode="${1#--}"
+                if [[ -n "$cleanup_mode" && "$cleanup_mode" != "$requested_mode" ]]; then
+                    printf "$RED%s$NC\n" "  Choose only one of --both, --local, or --remote"
+                    return 1
+                fi
+                cleanup_mode="$requested_mode"
+                ;;
+            --)
+                shift
+                if [[ $# -gt 1 || -n "$worktree_arg" ]]; then
+                    printf "$RED%s$NC\n" "  gwr accepts at most one worktree path"
+                    return 1
+                fi
+                [[ $# -eq 1 ]] && worktree_arg="$1"
+                break
+                ;;
+            -*)
+                printf "$RED%s$NC\n" "  Unknown option: $1"
+                return 1
+                ;;
+            *)
+                if [[ -n "$worktree_arg" ]]; then
+                    printf "$RED%s$NC\n" "  gwr accepts at most one worktree path"
+                    return 1
+                fi
+                worktree_arg="$1"
+                ;;
+        esac
+        shift
+    done
 
-  _gwr_local_branches=()
-  _gwr_upstream_branches=()
-
-  if [ $# -eq 0 ]; then
-    # Interactive multi-selection with fzf
-    local selected
-    selected=$(git worktree list | grep -v '(bare)' | awk '{print $1}' | fzf --multi --prompt="Select worktree(s) to remove (TAB to multi-select): ")
-    if [ -z "$selected" ]; then
-      return 0
+    # Resolve the path before _gwa_navigate_to_bare_root may change directories.
+    local resolved_path=""
+    if [[ -n "$worktree_arg" ]]; then
+        resolved_path="$(cd "$worktree_arg" 2>/dev/null && pwd || echo "$worktree_arg")"
     fi
 
-    while IFS= read -r worktree_path; do
-        printf "\n$MAGENTA_BACKGROUND%s$NC\n" " Removing: $worktree_path "
-        _gwr_remove "$worktree_path"
-    done <<< "$selected"
-  else
-    _gwr_remove "$resolved_path"
-  fi
+    _gwa_navigate_to_bare_root || return 1
 
-  _gwr_cleanup_branches
+    _gwr_local_branches=()
+    _gwr_upstream_branches=()
 
-  cd "$orig_dir" 2>/dev/null || true
+    local remove_status=0
+    if [[ -z "$worktree_arg" ]]; then
+        # Interactive multi-selection with fzf
+        local selected
+        selected=$(git worktree list | grep -v '(bare)' | awk '{print $1}' | fzf --multi --prompt="Select worktree(s) to remove (TAB to multi-select): ")
+        if [[ -z "$selected" ]]; then
+            cd "$orig_dir" 2>/dev/null || true
+            return 0
+        fi
+
+        while IFS= read -r worktree_path; do
+            printf "\n$MAGENTA_BACKGROUND%s$NC\n" " Removing: $worktree_path "
+            _gwr_remove "$worktree_path" "$force_remove" || remove_status=1
+        done <<< "$selected"
+    else
+        _gwr_remove "$resolved_path" "$force_remove" || remove_status=1
+    fi
+
+    local cleanup_status=0
+    _gwr_cleanup_branches "$cleanup_mode" || cleanup_status=$?
+
+    cd "$orig_dir" 2>/dev/null || true
+    [[ "$remove_status" -ne 0 ]] && return "$remove_status"
+    return "$cleanup_status"
 }
 
 # Switch to worktree (tmux window if in tmux, cd otherwise)
