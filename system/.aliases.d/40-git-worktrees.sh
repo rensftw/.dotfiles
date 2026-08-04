@@ -105,6 +105,30 @@ _tmux_window_name() {
     echo "$name"
 }
 
+# Find the registered worktree currently checking out a local branch.
+# Usage: _gwa_find_worktree_for_branch <branch_name>
+_gwa_find_worktree_for_branch() {
+    local target_ref="refs/heads/$1"
+    local worktree_path=""
+    local line
+
+    while IFS= read -r line; do
+        case "$line" in
+            worktree\ *)
+                worktree_path="${line#worktree }"
+                ;;
+            branch\ *)
+                if [[ "${line#branch }" == "$target_ref" ]] && [[ -d "$worktree_path" ]]; then
+                    printf '%s\n' "$worktree_path"
+                    return 0
+                fi
+                ;;
+        esac
+    done < <(git worktree list --porcelain 2>/dev/null)
+
+    return 1
+}
+
 # Create a worktree with branch (shared logic for single and multi mode)
 # Usage: _gwa_create_worktree <branch_name> <worktree_path> <base_ref>
 _gwa_create_worktree() {
@@ -142,11 +166,13 @@ _gwa_navigate_to_bare_root() {
 }
 
 # Single worktree mode (original gwa behavior)
+# Usage: _gwa_single <branch_name> <worktree_path> <no_tmux> <open_tmux> <base_ref>
 _gwa_single() {
     local branch_name="$1"
     local local_worktree_path="$2"
     local no_tmux="$3"
-    local base_ref="$4"
+    local open_tmux="$4"
+    local base_ref="$5"
 
     if ! git rev-parse --git-dir >/dev/null 2>&1; then
         printf "$RED$BOLD%s$NC\n\n" "  Aborting: not in a bare git repository."
@@ -155,33 +181,55 @@ _gwa_single() {
 
     _gwa_navigate_to_bare_root || return 1
 
+    local existing_worktree_path=""
+    local reused_worktree=false
+    if existing_worktree_path=$(_gwa_find_worktree_for_branch "$branch_name"); then
+        local_worktree_path="$existing_worktree_path"
+        reused_worktree=true
+        open_tmux=true
+    fi
+
     printf "%s$CYAN$BOLD%s$NC\n" " Branch name: " "$branch_name"
     printf "%s$CYAN$BOLD%s$NC\n" " Worktree path: " "$local_worktree_path"
 
-    _gwa_create_worktree "$branch_name" "$local_worktree_path" "$base_ref" || return 1
+    if [[ "$reused_worktree" == true ]]; then
+        printf "$GREEN%s$NC %s$BOLD%s$NC\n" " " "Reusing existing worktree: " "$local_worktree_path"
+    else
+        _gwa_create_worktree "$branch_name" "$local_worktree_path" "$base_ref" || return 1
+    fi
 
     if [[ "$no_tmux" == true ]]; then
         return 0
     fi
 
     if [[ -n "$TMUX" ]]; then
-        local open_window="n"
-        printf "$CYAN_BACKGROUND%s$NC " " Open new tmux window? [y/N]:"
-        read -r open_window
-        if [[ "$open_window" != [yY] ]]; then
-            return 0
+        if [[ "$open_tmux" != true ]]; then
+            local open_window="n"
+            printf "$CYAN_BACKGROUND%s$NC " " Open new tmux window? [y/N]:"
+            if ! read -r open_window </dev/tty; then
+                printf "\n$RED%s$NC\n" "  Could not read tmux confirmation from the terminal"
+                return 1
+            fi
+            case "$open_window" in
+                [yY]|[yY][eE][sS]) ;;
+                *) return 0 ;;
+            esac
         fi
 
         local window_name
         window_name=$(_tmux_window_name "$(basename "$local_worktree_path")")
 
-        if tmux list-windows -F '#{window_name}' | grep -q "^${window_name}$"; then
+        if tmux list-windows -F '#{window_name}' | grep -Fqx -- "$window_name"; then
             printf "$YELLOW%s$NC $BOLD%s$NC\n" " Note:" "Tmux window '$window_name' already exists"
         else
             local full_worktree_path
             full_worktree_path="$(cd "$(dirname "$local_worktree_path")" 2>/dev/null && pwd)/$(basename "$local_worktree_path")"
-            tmux new-window -n "$window_name" -c "$full_worktree_path" "[[ -f package.json ]] && printf \"\n$CYAN%s$NC\n\n\" \"󰞏  Install NPM dependencies in fresh worktrees\"; exec $SHELL"
-            printf "$GREEN%s$BOLD$NC%s%s\n" " Opened tmux window: " "$window_name -> $local_worktree_path"
+            if tmux new-window -n "$window_name" -c "$full_worktree_path" "$(_gwa_tmux_startup_command)"; then
+                printf "$GREEN%s$BOLD$NC%s%s\n" " Opened tmux window: " "$window_name -> $local_worktree_path"
+            else
+                printf "$RED%s$NC %s$BOLD%s$NC\n" " " "Failed to open tmux window: " "$window_name"
+                return 1
+            fi
         fi
     fi
 }
@@ -192,9 +240,9 @@ gwa() {
 
     if [[ $# -eq 0 ]]; then
         cat <<EOF
-${CYAN}Usage:${NC} gwa <branch_name> [local_worktree_path] [--count INT] [--start INT] [--base REF] [--no-tmux]
+${CYAN}Usage:${NC} gwa <branch_name> [local_worktree_path] [--count INT] [--start INT] [--base REF] [--no-tmux] [--yes]
 
-${BOLD}Create git worktrees from a bare repository.${NC}
+${BOLD}Create or reuse git worktrees from a bare repository.${NC}
 
 ${CYAN}Single worktree:${NC}
   gwa feature/login
@@ -215,15 +263,16 @@ EOF
     local start=""
     local base=""
     local no_tmux=false
+    local open_tmux=false
     local positional=()
 
     while [[ $# -gt 0 ]]; do
         case $1 in
             -h|--help)
                 cat <<EOF
-${CYAN}Usage:${NC} gwa <branch_name> [local_worktree_path] [--count INT] [--start INT] [--base REF] [--no-tmux]
+${CYAN}Usage:${NC} gwa <branch_name> [local_worktree_path] [--count INT] [--start INT] [--base REF] [--no-tmux] [--yes]
 
-${BOLD}Create git worktrees from a bare repository.${NC}
+${BOLD}Create or reuse git worktrees from a bare repository.${NC}
 
 ${CYAN}Positional:${NC}
   branch_name            Branch to create/checkout
@@ -234,11 +283,14 @@ ${CYAN}Options:${NC}
   -c, --count <n>        Create multiple worktrees with -pt{N} suffixes
   -s, --start <n>        Starting index for suffixes (default: 1)
   -n, --no-tmux          Skip tmux window creation
+  -y, --yes              Open the tmux window without prompting
   -h, --help             Show this help message
 
 ${CYAN}Single worktree:${NC}
-  gwa feature/login                     Create worktree for feature/login
-  gwa feature/login my-dir              Create worktree at ./my-dir
+  gwa feature/login                     Create or reuse worktree for feature/login
+  gwa feature/login my-dir              Use ./my-dir when creating a new worktree
+  gwa -y feature/login                  Create worktree and open a tmux window
+  gwa feature/login --yes               Same as -y
   gwa feature/login --no-tmux           Skip the tmux prompt
   gwa feature/login --base develop      Branch from origin/develop
 
@@ -259,6 +311,10 @@ EOF
                 ;;
             -n|--no-tmux)
                 no_tmux=true
+                shift
+                ;;
+            -y|--yes)
+                open_tmux=true
                 shift
                 ;;
             -b|--base)
@@ -326,13 +382,18 @@ EOF
         for ((i = start; i <= end_index; i++)); do
             local full_branch="${branch_name}-pt${i}"
             local worktree_path="${full_branch//[^a-zA-Z0-9._-]/_}"
+            local effective_worktree_path="$worktree_path"
+            local existing_worktree_path=""
+            if existing_worktree_path=$(_gwa_find_worktree_for_branch "$full_branch"); then
+                effective_worktree_path="$existing_worktree_path"
+            fi
 
-            printf "$MAGENTA_BACKGROUND%s$NC %s$BOLD%s$NC\n" " [$((i - start + 1))/$count] " "Creating: " "$full_branch"
+            printf "$MAGENTA_BACKGROUND%s$NC %s$BOLD%s$NC\n" " [$((i - start + 1))/$count] " "Preparing: " "$full_branch"
 
-            if _gwa_single "$full_branch" "$worktree_path" true "$base_ref"; then
-                worktree_paths+=("$worktree_path")
-                window_names+=("$(_tmux_window_name "$(basename "$worktree_path")")")
-                printf "  $GREEN%s$NC %s$BOLD%s$NC\n\n" "" "Worktree created at: " "$worktree_path"
+            if _gwa_single "$full_branch" "$worktree_path" true false "$base_ref"; then
+                worktree_paths+=("$effective_worktree_path")
+                window_names+=("$(_tmux_window_name "$(basename "$effective_worktree_path")")")
+                printf "  $GREEN%s$NC %s$BOLD%s$NC\n\n" "" "Worktree ready at: " "$effective_worktree_path"
             else
                 printf "  $RED%s$NC\n\n" "  Failed to create worktree for $full_branch"
             fi
@@ -347,13 +408,18 @@ EOF
             for ((i = 1; i <= ${#worktree_paths[@]}; i++)); do
                 local wt_path="${worktree_paths[$i]}"
                 local win_name="${window_names[$i]}"
-                local full_path="$base_dir/$wt_path"
+                local full_path
+                if [[ "$wt_path" == /* ]]; then
+                    full_path="$wt_path"
+                else
+                    full_path="$base_dir/$wt_path"
+                fi
 
                 if tmux list-windows -F '#{window_name}' | grep -q "^${win_name}$"; then
                     printf "$YELLOW%s$NC $BOLD%s$NC\n" " Note:" "Tmux window '$win_name' already exists"
                 else
                     printf "  %s$BOLD%s$NC%s%s\n" "Creating tmux window: " "$win_name" " -> " "$full_path"
-                    tmux new-window -n "$win_name" -c "$full_path" "[[ -f package.json ]] && printf \"\n$CYAN%s$NC\n\n\" \"  Install NPM dependencies in fresh worktrees\"; exec $SHELL"
+                    tmux new-window -n "$win_name" -c "$full_path" "$(_gwa_tmux_startup_command)"
                 fi
             done
 
@@ -371,7 +437,7 @@ EOF
         printf "$CYAN%s$NC\n" "  Install NPM dependencies in fresh worktrees"
     else
         [[ -z "$local_worktree_path" ]] && local_worktree_path=${branch_name//[^a-zA-Z0-9._-]/_}
-        _gwa_single "$branch_name" "$local_worktree_path" "$no_tmux" "$base_ref"
+        _gwa_single "$branch_name" "$local_worktree_path" "$no_tmux" "$open_tmux" "$base_ref"
     fi
 
     cd "$orig_dir" 2>/dev/null || true
