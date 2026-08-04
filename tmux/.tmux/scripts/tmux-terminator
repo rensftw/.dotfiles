@@ -1,16 +1,67 @@
 #!/usr/bin/env bash
 
-# Inherits theme + base layout from $FZF_DEFAULT_OPTS_FILE (set in zsh/.zshrc).
-# Overrides only the chrome specific to this picker.
-export FZF_DEFAULT_OPTS="\
-    --layout=reverse \
-    --border=top \
-    --border-label=\"Kill session\" \
-    --border-label-pos=1 \
-    --no-info \
-    --no-scrollbar \
-    --prompt=\"   \""
+error() {
+    printf 'tmux-terminator: %s\n' "$*" >&2
+}
 
-for s in $(tmux list-sessions -F \#S | fzf); do
-    tmux kill-session -t "$s"
-done
+pick_sessions() {
+    local sessions
+
+    sessions=$(tmux list-sessions -F '#S' 2> /dev/null) || return 0
+    [[ -n $sessions ]] || return 0
+
+    # Theme and base layout come from $FZF_DEFAULT_OPTS_FILE. Command-line
+    # flags keep this picker's behavior explicit and locally scoped.
+    printf '%s\n' "$sessions" | fzf \
+        --multi \
+        --layout=reverse \
+        --border=top \
+        --border-label='Kill session' \
+        --border-label-pos=1 \
+        --no-info \
+        --no-scrollbar \
+        --prompt='   '
+}
+
+kill_sessions() {
+    local selections="$1"
+    local session_name status
+
+    status=0
+    while IFS= read -r session_name; do
+        [[ -n $session_name ]] || continue
+
+        if ! tmux kill-session -t "=$session_name"; then
+            error "could not kill session '$session_name'"
+            status=1
+        fi
+    done <<< "$selections"
+
+    return "$status"
+}
+
+main() {
+    local selections picker_status
+
+    selections=$(pick_sessions)
+    picker_status=$?
+
+    case $picker_status in
+        0)
+            [[ -n $selections ]] || return 0
+            ;;
+        1|130)
+            return 0
+            ;;
+        *)
+            error "fzf exited with status $picker_status"
+            return 1
+            ;;
+    esac
+
+    kill_sessions "$selections"
+}
+
+if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
+    main "$@"
+fi
