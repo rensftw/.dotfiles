@@ -69,6 +69,10 @@ source _scripts/symlink-veracrypt-binary.sh
 # Install the current LTS Node version with the default global packages
 source _scripts/install-lts-node.sh
 
+# Install Pi with its managed, dependency-pinned installer. This must run after
+# Node because Pi requires Node.js 22.19 or newer.
+source _scripts/install-pi.sh
+
 # Install neovim plugins
 source _scripts/install-neovim-plugins.sh
 

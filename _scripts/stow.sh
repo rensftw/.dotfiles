@@ -36,7 +36,10 @@ ensure_real_home_directory "$HOME/.gnupg" 700 "GnuPG private keys and trust stat
 ensure_real_home_directory "$HOME/.tmux" 700 "tmux plugins and resurrect state"
 ensure_real_home_directory "$HOME/.nvm" 755 "installed Node versions"
 ensure_real_home_directory "$HOME/.pi" 700 "Pi authentication and session state"
-ensure_real_home_directory "$HOME/.pi/agent" 700 "Pi authentication and session state"
+ensure_real_home_directory "$HOME/.pi/agent" 700 "Pi authentication, session, and managed-install state"
+ensure_real_home_directory "$HOME/.pi/agent/bin" 755 "the managed Pi launcher"
+ensure_real_home_directory "$HOME/.pi/agent/install" 755 "managed Pi releases"
+ensure_real_home_directory "$HOME/.pi/agent/dream" 755 "stow-managed Pi dream tools and local runtime state"
 ensure_real_home_directory "$HOME/.config/nvim" 755 "Neovim configuration"
 ensure_real_home_directory "$HOME/.config/nnn" 755 "nnn plugins and session state"
 
@@ -64,7 +67,9 @@ STOW_IGNORE_ARGUMENTS=(
     "--ignore=^\\.config/nnn/(plugins|sessions|\\.lastd)(/|$)"
     "--ignore=^\\.config/nvim/\\.netrwhist$"
     "--ignore=^\\.config/nvim/nvim\\.log$"
-    "--ignore=^\\.pi/agent/(auth\\.json|sessions)(/|$)"
+    "--ignore=^\\.pi/agent/(auth\\.json|models-store\\.json|bin|install|npm|sessions|missions|pi-subagents|web-search-cache)(/|$)"
+    "--ignore=^\\.pi/agent/(mcp-cache\\.json|mcp-onboarding\\.json|mcp-project-approvals\\.json|run-history\\.jsonl|trust\\.json)$"
+    "--ignore=^\\.pi/agent/dream/(logs|snapshots)(/|$)"
 )
 
 for dir in "${DIRECTORIES[@]}"; do

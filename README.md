@@ -20,7 +20,7 @@ cd ~/.dotfiles
 # 4. Install Homebrew packages, submodules, nvm, Python, and Python packages.
 bash install.sh
 
-# 5. Link dotfiles, build nnn, install Node LTS, and sync Neovim plugins.
+# 5. Link dotfiles, build nnn, install Node LTS, install managed Pi, and sync Neovim plugins.
 bash configure.sh
 
 # 6. Optional: apply macOS defaults. This script prompts, then schedules a restart.
@@ -67,6 +67,7 @@ Installed by this repo:
 - Homebrew, then all formulae/casks from [`_homebrew/Brewfile`](./_homebrew/Brewfile). `install.sh` does not remove packages outside the Brewfile; use `backup.sh` or Homebrew cleanup commands explicitly when needed.
 - GNU Stow for symlink management.
 - `pyenv` + latest Python, `nvm` + latest Node LTS, Neovim, tmux, fzf, ripgrep, fd, ncurses, and the desktop apps listed in the Brewfile.
+- Pi through its official managed installer (`curl -fsSL https://pi.dev/install.sh | sh`), with dependency-pinned releases under `~/.pi/agent/install/`.
 - Git submodules/dependencies: tmux TPM and nnn source.
 
 Local/personal assumptions to review before a fresh setup:
@@ -75,17 +76,17 @@ Local/personal assumptions to review before a fresh setup:
 - [`git/.gitconfig`](./git/.gitconfig) contains a personal Git name, email, and GPG signing key. Change these before stowing on another account.
 - [`macos.sh`](./macos.sh) sets the timezone to `Europe/Sofia`, clears default Dock apps, changes Finder/Safari/Dock behavior, and restarts the machine.
 - Private state is intentionally not included: GPG keys, SSH keys, Pi auth/session state, API keys, local Obsidian vault contents, and app login state.
-- Existing files such as `~/.zshrc`, `~/.gitconfig`, `~/.config/nvim`, or `~/.tmux.conf` can conflict with Stow. Back them up first.
+- Existing files such as `~/AGENTS.md`, `~/.zshrc`, `~/.gitconfig`, `~/.config/nvim`, or `~/.tmux.conf` can conflict with Stow. Back them up first.
 
 ## What each top-level script does
 
 | Script | Purpose |
 | --- | --- |
 | [`install.sh`](./install.sh) | Installs Homebrew if needed, runs `brew bundle` against `_homebrew/Brewfile`, fetches submodules/dependencies, installs nvm, installs latest Python through pyenv, and installs default Python packages. |
-| [`configure.sh`](./configure.sh) | Exports Homebrew paths, stows all packages, builds/installs nnn from source, creates a VeraCrypt CLI symlink when the app exists, installs Node LTS through nvm, and runs a headless Lazy.nvim plugin sync. |
+| [`configure.sh`](./configure.sh) | Exports Homebrew paths, stows all packages, builds/installs nnn from source, creates a VeraCrypt CLI symlink when the app exists, installs Node LTS through nvm, installs managed Pi, and runs a headless Lazy.nvim plugin sync. |
 | [`macos.sh`](./macos.sh) | Applies macOS defaults and schedules a restart. Optional and opinionated. |
 | [`backup.sh`](./backup.sh) | Refreshes `_homebrew/Brewfile` from installed Homebrew packages and writes global npm packages to `nvm/.nvm/default-packages`. |
-| [`uninstall.sh`](./uninstall.sh) | Prompts for an exact `yes`, then removes pyenv/nvm artifacts, unstows dotfiles, uninstalls all Homebrew formulae/casks/taps, and removes Homebrew. Destructive. |
+| [`uninstall.sh`](./uninstall.sh) | Unstows dotfiles and optionally removes Brewfile-managed or all Homebrew packages; runtime and cask-data purges require separate confirmation. Managed Pi is preserved. |
 
 Each top-level script accepts `--dry-run`; action-oriented helper scripts do too and also inherit dry-run mode when called by a top-level script. Shared helper functions such as `run` and `is_dry_run` live in [`_scripts/lib.sh`](./_scripts/lib.sh), which helper scripts source via `$DOTFILES_LOCATION/_scripts/lib.sh`. Helper scripts live in [`_scripts/`](./_scripts) and generally assume they are running from the repo root.
 
@@ -106,7 +107,7 @@ Directories beginning with `_` are helpers. All other non-hidden top-level direc
 | `neovim` | `~/.config/nvim` |
 | `nnn` | `~/.config/nnn` |
 | `nvm` | `~/.nvm/default-packages` |
-| `pi` | `~/.pi/agent` public-safe Pi config; auth/session state is excluded. |
+| `pi` | `~/AGENTS.md`, public-safe `~/.pi/agent` config, and dream automation; auth, local runtime state, and managed Pi releases are excluded. |
 | `system` | shell aliases, networking notes, truecolor helper, hushlogin |
 | `tmux` | `~/.tmux.conf`, `~/.tmux` scripts/plugins |
 | `vale` | `~/.vale.ini`, `~/.config/vale`, `~/.vale` styles |
@@ -192,7 +193,7 @@ bash uninstall.sh --dry-run
 bash uninstall.sh
 ```
 
-`uninstall.sh` asks you to type `yes`. If accepted, it removes pyenv and nvm artifacts, unstows all packages, uninstalls every Homebrew formula/cask/tap, uninstalls Homebrew, and removes only Homebrew-owned leftover directories. It does not delete the `~/.dotfiles` repo itself or shell history files.
+`uninstall.sh` asks for exact confirmations matching the selected scope. It unstows dotfiles and can remove the selected Homebrew packages and optional runtime data. It does not delete the `~/.dotfiles` repo, shell history files, or the managed Pi installation under `~/.pi/agent`; rerun Pi's official installer and choose **Uninstall Pi** to remove that installation.
 
 ## Troubleshooting
 
