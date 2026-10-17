@@ -7,9 +7,6 @@ duration = 0
 blinking = "Always"
 shape = "Block"
 
-[env]
-TERM = "alacritty"
-
 [font]
 size = 18.0
 
@@ -58,6 +55,11 @@ mods = "Alt"
 chars = "\u001B[105;5u"
 key = "I"
 mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[112;6u"
+key = "P"
+mods = "Control|Shift"
 
 [[keyboard.bindings]]
 chars = "\u001B[46;5u"
