@@ -1,7 +1,6 @@
 return {
     'nvim-mini/mini.animate',
     version = false,
-    enable = false,
     event = 'VeryLazy',
     config = function()
         local animate = require('mini.animate')
@@ -24,8 +23,8 @@ return {
                 }),
             },
             resize = { enable = false },
-            open = { enable = true },
-            close = { enable = true },
+            open = { enable = false },
+            close = { enable = false },
         })
     end,
 }
