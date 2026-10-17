@@ -8,9 +8,11 @@
 #   tend --dry-run  print planned commands without running them
 #   tend --force    force-rebuild Neovim treesitter parsers (skips the plugin-bump gate)
 #   tend homebrew   update Homebrew only   (alias: brew)
+#   tend alacritty  update Alacritty only (from GitHub releases)
 #   tend neovim     update Neovim only     (alias: nvim)
 #   tend tmux       update tmux plugins (tpm) only
-#   tend pi         update Pi agent + extensions only
+#   tend pi         update managed Pi + extensions only
+#   tend claude     update Claude Code only
 #
 # Internal helpers are prefixed `_tend_` because this file is sourced into the
 # interactive shell. The run itself executes in a subshell (_tend_main) so its
@@ -18,7 +20,7 @@
 # — or clobber — the interactive shell's own handlers.
 
 _tend_usage() {
-    printf "%s%s%s\n" "${YELLOW:-}" "usage: tend [--dry-run] [--force] [all|homebrew|neovim|tmux|pi]" "${NC:-}"
+    printf "%s%s%s\n" "${YELLOW:-}" "usage: tend [--dry-run] [--force] [all|homebrew|alacritty|neovim|tmux|pi|claude]" "${NC:-}"
 }
 
 _tend_path_without_pyenv_shims() {
@@ -49,8 +51,8 @@ _tend_fail() {
 
 _tend_header() {
     echo ""
-    if command -v figlet &>/dev/null; then
-        figlet -f digital "$1" | "$_tend_lol"
+    if command -v toilet &>/dev/null; then
+        toilet -f smbraille "$1" | "$_tend_lol"
     else
         printf "== %s ==\n" "$1" | "$_tend_lol"
     fi
@@ -79,10 +81,13 @@ _tend_run() {
 }
 
 _tend_show_banner() {
-    if command -v figlet &>/dev/null; then
-        figlet -f ogre "Greetings, earthling!" | "$_tend_lol"
-    else
-        echo "☀ Greetings, earthling!" | "$_tend_lol"
+    # The greeting is reserved for a bare `tend`; any argument skips it.
+    if [[ "$_tend_greet" == true ]]; then
+        if command -v toilet &>/dev/null; then
+            toilet -f smblock "Greetings, earthling!" | "$_tend_lol"
+        else
+            echo "☀ Greetings, earthling!" | "$_tend_lol"
+        fi
     fi
 
     [[ "$_tend_dry_run" == true ]] && printf "  %sdry run — no changes will be made%s\n" "${YELLOW:-}" "${NC:-}"
@@ -92,13 +97,16 @@ _tend_show_banner() {
 _tend_brew_outdated() {
     local outdated="" skipped=""
 
-    _tend_print_cmd "brew outdated --greedy --verbose"
+    _tend_print_cmd "brew outdated --verbose"
     [[ "$_tend_dry_run" == true ]] && return 0
 
-    # First list = what the upgrade step will act on (same env var as there);
-    # the --greedy extras are self-updating casks, shown for visibility only.
+    # First list = what the upgrade step will act on (same env var as there).
+    # The second drops the env var (exported by .zshrc too), so brew also
+    # lists self-updating casks whose app bundle is actually older than the
+    # tap. `--greedy` would compare the Caskroom record instead, which goes
+    # stale once an app updates itself. The extras are shown, not upgraded.
     outdated="$(env PATH="$_tend_clean_path" HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1 brew outdated --verbose)" || return $?
-    skipped="$(env PATH="$_tend_clean_path" brew outdated --greedy --verbose)" || return $?
+    skipped="$(env -u HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS PATH="$_tend_clean_path" brew outdated --verbose)" || return $?
     if [[ -n "$outdated" && -n "$skipped" ]]; then
         skipped="$(printf "%s\n" "$skipped" | grep -Fxv -f <(printf "%s\n" "$outdated"))"
     fi
@@ -144,6 +152,22 @@ _tend_update_homebrew() {
     return "$rc"
 }
 
+_tend_update_alacritty() {
+    local installer="${DOTFILES_LOCATION:-$HOME/.dotfiles}/_scripts/install-alacritty.sh"
+
+    # Homebrew disabled the alacritty cask (the app isn't notarized) and skips
+    # disabled casks on upgrade, so updates come straight from GitHub releases.
+    # The installer also adopts a leftover cask install on its first run.
+    _tend_header "Alacritty"
+
+    if [[ ! -r "$installer" && "$_tend_dry_run" != true ]]; then
+        printf "  %s✗ installer not found: %s%s\n" "${RED:-}" "$installer" "${NC:-}"
+        return 1
+    fi
+
+    _tend_run "bash $installer" env PATH="$_tend_clean_path" bash "$installer"
+}
+
 _tend_update_neovim() {
     local updater="${DOTFILES_LOCATION:-$HOME/.dotfiles}/_scripts/nvim-update.lua"
 
@@ -187,7 +211,11 @@ _tend_update_tmux() {
     # only reliable failure signal is the per-plugin '"<name>" update fail'
     # line (on stderr) — capture everything and scan for it.
     output="$("$tpm_update" all 2>&1)" || rc=$?
-    [[ -n "$output" ]] && printf "%s\n" "$output"
+    # Hide git's "| Already up to date." lines: they repeat what the
+    # '"<name>" update success' lines say and, because tpm runs the updates in
+    # parallel, land detached from their plugin. The failure scan below still
+    # reads the unfiltered output.
+    [[ -n "$output" ]] && printf "%s\n" "$output" | sed -E '/^[[:space:]]*\| Already up to date\.$/d'
 
     [[ "$_tend_interrupted" == true ]] && return 130
     [[ "$rc" -ne 0 ]] && return "$rc"
@@ -199,32 +227,45 @@ _tend_update_tmux() {
 }
 
 _tend_update_pi() {
-    local pi_status=0
+    local managed_root="${PI_MANAGED_INSTALL_ROOT:-${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}/install}"
+    managed_root="${managed_root%/}"
+    local managed_marker="$managed_root/managed-install.json"
 
-    # Pi coding agent + its package-managed extensions (e.g. pi-web-access).
-    # `--no-approve` ignores project-local Pi files in the current directory,
-    # avoiding accidental updates from untrusted repositories.
-    # Custom .ts extensions (goal.ts, answer.ts, …) are stow-managed in this
-    # repo and update via git, not `pi update`.
+    # The managed installer pins Pi's complete dependency tree. `--all` updates
+    # that managed release and package-managed extensions (e.g. pi-web-access)
+    # in one command. `--no-approve` ignores project-local Pi files in the
+    # current directory, avoiding accidental updates from untrusted repos.
+    # Custom .ts extensions (goal.ts, answer.ts, …) remain stow-managed here.
     _tend_header "Pi"
 
-    if ! command -v pi &>/dev/null && [[ "$_tend_dry_run" != true ]]; then
-        printf "  %s✗ pi not found on PATH%s\n" "${RED:-}" "${NC:-}"
+    if [[ "$_tend_dry_run" != true ]]; then
+        if ! command -v pi &>/dev/null; then
+            printf "  %s✗ pi not found on PATH; run bash configure.sh to install it%s\n" "${RED:-}" "${NC:-}"
+            return 1
+        fi
+        if [[ ! -f "$managed_marker" ]]; then
+            printf "  %s✗ expected a managed Pi installation at %s%s\n" "${RED:-}" "$managed_root" "${NC:-}"
+            printf "  reinstall with: curl -fsSL https://pi.dev/install.sh | sh\n"
+            return 1
+        fi
+    fi
+
+    _tend_run "pi update --all --no-approve" command pi update --all --no-approve
+}
+
+_tend_update_claude() {
+    # The native install updates itself in the background; `claude update`
+    # just applies a pending release now. `command` skips the
+    # `caffeinate claude` alias.
+    _tend_header "Claude Code"
+
+    if [[ "$_tend_dry_run" != true ]] && ! command -v claude &>/dev/null; then
+        printf "  %s✗ claude not found on PATH%s\n" "${RED:-}" "${NC:-}"
+        printf "  install with: curl -fsSL https://claude.ai/install.sh | bash\n"
         return 1
     fi
 
-    _tend_run "pi update --self --no-approve" command pi update --self --no-approve || pi_status=$?
-    if [[ "$pi_status" -ne 0 ]]; then
-        [[ "$_tend_interrupted" == true ]] || printf "  %s✗ pi self-update failed; skipping extension update%s\n" "${RED:-}" "${NC:-}"
-        return "$pi_status"
-    fi
-
-    if [[ "$_tend_dry_run" != true ]]; then
-        hash -r 2>/dev/null || true
-        rehash 2>/dev/null || true
-    fi
-
-    _tend_run "pi update --extensions --no-approve" command pi update --extensions --no-approve
+    _tend_run "claude update" command claude update
 }
 
 _tend_run_task() {
@@ -260,25 +301,30 @@ _tend_print_summary() {
         return 0
     fi
 
-    _tend_print_random_art
+    # Like the greeting, the art is reserved for a bare `tend`.
+    [[ "$_tend_greet" == true ]] && _tend_print_random_art
     echo "  ✓ all done — have a great day!" | "$_tend_lol"
 }
 
 _tend_print_random_art() {
-    local art_dir="${DOTFILES_LOCATION:-$HOME/.dotfiles}/_scripts/ascii"
-    local art_name=""
+    local art_dir="${DOTFILES_LOCATION:-$HOME/.dotfiles}/_scripts/braille-dot-art"
+    local art_file=""
 
-    # Rotation art only — tools-ready-ascii.txt in the same directory is
-    # configure.sh's banner, so the directory can't simply be globbed.
-    set -- clover.txt mushroom-house.txt mushroom-house-2.txt plant.txt flower.txt cat.txt gingko.txt
+    # Every *.txt in the directory is in the rotation; adding or removing art
+    # needs no edit here. zsh would abort on an unmatched glob, so null_glob
+    # (function-scoped via local_options) lets it expand to nothing; bash
+    # leaves it as the literal pattern. The guard below covers both.
+    [[ -n "${ZSH_VERSION:-}" ]] && setopt local_options null_glob
+    set -- "$art_dir"/*.txt
+    [[ $# -eq 0 || ! -e "$1" ]] && return 0
 
     # The subshell inherits $RANDOM's seed and the parent never advances it,
     # so without re-seeding every run in a session would pick the same art.
     RANDOM=$(date +%s)
     shift $((RANDOM % $#))
-    art_name="$1"
+    art_file="$1"
 
-    [[ -n "$art_name" && -r "$art_dir/$art_name" ]] && "$_tend_lol" < "$art_dir/$art_name"
+    [[ -r "$art_file" ]] && "$_tend_lol" < "$art_file"
     return 0
 }
 
@@ -313,7 +359,7 @@ _tend_main() (
                 _tend_usage
                 return 0
                 ;;
-            all|homebrew|brew|neovim|nvim|tmux|pi)
+            all|homebrew|brew|alacritty|neovim|nvim|tmux|pi|claude)
                 if [[ "$target_set" == true ]]; then
                     _tend_usage >&2
                     return 1
@@ -328,6 +374,8 @@ _tend_main() (
         esac
     done
 
+    _tend_greet=false
+    [[ $# -eq 0 ]] && _tend_greet=true
     _tend_dry_run="$dry_run"
     _tend_force="$force"
     _tend_interrupted=false
@@ -344,12 +392,17 @@ _tend_main() (
     case "$target" in
         all)
             _tend_run_task "homebrew" _tend_update_homebrew
+            _tend_run_task "alacritty" _tend_update_alacritty
             _tend_run_task "neovim" _tend_update_neovim
             _tend_run_task "tmux" _tend_update_tmux
             _tend_run_task "pi" _tend_update_pi
+            _tend_run_task "claude" _tend_update_claude
             ;;
         homebrew|brew)
             _tend_run_task "homebrew" _tend_update_homebrew
+            ;;
+        alacritty)
+            _tend_run_task "alacritty" _tend_update_alacritty
             ;;
         neovim|nvim)
             _tend_run_task "neovim" _tend_update_neovim
@@ -359,6 +412,9 @@ _tend_main() (
             ;;
         pi)
             _tend_run_task "pi" _tend_update_pi
+            ;;
+        claude)
+            _tend_run_task "claude" _tend_update_claude
             ;;
     esac
 
