@@ -1,10 +1,25 @@
 {
-  "defaultProvider": "openai",
-  "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "high",
-  "packages": [
-    "npm:pi-web-access"
+  "$schema": "https://pi.dev/schemas/settings.schema.json",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-5-5",
+  "defaultThinkingLevel": "xhigh",
+  "defaultTools": [
+    "+codemode"
   ],
-  "lastChangelogVersion": "0.79.8",
-  "theme": "dark"
+  "packages": [
+    "npm:pi-web-access",
+    "npm:pi-subagents"
+  ],
+  "skills": [
+    "~/.claude/skills",
+    "~/.codex/skills"
+  ],
+  "lastChangelogVersion": "1.3.0",
+  "theme": "system",
+  "tuiMode": "regular",
+  "warnings": {
+    "anthropicExtraUsage": false
+  },
+  "quietStartup": "header",
+  "enableInstallTelemetry": false
 }
