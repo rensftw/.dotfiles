@@ -117,7 +117,8 @@ export default function answerExtension(pi: ExtensionAPI) {
         )
         .join("\n\n");
 
-      pi.sendUserMessage(`Answers to your questions:\n\n${compiled}`);
+      // Queue behind a run that started while the answers were being typed.
+      pi.sendUserMessage(`Answers to your questions:\n\n${compiled}`, { deliverAs: "followUp" });
     },
   });
 }
