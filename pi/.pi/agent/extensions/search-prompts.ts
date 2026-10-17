@@ -4,7 +4,10 @@
  * Ctrl+R (or /search-prompts) opens fzf over previous user prompts and
  * restores the selected prompt into the current pi input editor.
  *
- * Optional scope: PI_SEARCH_PROMPTS_SCOPE=current|project|all (default: all).
+ * Optional configuration:
+ * - PI_SEARCH_PROMPTS_SCOPE=current|project|all (default: project)
+ * - PI_SEARCH_PROMPTS_MAX_SESSIONS (default: 100)
+ * - PI_SEARCH_PROMPTS_MAX_RESULTS (default: 2000)
  */
 
 import type {
@@ -31,6 +34,12 @@ interface FzfResult {
   prompt?: string;
   error?: string;
 }
+
+type PromptScope = "current" | "project" | "all";
+
+const DEFAULT_SCOPE: PromptScope = "project";
+const DEFAULT_MAX_SESSIONS = 100;
+const DEFAULT_MAX_RESULTS = 2000;
 
 const PREVIEW_SCRIPT = String.raw`#!/usr/bin/env node
 const { readFileSync } = require("node:fs");
@@ -152,8 +161,28 @@ function collectFromEntries(
   }
 }
 
+function configuredScope(): PromptScope {
+  const value = (process.env.PI_SEARCH_PROMPTS_SCOPE ?? DEFAULT_SCOPE).trim().toLowerCase();
+  if (value === "current" || value === "project" || value === "all") return value;
+  throw new Error("PI_SEARCH_PROMPTS_SCOPE must be current, project, or all.");
+}
+
+function configuredPositiveLimit(name: string, fallback: number): number {
+  const raw = process.env[name]?.trim();
+  if (!raw) return fallback;
+
+  const value = Number(raw);
+  if (Number.isSafeInteger(value) && value > 0) return value;
+  throw new Error(`${name} must be a positive whole number.`);
+}
+
+function finalizePromptRecords(records: PromptRecord[], maxResults: number): PromptRecord[] {
+  return newestFirst(dedupeByOccurrence(records)).slice(0, maxResults);
+}
+
 async function collectPromptHistory(ctx: ExtensionContext): Promise<PromptRecord[]> {
   const records: PromptRecord[] = [];
+  const maxResults = configuredPositiveLimit("PI_SEARCH_PROMPTS_MAX_RESULTS", DEFAULT_MAX_RESULTS);
   const currentFile = ctx.sessionManager.getSessionFile();
   const currentFileResolved = currentFile ? resolve(currentFile) : undefined;
   const currentHeader = ctx.sessionManager.getHeader();
@@ -165,14 +194,18 @@ async function collectPromptHistory(ctx: ExtensionContext): Promise<PromptRecord
     records,
   );
 
-  const scope = (process.env.PI_SEARCH_PROMPTS_SCOPE ?? "all").toLowerCase();
-  if (scope === "current") return newestFirst(records);
+  const scope = configuredScope();
+  if (scope === "current") return finalizePromptRecords(records, maxResults);
 
+  const maxSessions = configuredPositiveLimit("PI_SEARCH_PROMPTS_MAX_SESSIONS", DEFAULT_MAX_SESSIONS);
   const sessions = scope === "project"
     ? await SessionManager.list(ctx.cwd)
     : await SessionManager.listAll();
+  const recentSessions = [...sessions]
+    .sort((a, b) => b.modified.getTime() - a.modified.getTime())
+    .slice(0, maxSessions);
 
-  for (const session of sessions) {
+  for (const session of recentSessions) {
     if (currentFileResolved && resolve(session.path) === currentFileResolved) continue;
 
     try {
@@ -188,7 +221,7 @@ async function collectPromptHistory(ctx: ExtensionContext): Promise<PromptRecord
     }
   }
 
-  return newestFirst(dedupeByOccurrence(records));
+  return finalizePromptRecords(records, maxResults);
 }
 
 function newestFirst(records: PromptRecord[]): PromptRecord[] {
@@ -275,7 +308,7 @@ function writeFzfFiles(records: PromptRecord[]): { dir: string; input: string; p
       const columns = [
         promptPath,
         formatTimestamp(record.timestamp),
-        projectLabel(record.cwd),
+        oneLine(sanitizeForTerminal(projectLabel(record.cwd))),
         truncate(oneLine(sanitizeForTerminal(record.text)), 300),
       ];
 
