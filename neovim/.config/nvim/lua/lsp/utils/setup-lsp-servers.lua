@@ -3,20 +3,20 @@ LSP setup
 
 Layout
 ------
-  lua/lsp/utils/server-list.lua         — list of servers to install and enable
+  lua/lsp/utils/server-list.lua         — list of server configs to enable
   lua/lsp/utils/on_attach.lua           — callback with per-buffer keymaps,
                                           invoked via the LspAttach autocmd below
   lua/lsp/utils/setup-lsp-servers.lua   — this file: shared defaults + enable loop
-  ~/.config/nvim/lsp/<server>.lua       — per-server overrides / extensions
+  ~/.config/nvim/after/lsp/<server>.lua — overrides that must win over shipped defaults
                                           (optional; see below)
 
 Per-server config
 -----------------
 Neovim 0.11's `vim.lsp.enable(name)` automatically discovers and merges every
-`lsp/<name>.lua` file it finds on `runtimepath`, including:
+`lsp/<name>.lua` and `after/lsp/<name>.lua` file it finds on `runtimepath`, including:
 
   1. `nvim-lspconfig`'s shipped defaults (cmd, filetypes, root_markers, …)
-  2. Your override at `~/.config/nvim/lsp/<name>.lua` (if present)
+  2. Your override at `~/.config/nvim/after/lsp/<name>.lua` (if present)
   3. Your `vim.lsp.config('*', { … })` defaults below (capabilities)
 
 A per-server file is ONLY needed when you want to change or extend the

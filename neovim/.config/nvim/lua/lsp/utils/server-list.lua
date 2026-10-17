@@ -1,9 +1,8 @@
--- Canonical list of LSP servers used across the config.
--- Consumed by plugins/mason-lspconfig.lua (ensure_installed) and
--- lsp/utils/setup-lsp-servers.lua (vim.lsp.config + enable loop).
+-- Canonical list of LSP servers enabled by Neovim.
+-- Mason installs every entry except servers supplied by their workspace.
 return {
     -- JavaScript / TypeScript
-    'ts_ls',    -- LSP
+    'tsc',      -- TypeScript 7 native LSP
     'eslint',   -- linting
     -- Python
     'pyright',  -- LSP
