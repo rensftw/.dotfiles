@@ -1,5 +1,10 @@
 {
+  "$schema": "https://pi.dev/schemas/keybindings.schema.json",
   "tui.select.up": ["up", "ctrl+k"],
   "tui.select.down": ["down", "ctrl+j"],
-  "app.session.rename": []
+  "app.session.rename": [],
+  "app.session.togglePath": "alt+m",
+  "app.model.cycleForward": "alt+m",
+  "app.model.cycleBackward": "alt+shift+m",
+  "app.models.toggleProvider": "alt+m"
 }
