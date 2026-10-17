@@ -44,6 +44,19 @@ return {
                     path     = { name = ' ' },
                     snippets = { name = ' ' },
                     buffer   = { name = '󰅍 ' },
+                    cmdline  = {
+                        override = {
+                            enabled = function(source)
+                                local command = vim.fn.getcmdline():match('^%s*(%S+)')
+
+                                if vim.fn.getcmdtype() == ':' and command and command:match('^Diffview') then
+                                    return false
+                                end
+
+                                return source:enabled()
+                            end,
+                        },
+                    },
                     lazydev  = {
                         name         = ' ',
                         module       = 'lazydev.integrations.blink',
