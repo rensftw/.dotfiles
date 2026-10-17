@@ -8,7 +8,7 @@ path=(
   "$BREW_PREFIX/opt/fzf/bin"
   "$BREW_PREFIX/opt/curl/bin"
   "$BREW_PREFIX/opt/lua-language-server/bin"
-  "$HOME/.local/bin" # For Claude Code binary
+  "$HOME/.local/bin" # User-local binaries (Claude Code, managed Pi entrypoint)
   "$HOME/.bin"
   "$HOME"
   "${path[@]}"
