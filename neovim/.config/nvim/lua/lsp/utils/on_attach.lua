@@ -13,7 +13,15 @@ local highlight_symbol_under_cursor = function(client, bufnr)
     vim.api.nvim_create_autocmd('CursorHold', {
         group = group,
         buffer = bufnr,
-        callback = vim.lsp.buf.document_highlight,
+        callback = function()
+            local clients = vim.lsp.get_clients({
+                bufnr = bufnr,
+                method = 'textDocument/documentHighlight',
+            })
+            if #clients > 0 then
+                vim.lsp.buf.document_highlight()
+            end
+        end,
     })
     vim.api.nvim_create_autocmd('CursorMoved', {
         group = group,
