@@ -35,11 +35,11 @@ local function res_brief(res)
   return brief(msg)
 end
 
--- Section header: figlet "digital" in rainbow (lolcat). --force because our
+-- Section header: toilet "smbraille" in rainbow (lolcat). --force because our
 -- stdout here is a captured pipe, not a TTY. Falls back to plain coloured text.
 local function header(text)
   local art = vim.fn.system({ "sh", "-c",
-    "figlet -f digital " .. vim.fn.shellescape(text) .. " | lolcat --force" })
+    "toilet -f smbraille " .. vim.fn.shellescape(text) .. " | lolcat --force" })
   if vim.v.shell_error == 0 and art:match("%S") then
     out:write("\n" .. art)
   else
