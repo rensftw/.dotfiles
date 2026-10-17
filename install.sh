@@ -25,6 +25,11 @@ source _scripts/install-homebrew.sh
 # Install all packages defined in Brewfile (taps, formulae, casks, and MAS apps)
 source _scripts/install-from-brewfile.sh
 
+# Install Alacritty from its GitHub release (Homebrew disabled its cask). Run as
+# a child process so its cleanup trap stays out of this shell; it inherits
+# dry-run mode through the exported DOTFILES_DRY_RUN.
+bash _scripts/install-alacritty.sh
+
 # Fetch dependencies (as git modules or manually)
 source _scripts/fetch-dependencies.sh
 
