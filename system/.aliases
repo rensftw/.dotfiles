@@ -20,3 +20,4 @@ for f in "$HOME/.aliases.d"/*.sh(N); do
     source "$f"
 done
 unset f
+

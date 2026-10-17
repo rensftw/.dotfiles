@@ -32,6 +32,8 @@ alias av='nvim $VIMRC_LOCATION'
 alias az='nvim $ZSHRC_LOCATION'
 alias aa='nvim $ALIASES_LOCATION'
 alias obsidian='cd $OBSIDIAN_LOCATION && nvim .'
+alias claude='caffeinate claude'
+alias pi='caffeinate pi'
 
 # Use neovim by default
 alias vi="nvim"
